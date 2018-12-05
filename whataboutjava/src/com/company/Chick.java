@@ -19,8 +19,8 @@ public class Chick {
         System.out.println(017);
         System.out.println(0x1F);
 
-    int daysOfTheWeek = 6;
-    switch(daysOfTheWeek){
+    int lyrics = 6;
+    switch(lyrics){
         default:
             System.out.println("Used to be rock, but now it's roll\n" +
                     "Looking at the clock and the remote control\n" +

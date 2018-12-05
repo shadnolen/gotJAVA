@@ -42,14 +42,16 @@ public class Chick {
                     "But let's try not to get too lost");
             break;
     }
-    int ratBelly = 419;
-    public void eatCheese(int bites){
-        while (bites > 0 && ratBelly > 0){
-            bites--;
-            ratBelly--;
-        }
-        System.out.println(eatCheese+ " pieces the rat bastered has left");
-        }
+
+   java.util.List<String> values = new java.util.ArrayList<String>();
+    values.add("we");
+    values.add("are");
+    values.add("the");
+    values.add("World");
+    for(String value: values){
+        System.out.print(value + " ");
+    }
+
     }
 
 }

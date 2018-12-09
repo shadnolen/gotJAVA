@@ -1,4 +1,5 @@
 package com.company;
+import java.lang.reflect.Array;
 import java.util.*;
 
 public class Main {
@@ -13,6 +14,13 @@ public class Main {
 	String s1 = "Of Da";
 	String s2 = "Faith";
 	String s3 = "Streets";
+	int[] numbers = {0,1,2,3,4,5,6,7,8,9,};
+	int[][] twoDizzle = new int[4	][19];
+	for(int i = 0;i < twoDizzle.length; i++){
+		for(int j = 0; j < twoDizzle[i].length; j++)
+			System.out.println(twoDizzle[i][j] + " ");
+		System.out.println();
+	}
 	//String sub = sb.substring(sb.indexOf("e"), sb.indexOf("ed"));
 	//b = b.append(" Da O.").append("G.");
 
@@ -22,9 +30,12 @@ public class Main {
 	System.out.println(s1 + " " + s2 + " " + s1 + " " + s3);
 	System.out.println(sb2);
 	System.out.println(sb == sb2);
+	System.out.println(Arrays.binarySearch(numbers,22));
+		System.out.println(Arrays.binarySearch(numbers,8));
 
 
-	//System.out.println("a= " + a);
+
+		//System.out.println("a= " + a);
 	//System.out.println("b= " + b);
     }
 }

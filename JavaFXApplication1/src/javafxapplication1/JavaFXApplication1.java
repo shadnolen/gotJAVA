@@ -6,16 +6,28 @@
 package javafxapplication1;
 
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckMenuItem;
+import javafx.scene.control.Label;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
+import javafx.scene.control.RadioMenuItem;
+import javafx.scene.control.SeparatorMenuItem;
+import javafx.scene.control.ToggleGroup;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 /**
@@ -42,32 +54,35 @@ public class JavaFXApplication1 extends Application {
         MenuItem exitMenuItem  = new MenuItem("Exit");
         
         //Add new menu items
-        fileMenu.getItem().addAll(newMenuItem, saveMenuItem, printMenuItem, new SeparatorMenuItem, exitMenuItem);
+        fileMenu.getItems().addAll(newMenuItem, saveMenuItem, printMenuItem, new SeparatorMenuItem(), exitMenuItem);
+        
         
       Menu languageMenu = new Menu("Language");
       CheckMenuItem javaMenuItem = new CheckMenuItem("Java");
       CheckMenuItem pythonMenuItem = new CheckMenuItem("Python");
       CheckMenuItem htmlMenuItem = new CheckMenuItem("HTML");      
-      languageMenu.getItem().addALL(javaMenuItem, pythonMenuItem, htmlMenuItem);
+      languageMenu.getItems().addAll(javaMenuItem, pythonMenuItem, htmlMenuItem);
+      
      
-     Check
+     CheckMenuItem FXMenuItem = new CheckMenuItem("JavaFX");
+     FXMenuItem.setSelected(true); 
+     languageMenu.getItems().addAll(new SeparatorMenuItem(), FXMenuItem);
+     
+     Menu tutorialMenu = new Menu("Tutorial");
+     tutorialMenu.getItems().addAll(
+        new MenuItem("Buttons"),
+        new MenuItem("Menus"),
+        new MenuItem("Images")
+             );
+       
+       languageMenu.getItems().add(tutorialMenu);
+       exitMenuItem.setOnAction(actionEvent->Platform.exit());
+       
+       
+       menuBar.getMenus().addAll(fileMenu, languageMenu);
+    
         
-        
-        btn.setText("Say 'Hello World'");
-        btn.setOnAction(new EventHandler<ActionEvent>() {
-            
-            @Override
-            public void handle(ActionEvent event) {
-                System.out.println("Hello World!");
-            }
-        });
-        
-        StackPane root = new StackPane();
-        root.getChildren().add(btn);
-        
-        Scene scene = new Scene(root, 300, 250);
-        
-        primaryStage.setTitle("Hello World!");
+        primaryStage.setTitle("Add that Menu!");
         primaryStage.setScene(scene);
         primaryStage.show();
     }

@@ -24,9 +24,72 @@ public class ArraysSet {
         protected int partCount;
         protected int min;
         protected int max;
-        
 
+        public void setPartName(String name){
+            this.partName = name;
+        }
 
+        public String getPartName() {
+            return partName;
+        }
+
+        public void setPartCost(cost){
+            this.partCost = cost;
+        }
+
+        public double getPartCost(){
+            return partCost;
+        }
+
+        public void setPartCount(int count){
+            this.partCount = count;
+        }
+
+        public void getPartCount(){
+            return partCount;
+        }
+
+        public void setMin(int min){
+            this.min = min;
+        }
+
+        public void getMin(){
+            return min;
+        }
+
+        public void setMax(int max){
+           this.max = max;
+        }
+
+        public void getMax(){
+            return max;
+        }
+        public void setPartID(int partID){
+            this.partID = partID;
+        }
+
+        public void getPartID(){
+            return partID;
+        }
+
+    }
+
+    public class Products{
+        private ArraysSet<Parts> associatedParts = new ArraysSet<Parts>;
+        private int proid;
+        private String proName;
+        private double proPrice = 0.0;
+        private int proCount = 0;
+        private int rmin;
+        private int max;
+        private double proCost;
+
+        public Products(int proid, String proName, int proCount ,double proPrice, int min, int max){
+            setProid(proid);
+            setProName(proName);
+            setProCount(proCount);
+            
+        }
     }
 
 

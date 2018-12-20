@@ -24,8 +24,9 @@ public class ArraysSet {
         protected int partCount;
         protected int min;
         protected int max;
-
         
+
+
     }
 
 

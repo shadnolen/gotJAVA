@@ -2,14 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="cd45c897-45d6-4141-883b-5ad4a68c7a4b" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Imsf/src/imsf/FXMLDocumentController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Imsf/src/imsf/IMSgui.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Imsf/src/imsf/Imsf.java" beforeDir="false" afterPath="$PROJECT_DIR$/Imsf/src/imsf/Imsf.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Imsf/src/imsf/partAdd.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Imsf/src/imsf/partMod.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Imsf/src/imsf/proAdd.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Imsf/src/imsf/proMod.fxml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Skills/src/ArraysSet.java" beforeDir="false" afterPath="$PROJECT_DIR$/Skills/src/ArraysSet.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
@@ -24,8 +16,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Skills/src/ArraysSet.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="459">
-              <caret line="27" column="8" selection-start-line="27" selection-start-column="8" selection-end-line="27" selection-end-column="8" />
+            <state relative-caret-position="442">
+              <caret line="26" column="8" selection-start-line="26" selection-start-column="8" selection-end-line="26" selection-end-column="8" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -89,7 +81,7 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1545346378519" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1545346571945" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
   </component>
   <component name="RunDashboard">
@@ -168,8 +160,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Skills/src/ArraysSet.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="459">
-          <caret line="27" column="8" selection-start-line="27" selection-start-column="8" selection-end-line="27" selection-end-column="8" />
+        <state relative-caret-position="442">
+          <caret line="26" column="8" selection-start-line="26" selection-start-column="8" selection-end-line="26" selection-end-column="8" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>

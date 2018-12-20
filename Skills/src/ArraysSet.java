@@ -17,4 +17,16 @@ public class ArraysSet {
     }
 
 
+    public abstract class Part{
+        protected int partID;
+        protected String partName;
+        protected double partCost = 0.0;
+        protected int partCount;
+        protected int min;
+        protected int max;
+
+        
+    }
+
+
 }

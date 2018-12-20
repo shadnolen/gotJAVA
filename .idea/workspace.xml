@@ -2,7 +2,15 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="cd45c897-45d6-4141-883b-5ad4a68c7a4b" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/carsJava/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/carsJava/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Imsf/src/imsf/FXMLDocumentController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Imsf/src/imsf/IMSgui.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Imsf/src/imsf/Imsf.java" beforeDir="false" afterPath="$PROJECT_DIR$/Imsf/src/imsf/Imsf.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Imsf/src/imsf/partAdd.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Imsf/src/imsf/partMod.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Imsf/src/imsf/proAdd.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Imsf/src/imsf/proMod.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Skills/src/ArraysSet.java" beforeDir="false" afterPath="$PROJECT_DIR$/Skills/src/ArraysSet.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -12,14 +20,34 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="FileEditorManager">
-    <leaf />
+    <leaf>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/Skills/src/ArraysSet.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="459">
+              <caret line="27" column="8" selection-start-line="27" selection-start-column="8" selection-end-line="27" selection-end-column="8" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/Skills/src/ArraysSet.java" />
+      </list>
+    </option>
+  </component>
   <component name="ProjectFrameBounds">
-    <option name="width" value="1943" />
-    <option name="height" value="1103" />
+    <option name="width" value="1944" />
+    <option name="height" value="1104" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -28,11 +56,40 @@
     </navigator>
     <panes>
       <pane id="PackagesPane" />
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="JavaBasicsII" type="b2602c69:ProjectViewProjectNode" />
+              <item name="JavaBasicsII" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="JavaBasicsII" type="b2602c69:ProjectViewProjectNode" />
+              <item name="JavaBasicsII" type="462c0819:PsiDirectoryNode" />
+              <item name="Skills" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="JavaBasicsII" type="b2602c69:ProjectViewProjectNode" />
+              <item name="JavaBasicsII" type="462c0819:PsiDirectoryNode" />
+              <item name="Skills" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="JavaBasicsII" type="b2602c69:ProjectViewProjectNode" />
+              <item name="JavaBasicsII" type="462c0819:PsiDirectoryNode" />
+              <item name="Skills" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="com" type="462c0819:PsiDirectoryNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
       <pane id="Scope" />
-      <pane id="ProjectPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1545346378519" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
   </component>
   <component name="RunDashboard">
@@ -73,9 +130,10 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="0" width="1554" height="882" extended-state="0" />
+    <frame x="0" y="0" width="1555" height="883" extended-state="0" />
+    <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.2570281" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.26086956" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -105,5 +163,18 @@
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/src/Main.java" />
+    <entry file="file://$PROJECT_DIR$/Skills/src/com/codeWriting">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Skills/src/ArraysSet.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="459">
+          <caret line="27" column="8" selection-start-line="27" selection-start-column="8" selection-end-line="27" selection-end-column="8" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
   </component>
 </project>

@@ -17,62 +17,7 @@ public class ArraysSet {
     }
 
 
-    public abstract class Part{
-        protected int partID;
-        protected String partName;
-        protected double partCost = 0.0;
-        protected int partCount;
-        protected int min;
-        protected int max;
 
-        public void setPartName(String name){
-            this.partName = name;
-        }
-
-        public String getPartName() {
-            return partName;
-        }
-
-        public void setPartCost(cost){
-            this.partCost = cost;
-        }
-
-        public double getPartCost(){
-            return partCost;
-        }
-
-        public void setPartCount(int count){
-            this.partCount = count;
-        }
-
-        public void getPartCount(){
-            return partCount;
-        }
-
-        public void setMin(int min){
-            this.min = min;
-        }
-
-        public void getMin(){
-            return min;
-        }
-
-        public void setMax(int max){
-           this.max = max;
-        }
-
-        public void getMax(){
-            return max;
-        }
-        public void setPartID(int partID){
-            this.partID = partID;
-        }
-
-        public void getPartID(){
-            return partID;
-        }
-
-    }
 
     public class Products{
         private ArraysSet<Parts> associatedParts = new ArraysSet<Parts>;
@@ -84,13 +29,14 @@ public class ArraysSet {
         private int max;
         private double proCost;
 
-        public Products(int proid, String proName, int proCount ,double proPrice, int min, int max){
+        public Products(int proid, String proName, int proCount, double proPrice, int min, int max){
             setProid(proid);
             setProName(proName);
             setProCount(proCount);
             setMin(min);
             setMax(max);
         }
+
         public void setProName(String proName){
             this.proName = proName;
         }
@@ -131,18 +77,42 @@ public class ArraysSet {
             this.max = max;
         }
 
-        public void addPartsToAdd(Parts partsToAdd){
-            partsToAdd.add(partsToAdd);
+        public void  addAssociatedParts(Parts partsToAdd){
+            associatedParts.add(partsToAdd);
         }
 
-        public boolean removePartstoAdd(Parts partsToRemove){
+        public boolean removeAssociatedParts(Parts partsToRemove){
             int i;
-            for(i=0; i< addPartsToAdd(); i++){
-                if (addPartsToAdd(.get(i).getPartID() == partsToRemove){
-                    addPartsToAdd.remove(i);
+            for(i=0; i< associatedParts.size(); i++){
+                if (associatedParts.get(i).getPartID() == partsToRemove){
+                    associatedParts.remove(i);
                     return true;
-                };)
+                }
+            )
+                    return false;
             }
+
+            public Parts lookupAssociatedParts(int partToSearch){
+              for(int i = 0; i < associatedParts.size(); i++){
+                  if(associatedParts.get(i).getPartID() == partToSearch){
+                      return associatedParts.get(i);
+                  }
+                  return null;
+              }
+              public void setProid(int id){
+                  this.proid = id;
+                }
+              public int getProid(){
+                  return this.proid;
+                }
+
+              public int getPartsListSize(){
+                  return associatedParts.size()
+                }
+            }
+
+
+
         }
     }
 

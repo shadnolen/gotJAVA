@@ -80,7 +80,7 @@ public class ArraysSet {
         private String proName;
         private double proPrice = 0.0;
         private int proCount = 0;
-        private int rmin;
+        private int min;
         private int max;
         private double proCost;
 
@@ -88,7 +88,61 @@ public class ArraysSet {
             setProid(proid);
             setProName(proName);
             setProCount(proCount);
-            
+            setMin(min);
+            setMax(max);
+        }
+        public void setProName(String proName){
+            this.proName = proName;
+        }
+
+        public String getProName() {
+            return proName;
+        }
+
+        public void setProCost(double proCost) {
+            this.proCost = proCost;
+        }
+
+        public double getProCost() {
+            return proCost;
+        }
+
+        public void setProCount(int proCount) {
+            this.proCount = proCount;
+        }
+
+        public int getProCount() {
+            return proCount;
+        }
+
+        public int getMin() {
+            return min;
+        }
+
+        public void setMin(int min) {
+            this.min = min;
+        }
+
+        public int getMax() {
+            return max;
+        }
+
+        public void setMax(int max) {
+            this.max = max;
+        }
+
+        public void addPartsToAdd(Parts partsToAdd){
+            partsToAdd.add(partsToAdd);
+        }
+
+        public boolean removePartstoAdd(Parts partsToRemove){
+            int i;
+            for(i=0; i< addPartsToAdd(); i++){
+                if (addPartsToAdd(.get(i).getPartID() == partsToRemove){
+                    addPartsToAdd.remove(i);
+                    return true;
+                };)
+            }
         }
     }
 

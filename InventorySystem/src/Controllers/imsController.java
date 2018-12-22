@@ -250,9 +250,27 @@ public class imsController  implements Initializable {
                     errorWindow(2);
                     return;
                 }else{
-                    FXMLLOADER loader = new FXMLLoader(getClass().getResource("GUI/proMod"));
+                 
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("GUI/proMod"));
                     proMod controller = new proMod(int, productSelected);
+                   
+                    loader.setController(controller);
+                  Parent root = loader.load();         
+                  Scene scene = new Scene(root);         
+                  Stage stage = (Stage) ((Node) event.getSource()).getSource().getWindow();           
+                  stage.setScene(scene);
+                  stage.setResizable(false);          
+                  stage.show();      
                 }
+            }catch(IOException e){
+                
+            }
+        }
+        
+        @FXML
+        private void addProduct(MouseEvent event){
+            try{
+                FXMLLoader loader = new 
             }
         }
 
@@ -266,6 +284,16 @@ public class imsController  implements Initializable {
 
     private boolean confirmDelete(String name) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    private static class FXMLLOADER {
+
+        public FXMLLOADER() {
+        }
+
+        private Parent load() {
+            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        }
     }
     }
 }

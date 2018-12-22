@@ -10,6 +10,7 @@ import Code.Parts;
 import Code.Products;
 import Code.Supply;
 import java.awt.event.MouseEvent;
+import java.io.IOException;
 
 //java imports
 import java.net.URL;
@@ -22,9 +23,13 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 
 
 /**
@@ -57,7 +62,7 @@ public class imsController  implements Initializable {
     ArrayList<Integer> partIDL;
     ArrayList<Integer>  productIDL;
     
-    public imsController(Supply inv){
+    public imsController(Supply inv, Parts selected){
         this.inv = inv;
         partIDL = inv.retrievePartIDL();
         productIDL = inv.retrieveProductIDL();
@@ -138,15 +143,37 @@ public class imsController  implements Initializable {
     @FXML
     private void addPart(MouseEvent event){
         try{
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("addPart.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("GUI/partAdd.fxml"));
+            AddPartController controller = new AddPartController(inv);
             
+            loader.setController(controller);
+            Parent root = loader.load();
+            Scene scene = new Scene(root);
+            Stage stage = (Stage) ((Node) event.getSource()).getSource().getWindow();
+            stage.setScene(scene);
+            stage.setResizable(false);
+            stage.show();
+        }catch(IOException e){
         }
     }
     
     @FXML
     private void modifyPart(MouseEvent event){
         try{
-            Parts
+            Parts selected = partsTable.getSelectionModel().getSelectedItem();
+            if(partSupply.isEmpty()){
+                errorWindow(1);
+                return;
+            } if (!partSupply.isEmpty()) {
+                errorWindow(2);
+                return;                
+            }else{
+                 FXMLLoader loader = new FXMLLoader(getClass().getResource("GUI/proMod.fxml"));
+                 imsController controller = new imsController(inv, selected);
+                 
+                
+            }
+            
         }
     }
 }

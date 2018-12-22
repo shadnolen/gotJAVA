@@ -9,6 +9,6 @@ package Code;
  *
  * @author shadn
  */
-class Parts {
+public class Parts {
     
 }

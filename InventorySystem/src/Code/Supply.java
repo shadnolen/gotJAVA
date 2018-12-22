@@ -5,10 +5,26 @@
  */
 package Code;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author shadn
  */
 public class Supply {
+    
+    private ArrayList<Parts>  partsTotal;
+    
+    public Parts lookUpPart(int partLookUp){
+        if(!partsTotal.isEmpty()){
+            for(int i=0; i < partsTotal.size(); i++){
+                if(partsTotal.get(i).getPartID(). == partLookUp){
+                return partsTotal.get(i);
+            }
+          }
+       }
+        return null;
+    }
+    
     
 }

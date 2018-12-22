@@ -5,10 +5,19 @@
  */
 package Controllers;
 
+import Code.Supply;
+
 /**
  *
  * @author shadn
  */
 public class AddPartController {
+
+    public AddPartController(Supply inv) {
+    }
+
+    AddPartController(Supply inv) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
 }

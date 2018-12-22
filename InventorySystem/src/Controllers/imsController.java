@@ -61,6 +61,7 @@ public class imsController  implements Initializable {
     private ObservableList<Products> productSupplySearch = FXCollections.observableArrayList();
     ArrayList<Integer> partIDL;
     ArrayList<Integer>  productIDL;
+    private Object removePart;
     
     public imsController(Supply inv, Parts selected){
         this.inv = inv;
@@ -170,10 +171,101 @@ public class imsController  implements Initializable {
             }else{
                  FXMLLoader loader = new FXMLLoader(getClass().getResource("GUI/proMod.fxml"));
                  imsController controller = new imsController(inv, selected);
-                 
-                
-            }
-            
+                  loader.setController(controller);
+           
+                  Parent root = loader.load();         
+                  Scene scene = new Scene(root);         
+                  Stage stage = (Stage) ((Node) event.getSource()).getSource().getWindow();           
+                  stage.setScene(scene);
+                  stage.setResizable(false);          
+                  stage.show();                    
+           }
+        }catch(IOException e){                    
+                    }            
         }
+        
+        @FXML
+        private void deletePart(MouseEvent){
+            Parts removePart = partsTable.getSelectionModel().getSelectedItem();
+            if(partSupply.isEmpty()){
+                errorWindow(1);
+                return;
+        }
+            if(partSupply.isEmpty()){
+                errorWindow(2);
+            }else{
+                boolean confirm = confirmationWindow(removePart.getName());
+                if(!confirm){
+                    return;
+                }
+                inv.deletePart(removePart);
+                partSupply.remove(removePart);
+                partsTable.refresh();
+            }
+        }
+        
+        @FXML 
+        private void deleteProduct(MouseEvent event){
+        boolean deleted = false;
+        Products removeProduct = productsTable.getSelectionModel().getSelectedItem();
+        if(productSupply.isEmpty()){
+            errorWindow(1);
+            return;
+        }
+        if(!productSupply.isEmpty() && removePart == null){
+            errorWindow(2);
+            return;
+        }
+        if(removeProduct.getPartsListSize() > 0){
+            boolean confirm = confirmDelete(removeProduct.getName());
+            if(!confirm){
+                return;
+            }else{
+                if(removeProduct != null){
+                    infoWindow(1, removeProduct.getName());
+                    deleted = true;
+                    if(deleted){
+                        return;
+                    }else{
+                        infoWindow(2, " ");
+                    }
+            }           
+        }
+            
+            inv.removeProduct(removeProduct.getProductID());
+            productSupply.remove(removeProduct);
+            productsTable.setItems(productSupply);
+            productsTable.refresh();
+        }
+        
+        @FXML
+        private void modifyProduct(MouseEvent event){
+            try{
+                Products productSelected = productsTable.getSelectionModel().getSelectedItem();
+                if(productSupply.isEmpty()){
+                    errorWindow(1);
+                    return;
+                }
+                if(!productSupply.isEmpty() && productSelected == null){
+                    errorWindow(2);
+                    return;
+                }else{
+                    FXMLLOADER loader = new FXMLLoader(getClass().getResource("GUI/proMod"));
+                    proMod controller = new proMod(int, productSelected);
+                }
+            }
+        }
+
+    private void errorWindow(int i) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    private void infoWindow(int i, String _) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    private boolean confirmDelete(String name) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     }
 }

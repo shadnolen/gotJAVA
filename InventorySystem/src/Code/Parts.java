@@ -10,5 +10,9 @@ package Code;
  * @author shadn
  */
 public class Parts {
+
+    Object getPartID() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
 }

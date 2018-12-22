@@ -15,6 +15,7 @@ import java.io.IOException;
 //java imports
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Optional;
 import java.util.ResourceBundle;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
@@ -26,6 +27,9 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -238,7 +242,7 @@ public class imsController  implements Initializable {
             productsTable.refresh();
         }
         
-        @FXML
+      @FXML
         private void modifyProduct(MouseEvent event){
             try{
                 Products productSelected = productsTable.getSelectionModel().getSelectedItem();
@@ -252,9 +256,9 @@ public class imsController  implements Initializable {
                 }else{
                  
                     FXMLLoader loader = new FXMLLoader(getClass().getResource("GUI/proMod"));
-                    proMod controller = new proMod(int, productSelected);
+                    proModController controller = new proMod(int, productSelected);
                    
-                    loader.setController(controller);
+                  loader.setController(controller);
                   Parent root = loader.load();         
                   Scene scene = new Scene(root);         
                   Stage stage = (Stage) ((Node) event.getSource()).getSource().getWindow();           
@@ -270,30 +274,66 @@ public class imsController  implements Initializable {
         @FXML
         private void addProduct(MouseEvent event){
             try{
-                FXMLLoader loader = new 
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/GUI/proAdd"));
+                proAddController controller = new proAddController(inv);
+
+                  loader.setController(controller);
+                  Parent root = loader.load();         
+                  Scene scene = new Scene(root);         
+                  Stage stage = (Stage) ((Node) event.getSource()).getSource().getWindow();           
+                  stage.setScene(scene);
+                  stage.setResizable(false);          
+                  stage.show();      
+          
+            }catch(IOException e){                
             }
         }
-
-    private void errorWindow(int i) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
+        
+        
+    private void errorWindow(int code) {
+    if(code==1){
+        Alert alert = new Alert(AlertType.ERROR);
+        alert.setTitle("Error");
+        alert.setHeaderText("Empty Supply");
+        alert.setContentText("Nothing Selected, YO!");
+        alert.showAndWait();
     }
-
-    private void infoWindow(int i, String _) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+     if(code== 2){
+        Alert alert = new Alert(AlertType.ERROR);
+        alert.setTitle("Error");
+        alert.setHeaderText("Invailid Choice");
+        alert.setContentText("Select something!");
+        alert.showAndWait();
+      }
     }
-
-    private boolean confirmDelete(String name) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    private static class FXMLLOADER {
-
-        public FXMLLOADER() {
+    
+    private boolean confirmationWindow(String name){
+        Alert alert = new Alert(AlertType.CONFIRMATION);
+        alert.setTitle("Delete This Part");
+        alert.setHeaderText("Do you really want to delete  " + name + ", Since it still has parts assigned to it?");
+        alert.setContentText("Click to Confirm");
+        
+        Optional<ButtonType> result = alert.showAndWait();
+        if(result.get() == ButtonType.OK){
+            return true;
+        }else{
+            return false;
         }
+    }
 
-        private Parent load() {
-            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-        }
-    }
-    }
+    private void infoWindow(int code, String name) {
+       if(code ==1){
+           Alert alert = new Alert(AlertType.INFORMATION);
+           alert.setTitle("Confirmed");
+           alert.setHeaderText(null);
+           alert.setContentText( name + ", has been Deleted!");
+           alert.showAndWait();
+    }else{
+            Alert alert = new Alert(AlertType.INFORMATION);
+           alert.setTitle("Error in your ways");
+           alert.setHeaderText(null);
+           alert.setContentText( "Correct you error!");
+          }         
+     }
 }

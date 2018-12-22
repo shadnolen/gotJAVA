@@ -11,7 +11,7 @@ import Code.Supply;
  *
  * @author shadn
  */
-public class AddPartController {
+public class partAddController {
 
     public AddPartController(Supply inv) {
     }

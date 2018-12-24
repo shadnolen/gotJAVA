@@ -75,6 +75,10 @@ public class imsController  implements Initializable {
     }
     
     // Let's go ahead and initialize the controller class
+
+    public imsController() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
     
     @Override
@@ -118,7 +122,7 @@ public class imsController  implements Initializable {
     @FXML
     private void searchPartList(MouseEvent event){
         if(!partsSearchBox.getText().trim().isEmpty()){
-            partsSupplySearch.clear();
+            partSupplySearch.clear();
             for(int i=0; i<partIDL.size();i++){
                if (inv.lookUpPart(partIDL.get(i)).getName().contains(partsSearchBox.getText().trim())){
                    partSupplySearch.add(inv.lookUpPart(partIDL.get(i)));
@@ -150,7 +154,7 @@ public class imsController  implements Initializable {
     private void addPart(MouseEvent event){
         try{
             FXMLLoader loader = new FXMLLoader(getClass().getResource("GUI/partAdd.fxml"));
-            AddPartController controller = new AddPartController(inv);
+            partAddController controller = new partAddController(inv);
             
             loader.setController(controller);
             Parent root = loader.load();

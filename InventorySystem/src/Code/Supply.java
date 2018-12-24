@@ -13,46 +13,129 @@ import java.util.ArrayList;
  */
 public class Supply {
     
-    private ArrayList<Parts>  partsTotal;
+    private ArrayList<Parts>  products;
     private ArrayList<Products> productTotal;
+    int i;
     
-    public Parts lookUpPart(int partLookUp){
-        if(!partsTotal.isEmpty()){
-            for(int i=0; i < partsTotal.size(); i++){
-                if(partsTotal.get(i).getPartID()  == partLookUp){
-                return partsTotal.get(i);
+    public Supply(){
+    products = new ArrayList<>();
+    productTotal = new ArrayList<>();    
+}
+    
+    //ADD/REMOVE/MOD from product list 
+    public void productAdd(Products addProduct){
+        if(addProduct != null){
+            this.productAdd(addProduct);
+        }
+    }    
+    
+    public boolean productRemoval(int productRemoval){
+     
+        for( i = 0; i< products.size(); i++){
+            if(productTotal.get(i).getProductID() == productRemoval){
+                products.remove(i);
+                break;
+            }else{
+                return false;
+            }
+        }
+        return true;
+    }
+    
+    public Products productSearch(int searchProduct){
+        if(!products.isEmpty()){
+            for(i = 0; i <products.size();i++ ){
+                if(productTotal.get(i).getProductID() == searchProduct);
+            }
+        }
+            return null;
+    }
+    
+    public Products productUpdate(Products product){
+        for (i=0; i < products.size();i++){
+            if(productTotal.get(i).getProductID() == product.getProductID()) {
+            } else {
+                productTotal.set(i, product);
+                break;
+            }
+        }
+        return null;
+    }
+
+
+//ADD/REMOVE/MOD from parts list 
+    
+    
+    
+    public void partsAdd(Parts partsAdd){
+        if(partsAdd  != null){
+            products.add(partsAdd);
+        }
+    }
+    
+    public boolean partsDelete(Parts partsDelete) {       
+        for (i=0; i < products.size();i++){
+                
+        if (products.get(i).getPartID() == partsDelete.getPartID()){
+            products.remove(i);
+            break;
+             }else{
+            return false;
+          }
+        }       
+        return true;
+    }
+    
+    public Parts partsSearch(int partsSearch){
+        if(!products.isEmpty()){
+            for(int i=0; i < products.size(); i++){
+                if(products.get(i).getPartID()  == partsSearch){
+                return products.get(i);
             }
           }
        }
         return null;
     }
     
-    public Products lookUpProduct(int productLookUp){
-        if(!productTotal.isEmpty()){
-            for(int i=0;  i < productTotal.size(.); i++){
-                if(productTotal.get(i).getProductID() == productLookUp){
-                    return productTotal.get(i);
-                }
+    
+    
+    public void   partsUpdate(Parts partsUpdate){
+        for(int i = 0; i < products.size(); i++){
+            if (products.get(i).getPartID() == partsUpdate.partID){
+                products.set(i, partsUpdate);
+                break;
             }
         }
-        return null;
+        return;
     }
 
-    public ArrayList<Integer> retrievePartIDL() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    public ArrayList<Integer> retrieveProductIDL() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    public void removeProduct(int productID) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    public void deletePart(Parts removePart) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    
+      // List Size Check
+    public int productLS(){
+        return products.size();
     }
     
+    public int partLS(){
+        return productTotal.size();
+    }
+
+         public ArrayList<Integer> retrievePartsIDL(){
+        ArrayList<Integer> list = new ArrayList<>();
+        if(!products.isEmpty()){
+            for(int i = 0; i< products.size(); i++){
+                list.add(products.get(i).getPartID());
+            }
+        }
+        return list;
+    }
     
+            public ArrayList<Integer> retrieveProductsIDL(){
+        ArrayList<Integer> list = new ArrayList<>();
+        if(!productTotal.isEmpty()){
+            for(int i = 0; i< productTotal.size(); i++){
+                list.add(productTotal.get(i).getProductID());
+            }
+        }
+        return list;
+    }
 }

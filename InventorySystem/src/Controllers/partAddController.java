@@ -5,19 +5,148 @@
  */
 package Controllers;
 
+import Code.Parts;
 import Code.Supply;
+import java.awt.event.MouseEvent;
+import java.net.URL;
+import java.util.Random;
+import javafx.fxml.FXML;
+import javafx.scene.control.Label;
+import javafx.scene.control.RadioButton;
+import javafx.scene.control.TextField;
 
 /**
  *
  * @author shadn
  */
 public class partAddController {
-
-    public AddPartController(Supply inv) {
+    Supply inv;
+    
+    
+    @FXML
+    private RadioButton inHouse;
+    
+    @FXML
+    private RadioButton outSourced;
+    
+    @FXML 
+    private TextField id;
+    
+     @FXML 
+    private TextField name;
+     
+     @FXML 
+    private TextField count;
+                
+     @FXML 
+    private TextField price;
+  
+    @FXML 
+    private TextField max;
+    
+    @FXML 
+    private TextField min;
+    
+    @FXML 
+    private Label compName;
+    
+    @FXML 
+    private Label comp;
+    
+    
+    public partAddController(Supply inv) {
+        this.inv = inv;
     }
 
-    AddPartController(Supply inv) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    @Override
+    public void initialize(URL url, Resourcebundle rb){
+        generatePartID();
+        resetFields();        
+    }
+
+    private void generatePartID() {
+       boolean match;
+       Random rn = new Random();
+       Integer num = rn.nextInt(1000);
+       
+       if (inv.partLS() == 0){
+           id.setText(num.toString());
+       }
+       
+       if(inv.partLS() == 1000) {
+        errorWindow(3, null);
+       }else{
+           match = generateNumber(num);
+           
+           if (match == false){
+               id.setText(num.toString());
+           }else{
+               generatePartID();
+           }
+       }
+    }
+    
+    
+    private boolean generateNumber(Integer num){
+        Parts match = inv.partsSearch(num);
+        if(match != null){
+            return true;
+        }
+        return false;
+    }
+    
+    @FXML
+    private void inSelect(MouseEvent event){
+        compName.setText("Machine ID");
+        comp.setText("Machine Name");
+    }
+    
+    @FXML 
+    
+   private void outSelect(MouseEvent event ){
+       compName.setText("Machine ID");
+       comp.setText("Machine Name");
+   }
+   
+   @FXML 
+        private void disableID(MouseEvent event){      
+   }
+        
+   @FXML
+   private void partAddCancel(MouseEvent event){
+       boolean cancel = cancel();
+       if(cancel) {
+           mainSceen(event);
+    }else{
+           return;
+       }       
+   }
+   
+   @FXML 
+   private void partSave(Mouse event){
+       resetFieldSyt
+   }
+   
+   
+   
+    private void resetFields() {
+     name.setText("Part Name");
+     count.setText("Inventory Number");
+     price.setText("Price");
+     max.setText("Max");
+     min.setText("Min");
+     compName.setText("Machine ID");
+     comp.setText("MachineID");
+     inHouse.setSelected(true);     
+    }
+
+    
+    
+    
+    private static class Resourcebundle {
+
+        public Resourcebundle() {
+        }
     }
     
 }

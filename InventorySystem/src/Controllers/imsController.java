@@ -70,8 +70,8 @@ public class imsController  implements Initializable {
     
     public imsController(Supply inv, Parts selected){
         this.inv = inv;
-        partIDL = inv.retrievePartIDL();
-        productIDL = inv.retrieveProductIDL();
+        partIDL = inv.retrievePartsIDL();
+        productIDL = inv.retrieveProductsIDL();
     }
     
     // Let's go ahead and initialize the controller class
@@ -91,7 +91,7 @@ public class imsController  implements Initializable {
     private void generatePartsTable() {
        if(!partIDL.isEmpty()){
            for(int i=0; i < partIDL.size(); i++){
-               partSupply.add(inv.lookUpPart(partIDL.get(i)));
+               partSupply.add(inv.partLookUp(partIDL.get(i)));
            }
        }
        
@@ -102,7 +102,7 @@ public class imsController  implements Initializable {
     private void generateProductsTable() {
         if(!productIDL.isEmpty()){
             for(int i = 0; i <productIDL.size(); i++){
-                productSupply.add(inv.lookUpProduct(productIDL.get(i)));
+                productSupply.add(inv.productLookUp(productIDL.get(i)));
             }
         }
         System.out.println(productIDL.size());

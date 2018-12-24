@@ -123,8 +123,34 @@ public class partAddController {
    }
    
    @FXML 
-   private void partSave(Mouse event){
-       resetFieldSyt
+   private void partSave(MouseEvent event){
+      fieldStyle();
+      boolean end = false;
+      TextField[] fieldCount = { count, price, max, min};
+      if(inHouse.isSelected() || outSourced.isSelected()){
+          for(int i = 0; i < fieldCount.length;i++){
+              boolean errorValue = checkValue(fieldCount[i]);
+              if (errorValue){
+                  end = true;
+                  break;
+              }
+              
+              boolean errorType = checkType(fieldCount[i]);
+              if(errorType){
+                  end = true;
+                  break;
+              }
+          }
+          
+          if(name.getText().trim().isEmpty() || name.getText().trim().toLowerCase().equals("Part Name")){
+              errorWindow(4, name);
+              return;
+          }
+          
+          if()
+          
+          
+      }
    }
    
    

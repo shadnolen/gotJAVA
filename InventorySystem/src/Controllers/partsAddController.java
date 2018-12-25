@@ -10,7 +10,10 @@ import Code.Supply;
 import java.awt.event.MouseEvent;
 import java.net.URL;
 import java.util.Random;
+import java.util.ResourceBundle;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
@@ -19,18 +22,18 @@ import javafx.scene.control.TextField;
  *
  * @author shadn
  */
-public class partAddController {
+public class partsAddController {
     Supply inv;
     
     
     @FXML
-    private RadioButton inHouse;
+    private RadioButton inSelect;
     
     @FXML
-    private RadioButton outSourced;
+    private RadioButton outSelect;
     
     @FXML 
-    private TextField partid;
+    private TextField idNum;
     
      @FXML 
     private TextField name;
@@ -46,20 +49,19 @@ public class partAddController {
     
     @FXML 
     private TextField min;
-    
+       
     @FXML 
+    private TextField comp;
+    
+     @FXML 
     private Label compName;
     
-    @FXML 
-    private Label comp;
-    
-    
-    public partAddController(Supply inv) {
+    public partsAddController(Supply inv) {
         this.inv = inv;
     }
 
-    @Override
-    public void initialize(URL url, Resourcebundle rb){
+ //   @Override
+    public void initialize(URL url, ResourceBundle rb){
         generatePartID();
         resetFields();        
     }
@@ -70,7 +72,7 @@ public class partAddController {
        Integer num = rn.nextInt(1000);
        
        if (inv.partLS() == 0){
-           id.setText(num.toString());
+           idNum.setText(num.toString());
        }
        
        if(inv.partLS() == 1000) {
@@ -79,7 +81,7 @@ public class partAddController {
            match = generateNumber(num);
            
            if (match == false){
-               id.setText(num.toString());
+               idNum.setText(num.toString());
            }else{
                generatePartID();
            }
@@ -96,14 +98,14 @@ public class partAddController {
     }
     
     @FXML
-    private void inSelect(MouseEvent event){
+    private void inHouse(MouseEvent event){
         compName.setText("Machine ID");
         comp.setText("Machine Name");
     }
     
     @FXML 
     
-   private void outSelect(MouseEvent event ){
+   private void outSourced(MouseEvent event ){
        compName.setText("Machine ID");
        comp.setText("Machine Name");
    }
@@ -146,15 +148,120 @@ public class partAddController {
               errorWindow(4, name);
               return;
           }
+               if(Integer.parseInt(min.getText().trim())> Integer.parseInt(max.getText().trim())){
+              errorWindow(8, min);
+              return;
+          }
+           
+            if(Integer.parseInt(count.getText().trim())> Integer.parseInt(min.getText().trim())){
+              errorWindow(6, count);
+              return;
+              
+          if(Integer.parseInt(count.getText().trim()) > Integer.parseInt(min.getText().trim()));
+          errorWindow(7, count);
+          return;
           
-          if()
+     
           
+         
+         
+         
           
-      }
+         
+          }
+          
+        if(end){
+            return;
+            
+        }else if(comp.getText().trim().isEmpty() || comp.getText().trim().toLowerCase().equals("Company Name")){
+            errorWindow(3, comp);
+            return;
+            
+        } else if(inSelect.isSelected() && !comp.getText().trim().matches("[0-9]")){
+            errorWindow(3, comp);
+            return;
+            
+        }else if(inSelect.isSelected()){
+            addInSelect();
+            
+        }else if(outSelect.isSelected()){
+            addOutSelect();
+        }
+   }else{
+          errorWindow(2, null);
+       return;
    }
-   
-   
-   
+          mainIMS(event);
+}
+
+      private void addInHouse() {
+        inv.addPart(new InHouse(Integer.parseInt(id.getText().trim()), name.getText().trim(),
+                Double.parseDouble(price.getText().trim()), Integer.parseInt(count.getText().trim()),
+                Integer.parseInt(min.getText().trim()), Integer.parseInt(max.getText().trim()), (Integer.parseInt(company.getText().trim()))));
+
+    }
+      
+       private void addOutSourced(){
+          inv.addPart(new OutSourced(Integer.parseInt(idNum.getText().trim()), name.getText().trim(),
+                Double.parseDouble(price.getText().trim()), Integer.parseInt(count.getText().trim()),
+                Integer.parseInt(min.getText().trim()), Integer.parseInt(max.getText().trim()), comp.getText().trim()));
+      }
+       
+       
+       private void errorWindow(int code, TextField field){
+           errorField(field);
+           if(code == 1){
+               Alert alert = new Alert (AlertType.ERROR);
+               alert.setTitle("Error Adding This Part");
+               alert.setHeaderText("Can't Add This Part");
+               alert.setContentText("Field Cannot Be Empty!");
+               alert.showAndWait();
+           }else if(code==2){
+               Alert alert = new Alert (AlertType.ERROR);
+               alert.setTitle("Error Adding This Part");
+               alert.setHeaderText("Can't Add This Part");
+               alert.setContentText("You Did't Specify In-House or Outsouced");
+               alert.showAndWait();               
+           }else if(code == 3){
+               Alert alert = new Alert(AlertType.ERROR);
+               alert.setTitle("Error Adding This Part");
+               alert.setHeaderText("Can't Add This Part");
+               alert.setContentText("Invaid System Format");
+               alert.showAndWait();
+           }else if(code == 4){
+               Alert alert = new Alert(AlertType.ERROR);
+               alert.setTitle("Error Adding This Part");
+               alert.setHeaderText("Can't Add Part");
+               alert.setContentText("Invalid Naming Convention");
+               alert.showAndWait();
+           }else if(code == 5){
+               Alert alert = new Alert(AlertType.ERROR);
+               alert.setTitle("Error Adding this Part");
+               alert.setHeaderText("Can't Add This Part");
+               alert.setContentText("Keep it Positive!");
+               alert.showAndWait();
+       }else if(code== 7){
+               Alert alert = new Alert(AlertType.ERROR);
+               alert.setTitle("Error Adding this Part");
+               alert.setHeaderText("Can't Add This Part");
+               alert.setContentText("Supply Needs to be Greater Than The Minimum");
+               alert.showAndWait();
+       }else if(code== 8){
+               Alert alert = new Alert(AlertType.ERROR);
+               alert.setTitle("Error Adding this Part");
+               alert.setHeaderText("Can't Add This Part");
+               alert.setContentText("Supply Can't Be Greater Than The Maximum");
+               alert.showAndWait();   
+       }else{
+           Alert alert = new Alert(AlertType.ERROR);
+               alert.setTitle("Error Adding this Part");
+               alert.setHeaderText("Can't Add This Part");
+               alert.setContentText("Unkown Pythagorean Theorem Error");
+               alert.showAndWait();   
+       }
+ }
+       
+      
     private void resetFields() {
      name.setText("Part Name");
      count.setText("Inventory Number");
@@ -163,16 +270,28 @@ public class partAddController {
      min.setText("Min");
      compName.setText("Machine ID");
      comp.setText("MachineID");
-     inHouse.setSelected(true);     
+     inSelect.setSelected(true);     
+    }
+    
+    private void resetStyle(){
+       
     }
 
-    
-    
-    
-    private static class Resourcebundle {
-
-        public Resourcebundle() {
+    private void errorField(TextField field){
+        if(field == null){
+            return;
+        }else{
+            field.setStyle("-fx-boarder-color:purple");
         }
     }
+    private void fieldStyle() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    private boolean checkType(TextField textField) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+ 
     
 }

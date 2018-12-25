@@ -7,7 +7,6 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <Label id="addLabel" layoutX="55.0" layoutY="30.0" text="Add Part">
@@ -15,8 +14,8 @@
             <Font size="16.0" />
          </font>
       </Label>
-      <RadioButton id="addRBih" layoutX="185.0" layoutY="34.0" mnemonicParsing="false" text="In-House" />
-      <RadioButton id="addRBout" layoutX="293.0" layoutY="34.0" mnemonicParsing="false" text="Outsourced" />
+      <RadioButton id="inSelect" fx:id="inSelect" layoutX="185.0" layoutY="34.0" mnemonicParsing="false" text="In-House" />
+      <RadioButton id="outSelect" fx:id="outSelect" layoutX="293.0" layoutY="34.0" mnemonicParsing="false" text="Outsourced" />
       <Label id="addLabelID" layoutX="28.0" layoutY="76.00000000000003" text="ID" AnchorPane.bottomAnchor="298.4">
          <font>
             <Font size="16.0" />
@@ -27,7 +26,7 @@
             <Font size="16.0" />
          </font>
       </Label>
-      <Label id="addLabelPN" layoutX="26.0" layoutY="153.0" text="PART NUMBER">
+      <Label id="addLabelPN" layoutX="26.0" layoutY="153.0" text="Supply Count">
          <font>
             <Font size="16.0" />
          </font>
@@ -47,18 +46,18 @@
             <Font size="16.0" />
          </font>
       </Label>
-      <Label id="addLabelMID" layoutX="26.0" layoutY="266.0" text="Machine ID">
+      <Label id="addLabelMID" layoutX="26.0" layoutY="266.0" text="Company Name">
          <font>
             <Font size="16.0" />
          </font>
       </Label>
-      <TextField id="addTextId" layoutX="181.0" layoutY="76.0" />
-      <TextField id="addTextName" layoutX="181.0" layoutY="118.0" />
-      <TextField id="addTextPN" layoutX="181.0" layoutY="153.0" />
-      <TextField id="addTextCost" layoutX="181.0" layoutY="187.0" />
-      <TextField id="addTextMID" layoutX="181.0" layoutY="266.0" />
-      <TextField id="addTextMin" layoutX="361.0" layoutY="224.0" prefHeight="26.0" prefWidth="106.0" />
-      <TextField id="addTextMax" layoutX="181.0" layoutY="224.0" prefHeight="26.0" prefWidth="106.0" />
+      <TextField id="partId" fx:id="idNum" layoutX="181.0" layoutY="76.0" />
+      <TextField id="addTextName" fx:id="name" layoutX="181.0" layoutY="118.0" />
+      <TextField id="addTextPN" fx:id="count" layoutX="181.0" layoutY="153.0" />
+      <TextField id="addTextCost" fx:id="cost" layoutX="181.0" layoutY="187.0" />
+      <TextField id="addTextMID" fx:id="compName" layoutX="181.0" layoutY="266.0" />
+      <TextField id="addTextMin" fx:id="min" layoutX="361.0" layoutY="224.0" prefHeight="26.0" prefWidth="106.0" />
+      <TextField id="addTextMax" fx:id="max" layoutX="181.0" layoutY="224.0" prefHeight="26.0" prefWidth="106.0" />
       <Button id="addSave" layoutX="309.0" layoutY="308.0" mnemonicParsing="false" text="Save" />
       <Button id="addCancel" layoutX="361.0" layoutY="308.0" mnemonicParsing="false" text="Cancel" />
    </children>

@@ -30,7 +30,7 @@ public class partAddController {
     private RadioButton outSourced;
     
     @FXML 
-    private TextField id;
+    private TextField partid;
     
      @FXML 
     private TextField name;

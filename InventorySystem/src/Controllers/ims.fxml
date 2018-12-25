@@ -9,19 +9,18 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="479.0" prefWidth="748.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="inventorysystem.GUI.IMSguiController">
    <children>
-      <BottomNavigationButton id="addParts" fx:id="add" accessibleText="add" layoutX="127.0" layoutY="311.0" prefHeight="24.0" prefWidth="60.0" text="Add" />
+      <BottomNavigationButton id="addParts" fx:id="partAdd" accessibleText="add" layoutX="127.0" layoutY="311.0" prefHeight="24.0" prefWidth="60.0" text="Add" />
       <Button id="modifyParts" layoutX="199.0" layoutY="311.0" mnemonicParsing="false" text="Modify" />
       <Button id="deleteParts" layoutX="271.0" layoutY="311.0" mnemonicParsing="false" text="Delete" />
-      <BottomNavigationButton id="addProducts" fx:id="add1" accessibleText="add" layoutX="499.0" layoutY="311.0" prefHeight="24.0" prefWidth="60.0" text="Add" />
+      <BottomNavigationButton id="addProducts" fx:id="prodcutAdd" accessibleText="add" layoutX="499.0" layoutY="311.0" prefHeight="24.0" prefWidth="60.0" text="Add" />
       <Button id="modifyProducts" layoutX="578.0" layoutY="311.0" mnemonicParsing="false" text="Modify" />
       <Button id="deleteProducts" layoutX="643.0" layoutY="311.0" mnemonicParsing="false" text="Delete" />
-      <Button id="searchParts" fx:id="searchParts" layoutX="125.0" layoutY="96.0" mnemonicParsing="false" text="Search" />
-      <TextField id="searchPartsText" layoutX="181.0" layoutY="96.0" prefHeight="26.0" prefWidth="139.0" />
+      <Button id="searchParts" fx:id="partsSearch" layoutX="125.0" layoutY="96.0" mnemonicParsing="false" text="Search" />
+      <TextField id="partsSearchField" fx:id="partsSearch" layoutX="181.0" layoutY="96.0" prefHeight="26.0" prefWidth="139.0" />
       <Button id="searchProducts" layoutX="499.0" layoutY="96.0" mnemonicParsing="false" text="Search" />
-      <TextField id="searchProductsText" layoutX="555.0" layoutY="96.0" prefHeight="26.0" prefWidth="139.0" />
+      <TextField id="proSearchField" fx:id="productSearch" layoutX="555.0" layoutY="96.0" prefHeight="26.0" prefWidth="139.0" />
       <Button id="exit" layoutX="609.0" layoutY="373.0" mnemonicParsing="false" text="Exit" />
       <TableView layoutX="24.0" layoutY="133.0" prefHeight="162.0" prefWidth="298.0">
         <columns>

@@ -18,8 +18,8 @@ public abstract class Parts {
     protected int min;
     
     
-    public void setPartID(int pid){
-        this.partID = pid;
+    public void setPartID(int partID){
+        this.partID = partID;
     }
     
     public int getPartID(){

@@ -49,7 +49,7 @@ public class imsController  implements Initializable {
     private Label label;
     
     @FXML
-    private TextField partSearchField;
+    private TextField partsSearchField;
     
     @FXML
     private TextField proSearchField;
@@ -121,10 +121,10 @@ public class imsController  implements Initializable {
     
     @FXML
     private void searchPartList(MouseEvent event){
-        if(!partsSearchBox.getText().trim().isEmpty()){
+        if(!partsSearch.getText().trim().isEmpty()){
             partSupplySearch.clear();
             for(int i=0; i<partIDL.size();i++){
-               if (inv.lookUpPart(partIDL.get(i)).getName().contains(partsSearchBox.getText().trim())){
+               if (inv.lookUpPart(partIDL.get(i)).getName().contains(partsSearch.getText().trim())){
                    partSupplySearch.add(inv.lookUpPart(partIDL.get(i)));
                } 
             }
@@ -136,10 +136,10 @@ public class imsController  implements Initializable {
     
     @FXML
     private void searchProductSupply(MouseEvent event){
-        if(!productSearchBox.getText().trim().isEmpty()){
+        if(!productSearch.getText().trim().isEmpty()){
             productSupplySearch.clear();
             for(int i = 0; i < productIDL.size();i++ ) {
-                if(inv.lookUpProduct(productIDL.get(i)).getName().contains(productSearchBox.getText().trim())){
+                if(inv.lookUpProduct(productIDL.get(i)).getName().contains(productSearch.getText().trim())){
                     productSupplySearch.add(inv.lookUpProduct(productIDL.get(i)));
                 }
             }
@@ -151,15 +151,15 @@ public class imsController  implements Initializable {
     
   
     @FXML
-    private void addPart(MouseEvent event){
+    private void partAdd(MouseEvent event){
         try{
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("GUI/partAdd.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/GUI/partAdd.fxml"));
             partAddController controller = new partAddController(inv);
             
             loader.setController(controller);
             Parent root = loader.load();
             Scene scene = new Scene(root);
-            Stage stage = (Stage) ((Node) event.getSource()).getSource().getWindow();
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             stage.setScene(scene);
             stage.setResizable(false);
             stage.show();
@@ -184,7 +184,7 @@ public class imsController  implements Initializable {
            
                   Parent root = loader.load();         
                   Scene scene = new Scene(root);         
-                  Stage stage = (Stage) ((Node) event.getSource()).getSource().getWindow();           
+                  Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();           
                   stage.setScene(scene);
                   stage.setResizable(false);          
                   stage.show();                    
@@ -194,7 +194,7 @@ public class imsController  implements Initializable {
         }
         
         @FXML
-        private void deletePart(MouseEvent){
+        private void partDelete(MouseEvent event){
             Parts removePart = partsTable.getSelectionModel().getSelectedItem();
             if(partSupply.isEmpty()){
                 errorWindow(1);
@@ -207,7 +207,7 @@ public class imsController  implements Initializable {
                 if(!confirm){
                     return;
                 }
-                inv.deletePart(removePart);
+                inv.partDelete(removePart);
                 partSupply.remove(removePart);
                 partsTable.refresh();
             }

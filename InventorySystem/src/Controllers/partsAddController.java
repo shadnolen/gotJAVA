@@ -11,7 +11,9 @@ import java.awt.event.MouseEvent;
 import java.net.URL;
 import java.util.Random;
 import java.util.ResourceBundle;
+import javafx.event.Event;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Label;
@@ -274,7 +276,12 @@ public class partsAddController {
     }
     
     private void resetStyle(){
-       
+       name.setStyle("-fx-border-color:lightblue");
+       count.setStyle("-fx-border-color:lightblue");
+       price.setStyle("-fx-border-color:lightblue");
+       min.setStyle("-fx-border-color:lightblue");
+       max.setStyle("-fx-border-color:lightblue");
+       comp.setStyle("-fx-border-color:lightblue");
     }
 
     private void errorField(TextField field){
@@ -284,6 +291,20 @@ public class partsAddController {
             field.setStyle("-fx-boarder-color:purple");
         }
     }
+    
+    private void mainIMS(Event event){
+        try{
+            FXMLLoader load = new FXMLLoader(getClass().getResource("ims.fxml"));
+            imsController controller = new imsController(inv);
+            
+        }
+    }
+    
+    
+    
+    
+    
+    
     private void fieldStyle() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }

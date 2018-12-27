@@ -124,8 +124,8 @@ public class imsController  implements Initializable {
         if(!partsSearch.getText().trim().isEmpty()){
             partSupplySearch.clear();
             for(int i=0; i<partIDL.size();i++){
-               if (inv.lookUpPart(partIDL.get(i)).getName().contains(partsSearch.getText().trim())){
-                   partSupplySearch.add(inv.lookUpPart(partIDL.get(i)));
+               if (inv.partLookUp(partIDL.get(i)).getName().contains(partsSearch.getText().trim())){
+                   partSupplySearch.add(inv.partLookUp(partIDL.get(i)));
                } 
             }
             
@@ -140,7 +140,7 @@ public class imsController  implements Initializable {
             productSupplySearch.clear();
             for(int i = 0; i < productIDL.size();i++ ) {
                 if(inv.lookUpProduct(productIDL.get(i)).getName().contains(productSearch.getText().trim())){
-                    productSupplySearch.add(inv.lookUpProduct(productIDL.get(i)));
+                    productSupplySearch.add(inv.productLookUp(productIDL.get(i)));
                 }
             }
             
@@ -277,7 +277,7 @@ public class imsController  implements Initializable {
         }
         
         @FXML
-        private void addProduct(MouseEvent event){
+        private void productAdd(MouseEvent event){
             try{
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/GUI/proAdd"));
                 proAddController controller = new proAddController(inv);
@@ -294,7 +294,7 @@ public class imsController  implements Initializable {
             }
         }
         
-        
+        }
         
     private void errorWindow(int code) {
     if(code==1){

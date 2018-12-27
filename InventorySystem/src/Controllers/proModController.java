@@ -8,6 +8,7 @@ package Controllers;
 import Code.Parts;
 import Code.Products;
 import Code.Supply;
+import static com.sun.deploy.panel.JreFindDialog.search;
 import java.awt.event.MouseEvent;
 import java.net.URL;
 import java.util.ArrayList;
@@ -72,7 +73,7 @@ this.partsIDL = inv.retrievePartsIDL();
 
 @Override
 public void initialize(URL url, ResourceBundle rb){
-    popSearchTable();
+    populateST();
     setData();
 }
 
@@ -81,19 +82,19 @@ void clearText(MouseEvent event){
     Object source = event.getSource();
     TextField field = (TextField) source;
     field.setText(" ");
-    if(field == search){
+    if(field == proSearch){
         partsST.setItems(partsSupply);
     }
 }
 
 @FXML
 private void proModSearch(MouseEvent event){
-    if(search.getText().trim().length() = 0 | search.getText(). == null){
+    if (proSearch.getText().trim().length() == 0 | proSearch.getText() == null){
     return;
    }else{
            partsSupplySearch.clear();
-           for(int i = 0; i< partsLS();i++){
-           if(inv.partsLookUp(partsIDL.get(i)).getName().contains(search.getText().trim())){
+           for(int i = 0; i< partLS();i++){
+           if(inv.partsLookUp(partsIDL.get(i)).getName().contains(proSearch.getText().trim())){
            partsSupplySearch.add(inv.partsSearch(partsIDL.get(i)));
           }
    }
@@ -320,13 +321,32 @@ private void partDelete(MouseEvent event){
 
     
     
-    private void mainIMS(MouseEvent event) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+  private boolean checkType(TextField field) {
+
+        if (field == price & !field.getText().trim().matches("\\d+(\\.\\d+)?")) {
+            errorWindow(3, field);
+            return true;
+        }
+        if (field != price & !field.getText().trim().matches("[0-9]*")) {
+            errorWindow(3, field);
+            return true;
+        }
+        return false;
+
     }
 
     private boolean cancel() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Alert alert = new Alert(AlertType.CONFIRMATION);
+        alert.setTitle("Cancel");
+        alert.setHeaderText("Do you really want to cancel?");
+        alert..setContentText("OK to confirm");
+       
+         Optional<ButtonType> result = alert.showAndWait();
+        if (result.get() == ButtonType.OK) {
+            return true;
+        } else {
+            return false;
+        }
     }
-    
-
+}
 

@@ -66,7 +66,7 @@ public class imsController  implements Initializable {
     private ObservableList<Products> productSupplySearch = FXCollections.observableArrayList();
     ArrayList<Integer> partIDL;
     ArrayList<Integer>  productIDL;
-    private Object removePart;
+ 
     
     public imsController(Supply inv, Parts selected){
         this.inv = inv;
@@ -91,7 +91,7 @@ public class imsController  implements Initializable {
     private void generatePartsTable() {
        if(!partIDL.isEmpty()){
            for(int i=0; i < partIDL.size(); i++){
-               partSupply.add(inv.partLookUp(partIDL.get(i)));
+               partSupply.add(inv.partsSearch(partIDL.get(i)));
            }
        }
        
@@ -102,7 +102,7 @@ public class imsController  implements Initializable {
     private void generateProductsTable() {
         if(!productIDL.isEmpty()){
             for(int i = 0; i <productIDL.size(); i++){
-                productSupply.add(inv.productLookUp(productIDL.get(i)));
+                productSupply.add(inv.productSearch(productIDL.get(i)));
             }
         }
         System.out.println(productIDL.size());
@@ -124,8 +124,8 @@ public class imsController  implements Initializable {
         if(!partsSearch.getText().trim().isEmpty()){
             partSupplySearch.clear();
             for(int i=0; i<partIDL.size();i++){
-               if (inv.partLookUp(partIDL.get(i)).getName().contains(partsSearch.getText().trim())){
-                   partSupplySearch.add(inv.partLookUp(partIDL.get(i)));
+               if (inv.partsSearch(partIDL.get(i)).getName().contains(partsSearch.getText().trim())){
+                   partSupplySearch.add(inv.partsSearch(partIDL.get(i)));
                } 
             }
             
@@ -139,8 +139,8 @@ public class imsController  implements Initializable {
         if(!productSearch.getText().trim().isEmpty()){
             productSupplySearch.clear();
             for(int i = 0; i < productIDL.size();i++ ) {
-                if(inv.lookUpProduct(productIDL.get(i)).getName().contains(productSearch.getText().trim())){
-                    productSupplySearch.add(inv.productLookUp(productIDL.get(i)));
+                if(inv.productSearch(productIDL.get(i)).getName().contains(productSearch.getText().trim())){
+                    productSupplySearch.add(inv.productSearch(productIDL.get(i)));
                 }
             }
             
@@ -154,7 +154,7 @@ public class imsController  implements Initializable {
     private void partAdd(MouseEvent event){
         try{
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/GUI/partAdd.fxml"));
-            partAddController controller = new partAddController(inv);
+            partsAddController controller = new partsAddController(inv);
             
             loader.setController(controller);
             Parent root = loader.load();
@@ -207,7 +207,7 @@ public class imsController  implements Initializable {
                 if(!confirm){
                     return;
                 }
-                inv.partDelete(removePart);
+                inv.partsDelete(removePart);
                 partSupply.remove(removePart);
                 partsTable.refresh();
             }
@@ -225,8 +225,8 @@ public class imsController  implements Initializable {
             errorWindow(2);
             return;
         }
-        if(removeProduct.getPartsListSize() > 0){
-            boolean confirm = confirmDelete(removeProduct.getName());
+        if(productRemoval.getPartsLS() > 0){
+            boolean confirm = confirmationWindow(removeProduct.getName());
             if(!confirm){
                 return;
             }else{
@@ -241,15 +241,15 @@ public class imsController  implements Initializable {
             }           
         }
             
-            inv.removeProduct(removeProduct.getProductID());
+            inv.productRemoval(removeProduct.getProductID());
             productSupply.remove(removeProduct);
             productsTable.setItems(productSupply);
             productsTable.refresh();
         }
         
-      @FXML
-        private void modifyProduct(MouseEvent event){
-            try{
+     @FXML
+    private void modifyProduct(MouseEvent event ) {
+        try {
                 Products productSelected = productsTable.getSelectionModel().getSelectedItem();
                 if(productSupply.isEmpty()){
                     errorWindow(1);
@@ -261,7 +261,7 @@ public class imsController  implements Initializable {
                 }else{
                  
                     FXMLLoader loader = new FXMLLoader(getClass().getResource("GUI/proMod"));
-                    proModController controller = new proMod(int, productSelected);
+                    proModController controller = new proModController(int, productSelected);
                    
                   loader.setController(controller);
                   Parent root = loader.load();         
@@ -285,7 +285,7 @@ public class imsController  implements Initializable {
                   loader.setController(controller);
                   Parent root = loader.load();         
                   Scene scene = new Scene(root);         
-                  Stage stage = (Stage) ((Node) event.getSource()).getSource().getWindow();           
+                 Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();         
                   stage.setScene(scene);
                   stage.setResizable(false);          
                   stage.show();      

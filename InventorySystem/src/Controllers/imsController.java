@@ -162,7 +162,7 @@ public class imsController  implements Initializable {
     private void partAdd(MouseEvent event){
         try{
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/GUI/partAdd.fxml"));
-            partsAddController controller = new partsAddController(inv);
+            PartAddController controller = new PartAddController(inv);
             
             loader.setController(controller);
             Parent root = loader.load();

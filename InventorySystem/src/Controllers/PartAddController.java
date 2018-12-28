@@ -33,7 +33,7 @@ import javafx.stage.Stage;
  *
  * @author shadn
  */
-public class partsAddController {
+public class PartAddController {
     Supply inv;
    
     @FXML
@@ -57,7 +57,7 @@ public class partsAddController {
     @FXML
     private TextField min;
 
-    public partsAddController(Supply inv) {
+    public PartAddController(Supply inv) {
         this.inv = inv;
     }
 

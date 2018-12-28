@@ -79,6 +79,14 @@ public class imsController  implements Initializable {
     public imsController() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
+    imsController(Supply inv) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    imsController(Supply inv) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
     
     @Override
@@ -121,10 +129,10 @@ public class imsController  implements Initializable {
     
     @FXML
     private void searchPartList(MouseEvent event){
-        if(!partsSearch.getText().trim().isEmpty()){
+        if(!partsSearchField.getText().trim().isEmpty()){
             partSupplySearch.clear();
             for(int i=0; i<partIDL.size();i++){
-               if (inv.partsSearch(partIDL.get(i)).getName().contains(partsSearch.getText().trim())){
+               if (inv.partsSearch(partIDL.get(i)).getName().contains(partsSearchField.getText().trim())){
                    partSupplySearch.add(inv.partsSearch(partIDL.get(i)));
                } 
             }
@@ -136,10 +144,10 @@ public class imsController  implements Initializable {
     
     @FXML
     private void searchProductSupply(MouseEvent event){
-        if(!productSearch.getText().trim().isEmpty()){
+        if(!proSearchField.getText().trim().isEmpty()){
             productSupplySearch.clear();
             for(int i = 0; i < productIDL.size();i++ ) {
-                if(inv.productSearch(productIDL.get(i)).getName().contains(productSearch.getText().trim())){
+                if(inv.productSearch(productIDL.get(i)).getName().contains(proSearchField.getText().trim())){
                     productSupplySearch.add(inv.productSearch(productIDL.get(i)));
                 }
             }
@@ -225,7 +233,7 @@ public class imsController  implements Initializable {
             errorWindow(2);
             return;
         }
-        if(productRemoval.getPartsLS() > 0){
+        if(removeProduct.getPartsLS() > 0){
             boolean confirm = confirmationWindow(removeProduct.getName());
             if(!confirm){
                 return;

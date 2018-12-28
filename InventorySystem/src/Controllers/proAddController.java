@@ -5,10 +5,16 @@
  */
 package Controllers;
 
+import Code.Supply;
+
 /**
  *
  * @author shadn
  */
 class proAddController {
+
+    proAddController(Supply inv) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
 }

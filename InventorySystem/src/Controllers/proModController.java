@@ -8,20 +8,27 @@ package Controllers;
 import Code.Parts;
 import Code.Products;
 import Code.Supply;
-import static com.sun.deploy.panel.JreFindDialog.search;
-import java.awt.event.MouseEvent;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Optional;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.Event;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
-import static jdk.nashorn.internal.objects.NativeString.search;
+import javafx.scene.input.MouseEvent;
+import javafx.stage.Stage;
 
 /**
  *
@@ -93,8 +100,8 @@ private void proModSearch(MouseEvent event){
     return;
    }else{
            partsSupplySearch.clear();
-           for(int i = 0; i< partLS();i++){
-           if(inv.partsLookUp(partsIDL.get(i)).getName().contains(proSearch.getText().trim())){
+           for(int i = 0; i< inv.partLS();i++){
+           if(inv.partsSearch(partsIDL.get(i)).getName().contains(proSearch.getText().trim())){
            partsSupplySearch.add(inv.partsSearch(partsIDL.get(i)));
           }
    }
@@ -107,7 +114,7 @@ private void partDelete(MouseEvent event){
     Parts partsRemove = associatedPartsTable.getSelectionModel().getSelectedItem();
     boolean deleted = false;
     if(partsRemove != null){
-        boolean remove = confirmWindow(partsRemove.getName());
+        boolean remove = confirmationWindow(partsRemove.getName());
         if(remove){
             deleted = products.removeAssociatedParts(partsRemove.getPartID());
             associatedPartsList.remove(partsRemove);
@@ -124,17 +131,18 @@ private void partDelete(MouseEvent event){
 
     @FXML
     private void partAdd(MouseEvent event){
-        Parts addParts = partsST.getSelectionModel().getSelectedItem();
+        Parts partAdd = partsST.getSelectionModel().getSelectedItem();
     boolean repeatItems = false;
+    
     if(partAdd == null){
         return;
     }else{
         int proID = partAdd.getPartID();
-        for(int i = 0; i <  associatedPartsList.size(); i++){
-            if(associatedPartsList.get(i), getPartID()  == proID){
-            errorWindow(2, null);
+        for (int i = 0; i <  associatedPartsList.size(); i++){
+            if (associatedPartsList.get(i).getPartID() == proID) {
+            errorWindows(2, null);
             repeatItems = true;
-        }
+        } 
      }
         if(!repeatItems){
             associatedPartsList.add(partAdd);
@@ -145,7 +153,7 @@ private void partDelete(MouseEvent event){
 
     @FXML
     private void cancelMod(MouseEvent event){
-        boolean cancel = cancel()
+        boolean cancel = cancel();
                 if(cancel){
                     mainIMS(event);
                 }else{
@@ -159,10 +167,10 @@ private void partDelete(MouseEvent event){
         boolean end = false;
         TextField[] fieldCount = {proCount, proPrice, proMax, proMin};
         double minCost = 0;
-        for(int i = 0; i < associatedPartsList;i++){
+        for(int i = 0; i < associatedPartsList.size();i++){
             minCost += associatedPartsList.get(i).getPrice();
-        }if (name.getText().trim().isEmpty() || name.getText().trim().toLowerCase().equals("Part Name")){
-            errorWindow(4, name);
+        }if (proName.getText().trim().isEmpty() || proName.getText().trim().toLowerCase().equals("Part Name")){
+            errorWindows(4, proName);
             return;
         }for(int i = 0; i < fieldCount.length; i++){
             boolean valueError  = checkValue(fieldCount[i]);
@@ -177,23 +185,23 @@ private void partDelete(MouseEvent event){
             }
         }
         if (Integer.parseInt(proMax.getText().trim()) > Integer.parseInt(proMin.getText().trim())){
-            errorWindow(10, proMin);
+            errorWindows(10, proMin);
             return;
         }
             if(Integer.parseInt(proCount.getText().trim())  < Integer.parseInt(proMax.getText().trim())){
-                errorWindow(9, proCount);
+                errorWindows(9, proCount);
                 return;
             }
             if(Integer.parseInt(proCount.getText().trim()) < Integer.parseInt(proMin.getText().trim())){
-                errorWindow(8, proCount);
+                errorWindows(8, proCount);
                 return;
     }
-            if (Double.parseDouble(proPrice.getText().trim()) < minCost{
-                errorWindow(6, proPrice);
+            if (Double.parseDouble(proPrice.getText().trim()) < minCost){
+                errorWindows(6, proPrice);
                 return;
             }
-            if (partsSuppy.size() == 0 ){
-                errorWindow(6, null);
+            if (associatedPartsList.size() == 0 ){
+                errorWindows(6, null);
                 return;
             }
             
@@ -201,9 +209,9 @@ private void partDelete(MouseEvent event){
             mainIMS(event);
     }
     private void productSave(){
-        Products products = new Products(Interger.parseInt(proID.getText().trim()), proName.getText().trim(), Double.parseDouble(proPrice.getText().trim()), 
+        Products products = new Products(Integer.parseInt(proID.getText().trim()), proName.getText().trim(), Double.parseDouble(proPrice.getText().trim()), 
                 Integer.parseInt(proCount.getText().trim()), Integer.parseInt(proMin.getText().trim()), Integer.parseInt(proMax.getText().trim()));
-        for(int i = 0; i < partsSupply; i++){
+        for(int i = 0; i < partsSupply.size(); i++){
             products.addAssociatedParts(associatedPartsList.get(i));            
         }
         inv.productUpdate(products);
@@ -231,7 +239,7 @@ private void partDelete(MouseEvent event){
             return;
         }else{
             for(int i = 0; i < partsIDL.size();i++){
-                partsSupply.add(inv.partsLookUp(partsIDL.get(i)));
+                partsSupply.add(inv.partsSearch(partsIDL.get(i)));
                 
             }
         }
@@ -315,20 +323,92 @@ private void partDelete(MouseEvent event){
             return;
         }
     }
-
-    }
  
 
-    
+       private void fieldStyleReset() {
+        proName.setStyle("-fx-border-color: lightgray");
+        proCount.setStyle("-fx-border-color: lightgray");
+        proPrice.setStyle("-fx-border-color: lightgray");
+        proMax.setStyle("-fx-border-color: lightgray");
+        proMin.setStyle("-fx-border-color: lightgray");
+
+    }
+
+    private boolean confirmationWindow(String name) {
+        Alert alert = new Alert(AlertType.CONFIRMATION);
+        alert.setTitle("Delete part");
+        alert.setHeaderText("Are you sure you want to delete: " + name);
+        alert.setContentText("Click ok to confirm");
+
+        Optional<ButtonType> result = alert.showAndWait();
+        if (result.get() == ButtonType.OK) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    private void infoWindow(int code, String name) {
+        if (code != 2) {
+            Alert alert = new Alert(AlertType.INFORMATION);
+            alert.setTitle("Confirmed");
+            alert.setHeaderText(null);
+            alert.setContentText(name + " has been deleted!");
+
+            alert.showAndWait();
+        } else {
+            Alert alert = new Alert(AlertType.INFORMATION);
+            alert.setTitle("Error");
+            alert.setHeaderText(null);
+            alert.setContentText("There was an error!");
+        }
+    }
+
+    private void mainIMS(Event event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("ims.fxml"));
+            imsController controller = new imsController(inv);
+
+            loader.setController(controller);
+            Parent root = loader.load();
+            Scene scene = new Scene(root);
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage.setScene(scene);
+            stage.setResizable(false);
+            stage.show();
+        } catch (IOException e) {
+
+        }
+    }
+
+    private boolean checkValue(TextField field) {
+        boolean error = false;
+        try {
+            if (field.getText().trim().isEmpty() || field.getText().trim() == null) {
+                errorWindows(1, field);
+                return true;
+            }
+            if (field == proPrice && Double.parseDouble(field.getText().trim()) < 0) {
+                errorWindows(5, field);
+                error = true;
+            }
+        } catch (Exception e) {
+            error = true;
+            errorWindows(3, field);
+            System.out.println(e);
+
+        }
+        return error;
+    }
     
   private boolean checkType(TextField field) {
 
-        if (field == price & !field.getText().trim().matches("\\d+(\\.\\d+)?")) {
-            errorWindow(3, field);
+        if (field == proPrice & !field.getText().trim().matches("\\d+(\\.\\d+)?")) {
+            errorWindows(3, field);
             return true;
         }
-        if (field != price & !field.getText().trim().matches("[0-9]*")) {
-            errorWindow(3, field);
+        if (field != proPrice & !field.getText().trim().matches("[0-9]*")) {
+            errorWindows(3, field);
             return true;
         }
         return false;
@@ -339,7 +419,7 @@ private void partDelete(MouseEvent event){
         Alert alert = new Alert(AlertType.CONFIRMATION);
         alert.setTitle("Cancel");
         alert.setHeaderText("Do you really want to cancel?");
-        alert..setContentText("OK to confirm");
+        alert.setContentText("OK to confirm");
        
          Optional<ButtonType> result = alert.showAndWait();
         if (result.get() == ButtonType.OK) {

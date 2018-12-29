@@ -55,7 +55,7 @@ private TextField partName;
 private TextField partCount;
 
 @FXML
-private double partPrice;
+private TextField partPrice;
 
 @FXML
 private TextField partMax;
@@ -84,9 +84,9 @@ this.part = parts;
            InHouse in = (InHouse) part;
            inHouseRadio.setSelected(true);           
            companyName.setText("Machine ID");
-          this.partName.setText(in.getPartName());
+          this.partName.setText(in.getName());
           this.partID.setText((Integer.toString(in.getPartID())));
-          this.partCount.setText((Integer.toString(in.getStock())));.
+          this.partCount.setText((Integer.toString(in.getStock())));
           this.partPrice.setText((Double.toString(in.getPrice())));
           this.partMax.setText(Integer.toString(in.getMax()));
           this.partMin.setText(Integer.toString(in.getMin()));
@@ -96,8 +96,8 @@ this.part = parts;
        if(part instanceof OutSourced){
            OutSourced out = (OutSourced) part;
           outSourcedRadio.setSelected(true);           
-           companyName.setText("Machine ID");
-          this.partName.setText(out.getPartName());
+          companyName.setText("Machine ID");
+          this.partName.setText(out.getName());
           this.partID.setText((Integer.toString(out.getPartID())));
          this.partCount.setText((Integer.toString(out.getStock())));
           this.partPrice.setText((Double.toString(out.getPrice())));
@@ -112,6 +112,7 @@ this.part = parts;
             TextField field = (TextField) source;
             field.setText(" ");            
         }
+        
         @FXML
         private void inHouseSelect(MouseEvent event){
             companyName.setText("Machine ID");            
@@ -149,18 +150,20 @@ this.part = parts;
                      end = true;
                      break;
                  }
-                 
-                 boolean typeError = checkType(fieldCount[i]);
-                 if(typeError){
-                 end = true;
-                 break;
-        }
-   }
+   
              if(partName.getText().trim().isEmpty() || partName.getText().trim().toLowerCase().equals("Part Name")){
              errorWindow(4, partName);
              return;
          }
              if(Integer.parseInt(partMin.getText().trim()) < Integer.parseInt(partMax.getText().trim())){
+                 
+                 boolean errorType = checkType(fieldCount[i]);
+                 if(errorType){
+                 end = true;
+                 break;
+        }
+             }
+                   if(Integer.parseInt(partMin.getText().trim()) > Integer.parseInt(partMax.getText().trim())){
                  errorWindow(8, partMin);
              }
              
@@ -192,7 +195,7 @@ this.part = parts;
             } else if (outSourcedRadio.isSelected() & part instanceof InHouse) {
                 updateItemOutSourced();
             }
-
+             }
         } else {
             errorWindow(2, null);
             return;
@@ -200,13 +203,13 @@ this.part = parts;
          mainIMS(event);
         }
         private void updateItemInHouse(){
-            inv.updatePart(new InHouse(Integer.parseInt(partID.getText().trim()), partName.getText().trim(),
-                     Double.parseDouble(partPrice.getText().trim()), Integer.parseInt(partCount.getText().trim()),
+            inv.partsUpdate(new InHouse(Integer.parseInt(partID.getText().trim()), partName.getText().trim(),
+                      Double.parseDouble(partPrice.getText().trim()), Integer.parseInt(partCount.getText().trim()),
                    Integer.parseInt(partMax.getText().trim()), Integer.parseInt(partMin.getText().trim()), Integer.parseInt(company.getText().trim())));
         }
         
         private void updateItemOutSourced(){
-            inv.updatePart(new OutSourced(Integer.parseInt(partID.getText().trim()), partName.getText().trim(),
+            inv.partsUpdate(new OutSourced(Integer.parseInt(partID.getText().trim()), partName.getText().trim(),
                     Double.parseDouble(partPrice.getText().trim()), Integer.parseInt(partCount.getText().trim()),
                    Integer.parseInt(partMax.getText().trim()), Integer.parseInt(partMin.getText().trim()), company.getText().trim()));
         }

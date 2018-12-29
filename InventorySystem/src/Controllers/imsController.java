@@ -72,26 +72,13 @@ public class ImsController  implements Initializable {
     }
  
     
-    public imsController(Supply inv, Parts selected){
+    public ImsController(Supply inv, Parts selected){
         this.inv = inv;
         partIDL = inv.retrievePartsIDL();
         productIDL = inv.retrieveProductsIDL();
     }
     
-    // Let's go ahead and initialize the controller class
-
-    public imsController() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    imsController(Supply inv) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    imsController(Supply inv) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-    
+    // Let's go ahead and initialize the controller class   
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -191,7 +178,7 @@ public class ImsController  implements Initializable {
                 return;                
             }else{
                  FXMLLoader loader = new FXMLLoader(getClass().getResource("GUI/proMod.fxml"));
-                 imsController controller = new imsController(inv, selected);
+                 ImsController controller = new ImsController(inv, selected);
                   loader.setController(controller);
            
                   Parent root = loader.load();         
@@ -233,11 +220,11 @@ public class ImsController  implements Initializable {
             errorWindow(1);
             return;
         }
-        if(!productSupply.isEmpty() && removePart == null){
+        if(!productSupply.isEmpty() && removeProduct == null){
             errorWindow(2);
             return;
         }
-        if(removeProduct.getPartsLS() > 0){
+        if(removeProduct.getPartLS() > 0){
             boolean confirm = confirmationWindow(removeProduct.getName());
             if(!confirm){
                 return;
@@ -257,7 +244,7 @@ public class ImsController  implements Initializable {
             productSupply.remove(removeProduct);
             productsTable.setItems(productSupply);
             productsTable.refresh();
-        }
+        }}
         
      @FXML
     private void modifyProduct(MouseEvent event ) {
@@ -272,13 +259,13 @@ public class ImsController  implements Initializable {
                     return;
                 }else{
                  
-                    FXMLLoader loader = new FXMLLoader(getClass().getResource("GUI/proMod"));
-                    proModController controller = new proModController(int, productSelected);
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("proMod.fxml"));
+                    ProModController controller = new ProModController(inv);
                    
                   loader.setController(controller);
                   Parent root = loader.load();         
                   Scene scene = new Scene(root);         
-                  Stage stage = (Stage) ((Node) event.getSource()).getSource().getWindow();           
+                  Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();           
                   stage.setScene(scene);
                   stage.setResizable(false);          
                   stage.show();      
@@ -292,7 +279,7 @@ public class ImsController  implements Initializable {
         private void productAdd(MouseEvent event){
             try{
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/GUI/proAdd"));
-                proAddController controller = new proAddController(inv);
+                ProAddController controller = new ProAddController(inv);
 
                   loader.setController(controller);
                   Parent root = loader.load();         
@@ -304,9 +291,7 @@ public class ImsController  implements Initializable {
           
             }catch(IOException e){                
             }
-        }
-        
-        }
+        }     
         
     private void errorWindow(int code) {
     if(code==1){

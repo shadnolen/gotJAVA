@@ -34,7 +34,7 @@ public abstract class Parts {
    }
    
    public void setPrice(double price){
-       this.partPrice = price;
+       this.partPrice = partPrice;
    }
    
    public double getPrice(){

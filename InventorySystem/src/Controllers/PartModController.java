@@ -80,6 +80,7 @@ this.part = parts;
     }
 
     private void setData() {
+        
        if (part instanceof InHouse){
            InHouse in = (InHouse) part;
            inHouseRadio.setSelected(true);           
@@ -202,8 +203,7 @@ this.part = parts;
          mainIMS(event);
         }
         private void updateItemInHouse(){
-            inv.partsUpdate(new InHouse(Integer.parseInt(partID.getText().trim()), partName.getText().trim(),
-                      Double.parseDouble(partPrice.getText().trim()), Integer.parseInt(partCount.getText().trim()),
+            inv.partsUpdate(new InHouse(Integer.parseInt(partID.getText().trim()), partName.getText().trim(), (int) Double.parseDouble(partPrice.getText().trim()), Integer.parseInt(partCount.getText().trim()),
                    Integer.parseInt(partMax.getText().trim()), Integer.parseInt(partMin.getText().trim()), Integer.parseInt(company.getText().trim())));
         }
         

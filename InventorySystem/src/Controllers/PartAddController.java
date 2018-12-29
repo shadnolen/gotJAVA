@@ -208,8 +208,7 @@ public class PartAddController {
 
     private void addInHouse() {
 
-        inv.addPart(new InHouse(Integer.parseInt(id.getText().trim()), name.getText().trim(),
-                Double.parseDouble(price.getText().trim()), Integer.parseInt(count.getText().trim()),
+        inv.partsAdd(new InHouse(Integer.parseInt(id.getText().trim()), name.getText().trim(), (int) Double.parseDouble(price.getText().trim()), Integer.parseInt(count.getText().trim()),
                 Integer.parseInt(min.getText().trim()), Integer.parseInt(max.getText().trim()), (Integer.parseInt(company.getText().trim()))));
 
     }

@@ -34,8 +34,9 @@ public class InventorySystem extends Application {
         @Override
     public void start(Stage stage) throws Exception {
         Supply inv = new Supply();
-   FXMLLoader loader = new FXMLLoader(getClass().getResource("/Ims.fxml"));
-   Controllers.ImsController controller = new Controllers.ImsController(inv);
+   FXMLLoader loader = new FXMLLoader(getClass().getResource("Controllers/Ims.fxml"));
+   Controllers.ImsController controller;
+        controller = new Controllers.ImsController(inv);
    loader.setController(controller);
    Parent root = loader.load();
    Scene scene = new Scene(root);

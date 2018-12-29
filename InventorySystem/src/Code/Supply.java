@@ -13,130 +13,124 @@ import java.util.ArrayList;
  * @author shadn
  */
 public class Supply {
-    
-    private ArrayList<Parts>  products;
-    private ArrayList<Products> productTotal;
-    int i;
-    
-    public Supply(){
-    products = new ArrayList<>();
-    productTotal = new ArrayList<>();    
-}
-    
-    //ADD/REMOVE/MOD from product list 
-    public void productAdd(Products addProduct){
-        if(addProduct != null){
-            this.productAdd(addProduct);
-        }
-    }    
-    
-    public boolean productRemoval(int productRemoval){
-     
-        for( i = 0; i< products.size(); i++){
-            if(productTotal.get(i).getProductID() == productRemoval){
-                products.remove(i);
-                break;
-            }else{
-                return false;
-            }
-        }
-        return true;
-    }
-    
-    public Products productSearch(int searchProduct){
-        if(!products.isEmpty()){
-            for(i = 0; i <products.size();i++ ){
-                if(productTotal.get(i).getProductID() == searchProduct);
-            }
-        }
-            return null;
-    }
-    
-    public Products productUpdate(Products product){
-        for (i=0; i < products.size();i++){
-            if(productTotal.get(i).getProductID() == product.getProductID()) {
-            } else {
-                productTotal.set(i, product);
-                break;
-            }
-        }
-        return null;
-    }
 
+	private ArrayList<Products> products;
+	private ArrayList<Parts> totalParts;
 
-//ADD/REMOVE/MOD from parts list 
-    
-    
-    
-    public void partsAdd(Parts partsAdd){
-        if(partsAdd  != null){
-            products.add(partsAdd);
-        }
-    }
-    
-    public boolean partsDelete(Parts partsDelete) {       
-        for (i=0; i < products.size();i++){
-                
-        if (products.get(i).getPartID() == partsDelete.getPartID()){
-            products.remove(i);
-            break;
-             }else{
-            return false;
-          }
-        }       
-        return true;
-    }
-    
-    public Parts partsSearch(int partsSearch){
-        if(!products.isEmpty()){
-            for(int i=0; i < products.size(); i++){
-                if(products.get(i).getPartID()  == partsSearch){
-                return products.get(i);
-            }
-          }
-       }
-        return null;
-    }
-    
-    
-    
-    public void   partsUpdate(Parts partsUpdate){
-        for(int i = 0; i < products.size(); i++){
-            if (products.get(i).getPartID() == partsUpdate.partID){
-                products.set(i, partsUpdate);
-                break;
-            }
-        }
-        return;
-    }
+	public Supply() {
+		products = new ArrayList<>();
+		totalParts = new ArrayList<>();
+	}
 
-    
-      // List Size Check
-    public int productLS(){
-        return products.size();
-    }
-    
-    public int partLS(){
-        return productTotal.size();
-    }
+	public void addProduct(Products productToAdd) {
+		if (productToAdd != null) {
+			this.products.add(productToAdd);
+		}
+	}
 
-         public ArrayList<Integer> retrievePartsIDL(){
-        ArrayList<Integer> list = new ArrayList<>();
-        if(!products.isEmpty()){
-            for(int i = 0; i< products.size(); i++){
-                list.add(products.get(i).getPartID());
-            }
-        }
-        return list;
-    }
-    
-            public ArrayList<Integer> retrieveProductsIDL(){
-        ArrayList<Integer> list = new ArrayList<>();
-        if(!productTotal.isEmpty()){
-            for(int i = 0; i< productTotal.size(); i++){
-                list.add(productTotal.get(i).getProductID());
-            }
-        }
-        return list;
-    }
+	public boolean removeProduct(int productToRemove) {
+		for (int i = 0; i < products.size(); i++) {
+			if (products.get(i).getProductID() == productToRemove) {
+				products.remove(i);
+				break;
+			}
+			else {
+				return false;
+			}
+		}
+		return true;
+	}
+
+	public Products lookUpProduct(int productToSearch) {
+		if (!products.isEmpty()) {
+			for (int i = 0; i < products.size(); i++) {
+				if (products.get(i).getProductID() == productToSearch) {
+					return products.get(i);
+				}
+			}
+		}
+		return null;
+	}
+
+	public void updateProduct(Products product) {
+		for (int i = 0; i < products.size(); i++) {
+			if (products.get(i).getProductID() == product.getProductID()) {
+				products.set(i, product);
+				break;
+			}
+		}
+		return;
+	}
+
+	public void addPart(Parts partToAdd) {
+		if (partToAdd != null) {
+			totalParts.add(partToAdd);
+		}
+	}
+
+	public boolean deletePart(Parts partToDelete) {
+		for (int i = 0; i < totalParts.size(); i++) {
+			if (totalParts.get(i).getPartID() == partToDelete.getPartID()) {
+				totalParts.remove(i);
+				break;
+			}
+			else {
+				return false;
+			}
+		}
+
+		return true;
+	}
+
+	public Parts lookUpPart(int partToLookUp) {
+		if (!totalParts.isEmpty()) {
+			for (int i = 0; i < totalParts.size(); i++) {
+				if (totalParts.get(i).getPartID() == partToLookUp) {
+					return totalParts.get(i);
+				}
+			}
+
+		}
+		return null;
+
+	}
+
+	public void updatePart(Parts partToUpdate) {
+		for (int i = 0; i < totalParts.size(); i++) {
+			if (totalParts.get(i).getPartID() == partToUpdate.partID) {
+				totalParts.set(i, partToUpdate);
+				break;
+			}
+		}
+		return;
+	}
+
+	public int productListSize() {
+		return products.size();
+	}
+
+	public int partListSize() {
+		return totalParts.size();
+	}
+
+	public ArrayList<Integer> retrievePartsIDList() {
+		ArrayList<Integer> list = new ArrayList<>();
+		if (!totalParts.isEmpty()) {
+			for (int i = 0; i < totalParts.size(); i++) {
+				list.add(totalParts.get(i).getPartID());
+			}
+		}
+		return list;
+	}
+
+	public ArrayList<Integer> retrieveProductIDList() {
+		ArrayList<Integer> list = new ArrayList<>();
+		if (!products.isEmpty()) {
+			for (int i = 0; i < products.size(); i++) {
+				list.add(products.get(i).getProductID());
+			}
+		}
+		return list;
+	}
+
 }

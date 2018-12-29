@@ -9,17 +9,19 @@ package Code;
  *
  * @author shadn
  */
-public class InHouse extends Parts{
-    private int machineID;
-    public InHouse(int partID, String name, int stock, double partPrice, int max, int min, int machID){
-     
-        setPartID(partID);
-        setName(name);
-        setStock(stock);
-        setPrice(partPrice);
-        setMax(max);
-        setMin(min);
-       setMachineID(machID);
+public class InHouse extends Parts {
+
+	private int machineID;
+
+	public InHouse(int partID, String name, double price, int numInStock, int min, int max, int machID) {
+
+		setPartID(partID);
+		setName(name);
+		setPrice(price);
+		setInStock(numInStock);
+		setMin(min);
+		setMax(max);
+		setMachineID(machID);
 	}
 
 	public void setMachineID(int id) {

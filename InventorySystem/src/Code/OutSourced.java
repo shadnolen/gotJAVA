@@ -9,28 +9,26 @@ package Code;
  *
  * @author shadn
  */
-public class OutSourced extends Parts{
-    
-    // we need to change to company being outsourced too
-    //cn = company name
-    private String companyName;
-    
-    public OutSourced(int partID, String name, double price, int stock, int max, int min, String company){
-       
-        this.setCompanyName(company);
-        this.setPartID(partID);
-        this.setName(name);
-        this.setPrice(price);
-        this.setStock(stock);
-        this.setMax(max);
-        this.setMin(min);
-        
-    }
-    
-    public void setCompanyName(String compName){
-        this.companyName =compName ;
-    }
-    public String getCompanyName(){
-    return companyName;
-   }
+public class OutSourced extends Parts {
+
+	private String companyName;
+
+	public OutSourced(int partID, String name, double price, int numInStock, int min, int max, String company) {
+		this.setPartID(partID);
+		this.setName(name);
+		this.setPrice(price);
+		this.setInStock(numInStock);
+		this.setMin(min);
+		this.setMax(max);
+		this.setCompanyName(company);
+	}
+
+	public void setCompanyName(String name) {
+		this.companyName = name;
+	}
+
+	public String getCompanyName() {
+		return companyName;
+	}
+
 }

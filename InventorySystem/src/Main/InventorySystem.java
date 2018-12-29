@@ -19,31 +19,26 @@ import javafx.stage.Stage;
  * @author shadn
  */
 public class InventorySystem extends Application {
-    
-   
-    // Here we are setting the stage
 
+	/**
+	 * @param args the command line arguments
+	 */
+	public static void main(String[] args) {
+		launch(args);
+	}
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) {
-        launch(args);
-    }
-    
-        @Override
-    public void start(Stage stage) throws Exception {
-        Supply inv = new Supply();
-   FXMLLoader loader = new FXMLLoader(getClass().getResource("Controllers/Ims.fxml"));
-   Controllers.ImsController controller;
-        controller = new Controllers.ImsController(inv);
-   loader.setController(controller);
-   Parent root = loader.load();
-   Scene scene = new Scene(root);
-   stage.setScene(scene);
-   stage.setResizable(false);
-   stage.show();
-   
-    }
-    
+	@Override
+	public void start(Stage stage) throws Exception {
+		Supply inv = new Supply();
+
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("/Controllers/Ims.fxml"));
+		Controllers.ImsController controller = new Controllers.ImsController(inv);
+		loader.setController(controller);
+		Parent root = loader.load();
+		Scene scene = new Scene(root);
+		stage.setScene(scene);
+		stage.setResizable(false);
+		stage.show();
+	}
+
 }

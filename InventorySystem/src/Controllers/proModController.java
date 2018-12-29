@@ -34,7 +34,7 @@ import javafx.stage.Stage;
  *
  * @author shadn
  */
-public class proModController implements Initializable {
+public class ProModController implements Initializable {
     
     Supply inv;
     Products products;

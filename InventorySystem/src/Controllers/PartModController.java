@@ -6,20 +6,28 @@
 package Controllers;
 
 import Code.InHouse;
+import Code.OutSourced;
 import Code.Parts;
 import Code.Supply;
+import java.io.IOException;
 import java.net.URL;
+import java.util.Optional;
 import java.util.ResourceBundle;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
+import javafx.stage.Stage;
 /**
  *
  * @author shadn
@@ -47,7 +55,7 @@ private TextField partName;
 private TextField partCount;
 
 @FXML
-private TextField partPrice;
+private double partPrice;
 
 @FXML
 private TextField partMax;
@@ -57,6 +65,9 @@ private TextField partMin;
 
 @FXML
 private Button partModSaveButton;
+
+@FXML 
+private TextField company;
 
 private PartModController (Supply inv, Parts parts){
 this.inv = inv;
@@ -75,24 +86,24 @@ this.part = parts;
            companyName.setText("Machine ID");
           this.partName.setText(in.getPartName());
           this.partID.setText((Integer.toString(in.getPartID())));
-          this.partCount.setText ((Integer.toString(in.getStock())));.
+          this.partCount.setText((Integer.toString(in.getStock())));.
           this.partPrice.setText((Double.toString(in.getPrice())));
           this.partMax.setText(Integer.toString(in.getMax()));
           this.partMin.setText(Integer.toString(in.getMin()));
-          this.companyName.setText((Integer.toString(in.getMachineID)));
+          this.companyName.setText((Integer.toString(in.getMachineID())));
        }
        
-       if(part instanceof Outsourced){
-           Outsourced out = (Outsourced) part;
+       if(part instanceof OutSourced){
+           OutSourced out = (OutSourced) part;
           outSourcedRadio.setSelected(true);           
            companyName.setText("Machine ID");
           this.partName.setText(out.getPartName());
           this.partID.setText((Integer.toString(out.getPartID())));
-          this.partCount.setText ((Integer.toString(out.getStock())));.
+         this.partCount.setText((Integer.toString(out.getStock())));
           this.partPrice.setText((Double.toString(out.getPrice())));
           this.partMax.setText(Integer.toString(out.getMax()));
           this.partMin.setText(Integer.toString(out.getMin()));
-          this.companyName.setText((Integer.toString(out.getMachineID)));          
+          this.companyName.setText(out.getCompanyName());          
        }
     }
         @FXML 
@@ -168,7 +179,7 @@ this.part = parts;
              }else if(inHouseRadio.isSelected() && !company.getText().trim().matches("[0-9}*")){
                  errorWindow(1, company);
                  return;
-             }else if(outSourced.isSelected() &&  company.getText.trim().isEmpty()){
+             }else if(outSourcedRadio.isSelected() &&  company.getText().trim().isEmpty()){
                  errorWindow(1, company);
                  return;
              } else if (inHouseRadio.isSelected() & part instanceof InHouse) {
@@ -190,7 +201,7 @@ this.part = parts;
         }
         private void updateItemInHouse(){
             inv.updatePart(new InHouse(Integer.parseInt(partID.getText().trim()), partName.getText().trim(),
-                    Double.parseDouble(partPrice.getText().trim()), Integer.parseInt(partCount.getText().trim()),
+                     Double.parseDouble(partPrice.getText().trim()), Integer.parseInt(partCount.getText().trim()),
                    Integer.parseInt(partMax.getText().trim()), Integer.parseInt(partMin.getText().trim()), Integer.parseInt(company.getText().trim())));
         }
         
@@ -201,7 +212,7 @@ this.part = parts;
         }
         
         private void errorWindow(int errorCode, TextField field){
-            fieldError(field);
+            errorField(field);
             
             if (errorCode == 1){
                 Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -260,7 +271,7 @@ this.part = parts;
             }
         }
         
-    private void resetFieldsStyle() {
+    private void resetFieldStyle() {
         partName.setStyle("-fx-border-color: lightgray");
         partCount.setStyle("-fx-border-color: lightgray");
         partPrice.setStyle("-fx-border-color: lightgray");
@@ -279,12 +290,68 @@ this.part = parts;
     private void mainIMS(Event event){
         try{
             FXMLLoader loader = new FXMLLoader(getClass().getResource("ims.fxml"));
-            ImsController controller = now ImsController(inv);
+            ImsController controller = new ImsController(inv);
             
             loader.setController(controller);
             Parent root = loader.load();
             Scene scene = new Scene(root);
+             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage.setScene(scene);
+            stage.setResizable(false);
+            stage.show();
+        } catch (IOException e) {
+
         }
     }
-    
+
+    private boolean checkValue(TextField field) {
+        boolean error = false;
+        try {
+            if (field.getText().trim().isEmpty() || field.getText().trim() == null) {
+                errorWindow(1, field);
+                return true;
+            }
+            if (field == partPrice && Double.parseDouble(field.getText().trim()) < 0) {
+                errorWindow(5, field);
+                error = true;
+            }
+        } catch (Exception e) {
+            error = true;
+            errorWindow(3, field);
+            System.out.println(e);
+
+        }
+        return error;
+    }
+
+    private boolean checkType(TextField field) {
+
+        if (field == partPrice & !field.getText().trim().matches("\\d+(\\.\\d+)?")) {
+            errorWindow(3, field);
+            return true;
+        }
+        if (field != partPrice & !field.getText().trim().matches("[0-9]*")) {
+            errorWindow(3, field);
+            return true;
+        }
+        return false;
+
+    }
+
+    private boolean cancel() {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Cancel");
+        alert.setHeaderText("Are you sure you want to cancel?");
+        alert.setContentText("Click ok to confirm");
+
+        Optional<ButtonType> result = alert.showAndWait();
+        if (result.get() == ButtonType.OK) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
 }
+
+      

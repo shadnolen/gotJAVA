@@ -10,8 +10,8 @@ package Code;
  * @author shadn
  */
 public class InHouse extends Parts{
-    private int inHouseID;
-    public InHouse(int partID, String name, int stock, double price, int max, int min, int houseID){
+    private int machineID;
+    public InHouse(int partID, String name, int stock, double price, int max, int min, int machID){
      
         setPartID(partID);
         setName(name);
@@ -19,16 +19,15 @@ public class InHouse extends Parts{
         setPrice(price);
         setMax(max);
         setMin(min);
-        setInHouseID(houseID);
-    }
-    
-    public void setInHouseID(int houseID){
-        this.inHouseID = houseID;
-    }
-    
-    public int getInHouseID(){
-        return inHouseID;
-    }
+       setMachineID(machID);
+	}
+
+	public void setMachineID(int id) {
+		this.machineID = id;
+	}
+
+	public int getMachineID() {
+		return machineID;
+	}
+
 }
-
-

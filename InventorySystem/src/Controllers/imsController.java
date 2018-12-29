@@ -41,7 +41,7 @@ import javafx.stage.Stage;
  *
  * @author shadn
  */
-public class imsController  implements Initializable {
+public class ImsController  implements Initializable {
     
     Supply inv;
     
@@ -66,6 +66,10 @@ public class imsController  implements Initializable {
     private ObservableList<Products> productSupplySearch = FXCollections.observableArrayList();
     ArrayList<Integer> partIDL;
     ArrayList<Integer>  productIDL;
+
+    ImsController(Supply inv) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
  
     
     public imsController(Supply inv, Parts selected){

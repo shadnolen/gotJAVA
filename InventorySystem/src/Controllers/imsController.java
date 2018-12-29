@@ -67,15 +67,16 @@ public class ImsController  implements Initializable {
     ArrayList<Integer> partIDL;
     ArrayList<Integer>  productIDL;
 
-    ImsController(Supply inv) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
- 
-    
-    public ImsController(Supply inv, Parts selected){
+
+
+    public ImsController(Supply inv) {
         this.inv = inv;
         partIDL = inv.retrievePartsIDL();
         productIDL = inv.retrieveProductsIDL();
+    }
+
+    private ImsController(Supply inv, Parts selected) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
     // Let's go ahead and initialize the controller class   

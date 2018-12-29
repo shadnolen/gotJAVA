@@ -134,7 +134,6 @@ this.part = parts;
             if(cancel){
                 mainIMS(event);
             }else{
-                return;
             }
         }
         
@@ -318,7 +317,7 @@ this.part = parts;
                 errorWindow(5, field);
                 error = true;
             }
-        } catch (Exception e) {
+        } catch (NumberFormatException e) {
             error = true;
             errorWindow(3, field);
             System.out.println(e);

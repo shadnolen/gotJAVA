@@ -63,10 +63,9 @@ public class PartAddController {
 
     /**
      * Initializes the controller class.
-  
+
      */
-    @Override
-    public void initialize(URL url, ResourceBundle rb) {
+    public void initialize(URL url, ResourceBundle resources) {
         generatePartID();
         resetFields();
     }
@@ -300,10 +299,10 @@ public class PartAddController {
         }
     }
 
-    private void mainScreen(Event event) {
+    private void mainIMS(MouseEvent event) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("MainScreen.fxml"));
-            imsController controller = new imsController(inv);
+            ImsController controller = new ImsController(inv);
 
             loader.setController(controller);
             Parent root = loader.load();

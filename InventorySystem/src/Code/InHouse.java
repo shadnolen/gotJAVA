@@ -11,12 +11,12 @@ package Code;
  */
 public class InHouse extends Parts{
     private int machineID;
-    public InHouse(int partID, String name, int stock, double price, int max, int min, int machID){
+    public InHouse(int partID, String name, int stock, double partPrice, int max, int min, int machID){
      
         setPartID(partID);
         setName(name);
         setStock(stock);
-        setPrice(price);
+        setPrice(partPrice);
         setMax(max);
         setMin(min);
        setMachineID(machID);

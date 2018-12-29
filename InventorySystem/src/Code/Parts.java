@@ -12,7 +12,7 @@ package Code;
 public abstract class Parts {
     protected int partID;
     protected String partName;
-    protected double partPrice;
+    protected double partPrice = 0.0;
     protected int partInStock;
     protected int max;
     protected int min;

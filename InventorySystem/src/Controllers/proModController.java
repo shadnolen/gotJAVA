@@ -72,7 +72,7 @@ public class ProModController implements Initializable {
    ArrayList<Integer> partsIDL;   
 
 
-public proModController(Supply inv, Products products){
+public ProModController(Supply inv, Products products){
 this.inv = inv;
 this.products = products;
 this.partsIDL = inv.retrievePartsIDL();
@@ -219,7 +219,7 @@ private void partDelete(MouseEvent event){
     
     private void setData(){
         for(int i = 0; i < 1000; i++){
-            Parts parts = products.searchParts(i);
+            Parts parts = products.partsSearch(i);
             if(parts != null){
                 associatedPartsList.add(parts);
             }
@@ -367,7 +367,7 @@ private void partDelete(MouseEvent event){
     private void mainIMS(Event event) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("ims.fxml"));
-            imsController controller = new imsController(inv);
+            ImsController controller = new ImsController(inv);
 
             loader.setController(controller);
             Parent root = loader.load();

@@ -97,7 +97,7 @@ public void addAssociatedParts(Parts partAdd){
          return false;
  }
  
- public Parts searchParts(int searchPart){
+ public Parts partsSearch(int searchPart){
      for(int i = 0; i < associatedParts.size(); i++){
          if(associatedParts.get(i).getPartID() == searchPart){
              associatedParts.get(i);
@@ -106,7 +106,7 @@ public void addAssociatedParts(Parts partAdd){
      return null;
    }           
 
- public int getPartSize(){
+ public int getPartLS(){
         return associatedParts.size();
 }
 

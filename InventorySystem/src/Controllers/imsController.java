@@ -41,121 +41,131 @@ import javafx.stage.Stage;
  *
  * @author shadn
  */
-public class ImsController  implements Initializable {
-    
+
+public class ImsController implements Initializable {
+
     Supply inv;
-    
+
     @FXML
-    private Label label;
-    
+    private TextField partSearchBox;
     @FXML
-    private TextField partsSearchField;
-    
+    private TextField productSearchBox;
     @FXML
-    private TextField proSearchField;
-    
-    @FXML
-    private TableView<Parts>  partsTable;
-    
+    private TableView<Parts> partsTable;
     @FXML
     private TableView<Products> productsTable;
 
-    private ObservableList<Parts> partSupply = FXCollections.observableArrayList();
-    private ObservableList<Products> productSupply = FXCollections.observableArrayList();
-    private ObservableList<Parts> partSupplySearch = FXCollections.observableArrayList();
-    private ObservableList<Products> productSupplySearch = FXCollections.observableArrayList();
-    ArrayList<Integer> partIDL;
-    ArrayList<Integer>  productIDL;
-
-
+    private ObservableList<Parts> partInventory = FXCollections.observableArrayList();
+    private ObservableList<Products> productInventory = FXCollections.observableArrayList();
+    private ObservableList<Parts> partsInventorySearch = FXCollections.observableArrayList();
+    private ObservableList<Products> productInventorySearch = FXCollections.observableArrayList();
+    ArrayList<Integer> partIDList;
+    ArrayList<Integer> productIDList;
 
     public ImsController(Supply inv) {
         this.inv = inv;
-        partIDL = inv.retrievePartsIDL();
-        productIDL = inv.retrieveProductsIDL();
+        partIDList = inv.retrievePartsIDList();
+        productIDList = inv.retrieveProductIDList();
     }
 
-    private ImsController(Supply inv, Parts selected) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-    
-    // Let's go ahead and initialize the controller class   
-    
+    /**
+     * Initializes the controller class.
+     */
     @Override
-    public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+    public void initialize(URL url, ResourceBundle resources) {
         generatePartsTable();
-        generateProductsTable();        
-    }       
+        generateProductsTable();
+    }
 
     private void generatePartsTable() {
-       if(!partIDL.isEmpty()){
-           for(int i=0; i < partIDL.size(); i++){
-               partSupply.add(inv.partsSearch(partIDL.get(i)));
-           }
-       }
-       
-       partsTable.setItems(partSupply);
-       partsTable.refresh();
+        if (!partIDList.isEmpty()) {
+            for (int i = 0; i < partIDList.size(); i++) {
+                partInventory.add(inv.lookUpPart(partIDList.get(i)));
+            }
+        }
+
+        partsTable.setItems(partInventory);
+        partsTable.refresh();
     }
 
     private void generateProductsTable() {
-        if(!productIDL.isEmpty()){
-            for(int i = 0; i <productIDL.size(); i++){
-                productSupply.add(inv.productSearch(productIDL.get(i)));
+        if (!productIDList.isEmpty()) {
+            for (int i = 0; i < productIDList.size(); i++) {
+                productInventory.add(inv.lookUpProduct(productIDList.get(i)));
             }
         }
-        System.out.println(productIDL.size());
-        productsTable.setItems(productSupply);        
+        System.out.println(productIDList.size());
+        productsTable.setItems(productInventory);
+        productsTable.refresh();
     }
-    
+
     @FXML
-    private void exitSystem(ActionEvent ae){
+    private void exitProgram(ActionEvent event
+    ) {
         Platform.exit();
     }
-    
+
     @FXML
-    private void exitSysemButtom(MouseEvent event){
+    private void exitProgramButton(MouseEvent event
+    ) {
         Platform.exit();
     }
-    
+
     @FXML
-    private void searchPartList(MouseEvent event){
-        if(!partsSearchField.getText().trim().isEmpty()){
-            partSupplySearch.clear();
-            for(int i=0; i<partIDL.size();i++){
-               if (inv.partsSearch(partIDL.get(i)).getName().contains(partsSearchField.getText().trim())){
-                   partSupplySearch.add(inv.partsSearch(partIDL.get(i)));
-               } 
+    private void searchForPart(MouseEvent event) {
+        if (!partSearchBox.getText().trim().isEmpty()) {
+            partsInventorySearch.clear();
+            for (int i = 0; i < partIDList.size(); i++) {
+                if (inv.lookUpPart(partIDList.get(i)).getName().contains(partSearchBox.getText().trim())) {
+                    partsInventorySearch.add(inv.lookUpPart(partIDList.get(i)));
+                }
             }
-            
-            partsTable.setItems(partSupply);
+            partsTable.setItems(partsInventorySearch);
             partsTable.refresh();
         }
     }
-    
+
     @FXML
-    private void searchProductSupply(MouseEvent event){
-        if(!proSearchField.getText().trim().isEmpty()){
-            productSupplySearch.clear();
-            for(int i = 0; i < productIDL.size();i++ ) {
-                if(inv.productSearch(productIDL.get(i)).getName().contains(proSearchField.getText().trim())){
-                    productSupplySearch.add(inv.productSearch(productIDL.get(i)));
+    private void searchForProduct(MouseEvent event
+    ) {
+        if (!productSearchBox.getText().trim().isEmpty()) {
+            productInventorySearch.clear();
+            for (int i = 0; i < productIDList.size(); i++) {
+                if (inv.lookUpProduct(productIDList.get(i)).getName().contains(productSearchBox.getText().trim())) {
+                    productInventorySearch.add(inv.lookUpProduct(productIDList.get(i)));
                 }
             }
-            
-            productsTable.setItems(productSupply);
+            productsTable.setItems(productInventorySearch);
             productsTable.refresh();
         }
     }
-    
-  
+
     @FXML
-    private void partAdd(MouseEvent event){
-        try{
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/GUI/partAdd.fxml"));
+    void clearText(MouseEvent event
+    ) {
+        Object source = event.getSource();
+        TextField field = (TextField) source;
+        field.setText("");
+        if (partSearchBox == field) {
+            if (partInventory.size() != 0) {
+                partsTable.setItems(partInventory);
+            }
+        }
+        if (productSearchBox == field) {
+            if (productInventory.size() != 0) {
+                productsTable.setItems(productInventory);
+            }
+        }
+    }
+
+    @FXML
+    private void addPart(MouseEvent event
+    ) {
+
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("PartAdd.fxml"));
             PartAddController controller = new PartAddController(inv);
-            
+
             loader.setController(controller);
             Parent root = loader.load();
             Scene scene = new Scene(root);
@@ -163,180 +173,210 @@ public class ImsController  implements Initializable {
             stage.setScene(scene);
             stage.setResizable(false);
             stage.show();
-        }catch(IOException e){
+        } catch (IOException e) {
+
         }
     }
-    
+
     @FXML
-    private void modifyPart(MouseEvent event){
-        try{
+    private void modifyPart(MouseEvent event
+    ) {
+        try {
             Parts selected = partsTable.getSelectionModel().getSelectedItem();
-            if(partSupply.isEmpty()){
+            if (partInventory.isEmpty()) {
                 errorWindow(1);
                 return;
-            } if (!partSupply.isEmpty()) {
-                errorWindow(2);
-                return;                
-            }else{
-                 FXMLLoader loader = new FXMLLoader(getClass().getResource("GUI/proMod.fxml"));
-                 ImsController controller = new ImsController(inv, selected);
-                  loader.setController(controller);
-           
-                  Parent root = loader.load();         
-                  Scene scene = new Scene(root);         
-                  Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();           
-                  stage.setScene(scene);
-                  stage.setResizable(false);          
-                  stage.show();                    
-           }
-        }catch(IOException e){                    
-                    }            
-        }
-        
-        @FXML
-        private void partDelete(MouseEvent event){
-            Parts removePart = partsTable.getSelectionModel().getSelectedItem();
-            if(partSupply.isEmpty()){
-                errorWindow(1);
-                return;
-        }
-            if(partSupply.isEmpty()){
-                errorWindow(2);
-            }else{
-                boolean confirm = confirmationWindow(removePart.getName());
-                if(!confirm){
-                    return;
-                }
-                inv.partsDelete(removePart);
-                partSupply.remove(removePart);
-                partsTable.refresh();
             }
+            if (!partInventory.isEmpty() && selected == null) {
+                errorWindow(2);
+                return;
+            } else {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("PartModify.fxml"));
+                PartModifyController controller = new PartModifyController(inv, selected);
+
+                loader.setController(controller);
+                Parent root = loader.load();
+                Scene scene = new Scene(root);
+                Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                stage.setScene(scene);
+                stage.setResizable(false);
+                stage.show();
+            }
+        } catch (IOException e) {
+
         }
-        
-        @FXML 
-        private void deleteProduct(MouseEvent event){
-        boolean deleted = false;
-        Products removeProduct = productsTable.getSelectionModel().getSelectedItem();
-        if(productSupply.isEmpty()){
+    }
+
+    @FXML
+    private void deletePart(MouseEvent event
+    ) {
+        Parts removePart = partsTable.getSelectionModel().getSelectedItem();
+        if (partInventory.isEmpty()) {
             errorWindow(1);
             return;
         }
-        if(!productSupply.isEmpty() && removeProduct == null){
+        if (!partInventory.isEmpty() && removePart == null) {
+            errorWindow(2);
+            return;
+        } else {
+            boolean confirm = confirmationWindow(removePart.getName());
+            if (!confirm) {
+                return;
+            }
+            inv.deletePart(removePart);
+            partInventory.remove(removePart);
+            partsTable.refresh();
+
+        }
+    }
+
+    @FXML
+    private void deleteProduct(MouseEvent event
+    ) {
+        boolean deleted = false;
+        Products removeProduct = productsTable.getSelectionModel().getSelectedItem();
+        if (productInventory.isEmpty()) {
+            errorWindow(1);
+            return;
+        }
+        if (!productInventory.isEmpty() && removeProduct == null) {
             errorWindow(2);
             return;
         }
-        if(removeProduct.getPartLS() > 0){
-            boolean confirm = confirmationWindow(removeProduct.getName());
-            if(!confirm){
+        if (removeProduct.getPartsListSize() > 0) {
+            boolean confirm = confirmDelete(removeProduct.getName());
+            if (!confirm) {
                 return;
-            }else{
-                if(removeProduct != null){
-                    infoWindow(1, removeProduct.getName());
-                    deleted = true;
-                    if(deleted){
-                        return;
-                    }else{
-                        infoWindow(2, " ");
-                    }
-            }           
-        }
-            
-            inv.productRemoval(removeProduct.getProductID());
-            productSupply.remove(removeProduct);
-            productsTable.setItems(productSupply);
-            productsTable.refresh();
-        }}
-        
-     @FXML
-    private void modifyProduct(MouseEvent event ) {
-        try {
-                Products productSelected = productsTable.getSelectionModel().getSelectedItem();
-                if(productSupply.isEmpty()){
-                    errorWindow(1);
-                    return;
-                }
-                if(!productSupply.isEmpty() && productSelected == null){
-                    errorWindow(2);
-                    return;
-                }else{
-                 
-                    FXMLLoader loader = new FXMLLoader(getClass().getResource("proMod.fxml"));
-                    ProModController controller = new ProModController(inv);
-                   
-                  loader.setController(controller);
-                  Parent root = loader.load();         
-                  Scene scene = new Scene(root);         
-                  Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();           
-                  stage.setScene(scene);
-                  stage.setResizable(false);          
-                  stage.show();      
-                }
-            }catch(IOException e){
-                
             }
-        }
-        
-        @FXML
-        private void productAdd(MouseEvent event){
-            try{
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/GUI/proAdd"));
-                ProAddController controller = new ProAddController(inv);
+        } else {
+            if (removeProduct != null) {
+                infoWindow(1, removeProduct.getName());
+                deleted = true;
+                if (deleted) {
+                    return;
 
-                  loader.setController(controller);
-                  Parent root = loader.load();         
-                  Scene scene = new Scene(root);         
-                 Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();         
-                  stage.setScene(scene);
-                  stage.setResizable(false);          
-                  stage.show();      
-          
-            }catch(IOException e){                
+                } else {
+                    infoWindow(2, "");
+                }
+
             }
-        }     
-        
+        }
+        inv.removeProduct(removeProduct.getProductID());
+        productInventory.remove(removeProduct);
+        productsTable.setItems(productInventory);
+        productsTable.refresh();
+    }
+
+    @FXML
+    private void modifyProduct(MouseEvent event
+    ) {
+        try {
+            Products productSelected = productsTable.getSelectionModel().getSelectedItem();
+            if (productInventory.isEmpty()) {
+                errorWindow(1);
+                return;
+            }
+            if (!productInventory.isEmpty() && productSelected == null) {
+                errorWindow(2);
+                return;
+
+            } else {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("ProductModify.fxml"));
+                ProductModifyController controller = new ProductModifyController(inv, productSelected);
+
+                loader.setController(controller);
+                Parent root = loader.load();
+                Scene scene = new Scene(root);
+                Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                stage.setScene(scene);
+                stage.setResizable(false);
+                stage.show();
+            }
+        } catch (IOException e) {
+
+        }
+    }
+
+    @FXML
+    private void addProduct(MouseEvent event
+    ) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("ProductAdd.fxml"));
+            ProductAddController controller = new ProductAddController(inv);
+
+            loader.setController(controller);
+            Parent root = loader.load();
+            Scene scene = new Scene(root);
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage.setScene(scene);
+            stage.setResizable(false);
+            stage.show();
+
+        } catch (IOException e) {
+
+        }
+    }
+
     private void errorWindow(int code) {
-    if(code==1){
-        Alert alert = new Alert(AlertType.ERROR);
-        alert.setTitle("Error");
-        alert.setHeaderText("Empty Supply");
-        alert.setContentText("Nothing Selected, YO!");
-        alert.showAndWait();
+        if (code == 1) {
+            Alert alert = new Alert(AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("Empty Inventory!");
+            alert.setContentText("There's nothing to select!");
+            alert.showAndWait();
+        }
+        if (code == 2) {
+            Alert alert = new Alert(AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("Invalid Selection");
+            alert.setContentText("You must select an item!");
+            alert.showAndWait();
+        }
+
     }
-     if(code== 2){
-        Alert alert = new Alert(AlertType.ERROR);
-        alert.setTitle("Error");
-        alert.setHeaderText("Invailid Choice");
-        alert.setContentText("Select something!");
-        alert.showAndWait();
-      }
-    }
-    
-    private boolean confirmationWindow(String name){
+
+    private boolean confirmationWindow(String name) {
         Alert alert = new Alert(AlertType.CONFIRMATION);
-        alert.setTitle("Delete This Part");
-        alert.setHeaderText("Do you really want to delete  " + name + ", Since it still has parts assigned to it?");
-        alert.setContentText("Click to Confirm");
-        
+        alert.setTitle("Delete part");
+        alert.setHeaderText("Are you sure you want to delete: " + name);
+        alert.setContentText("Click ok to confirm");
+
         Optional<ButtonType> result = alert.showAndWait();
-        if(result.get() == ButtonType.OK){
+        if (result.get() == ButtonType.OK) {
             return true;
-        }else{
+        } else {
+            return false;
+        }
+    }
+
+    private boolean confirmDelete(String name) {
+        Alert alert = new Alert(AlertType.CONFIRMATION);
+        alert.setTitle("Delete product");
+        alert.setHeaderText("Are you sure you want to delete: " + name + " this product still has parts assigned to it!");
+        alert.setContentText("Click ok to confirm");
+
+        Optional<ButtonType> result = alert.showAndWait();
+        if (result.get() == ButtonType.OK) {
+            return true;
+        } else {
             return false;
         }
     }
 
     private void infoWindow(int code, String name) {
-       if(code ==1){
-           Alert alert = new Alert(AlertType.INFORMATION);
-           alert.setTitle("Confirmed");
-           alert.setHeaderText(null);
-           alert.setContentText( name + ", has been Deleted!");
-           alert.showAndWait();
-    }else{
+        if (code != 2) {
             Alert alert = new Alert(AlertType.INFORMATION);
-           alert.setTitle("Error in your ways");
-           alert.setHeaderText(null);
-           alert.setContentText( "Correct you error!");
-          }         
-     }
+            alert.setTitle("Confirmed");
+            alert.setHeaderText(null);
+            alert.setContentText(name + " has been deleted!");
+
+            alert.showAndWait();
+        } else {
+            Alert alert = new Alert(AlertType.INFORMATION);
+            alert.setTitle("Error");
+            alert.setHeaderText(null);
+            alert.setContentText("There was an error!");
+        }
+    }
+
 }

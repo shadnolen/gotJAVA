@@ -5,14 +5,13 @@
  */
 package Controllers;
 
-import Code.Parts;
 import Code.InHouse;
 import Code.OutSourced;
+import Code.Parts;
 import Code.Supply;
 import java.io.IOException;
 import java.net.URL;
 import java.util.Optional;
-import java.util.Random;
 import java.util.ResourceBundle;
 import javafx.event.Event;
 import javafx.fxml.FXML;
@@ -22,127 +21,121 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
-import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
-
 /**
  *
  * @author shadn
  */
-public class PartAddController implements Initializable {
+   
+public class PartModifyController implements Initializable {
 
     Supply inv;
+    Parts part;
 
     @FXML
     private RadioButton inHouseRadio;
     @FXML
     private RadioButton outSourcedRadio;
     @FXML
+    private Label companyLabel;
+    @FXML
     private TextField id;
     @FXML
     private TextField name;
     @FXML
+    private TextField price;
+    @FXML
     private TextField count;
     @FXML
-    private TextField price;
+    private TextField min;
     @FXML
     private TextField max;
     @FXML
     private TextField company;
     @FXML
-    private Label companyName;
-    @FXML
-    private TextField min;
+    private Button modifyPartSaveButton;
 
-    public PartAddController(Supply inv) {
+    public PartModifyController(Supply inv, Parts part) {
         this.inv = inv;
+        this.part = part;
     }
 
     /**
      * Initializes the controller class.
-     *
-     * @param url
-     * @param rb
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        generatePartID();
-        resetFields();
+        setData();
     }
 
-    private void resetFields() {
-        name.setText("Part Name");
-        count.setText("Inv Count");
-        price.setText("Part Price");
-        min.setText("Min");
-        max.setText("Max");
-        company.setText("Machine ID");
-        companyName.setText("Machine ID");
-        inHouseRadio.setSelected(true);
-    }
+    private void setData() {
 
-    private void generatePartID() {
-        boolean match;
-        Random randomNum = new Random();
-        Integer num = randomNum.nextInt(1000);
+        if (part instanceof InHouse) {
 
-        if (inv.partListSize() == 0) {
-            id.setText(num.toString());
-
-        }
-        if (inv.partListSize() == 1000) {
-            errorWindow(3, null);
-        } else {
-            match = generateNum(num);
-
-            if (match == false) {
-                id.setText(num.toString());
-            } else {
-                generatePartID();
-            }
-        }
-    }
-
-    private boolean generateNum(Integer num) {
-        Parts match = inv.lookUpPart(num);
-        if (match != null) {
-            return true;
+            InHouse part1 = (InHouse) part;
+            inHouseRadio.setSelected(true);
+            companyLabel.setText("Machine ID");
+            this.name.setText(part1.getName());
+            this.id.setText((Integer.toString(part1.getPartID())));
+            this.count.setText((Integer.toString(part1.getInStock())));
+            this.price.setText((Double.toString(part1.getPrice())));
+            this.min.setText((Integer.toString(part1.getMin())));
+            this.max.setText((Integer.toString(part1.getMax())));
+            this.company.setText((Integer.toString(part1.getMachineID())));
 
         }
 
-        return false;
+        if (part instanceof OutSourced) {
+
+            OutSourced part2 = (OutSourced) part;
+            outSourcedRadio.setSelected(true);
+            companyLabel.setText("Company Name");
+            this.name.setText(part2.getName());
+            this.id.setText((Integer.toString(part2.getPartID())));
+            this.count.setText((Integer.toString(part2.getInStock())));
+            this.price.setText((Double.toString(part2.getPrice())));
+            this.min.setText((Integer.toString(part2.getMin())));
+            this.max.setText((Integer.toString(part2.getMax())));
+            this.company.setText(part2.getCompanyName());
+        }
     }
 
     @FXML
-    private void clearTextField(MouseEvent event) {
+    private void clearTextField(MouseEvent event
+    ) {
         Object source = event.getSource();
         TextField field = (TextField) source;
         field.setText("");
     }
 
     @FXML
-    private void selectInHouse(MouseEvent event) {
-        companyName.setText("Machine ID");
-        company.setText("Machine Name");
+    private void selectInHouse(MouseEvent event
+    ) {
+        companyLabel.setText("Machine ID");
+
     }
 
     @FXML
-    private void selectOutSourced(MouseEvent event) {
-        companyName.setText("Company Name");
-        company.setText("Company Name");
+    private void selectOutSourced(MouseEvent event
+    ) {
+        companyLabel.setText("Company Name");
+
     }
 
     @FXML
-    private void idDisabled(MouseEvent event) {
+    private void idDisabled(MouseEvent event
+    ) {
     }
 
     @FXML
-    private void cancelAddPart(MouseEvent event) {
+    private void cancelModifyPart(MouseEvent event
+    ) {
         boolean cancel = cancel();
         if (cancel) {
             mainScreen(event);
@@ -152,7 +145,8 @@ public class PartAddController implements Initializable {
     }
 
     @FXML
-    private void saveAddPart(MouseEvent event) {
+    private void saveModifyPart(MouseEvent event
+    ) {
         resetFieldsStyle();
         boolean end = false;
         TextField[] fieldCount = {count, price, min, max};
@@ -188,19 +182,22 @@ public class PartAddController implements Initializable {
 
             if (end) {
                 return;
-            } else if (company.getText().trim().isEmpty() || company.getText().trim().toLowerCase().equals("company name")) {
-                errorWindow(3, company);
+            } else if (outSourcedRadio.isSelected() && company.getText().trim().isEmpty()) {
+                errorWindow(1, company);
+                return;
+            } else if (inHouseRadio.isSelected() && !company.getText().matches("[0-9]*")) {
+                errorWindow(1, company);
                 return;
 
-            } else if (inHouseRadio.isSelected() && !company.getText().trim().matches("[0-9]*")) {
-                errorWindow(3, company);
-                return;
-            } else if (inHouseRadio.isSelected()) {
-                addInHouse();
+            } else if (inHouseRadio.isSelected() & part instanceof InHouse) {
+                updateItemInHouse();
 
-            } else if (outSourcedRadio.isSelected()) {
-                addOutSourced();
-
+            } else if (inHouseRadio.isSelected() & part instanceof OutSourced) {
+                updateItemInHouse();
+            } else if (outSourcedRadio.isSelected() & part instanceof OutSourced) {
+                updateItemOutSourced();
+            } else if (outSourcedRadio.isSelected() & part instanceof InHouse) {
+                updateItemOutSourced();
             }
 
         } else {
@@ -211,74 +208,71 @@ public class PartAddController implements Initializable {
         mainScreen(event);
     }
 
-    private void addInHouse() {
-
-        inv.addPart(new InHouse(Integer.parseInt(id.getText().trim()), name.getText().trim(),
+    private void updateItemInHouse() {
+        inv.updatePart(new InHouse(Integer.parseInt(id.getText().trim()), name.getText().trim(),
                 Double.parseDouble(price.getText().trim()), Integer.parseInt(count.getText().trim()),
-                Integer.parseInt(min.getText().trim()), Integer.parseInt(max.getText().trim()), (Integer.parseInt(company.getText().trim()))));
-
+                Integer.parseInt(min.getText().trim()), Integer.parseInt(max.getText().trim()), Integer.parseInt(company.getText().trim())));
     }
 
-    private void addOutSourced() {
-        inv.addPart(new OutSourced(Integer.parseInt(id.getText().trim()), name.getText().trim(),
+    private void updateItemOutSourced() {
+        inv.updatePart(new OutSourced(Integer.parseInt(id.getText().trim()), name.getText().trim(),
                 Double.parseDouble(price.getText().trim()), Integer.parseInt(count.getText().trim()),
                 Integer.parseInt(min.getText().trim()), Integer.parseInt(max.getText().trim()), company.getText().trim()));
-
     }
 
     private void errorWindow(int code, TextField field) {
         fieldError(field);
 
         if (code == 1) {
-            Alert alert = new Alert(AlertType.ERROR);
+            Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error adding part");
             alert.setHeaderText("Cannot add part");
             alert.setContentText("Field is empty!");
             alert.showAndWait();
         } else if (code == 2) {
-            Alert alert = new Alert(AlertType.ERROR);
+            Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error adding part");
             alert.setHeaderText("Cannot add part");
             alert.setContentText("Ooops, you forgot to select In House/OutSourced!");
             alert.showAndWait();
         } else if (code == 3) {
-            Alert alert = new Alert(AlertType.ERROR);
+            Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error adding part");
             alert.setHeaderText("Cannot add part");
             alert.setContentText("Invalid format!");
             alert.showAndWait();
         } else if (code == 4) {
-            Alert alert = new Alert(AlertType.ERROR);
+            Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error adding part");
             alert.setHeaderText("Cannot add part");
             alert.setContentText("Name is invalid!");
             alert.showAndWait();
         } else if (code == 5) {
-            Alert alert = new Alert(AlertType.ERROR);
+            Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error adding part");
             alert.setHeaderText("Cannot add part");
-            alert.setContentText("Value cannot be negative!");
+            alert.setContentText("Value cannot be negative!!");
             alert.showAndWait();
         } else if (code == 6) {
-            Alert alert = new Alert(AlertType.ERROR);
+            Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error adding part");
             alert.setHeaderText("Cannot add part");
             alert.setContentText("Inventory cannot be lower than min!");
             alert.showAndWait();
         } else if (code == 7) {
-            Alert alert = new Alert(AlertType.ERROR);
+            Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error adding part");
             alert.setHeaderText("Cannot add part");
             alert.setContentText("Inventory cannot be greater than max!");
             alert.showAndWait();
         } else if (code == 8) {
-            Alert alert = new Alert(AlertType.ERROR);
+            Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error adding part");
             alert.setHeaderText("Cannot add part");
-            alert.setContentText("Min cannot be greater than max!");
+            alert.setContentText("Min cannot be higher than max!");
             alert.showAndWait();
         } else {
-            Alert alert = new Alert(AlertType.ERROR);
+            Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error adding part");
             alert.setHeaderText("Cannot add part");
             alert.setContentText("Unknown error!");
@@ -298,7 +292,7 @@ public class PartAddController implements Initializable {
 
     private void fieldError(TextField field) {
         if (field == null) {
-            return;
+            // do nothing
         } else {
             field.setStyle("-fx-border-color: red");
         }
@@ -324,7 +318,7 @@ public class PartAddController implements Initializable {
     private boolean checkValue(TextField field) {
         boolean error = false;
         try {
-            if (field.getText().trim().isEmpty() | field.getText().trim() == null) {
+            if (field.getText().trim().isEmpty() || field.getText().trim() == null) {
                 errorWindow(1, field);
                 return true;
             }
@@ -356,7 +350,7 @@ public class PartAddController implements Initializable {
     }
 
     private boolean cancel() {
-        Alert alert = new Alert(AlertType.CONFIRMATION);
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("Cancel");
         alert.setHeaderText("Are you sure you want to cancel?");
         alert.setContentText("Click ok to confirm");

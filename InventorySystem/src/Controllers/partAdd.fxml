@@ -14,8 +14,8 @@
             <Font size="16.0" />
          </font>
       </Label>
-      <RadioButton id="inSelect" fx:id="inSelect" layoutX="185.0" layoutY="34.0" mnemonicParsing="false" text="In-House" />
-      <RadioButton id="outSelect" fx:id="outSelect" layoutX="293.0" layoutY="34.0" mnemonicParsing="false" text="Outsourced" />
+      <RadioButton id="inSelect" fx:id="inHouseRadio" layoutX="185.0" layoutY="34.0" mnemonicParsing="false" text="In-House" />
+      <RadioButton id="outSelect" fx:id="outSourcedRadio" layoutX="293.0" layoutY="34.0" mnemonicParsing="false" text="Outsourced" />
       <Label id="addLabelID" layoutX="28.0" layoutY="76.00000000000003" text="ID" AnchorPane.bottomAnchor="298.4">
          <font>
             <Font size="16.0" />
@@ -51,11 +51,11 @@
             <Font size="16.0" />
          </font>
       </Label>
-      <TextField id="partId" fx:id="idNum" layoutX="181.0" layoutY="76.0" />
+      <TextField id="partId" fx:id="id" layoutX="181.0" layoutY="76.0" />
       <TextField id="addTextName" fx:id="name" layoutX="181.0" layoutY="118.0" />
       <TextField id="addTextPN" fx:id="count" layoutX="181.0" layoutY="153.0" />
-      <TextField id="addTextCost" fx:id="cost" layoutX="181.0" layoutY="187.0" />
-      <TextField id="addTextMID" fx:id="compName" layoutX="181.0" layoutY="266.0" />
+      <TextField id="addTextCost" fx:id="price" layoutX="181.0" layoutY="187.0" />
+      <TextField id="addTextMID" fx:id="companyName" layoutX="181.0" layoutY="266.0" />
       <TextField id="addTextMin" fx:id="min" layoutX="361.0" layoutY="224.0" prefHeight="26.0" prefWidth="106.0" />
       <TextField id="addTextMax" fx:id="max" layoutX="181.0" layoutY="224.0" prefHeight="26.0" prefWidth="106.0" />
       <Button id="addSave" layoutX="309.0" layoutY="308.0" mnemonicParsing="false" text="Save" />

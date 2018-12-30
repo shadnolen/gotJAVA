@@ -23,6 +23,7 @@ public class Product {
 	private int max;
 	private double cost;
 
+                   //vararg parameter (variable argument) you are only allowed to have one vararg parameter per method
 	public Product(int productID, String name, double price, int inStock, int min, int max) {
 		setProductID(productID);
 		setName(name);

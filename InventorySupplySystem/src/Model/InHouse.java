@@ -14,7 +14,9 @@ package Model;
 public class InHouse extends Part {
 
 	private int machineID;
-
+        
+        
+                    //vararg parameter (variable argument) you are only allowed to have one vararg parameter per method
 	public InHouse(int partID, String name, double price, int numInStock, int min, int max, int machID) {
 
 		setPartID(partID);

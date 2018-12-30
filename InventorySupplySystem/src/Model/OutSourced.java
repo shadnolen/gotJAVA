@@ -13,7 +13,8 @@ public class OutSourced extends Part {
 
 	private String companyName;
 
-	public OutSourced(int partID, String name, double price, int numInStock, int min, int max, String company) {
+ //vararg parameter (variable argument) you are only allowed to have one vararg parameter per method	
+        public OutSourced(int partID, String name, double price, int numInStock, int min, int max, String company) {
 		this.setPartID(partID);
 		this.setName(name);
 		this.setPrice(price);

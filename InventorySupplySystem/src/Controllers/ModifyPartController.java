@@ -5,10 +5,10 @@
  */
 package Controllers;
 
-import Code.InHouse;
-import Code.OutSourced;
-import Code.Parts;
-import Code.Supply;
+import Model.InHouse;
+import Model.Supply;
+import Model.OutSourced;
+import Model.Part;
 import java.io.IOException;
 import java.net.URL;
 import java.util.Optional;
@@ -28,15 +28,16 @@ import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
+
 /**
+ * FXML Controller class
  *
  * @author shadn
  */
-   
-public class PartModifyController implements Initializable {
+public class ModifyPartController implements Initializable {
 
     Supply inv;
-    Parts part;
+    Part part;
 
     @FXML
     private RadioButton inHouseRadio;
@@ -61,16 +62,18 @@ public class PartModifyController implements Initializable {
     @FXML
     private Button modifyPartSaveButton;
 
-    public PartModifyController(Supply inv, Parts part) {
+    public ModifyPartController(Supply inv, Part part) {
         this.inv = inv;
         this.part = part;
     }
 
     /**
      * Initializes the controller class.
+     * @param url
+     * @param resource
      */
     @Override
-    public void initialize(URL url, ResourceBundle rb) {
+    public void initialize(URL url, ResourceBundle resource) {
         setData();
     }
 
@@ -138,9 +141,8 @@ public class PartModifyController implements Initializable {
     ) {
         boolean cancel = cancel();
         if (cancel) {
-            Ims(event);
+            mainScreen(event);
         } else {
-            return;
         }
     }
 
@@ -151,13 +153,13 @@ public class PartModifyController implements Initializable {
         boolean end = false;
         TextField[] fieldCount = {count, price, min, max};
         if (inHouseRadio.isSelected() || outSourcedRadio.isSelected()) {
-            for (int i = 0; i < fieldCount.length; i++) {
-                boolean valueError = checkValue(fieldCount[i]);
+            for (TextField fieldCount1 : fieldCount) {
+                boolean valueError = checkValue(fieldCount1);
                 if (valueError) {
                     end = true;
                     break;
                 }
-                boolean typeError = checkType(fieldCount[i]);
+                boolean typeError = checkType(fieldCount1);
                 if (typeError) {
                     end = true;
                     break;
@@ -205,7 +207,7 @@ public class PartModifyController implements Initializable {
             return;
 
         }
-        Ims(event);
+        mainScreen(event);
     }
 
     private void updateItemInHouse() {
@@ -223,60 +225,88 @@ public class PartModifyController implements Initializable {
     private void errorWindow(int code, TextField field) {
         fieldError(field);
 
-        if (code == 1) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Error adding part");
-            alert.setHeaderText("Cannot add part");
-            alert.setContentText("Field is empty!");
-            alert.showAndWait();
-        } else if (code == 2) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Error adding part");
-            alert.setHeaderText("Cannot add part");
-            alert.setContentText("Ooops, you forgot to select In House/OutSourced!");
-            alert.showAndWait();
-        } else if (code == 3) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Error adding part");
-            alert.setHeaderText("Cannot add part");
-            alert.setContentText("Invalid format!");
-            alert.showAndWait();
-        } else if (code == 4) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Error adding part");
-            alert.setHeaderText("Cannot add part");
-            alert.setContentText("Name is invalid!");
-            alert.showAndWait();
-        } else if (code == 5) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Error adding part");
-            alert.setHeaderText("Cannot add part");
-            alert.setContentText("Value cannot be negative!!");
-            alert.showAndWait();
-        } else if (code == 6) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Error adding part");
-            alert.setHeaderText("Cannot add part");
-            alert.setContentText("Inventory cannot be lower than min!");
-            alert.showAndWait();
-        } else if (code == 7) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Error adding part");
-            alert.setHeaderText("Cannot add part");
-            alert.setContentText("Inventory cannot be greater than max!");
-            alert.showAndWait();
-        } else if (code == 8) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Error adding part");
-            alert.setHeaderText("Cannot add part");
-            alert.setContentText("Min cannot be higher than max!");
-            alert.showAndWait();
-        } else {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Error adding part");
-            alert.setHeaderText("Cannot add part");
-            alert.setContentText("Unknown error!");
-            alert.showAndWait();
+        switch (code) {
+            case 1:
+                {
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setTitle("Error adding part");
+                    alert.setHeaderText("Cannot add part");
+                    alert.setContentText("Field is empty!");
+                    alert.showAndWait();
+                    break;
+                }
+            case 2:
+                {
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setTitle("Error adding part");
+                    alert.setHeaderText("Cannot add part");
+                    alert.setContentText("Ooops, you forgot to select In House/OutSourced!");
+                    alert.showAndWait();
+                    break;
+                }
+            case 3:
+                {
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setTitle("Error adding part");
+                    alert.setHeaderText("Cannot add part");
+                    alert.setContentText("Invalid format!");
+                    alert.showAndWait();
+                    break;
+                }
+            case 4:
+                {
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setTitle("Error adding part");
+                    alert.setHeaderText("Cannot add part");
+                    alert.setContentText("Name is invalid!");
+                    alert.showAndWait();
+                    break;
+                }
+            case 5:
+                {
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setTitle("Error adding part");
+                    alert.setHeaderText("Cannot add part");
+                    alert.setContentText("Value cannot be negative!!");
+                    alert.showAndWait();
+                    break;
+                }
+            case 6:
+                {
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setTitle("Error adding part");
+                    alert.setHeaderText("Cannot add part");
+                    alert.setContentText("Supply cannot be lower than min!");
+                    alert.showAndWait();
+                    break;
+                }
+            case 7:
+                {
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setTitle("Error adding part");
+                    alert.setHeaderText("Cannot add part");
+                    alert.setContentText("Supply cannot be greater than max!");
+                    alert.showAndWait();
+                    break;
+                }
+            case 8:
+                {
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setTitle("Error adding part");
+                    alert.setHeaderText("Cannot add part");
+                    alert.setContentText("Min cannot be higher than max!");
+                    alert.showAndWait();
+                    break;
+                }
+            default:
+                {
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setTitle("Error adding part");
+                    alert.setHeaderText("Cannot add part");
+                    alert.setContentText("Unknown error!");
+                    alert.showAndWait();
+                    break;
+                }
         }
     }
 
@@ -298,10 +328,10 @@ public class PartModifyController implements Initializable {
         }
     }
 
-    private void Ims(Event event) {
+    private void mainScreen(Event event) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("Ims.fxml"));
-            ImsController controller = new ImsController(inv);
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("MainScreen.fxml"));
+            MainScreenController controller = new MainScreenController(inv);
 
             loader.setController(controller);
             Parent root = loader.load();
@@ -326,7 +356,7 @@ public class PartModifyController implements Initializable {
                 errorWindow(5, field);
                 error = true;
             }
-        } catch (Exception e) {
+        } catch (NumberFormatException e) {
             error = true;
             errorWindow(3, field);
             System.out.println(e);
@@ -356,11 +386,7 @@ public class PartModifyController implements Initializable {
         alert.setContentText("Click ok to confirm");
 
         Optional<ButtonType> result = alert.showAndWait();
-        if (result.get() == ButtonType.OK) {
-            return true;
-        } else {
-            return false;
-        }
+        return result.get() == ButtonType.OK;
     }
 
 }

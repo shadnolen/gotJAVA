@@ -40,13 +40,13 @@
             <Font size="16.0" />
          </font>
       </Label>
-      <TextField id="addTextIdM" fx:id="proID" layoutX="148.0" layoutY="104.0" prefHeight="26.0" prefWidth="66.0" />
-      <TextField id="addTextNameM" fx:id="name" layoutX="148.0" layoutY="146.0" prefHeight="26.0" prefWidth="138.0" />
-      <TextField id="addTextPNM" fx:id="proCount" layoutX="148.0" layoutY="181.0" prefHeight="26.0" prefWidth="66.0" />
-      <TextField id="addTextCostM" fx:id="cost" layoutX="148.0" layoutY="215.0" prefHeight="26.0" prefWidth="66.0" />
-      <TextField id="addTextMinM" fx:id="min" layoutX="244.0" layoutY="252.0" prefHeight="26.0" prefWidth="45.0" />
-      <TextField id="addTextMaxM" fx:id="max" layoutX="148.0" layoutY="252.0" prefHeight="26.0" prefWidth="45.0" />
-      <TableView fx:id="partTable" layoutX="391.0" layoutY="63.0" prefHeight="115.0" prefWidth="298.0">
+      <TextField id="addTextIdM" fx:id="id" layoutX="148.0" layoutY="104.0" prefHeight="26.0" prefWidth="66.0" text="ProductID" />
+      <TextField id="addTextNameM" fx:id="name" layoutX="148.0" layoutY="146.0" prefHeight="26.0" prefWidth="138.0" text="Product Name" />
+      <TextField id="addTextPNM" fx:id="count" layoutX="148.0" layoutY="181.0" prefHeight="26.0" prefWidth="66.0" text="Part #" />
+      <TextField id="addTextCostM" fx:id="price" layoutX="148.0" layoutY="215.0" prefHeight="26.0" prefWidth="66.0" text="Cost" />
+      <TextField id="addTextMinM" fx:id="min" layoutX="244.0" layoutY="252.0" prefHeight="26.0" prefWidth="45.0" text="Int" />
+      <TextField id="addTextMaxM" fx:id="max" layoutX="148.0" layoutY="252.0" prefHeight="26.0" prefWidth="45.0" text="Int" />
+      <TableView fx:id="tableSearch" layoutX="391.0" layoutY="63.0" prefHeight="115.0" prefWidth="298.0">
          <columns>
             <TableColumn id="partId" prefWidth="53.60000801086426" text="Part ID" />
             <TableColumn id="partName" prefWidth="70.40001678466797" text="Part Name" />
@@ -54,7 +54,7 @@
             <TableColumn id="partCost" prefWidth="67.20001220703125" text="Cost" />
          </columns>
       </TableView>
-      <TableView fx:id="proTable" layoutX="391.0" layoutY="228.0" prefHeight="115.0" prefWidth="298.0">
+      <TableView fx:id="partsTableSeachField" layoutX="391.0" layoutY="228.0" prefHeight="115.0" prefWidth="298.0">
          <columns>
             <TableColumn id="partId" prefWidth="53.60000801086426" text="Part ID" />
             <TableColumn id="partName" prefWidth="70.40001678466797" text="Part Name" />
@@ -62,14 +62,14 @@
             <TableColumn id="partCost" prefWidth="67.20001220703125" text="Cost" />
          </columns>
       </TableView>
-      <Button id="addPro" fx:id="addButton" layoutX="638.0" layoutY="192.0" mnemonicParsing="false" text="Add" />
+      <Button id="addPro" fx:id="modifyProductAddButton" layoutX="638.0" layoutY="192.0" mnemonicParsing="false" text="Add" />
       <Label layoutX="75.0" layoutY="46.0" text="MODIFY PRODUCT ">
          <font>
             <Font size="18.0" />
          </font>
       </Label>
-      <Button id="deletePro" fx:id="deleteButton" layoutX="631.0" layoutY="353.0" mnemonicParsing="false" text="Delete" />
-      <Button id="savePro" fx:id="saveButton" layoutX="572.0" layoutY="388.0" mnemonicParsing="false" text="Save" />
-      <Button id="Cancel" fx:id="cancelButton" layoutX="631.0" layoutY="388.0" mnemonicParsing="false" text="Cancel" />
+      <Button id="deletePro" fx:id="modifyProductDeleteButton" layoutX="631.0" layoutY="353.0" mnemonicParsing="false" text="Delete" />
+      <Button id="savePro" fx:id="modifyProductSaveButton" layoutX="572.0" layoutY="388.0" mnemonicParsing="false" text="Save" />
+      <Button id="Cancel" fx:id="modifyProductCancelButton" layoutX="631.0" layoutY="388.0" mnemonicParsing="false" text="Cancel" />
    </children>
 </AnchorPane>

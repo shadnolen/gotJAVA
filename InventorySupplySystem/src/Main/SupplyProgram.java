@@ -5,20 +5,21 @@
  */
 package Main;
 
-import Code.Supply;
+//Import from model package
+import Model.Supply;
 
+//List of Java Imports
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-
 /**
  *
  * @author shadn
  */
-public class InventorySystem extends Application {
+public class SupplyProgram extends Application {
 
 	/**
 	 * @param args the command line arguments
@@ -30,11 +31,14 @@ public class InventorySystem extends Application {
 	@Override
 	public void start(Stage stage) throws Exception {
 		Supply inv = new Supply();
-
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("/Controllers/Ims.fxml"));
-		Controllers.ImsController controller = new Controllers.ImsController(inv);
+                                        
+                                    // Set our path to FXML
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("/Controllers/MainScreen.fxml"));
+                                    // Set our Controllers 
+		Controllers.MainScreenController controller = new Controllers.MainScreenController(inv);
 		loader.setController(controller);
 		Parent root = loader.load();
+                                    //Setting the stage
 		Scene scene = new Scene(root);
 		stage.setScene(scene);
 		stage.setResizable(false);

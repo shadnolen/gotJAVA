@@ -5,9 +5,9 @@
  */
 package Controllers;
 
-import Code.Parts;
-import Code.Products;
-import Code.Supply;
+import Model.Supply;
+import Model.Part;
+import Model.Product;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -31,13 +31,14 @@ import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
 /**
+ * FXML Controller class
  *
  * @author shadn
  */
-public class ProductModifyController implements Initializable {
+public class ModifyProductController implements Initializable {
 
     Supply inv;
-    Products product;
+    Product product;
 
     @FXML
     private TextField id;
@@ -53,18 +54,18 @@ public class ProductModifyController implements Initializable {
     private TextField max;
 
     @FXML
-    private TableView<Parts> partsTableSeachField;
+    private TableView<Part> assocPartsTable;
     @FXML
-    private TableView<Parts> tableSearch;
+    private TableView<Part> partSearchTable;
     @FXML
     private TextField search;
 
-    private ObservableList<Parts> partsInventory = FXCollections.observableArrayList();
-    private ObservableList<Parts> partsInventorySearch = FXCollections.observableArrayList();
-    private ObservableList<Parts> assocPartList = FXCollections.observableArrayList();
+    private ObservableList<Part> partsSupply = FXCollections.observableArrayList();
+    private ObservableList<Part> partsSupplySearch = FXCollections.observableArrayList();
+    private ObservableList<Part> assocPartList = FXCollections.observableArrayList();
     ArrayList<Integer> partIDList;
 
-    public ProductModifyController(Supply inv, Products product) {
+    public ModifyProductController(Supply inv, Product product) {
         this.inv = inv;
         this.product = product;
         this.partIDList = inv.retrievePartsIDList();
@@ -73,9 +74,11 @@ public class ProductModifyController implements Initializable {
 
     /**
      * Initializes the controller class.
+     * @param url
+     * @param resource
      */
     @Override
-    public void initialize(URL url, ResourceBundle rb) {
+    public void initialize(URL url, ResourceBundle resource) {
         populateSearchTable();
         setData();
     }
@@ -86,36 +89,35 @@ public class ProductModifyController implements Initializable {
         TextField field = (TextField) source;
         field.setText("");
         if (field == search) {
-            tableSearch.setItems(partsInventory);
+            partSearchTable.setItems(partsSupply);
         }
     }
 
     @FXML
     private void modifyProductSearch(MouseEvent event) {
         if (search.getText().trim().length() == 0 | search.getText() == null) {
-            return;
         } else {
-            partsInventorySearch.clear();
+            partsSupplySearch.clear();
             for (int i = 0; i < inv.partListSize(); i++) {
                 if (inv.lookUpPart(partIDList.get(i)).getName().contains(search.getText().trim())) {
-                    partsInventorySearch.add(inv.lookUpPart(partIDList.get(i)));
+                    partsSupplySearch.add(inv.lookUpPart(partIDList.get(i)));
                 }
             }
-            tableSearch.setItems(partsInventorySearch);
+            partSearchTable.setItems(partsSupplySearch);
         }
 
     }
 
     @FXML
     private void deletePart(MouseEvent event) {
-        Parts removePart = partsTableSeachField.getSelectionModel().getSelectedItem();
+        Part removePart = assocPartsTable.getSelectionModel().getSelectedItem();
         boolean deleted = false;
         if (removePart != null) {
             boolean remove = confirmationWindow(removePart.getName());
             if (remove) {
                 deleted = product.removeAssociatedPart(removePart.getPartID());
                 assocPartList.remove(removePart);
-                partsTableSeachField.refresh();
+                assocPartsTable.refresh();
             }
         } else {
             return;
@@ -130,11 +132,10 @@ public class ProductModifyController implements Initializable {
 
     @FXML
     private void addPart(MouseEvent event) {
-        Parts addPart = tableSearch.getSelectionModel().getSelectedItem();
+        Part addPart = partSearchTable.getSelectionModel().getSelectedItem();
         boolean repeatedItem = false;
 
         if (addPart == null) {
-            return;
         } else {
             int id = addPart.getPartID();
             for (int i = 0; i < assocPartList.size(); i++) {
@@ -147,7 +148,7 @@ public class ProductModifyController implements Initializable {
             if (!repeatedItem) {
                 assocPartList.add(addPart);
             }
-            partsTableSeachField.setItems(assocPartList);
+            assocPartsTable.setItems(assocPartList);
         }
     }
 
@@ -155,9 +156,8 @@ public class ProductModifyController implements Initializable {
     private void cancelModify(MouseEvent event) {
         boolean cancel = cancel();
         if (cancel) {
-            Ims(event);
+            mainScreen(event);
         } else {
-            return;
         }
     }
 
@@ -174,13 +174,13 @@ public class ProductModifyController implements Initializable {
             errorWindow(4, name);
             return;
         }
-        for (int i = 0; i < fieldCount.length; i++) {
-            boolean valueError = checkValue(fieldCount[i]);
+        for (TextField fieldCount1 : fieldCount) {
+            boolean valueError = checkValue(fieldCount1);
             if (valueError) {
                 end = true;
                 break;
             }
-            boolean typeError = checkType(fieldCount[i]);
+            boolean typeError = checkType(fieldCount1);
             if (typeError) {
                 end = true;
                 break;
@@ -202,18 +202,18 @@ public class ProductModifyController implements Initializable {
             errorWindow(6, price);
             return;
         }
-        if (assocPartList.size() == 0) {
+        if (assocPartList.isEmpty()) {
             errorWindow(7, null);
             return;
         }
 
         saveProduct();
-        Ims(event);
+        mainScreen(event);
 
     }
 
     private void saveProduct() {
-        Products product = new Products(Integer.parseInt(id.getText().trim()), name.getText().trim(), Double.parseDouble(price.getText().trim()),
+        Product product = new Product(Integer.parseInt(id.getText().trim()), name.getText().trim(), Double.parseDouble(price.getText().trim()),
                 Integer.parseInt(count.getText().trim()), Integer.parseInt(min.getText().trim()), Integer.parseInt(max.getText().trim()));
         for (int i = 0; i < assocPartList.size(); i++) {
             product.addAssociatedPart(assocPartList.get(i));
@@ -225,13 +225,13 @@ public class ProductModifyController implements Initializable {
 
     private void setData() {
         for (int i = 0; i < 1000; i++) {
-            Parts part = product.lookupAssociatedPart(i);
+            Part part = product.lookupAssociatedPart(i);
             if (part != null) {
                 assocPartList.add(part);
             }
         }
 
-        partsTableSeachField.setItems(assocPartList);
+        assocPartsTable.setItems(assocPartList);
 
         this.name.setText(product.getName());
         this.id.setText((Integer.toString(product.getProductID())));
@@ -247,88 +247,121 @@ public class ProductModifyController implements Initializable {
             return;
         } else {
             for (int i = 0; i < partIDList.size(); i++) {
-                partsInventory.add(inv.lookUpPart(partIDList.get(i)));
+                partsSupply.add(inv.lookUpPart(partIDList.get(i)));
             }
         }
 
-        tableSearch.setItems(partsInventory);
+        partSearchTable.setItems(partsSupply);
     }
 
     private void errorWindow(int code, TextField field) {
         fieldError(field);
 
-        if (code == 1) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Error adding product");
-            alert.setHeaderText("Cannot add product");
-            alert.setContentText("Field is empty!");
-            alert.showAndWait();
-        } else if (code == 2) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Error adding part");
-            alert.setHeaderText("Cannot add part");
-            alert.setContentText("Part is already is associated with this product!");
-            alert.showAndWait();
-        } else if (code == 3) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Error adding product");
-            alert.setHeaderText("Cannot add product");
-            alert.setContentText("Invalid format!");
-            alert.showAndWait();
-        } else if (code == 4) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Error adding product");
-            alert.setHeaderText("Cannot add product");
-            alert.setContentText("Name is invalid!");
-            alert.showAndWait();
-        } else if (code == 5) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Error adding product");
-            alert.setHeaderText("Cannot add product");
-            alert.setContentText("Value cannot be negative!");
-            alert.showAndWait();
-        } else if (code == 6) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Error adding product");
-            alert.setHeaderText("Cannot add product");
-            alert.setContentText("Product cost cannot be lower than it's parts!");
-            alert.showAndWait();
-        } else if (code == 7) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Error adding product");
-            alert.setHeaderText("Cannot add product");
-            alert.setContentText("Product must have at least one part!");
-            alert.showAndWait();
-        } else if (code == 8) {
-            Alert alert = new Alert(AlertType.ERROR);
-            alert.setTitle("Error adding part");
-            alert.setHeaderText("Cannot add part");
-            alert.setContentText("Inventory cannot be lower than min!");
-            alert.showAndWait();
-        } else if (code == 9) {
-            Alert alert = new Alert(AlertType.ERROR);
-            alert.setTitle("Error adding part");
-            alert.setHeaderText("Cannot add part");
-            alert.setContentText("Inventory cannot be greater than max!");
-            alert.showAndWait();
-        } else if (code == 10) {
-            Alert alert = new Alert(AlertType.ERROR);
-            alert.setTitle("Error adding part");
-            alert.setHeaderText("Cannot add part");
-            alert.setContentText("Min cannot be greater than max!");
-            alert.showAndWait();
-        } else {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Error adding product");
-            alert.setHeaderText("Cannot add product");
-            alert.setContentText("Unknown error!");
-            alert.showAndWait();
+        switch (code) {
+            case 1:
+                {
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setTitle("Error adding product");
+                    alert.setHeaderText("Cannot add product");
+                    alert.setContentText("Field is empty!");
+                    alert.showAndWait();
+                    break;
+                }
+            case 2:
+                {
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setTitle("Error adding part");
+                    alert.setHeaderText("Cannot add part");
+                    alert.setContentText("Part is already is associated with this product!");
+                    alert.showAndWait();
+                    break;
+                }
+            case 3:
+                {
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setTitle("Error adding product");
+                    alert.setHeaderText("Cannot add product");
+                    alert.setContentText("Invalid format!");
+                    alert.showAndWait();
+                    break;
+                }
+            case 4:
+                {
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setTitle("Error adding product");
+                    alert.setHeaderText("Cannot add product");
+                    alert.setContentText("Name is invalid!");
+                    alert.showAndWait();
+                    break;
+                }
+            case 5:
+                {
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setTitle("Error adding product");
+                    alert.setHeaderText("Cannot add product");
+                    alert.setContentText("Value cannot be negative!");
+                    alert.showAndWait();
+                    break;
+                }
+            case 6:
+                {
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setTitle("Error adding product");
+                    alert.setHeaderText("Cannot add product");
+                    alert.setContentText("Product cost cannot be lower than it's parts!");
+                    alert.showAndWait();
+                    break;
+                }
+            case 7:
+                {
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setTitle("Error adding product");
+                    alert.setHeaderText("Cannot add product");
+                    alert.setContentText("Product must have at least one part!");
+                    alert.showAndWait();
+                    break;
+                }
+            case 8:
+                {
+                    Alert alert = new Alert(AlertType.ERROR);
+                    alert.setTitle("Error adding part");
+                    alert.setHeaderText("Cannot add part");
+                    alert.setContentText("Supply cannot be lower than min!");
+                    alert.showAndWait();
+                    break;
+                }
+            case 9:
+                {
+                    Alert alert = new Alert(AlertType.ERROR);
+                    alert.setTitle("Error adding part");
+                    alert.setHeaderText("Cannot add part");
+                    alert.setContentText("Supply cannot be greater than max!");
+                    alert.showAndWait();
+                    break;
+                }
+            case 10:
+                {
+                    Alert alert = new Alert(AlertType.ERROR);
+                    alert.setTitle("Error adding part");
+                    alert.setHeaderText("Cannot add part");
+                    alert.setContentText("Min cannot be greater than max!");
+                    alert.showAndWait();
+                    break;
+                }
+            default:
+                {
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setTitle("Error adding product");
+                    alert.setHeaderText("Cannot add product");
+                    alert.setContentText("Unknown error!");
+                    alert.showAndWait();
+                    break;
+                }
         }
     }
 
     private void fieldError(TextField field) {
         if (field == null) {
-            return;
         } else {
             field.setStyle("-fx-border-color: red");
         }
@@ -350,11 +383,7 @@ public class ProductModifyController implements Initializable {
         alert.setContentText("Click ok to confirm");
 
         Optional<ButtonType> result = alert.showAndWait();
-        if (result.get() == ButtonType.OK) {
-            return true;
-        } else {
-            return false;
-        }
+        return result.get() == ButtonType.OK;
     }
 
     private void infoWindow(int code, String name) {
@@ -373,10 +402,10 @@ public class ProductModifyController implements Initializable {
         }
     }
 
-    private void Ims(Event event) {
+    private void mainScreen(Event event) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("Ims.fxml"));
-            ImsController controller = new ImsController(inv);
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("MainScreen.fxml"));
+            MainScreenController controller = new MainScreenController(inv);
 
             loader.setController(controller);
             Parent root = loader.load();
@@ -401,7 +430,7 @@ public class ProductModifyController implements Initializable {
                 errorWindow(5, field);
                 error = true;
             }
-        } catch (Exception e) {
+        } catch (NumberFormatException e) {
             error = true;
             errorWindow(3, field);
             System.out.println(e);
@@ -431,10 +460,6 @@ public class ProductModifyController implements Initializable {
         alert.setContentText("Click ok to confirm");
 
         Optional<ButtonType> result = alert.showAndWait();
-        if (result.get() == ButtonType.OK) {
-            return true;
-        } else {
-            return false;
-        }
+        return result.get() == ButtonType.OK;
     }
 }

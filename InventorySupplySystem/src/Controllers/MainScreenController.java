@@ -5,14 +5,9 @@
  */
 package Controllers;
 
-//importing  classes from diffrent package
-import Code.Parts;
-import Code.Products;
-import Code.Supply;
-
-
-//java imports
-import java.awt.event.MouseEvent;
+import Model.Supply;
+import Model.Part;
+import Model.Product;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -33,15 +28,15 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
-
 /**
+ * FXML Controller class
  *
  * @author shadn
  */
-
-public class ImsController implements Initializable {
+public class MainScreenController implements Initializable {
 
     Supply inv;
 
@@ -50,18 +45,18 @@ public class ImsController implements Initializable {
     @FXML
     private TextField productSearchBox;
     @FXML
-    private TableView<Parts> partsTable;
+    private TableView<Part> partsTable;
     @FXML
-    private TableView<Products> productsTable;
+    private TableView<Product> productsTable;
 
-    private ObservableList<Parts> partInventory = FXCollections.observableArrayList();
-    private ObservableList<Products> productInventory = FXCollections.observableArrayList();
-    private ObservableList<Parts> partsInventorySearch = FXCollections.observableArrayList();
-    private ObservableList<Products> productInventorySearch = FXCollections.observableArrayList();
+    private ObservableList<Part> partSupply = FXCollections.observableArrayList();
+    private ObservableList<Product> productSupply = FXCollections.observableArrayList();
+    private ObservableList<Part> partsSupplySearch = FXCollections.observableArrayList();
+    private ObservableList<Product> productSupplySearch = FXCollections.observableArrayList();
     ArrayList<Integer> partIDList;
     ArrayList<Integer> productIDList;
 
-    public ImsController(Supply inv) {
+    public MainScreenController(Supply inv) {
         this.inv = inv;
         partIDList = inv.retrievePartsIDList();
         productIDList = inv.retrieveProductIDList();
@@ -69,9 +64,11 @@ public class ImsController implements Initializable {
 
     /**
      * Initializes the controller class.
+     * @param url
+     * @param resource
      */
     @Override
-    public void initialize(URL url, ResourceBundle resources) {
+    public void initialize(URL url, ResourceBundle resource) {
         generatePartsTable();
         generateProductsTable();
     }
@@ -79,22 +76,22 @@ public class ImsController implements Initializable {
     private void generatePartsTable() {
         if (!partIDList.isEmpty()) {
             for (int i = 0; i < partIDList.size(); i++) {
-                partInventory.add(inv.lookUpPart(partIDList.get(i)));
+                partSupply.add(inv.lookUpPart(partIDList.get(i)));
             }
         }
 
-        partsTable.setItems(partInventory);
+        partsTable.setItems(partSupply);
         partsTable.refresh();
     }
 
     private void generateProductsTable() {
         if (!productIDList.isEmpty()) {
             for (int i = 0; i < productIDList.size(); i++) {
-                productInventory.add(inv.lookUpProduct(productIDList.get(i)));
+                productSupply.add(inv.lookUpProduct(productIDList.get(i)));
             }
         }
         System.out.println(productIDList.size());
-        productsTable.setItems(productInventory);
+        productsTable.setItems(productSupply);
         productsTable.refresh();
     }
 
@@ -113,13 +110,13 @@ public class ImsController implements Initializable {
     @FXML
     private void searchForPart(MouseEvent event) {
         if (!partSearchBox.getText().trim().isEmpty()) {
-            partsInventorySearch.clear();
+            partsSupplySearch.clear();
             for (int i = 0; i < partIDList.size(); i++) {
                 if (inv.lookUpPart(partIDList.get(i)).getName().contains(partSearchBox.getText().trim())) {
-                    partsInventorySearch.add(inv.lookUpPart(partIDList.get(i)));
+                    partsSupplySearch.add(inv.lookUpPart(partIDList.get(i)));
                 }
             }
-            partsTable.setItems(partsInventorySearch);
+            partsTable.setItems(partsSupplySearch);
             partsTable.refresh();
         }
     }
@@ -128,13 +125,13 @@ public class ImsController implements Initializable {
     private void searchForProduct(MouseEvent event
     ) {
         if (!productSearchBox.getText().trim().isEmpty()) {
-            productInventorySearch.clear();
+            productSupplySearch.clear();
             for (int i = 0; i < productIDList.size(); i++) {
                 if (inv.lookUpProduct(productIDList.get(i)).getName().contains(productSearchBox.getText().trim())) {
-                    productInventorySearch.add(inv.lookUpProduct(productIDList.get(i)));
+                    productSupplySearch.add(inv.lookUpProduct(productIDList.get(i)));
                 }
             }
-            productsTable.setItems(productInventorySearch);
+            productsTable.setItems(productSupplySearch);
             productsTable.refresh();
         }
     }
@@ -146,13 +143,13 @@ public class ImsController implements Initializable {
         TextField field = (TextField) source;
         field.setText("");
         if (partSearchBox == field) {
-            if (partInventory.size() != 0) {
-                partsTable.setItems(partInventory);
+            if (!partSupply.isEmpty()) {
+                partsTable.setItems(partSupply);
             }
         }
         if (productSearchBox == field) {
-            if (productInventory.size() != 0) {
-                productsTable.setItems(productInventory);
+            if (!productSupply.isEmpty()) {
+                productsTable.setItems(productSupply);
             }
         }
     }
@@ -162,8 +159,8 @@ public class ImsController implements Initializable {
     ) {
 
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("PartAdd.fxml"));
-            PartAddController controller = new PartAddController(inv);
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("AddPart.fxml"));
+            AddPartController controller = new AddPartController(inv);
 
             loader.setController(controller);
             Parent root = loader.load();
@@ -181,17 +178,16 @@ public class ImsController implements Initializable {
     private void modifyPart(MouseEvent event
     ) {
         try {
-            Parts selected = partsTable.getSelectionModel().getSelectedItem();
-            if (partInventory.isEmpty()) {
+            Part selected = partsTable.getSelectionModel().getSelectedItem();
+            if (partSupply.isEmpty()) {
                 errorWindow(1);
                 return;
             }
-            if (!partInventory.isEmpty() && selected == null) {
+            if (!partSupply.isEmpty() && selected == null) {
                 errorWindow(2);
-                return;
             } else {
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("PartModify.fxml"));
-                PartModifyController controller = new PartModifyController(inv, selected);
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("ModifyPart.fxml"));
+                ModifyPartController controller = new ModifyPartController(inv, selected);
 
                 loader.setController(controller);
                 Parent root = loader.load();
@@ -209,21 +205,20 @@ public class ImsController implements Initializable {
     @FXML
     private void deletePart(MouseEvent event
     ) {
-        Parts removePart = partsTable.getSelectionModel().getSelectedItem();
-        if (partInventory.isEmpty()) {
+        Part removePart = partsTable.getSelectionModel().getSelectedItem();
+        if (partSupply.isEmpty()) {
             errorWindow(1);
             return;
         }
-        if (!partInventory.isEmpty() && removePart == null) {
+        if (!partSupply.isEmpty() && removePart == null) {
             errorWindow(2);
-            return;
         } else {
             boolean confirm = confirmationWindow(removePart.getName());
             if (!confirm) {
                 return;
             }
             inv.deletePart(removePart);
-            partInventory.remove(removePart);
+            partSupply.remove(removePart);
             partsTable.refresh();
 
         }
@@ -233,12 +228,12 @@ public class ImsController implements Initializable {
     private void deleteProduct(MouseEvent event
     ) {
         boolean deleted = false;
-        Products removeProduct = productsTable.getSelectionModel().getSelectedItem();
-        if (productInventory.isEmpty()) {
+        Product removeProduct = productsTable.getSelectionModel().getSelectedItem();
+        if (productSupply.isEmpty()) {
             errorWindow(1);
             return;
         }
-        if (!productInventory.isEmpty() && removeProduct == null) {
+        if (!productSupply.isEmpty() && removeProduct == null) {
             errorWindow(2);
             return;
         }
@@ -261,8 +256,8 @@ public class ImsController implements Initializable {
             }
         }
         inv.removeProduct(removeProduct.getProductID());
-        productInventory.remove(removeProduct);
-        productsTable.setItems(productInventory);
+        productSupply.remove(removeProduct);
+        productsTable.setItems(productSupply);
         productsTable.refresh();
     }
 
@@ -270,18 +265,17 @@ public class ImsController implements Initializable {
     private void modifyProduct(MouseEvent event
     ) {
         try {
-            Products productSelected = productsTable.getSelectionModel().getSelectedItem();
-            if (productInventory.isEmpty()) {
+            Product productSelected = productsTable.getSelectionModel().getSelectedItem();
+            if (productSupply.isEmpty()) {
                 errorWindow(1);
                 return;
             }
-            if (!productInventory.isEmpty() && productSelected == null) {
+            if (!productSupply.isEmpty() && productSelected == null) {
                 errorWindow(2);
-                return;
 
             } else {
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("ProductModify.fxml"));
-                ProductModifyController controller = new ProductModifyController(inv, productSelected);
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("ModifyProduct.fxml"));
+                ModifyProductController controller = new ModifyProductController(inv, productSelected);
 
                 loader.setController(controller);
                 Parent root = loader.load();
@@ -300,8 +294,8 @@ public class ImsController implements Initializable {
     private void addProduct(MouseEvent event
     ) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("ProductAdd.fxml"));
-            ProductAddController controller = new ProductAddController(inv);
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("AddProduct.fxml"));
+            AddProductController controller = new AddProductController(inv);
 
             loader.setController(controller);
             Parent root = loader.load();
@@ -320,7 +314,7 @@ public class ImsController implements Initializable {
         if (code == 1) {
             Alert alert = new Alert(AlertType.ERROR);
             alert.setTitle("Error");
-            alert.setHeaderText("Empty Inventory!");
+            alert.setHeaderText("Empty Supply!");
             alert.setContentText("There's nothing to select!");
             alert.showAndWait();
         }
@@ -341,11 +335,7 @@ public class ImsController implements Initializable {
         alert.setContentText("Click ok to confirm");
 
         Optional<ButtonType> result = alert.showAndWait();
-        if (result.get() == ButtonType.OK) {
-            return true;
-        } else {
-            return false;
-        }
+        return result.get() == ButtonType.OK;
     }
 
     private boolean confirmDelete(String name) {
@@ -355,11 +345,7 @@ public class ImsController implements Initializable {
         alert.setContentText("Click ok to confirm");
 
         Optional<ButtonType> result = alert.showAndWait();
-        if (result.get() == ButtonType.OK) {
-            return true;
-        } else {
-            return false;
-        }
+        return result.get() == ButtonType.OK;
     }
 
     private void infoWindow(int code, String name) {

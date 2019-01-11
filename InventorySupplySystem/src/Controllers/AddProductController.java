@@ -151,7 +151,7 @@ public class AddProductController implements Initializable {
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Confirmed");
             alert.setHeaderText(null);
-            alert.setContentText(name + " has been deleted!");
+            alert.setContentText(name + " Has been deleted from product list!");
 
             alert.showAndWait();
         } else {
@@ -338,7 +338,7 @@ public class AddProductController implements Initializable {
                 {
                     Alert alert = new Alert(Alert.AlertType.ERROR);
                     alert.setTitle("Error adding product");
-                    alert.setHeaderText("Cannot add product");
+                    alert.setHeaderText("Can't add product");
                     alert.setContentText("Field is empty!");
                     alert.showAndWait();
                     break;
@@ -356,7 +356,7 @@ public class AddProductController implements Initializable {
                 {
                     Alert alert = new Alert(Alert.AlertType.ERROR);
                     alert.setTitle("Error adding product");
-                    alert.setHeaderText("Cannot add product");
+                    alert.setHeaderText("Can't add product");
                     alert.setContentText("Invalid format!");
                     alert.showAndWait();
                     break;
@@ -365,7 +365,7 @@ public class AddProductController implements Initializable {
                 {
                     Alert alert = new Alert(Alert.AlertType.ERROR);
                     alert.setTitle("Error adding product");
-                    alert.setHeaderText("Cannot add product");
+                    alert.setHeaderText("Can't add product");
                     alert.setContentText("Name is invalid!");
                     alert.showAndWait();
                     break;
@@ -374,7 +374,7 @@ public class AddProductController implements Initializable {
                 {
                     Alert alert = new Alert(Alert.AlertType.ERROR);
                     alert.setTitle("Error adding product");
-                    alert.setHeaderText("Cannot add product");
+                    alert.setHeaderText("Can't add product");
                     alert.setContentText("Value cannot be negative!");
                     alert.showAndWait();
                     break;
@@ -383,7 +383,7 @@ public class AddProductController implements Initializable {
                 {
                     Alert alert = new Alert(Alert.AlertType.ERROR);
                     alert.setTitle("Error adding product");
-                    alert.setHeaderText("Cannot add product");
+                    alert.setHeaderText("Can't add product");
                     alert.setContentText("Product cost cannot be lower than it's parts!");
                     alert.showAndWait();
                     break;
@@ -392,7 +392,7 @@ public class AddProductController implements Initializable {
                 {
                     Alert alert = new Alert(Alert.AlertType.ERROR);
                     alert.setTitle("Error adding product");
-                    alert.setHeaderText("Cannot add product");
+                    alert.setHeaderText("Can't add product");
                     alert.setContentText("Product must have at least one part!");
                     alert.showAndWait();
                     break;
@@ -401,7 +401,7 @@ public class AddProductController implements Initializable {
                 {
                     Alert alert = new Alert(Alert.AlertType.ERROR);
                     alert.setTitle("Error adding part");
-                    alert.setHeaderText("Cannot add part");
+                    alert.setHeaderText("Can't add part");
                     alert.setContentText("Supply cannot be lower than min!");
                     alert.showAndWait();
                     break;
@@ -410,7 +410,7 @@ public class AddProductController implements Initializable {
                 {
                     Alert alert = new Alert(Alert.AlertType.ERROR);
                     alert.setTitle("Error adding part");
-                    alert.setHeaderText("Cannot add part");
+                    alert.setHeaderText("Can't add part");
                     alert.setContentText("Supply cannot be greater than max!");
                     alert.showAndWait();
                     break;
@@ -428,7 +428,7 @@ public class AddProductController implements Initializable {
                 {
                     Alert alert = new Alert(Alert.AlertType.ERROR);
                     alert.setTitle("Error adding product");
-                    alert.setHeaderText("Cannot add product");
+                    alert.setHeaderText("Can't add product");
                     alert.setContentText("Unknown error!");
                     alert.showAndWait();
                     break;

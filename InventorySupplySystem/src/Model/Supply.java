@@ -63,7 +63,6 @@ public class Supply {
 				break;
 			}
 		}
-		return;
 	}
                       //Parts method
 	public void addPart(Part partToAdd) {
@@ -106,7 +105,6 @@ public class Supply {
 				break;
 			}
 		}
-		return;
 	}
 
 	public int productListSize() {

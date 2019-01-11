@@ -230,7 +230,7 @@ public class ModifyPartController implements Initializable {
                 {
                     Alert alert = new Alert(Alert.AlertType.ERROR);
                     alert.setTitle("Error adding part");
-                    alert.setHeaderText("Cannot add part");
+                    alert.setHeaderText("Reason:");
                     alert.setContentText("Field is empty!");
                     alert.showAndWait();
                     break;
@@ -239,8 +239,8 @@ public class ModifyPartController implements Initializable {
                 {
                     Alert alert = new Alert(Alert.AlertType.ERROR);
                     alert.setTitle("Error adding part");
-                    alert.setHeaderText("Cannot add part");
-                    alert.setContentText("Ooops, you forgot to select In House/OutSourced!");
+                    alert.setHeaderText("Reason:");
+                    alert.setContentText("Need to select In House or OutSourced!");
                     alert.showAndWait();
                     break;
                 }
@@ -248,7 +248,7 @@ public class ModifyPartController implements Initializable {
                 {
                     Alert alert = new Alert(Alert.AlertType.ERROR);
                     alert.setTitle("Error adding part");
-                    alert.setHeaderText("Cannot add part");
+                    alert.setHeaderText("Reason:");
                     alert.setContentText("Invalid format!");
                     alert.showAndWait();
                     break;
@@ -257,7 +257,7 @@ public class ModifyPartController implements Initializable {
                 {
                     Alert alert = new Alert(Alert.AlertType.ERROR);
                     alert.setTitle("Error adding part");
-                    alert.setHeaderText("Cannot add part");
+                    alert.setHeaderText("Reason:");
                     alert.setContentText("Name is invalid!");
                     alert.showAndWait();
                     break;
@@ -266,8 +266,8 @@ public class ModifyPartController implements Initializable {
                 {
                     Alert alert = new Alert(Alert.AlertType.ERROR);
                     alert.setTitle("Error adding part");
-                    alert.setHeaderText("Cannot add part");
-                    alert.setContentText("Value cannot be negative!!");
+                    alert.setHeaderText("Reason:");
+                    alert.setContentText("Value can't be negative!!");
                     alert.showAndWait();
                     break;
                 }
@@ -275,8 +275,8 @@ public class ModifyPartController implements Initializable {
                 {
                     Alert alert = new Alert(Alert.AlertType.ERROR);
                     alert.setTitle("Error adding part");
-                    alert.setHeaderText("Cannot add part");
-                    alert.setContentText("Supply cannot be lower than min!");
+                    alert.setHeaderText("Reason:");
+                    alert.setContentText("Supply can't be lower than min!");
                     alert.showAndWait();
                     break;
                 }
@@ -284,8 +284,8 @@ public class ModifyPartController implements Initializable {
                 {
                     Alert alert = new Alert(Alert.AlertType.ERROR);
                     alert.setTitle("Error adding part");
-                    alert.setHeaderText("Cannot add part");
-                    alert.setContentText("Supply cannot be greater than max!");
+                    alert.setHeaderText("Reason:");
+                    alert.setContentText("Supply can't be greater than max!");
                     alert.showAndWait();
                     break;
                 }
@@ -293,8 +293,8 @@ public class ModifyPartController implements Initializable {
                 {
                     Alert alert = new Alert(Alert.AlertType.ERROR);
                     alert.setTitle("Error adding part");
-                    alert.setHeaderText("Cannot add part");
-                    alert.setContentText("Min cannot be higher than max!");
+                    alert.setHeaderText("Reason:");
+                    alert.setContentText("Min can't be higher than max!");
                     alert.showAndWait();
                     break;
                 }
@@ -302,7 +302,7 @@ public class ModifyPartController implements Initializable {
                 {
                     Alert alert = new Alert(Alert.AlertType.ERROR);
                     alert.setTitle("Error adding part");
-                    alert.setHeaderText("Cannot add part");
+                    alert.setHeaderText("Reason:");
                     alert.setContentText("Unknown error!");
                     alert.showAndWait();
                     break;

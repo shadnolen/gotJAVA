@@ -330,8 +330,8 @@ public class MainScreenController implements Initializable {
 
     private boolean confirmationWindow(String name) {
         Alert alert = new Alert(AlertType.CONFIRMATION);
-        alert.setTitle("Delete part");
-        alert.setHeaderText("Are you sure you want to delete: " + name);
+        alert.setTitle("Delete this part");
+        alert.setHeaderText("Are you sure you want to delete: " + name + "?");
         alert.setContentText("Click ok to confirm");
 
         Optional<ButtonType> result = alert.showAndWait();
@@ -341,7 +341,7 @@ public class MainScreenController implements Initializable {
     private boolean confirmDelete(String name) {
         Alert alert = new Alert(AlertType.CONFIRMATION);
         alert.setTitle("Delete product");
-        alert.setHeaderText("Are you sure you want to delete: " + name + " this product still has parts assigned to it!");
+        alert.setHeaderText("Are you sure you want to delete: " + name + "  this product still has parts assigned to it!");
         alert.setContentText("Click ok to confirm");
 
         Optional<ButtonType> result = alert.showAndWait();

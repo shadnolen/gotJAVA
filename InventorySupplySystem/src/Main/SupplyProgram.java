@@ -32,13 +32,16 @@ public class SupplyProgram extends Application {
 	public void start(Stage stage) throws Exception {
 		Supply inv = new Supply();
                                         
-                                    // Set our path to FXML
+                                    
+                // Set our path to FXML
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/Controllers/MainScreen.fxml"));
-                                    // Set our Controllers 
+                                   
+                // Set our Controllers 
 		Controllers.MainScreenController controller = new Controllers.MainScreenController(inv);
 		loader.setController(controller);
 		Parent root = loader.load();
-                                    //Setting the stage
+                                  
+                //Setting the stage
 		Scene scene = new Scene(root);
 		stage.setScene(scene);
 		stage.setResizable(false);

@@ -14,7 +14,7 @@ import java.util.ArrayList;
 public class Product {
 
                    //Initialize Array
-	private ArrayList<Part> associatedParts = new ArrayList<Part>();
+	private ArrayList<Part> associatedParts = new ArrayList<>();
 	private int productID;
 	private String name;
 	private double price = 0.0;

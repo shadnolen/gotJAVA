@@ -17,12 +17,12 @@ public class Supply {
 
                     //Set arraylist 
 	private ArrayList<Product> products;
-	private ArrayList<Part> allParts;
+	private ArrayList<Part> partsTotal;
 
                    //Methods
 	public Supply() {
 		products = new ArrayList<>();
-		allParts = new ArrayList<>();
+		partsTotal = new ArrayList<>();
 	}
 
                     //Product methods
@@ -67,14 +67,14 @@ public class Supply {
                       //Parts method
 	public void addPart(Part partToAdd) {
 		if (partToAdd != null) {
-			allParts.add(partToAdd);
+			partsTotal.add(partToAdd);
 		}
 	}
 
 	public boolean deletePart(Part partToDelete) {
-		for (int i = 0; i < allParts.size(); i++) {
-			if (allParts.get(i).getPartID() == partToDelete.getPartID()) {
-				allParts.remove(i);
+		for (int i = 0; i < partsTotal.size(); i++) {
+			if (partsTotal.get(i).getPartID() == partToDelete.getPartID()) {
+				partsTotal.remove(i);
 				break;
 			}
 			else {
@@ -86,10 +86,10 @@ public class Supply {
 	}
 
 	public Part lookUpPart(int partToLookUp) {
-		if (!allParts.isEmpty()) {
-			for (int i = 0; i < allParts.size(); i++) {
-				if (allParts.get(i).getPartID() == partToLookUp) {
-					return allParts.get(i);
+		if (!partsTotal.isEmpty()) {
+			for (int i = 0; i < partsTotal.size(); i++) {
+				if (partsTotal.get(i).getPartID() == partToLookUp) {
+					return partsTotal.get(i);
 				}
 			}
 
@@ -99,9 +99,9 @@ public class Supply {
 	}
 
 	public void updatePart(Part partToUpdate) {
-		for (int i = 0; i < allParts.size(); i++) {
-			if (allParts.get(i).getPartID() == partToUpdate.partID) {
-				allParts.set(i, partToUpdate);
+		for (int i = 0; i < partsTotal.size(); i++) {
+			if (partsTotal.get(i).getPartID() == partToUpdate.partID) {
+				partsTotal.set(i, partToUpdate);
 				break;
 			}
 		}
@@ -112,14 +112,14 @@ public class Supply {
 	}
 
 	public int partListSize() {
-		return allParts.size();
+		return partsTotal.size();
 	}
 
 	public ArrayList<Integer> retrievePartsIDList() {
 		ArrayList<Integer> list = new ArrayList<>();
-		if (!allParts.isEmpty()) {
-			for (int i = 0; i < allParts.size(); i++) {
-				list.add(allParts.get(i).getPartID());
+		if (!partsTotal.isEmpty()) {
+			for (int i = 0; i < partsTotal.size(); i++) {
+				list.add(partsTotal.get(i).getPartID());
 			}
 		}
 		return list;

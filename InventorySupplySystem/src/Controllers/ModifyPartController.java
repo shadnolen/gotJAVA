@@ -330,7 +330,7 @@ public class ModifyPartController implements Initializable {
 
     private void mainScreen(Event event) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("MainScreen.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Views/MainScreen.fxml"));
             MainScreenController controller = new MainScreenController(inv);
 
             loader.setController(controller);

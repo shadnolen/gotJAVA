@@ -159,7 +159,7 @@ public class MainScreenController implements Initializable {
     ) {
 
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("AddPart.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Views/AddPart.fxml"));
             AddPartController controller = new AddPartController(inv);
 
             loader.setController(controller);
@@ -186,7 +186,7 @@ public class MainScreenController implements Initializable {
             if (!partSupply.isEmpty() && selected == null) {
                 errorWindow(2);
             } else {
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("ModifyPart.fxml"));
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/Views/ModifyPart.fxml"));
                 ModifyPartController controller = new ModifyPartController(inv, selected);
 
                 loader.setController(controller);
@@ -274,7 +274,7 @@ public class MainScreenController implements Initializable {
                 errorWindow(2);
 
             } else {
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("ModifyProduct.fxml"));
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/Views/ModifyProduct.fxml"));
                 ModifyProductController controller = new ModifyProductController(inv, productSelected);
 
                 loader.setController(controller);
@@ -294,7 +294,7 @@ public class MainScreenController implements Initializable {
     private void addProduct(MouseEvent event
     ) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("AddProduct.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Views/AddProduct.fxml"));
             AddProductController controller = new AddProductController(inv);
 
             loader.setController(controller);

@@ -34,7 +34,7 @@ public class SupplyProgram extends Application {
                                         
                                     
                 // Set our path to FXML
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("/Controllers/MainScreen.fxml"));
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("/Views/MainScreen.fxml"));
                                    
                 // Set our Controllers 
 		Controllers.MainScreenController controller = new Controllers.MainScreenController(inv);

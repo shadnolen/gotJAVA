@@ -213,13 +213,13 @@ public class ModifyProductController implements Initializable {
     }
 
     private void saveProduct() {
-        Product product = new Product(Integer.parseInt(id.getText().trim()), name.getText().trim(), Double.parseDouble(price.getText().trim()),
+        Product products = new Product(Integer.parseInt(id.getText().trim()), name.getText().trim(), Double.parseDouble(price.getText().trim()),
                 Integer.parseInt(count.getText().trim()), Integer.parseInt(min.getText().trim()), Integer.parseInt(max.getText().trim()));
         for (int i = 0; i < assocPartList.size(); i++) {
-            product.addAssociatedPart(assocPartList.get(i));
+            products.addAssociatedPart(assocPartList.get(i));
         }
 
-        inv.updateProduct(product);
+        inv.updateProduct(products);
 
     }
 

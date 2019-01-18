@@ -9,6 +9,8 @@ import Model.InHouse;
 import Model.Supply;
 import Model.OutSourced;
 import Model.Part;
+
+
 import java.io.IOException;
 import java.net.URL;
 import java.util.Optional;
@@ -40,10 +42,7 @@ public class AddPartController implements Initializable {
     Supply inv;
 
     //Field linking FXML
-    @FXML
-    private RadioButton inHouseRadio;
-    @FXML
-    private RadioButton outSourcedRadio;
+  
     @FXML
     private TextField id;
     @FXML
@@ -55,12 +54,16 @@ public class AddPartController implements Initializable {
     @FXML
     private TextField max;
     @FXML
+    private TextField min;
+    @FXML
     private TextField company;
     @FXML
-    private Label companyLabel;
+    private Label companyLabel;    
     @FXML
-    private TextField min;
-
+    private RadioButton inHouseRadio;
+    @FXML
+    private RadioButton outSourcedRadio;
+    
     public AddPartController(Supply inv) {
         this.inv = inv;
     }
@@ -77,15 +80,23 @@ public class AddPartController implements Initializable {
         resetFields();
     }
 
-    private void resetFields() {
-        name.setText("Part Name");
-        count.setText("Inv Count");
-        price.setText("Part Price");
-        min.setText("Min");
-        max.setText("Max");
-        company.setText("Machine ID");
-        companyLabel.setText("Machine ID");
-        inHouseRadio.setSelected(true);
+      private void addInHouse() {
+
+        inv.addPart(new InHouse(Integer.parseInt(id.getText().trim()), name.getText().trim(),
+                Double.parseDouble(price.getText().trim()), Integer.parseInt(count.getText().trim()),
+                Integer.parseInt(min.getText().trim()), Integer.parseInt(max.getText().trim()), (Integer.parseInt(company.getText().trim()))));
+
+    }
+
+    private void addOutSourced() {
+        inv.addPart(new OutSourced(Integer.parseInt(id.getText().trim()), name.getText().trim(),
+                Double.parseDouble(price.getText().trim()), Integer.parseInt(count.getText().trim()),
+                Integer.parseInt(min.getText().trim()), Integer.parseInt(max.getText().trim()), company.getText().trim()));
+
+    } 
+     private boolean generateNum(Integer num) {
+        Part match = inv.lookUpPart(num);
+        return match != null;
     }
 
     private void generatePartID() {
@@ -110,10 +121,7 @@ public class AddPartController implements Initializable {
         }
     }
 
-    private boolean generateNum(Integer num) {
-        Part match = inv.lookUpPart(num);
-        return match != null;
-    }
+ 
 
     @FXML
     private void clearTextField(MouseEvent event) {
@@ -145,6 +153,17 @@ public class AddPartController implements Initializable {
             mainScreen(event);
         } else {
         }
+    }
+    
+      private void resetFields() {
+        name.setText("Part Name");
+        count.setText("Inv Count");
+        price.setText("Part Price");
+        min.setText("Min");
+        max.setText("Max");
+        company.setText("Machine ID");
+        companyLabel.setText("Machine ID");
+        inHouseRadio.setSelected(true);
     }
 
     @FXML
@@ -207,22 +226,7 @@ public class AddPartController implements Initializable {
         mainScreen(event);
     }
 
-    private void addInHouse() {
-
-        inv.addPart(new InHouse(Integer.parseInt(id.getText().trim()), name.getText().trim(),
-                Double.parseDouble(price.getText().trim()), Integer.parseInt(count.getText().trim()),
-                Integer.parseInt(min.getText().trim()), Integer.parseInt(max.getText().trim()), (Integer.parseInt(company.getText().trim()))));
-
-    }
-
-    private void addOutSourced() {
-        inv.addPart(new OutSourced(Integer.parseInt(id.getText().trim()), name.getText().trim(),
-                Double.parseDouble(price.getText().trim()), Integer.parseInt(count.getText().trim()),
-                Integer.parseInt(min.getText().trim()), Integer.parseInt(max.getText().trim()), company.getText().trim()));
-
-    }
-
-    private void errorWindow(int code, TextField field) {
+      private void errorWindow(int code, TextField field) {
         fieldError(field);
 
         switch (code) {
@@ -329,7 +333,7 @@ public class AddPartController implements Initializable {
 
     private void mainScreen(Event event) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("MainScreen.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Views/MainScreen.fxml"));
             MainScreenController controller = new MainScreenController(inv);
 
             loader.setController(controller);

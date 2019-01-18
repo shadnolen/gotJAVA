@@ -182,7 +182,7 @@ public class AddProductController implements Initializable {
         for (int i = 0; i < assocPartList.size(); i++) {
             minCost += assocPartList.get(i).getPrice();
         }
-        if (name.getText().trim().isEmpty() || name.getText().trim().toLowerCase().equals("part name")) {
+        if (name.getText().trim().isEmpty() || name.getText().trim().toLowerCase().equals("Part Name")) {
             errorWindow(4, name);
             return;
         }
@@ -227,7 +227,7 @@ public class AddProductController implements Initializable {
     private void fieldError(TextField field) {
         if (field == null) {
         } else {
-            field.setStyle("-fx-border-color: red");
+            field.setStyle("-fx-background-color: red");
         }
     }
 

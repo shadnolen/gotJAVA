@@ -157,10 +157,10 @@ public class AddPartController implements Initializable {
     
       private void resetFields() {
         name.setText("Part Name");
-        count.setText("supply Count");
+        count.setText("Supply Count");
         price.setText("Part Price");
-        min.setText("Min");
-        max.setText("Max");
+        min.setText("Minimum");
+        max.setText("Maximum");
         company.setText("Machine ID");
         companyLabel.setText("Machine ID");
         inHouseRadio.setSelected(true);
@@ -184,7 +184,7 @@ public class AddPartController implements Initializable {
                     break;
                 }
             }
-            if (name.getText().trim().isEmpty() || name.getText().trim().toLowerCase().equals("part name")) {
+            if (name.getText().trim().isEmpty() || name.getText().trim().toLowerCase().equals("Part Name")) {
                 errorWindow(4, name);
                 return;
             }
@@ -203,7 +203,7 @@ public class AddPartController implements Initializable {
 
             if (end) {
                 return;
-            } else if (company.getText().trim().isEmpty() || company.getText().trim().toLowerCase().equals("company name")) {
+            } else if (company.getText().trim().isEmpty() || company.getText().trim().toLowerCase().equals("Company Name")) {
                 errorWindow(3, company);
                 return;
 
@@ -244,7 +244,7 @@ public class AddPartController implements Initializable {
                     Alert alert = new Alert(AlertType.ERROR);
                     alert.setTitle("Error adding part");
                     alert.setHeaderText("Reason:");
-                    alert.setContentText("Ooops, you forgot to select In House/OutSourced!");
+                    alert.setContentText("Looks like you forgot to select In House/OutSourced!");
                     alert.showAndWait();
                     break;
                 }
@@ -289,7 +289,7 @@ public class AddPartController implements Initializable {
                     Alert alert = new Alert(AlertType.ERROR);
                     alert.setTitle("Error adding part");
                     alert.setHeaderText("Reason:");
-                    alert.setContentText("Supply can't be greater than max!");
+                    alert.setContentText("Supply can't be greater than maximum!");
                     alert.showAndWait();
                     break;
                 }
@@ -298,7 +298,7 @@ public class AddPartController implements Initializable {
                     Alert alert = new Alert(AlertType.ERROR);
                     alert.setTitle("Error adding part");
                     alert.setHeaderText("Reason:");
-                    alert.setContentText("Min can't be greater than max!");
+                    alert.setContentText("Minimum can't be greater than maximum!");
                     alert.showAndWait();
                     break;
                 }
@@ -315,19 +315,19 @@ public class AddPartController implements Initializable {
     }
 
     private void resetFieldsStyle() {
-        name.setStyle("-fx-border-color: lightgray");
-        count.setStyle("-fx-border-color: lightgray");
-        price.setStyle("-fx-border-color: lightgray");
-        min.setStyle("-fx-border-color: lightgray");
-        max.setStyle("-fx-border-color: lightgray");
-        company.setStyle("-fx-border-color: lightgray");
+        name.setStyle("-fx-border-color: purple");
+        count.setStyle("-fx-border-color: purple");
+        price.setStyle("-fx-border-color: purple");
+        min.setStyle("-fx-border-color: purple");
+        max.setStyle("-fx-border-color: purple");
+        company.setStyle("-fx-border-color: purple");
 
     }
 
     private void fieldError(TextField field) {
         if (field == null) {
         } else {
-            field.setStyle("-fx-border-color: red");
+            field.setStyle("-fx-background-color: red");
         }
     }
 

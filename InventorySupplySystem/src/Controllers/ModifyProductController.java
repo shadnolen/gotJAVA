@@ -272,7 +272,7 @@ public class ModifyProductController implements Initializable {
                     Alert alert = new Alert(Alert.AlertType.ERROR);
                     alert.setTitle("Error adding part");
                     alert.setHeaderText("Reason:");
-                    alert.setContentText("Part is already is associated with this product!");
+                    alert.setContentText("This part is already is associated with this product!");
                     alert.showAndWait();
                     break;
                 }
@@ -281,7 +281,7 @@ public class ModifyProductController implements Initializable {
                     Alert alert = new Alert(Alert.AlertType.ERROR);
                     alert.setTitle("Error adding product");
                     alert.setHeaderText("Reason:");
-                    alert.setContentText("supplyalid format!");
+                    alert.setContentText("Invalid format!");
                     alert.showAndWait();
                     break;
                 }
@@ -290,7 +290,7 @@ public class ModifyProductController implements Initializable {
                     Alert alert = new Alert(Alert.AlertType.ERROR);
                     alert.setTitle("Error adding product");
                     alert.setHeaderText("Reason:");
-                    alert.setContentText("Name is supplyalid!");
+                    alert.setContentText("Name is Invaild!");
                     alert.showAndWait();
                     break;
                 }
@@ -326,7 +326,7 @@ public class ModifyProductController implements Initializable {
                     Alert alert = new Alert(AlertType.ERROR);
                     alert.setTitle("Error adding part");
                     alert.setHeaderText("Reason:");
-                    alert.setContentText("Supply cannot be lower than min!");
+                    alert.setContentText("Supply cannot be lower than minimum!");
                     alert.showAndWait();
                     break;
                 }
@@ -335,7 +335,7 @@ public class ModifyProductController implements Initializable {
                     Alert alert = new Alert(AlertType.ERROR);
                     alert.setTitle("Error adding part");
                     alert.setHeaderText("Reason:");
-                    alert.setContentText("Supply cannot be greater than max!");
+                    alert.setContentText("Supply cannot be greater than maximum!");
                     alert.showAndWait();
                     break;
                 }
@@ -344,7 +344,7 @@ public class ModifyProductController implements Initializable {
                     Alert alert = new Alert(AlertType.ERROR);
                     alert.setTitle("Error adding part");
                     alert.setHeaderText("Reason:");
-                    alert.setContentText("Min cannot be greater than max!");
+                    alert.setContentText("Minimum can't be greater than maximum!");
                     alert.showAndWait();
                     break;
                 }
@@ -363,16 +363,16 @@ public class ModifyProductController implements Initializable {
     private void fieldError(TextField field) {
         if (field == null) {
         } else {
-            field.setStyle("-fx-border-color: red");
+            field.setStyle("-fx-bacground-color: red");
         }
     }
 
     private void resetFieldsStyle() {
-        name.setStyle("-fx-border-color: lightgray");
-        count.setStyle("-fx-border-color: lightgray");
-        price.setStyle("-fx-border-color: lightgray");
-        min.setStyle("-fx-border-color: lightgray");
-        max.setStyle("-fx-border-color: lightgray");
+        name.setStyle("-fx-border-color: purple");
+        count.setStyle("-fx-border-color: purple");
+        price.setStyle("-fx-border-color: purple");
+        min.setStyle("-fx-border-color: purple");
+        max.setStyle("-fx-border-color: purple");
 
     }
 

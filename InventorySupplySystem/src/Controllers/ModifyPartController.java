@@ -59,8 +59,7 @@ public class ModifyPartController implements Initializable {
     private TextField max;
     @FXML
     private TextField company;
-    @FXML
-    private Button modifyPartSaveButton;
+
 
     public ModifyPartController(Supply supply, Part part) {
         this.supply = supply;
@@ -311,12 +310,12 @@ public class ModifyPartController implements Initializable {
     }
 
     private void resetFieldsStyle() {
-        name.setStyle("-fx-border-color: lightgray");
-        count.setStyle("-fx-border-color: lightgray");
-        price.setStyle("-fx-border-color: lightgray");
-        min.setStyle("-fx-border-color: lightgray");
-        max.setStyle("-fx-border-color: lightgray");
-        company.setStyle("-fx-border-color: lightgray");
+        name.setStyle("-fx-border-color: purple");
+        count.setStyle("-fx-border-color: purple");
+        price.setStyle("-fx-border-color: purple");
+        min.setStyle("-fx-border-color: purple");
+        max.setStyle("-fx-border-color: purple");
+        company.setStyle("-fx-border-color: purple");
 
     }
 
@@ -324,7 +323,7 @@ public class ModifyPartController implements Initializable {
         if (field == null) {
             // do nothing
         } else {
-            field.setStyle("-fx-border-color: red");
+            field.setStyle("-fx-background-color: red");
         }
     }
 

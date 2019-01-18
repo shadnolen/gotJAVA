@@ -38,7 +38,7 @@ import javafx.stage.Stage;
  */
 public class MainScreenController implements Initializable {
 
-    Supply inv;
+    Supply supply;
 
     @FXML
     private TextField partSearchBox;
@@ -56,10 +56,10 @@ public class MainScreenController implements Initializable {
     ArrayList<Integer> partIDList;
     ArrayList<Integer> productIDList;
 
-    public MainScreenController(Supply inv) {
-        this.inv = inv;
-        partIDList = inv.retrievePartsIDList();
-        productIDList = inv.retrieveProductIDList();
+    public MainScreenController(Supply supply) {
+        this.supply = supply;
+        partIDList = supply.retrievePartsIDList();
+        productIDList = supply.retrieveProductIDList();
     }
 
     /**
@@ -76,7 +76,7 @@ public class MainScreenController implements Initializable {
     private void generatePartsTable() {
         if (!partIDList.isEmpty()) {
             for (int i = 0; i < partIDList.size(); i++) {
-                partSupply.add(inv.lookUpPart(partIDList.get(i)));
+                partSupply.add(supply.lookUpPart(partIDList.get(i)));
             }
         }
 
@@ -87,7 +87,7 @@ public class MainScreenController implements Initializable {
     private void generateProductsTable() {
         if (!productIDList.isEmpty()) {
             for (int i = 0; i < productIDList.size(); i++) {
-                productSupply.add(inv.lookUpProduct(productIDList.get(i)));
+                productSupply.add(supply.lookUpProduct(productIDList.get(i)));
             }
         }
         System.out.println(productIDList.size());
@@ -112,8 +112,8 @@ public class MainScreenController implements Initializable {
         if (!partSearchBox.getText().trim().isEmpty()) {
             partsSupplySearch.clear();
             for (int i = 0; i < partIDList.size(); i++) {
-                if (inv.lookUpPart(partIDList.get(i)).getName().contains(partSearchBox.getText().trim())) {
-                    partsSupplySearch.add(inv.lookUpPart(partIDList.get(i)));
+                if (supply.lookUpPart(partIDList.get(i)).getName().contains(partSearchBox.getText().trim())) {
+                    partsSupplySearch.add(supply.lookUpPart(partIDList.get(i)));
                 }
             }
             partsTable.setItems(partsSupplySearch);
@@ -127,8 +127,8 @@ public class MainScreenController implements Initializable {
         if (!productSearchBox.getText().trim().isEmpty()) {
             productSupplySearch.clear();
             for (int i = 0; i < productIDList.size(); i++) {
-                if (inv.lookUpProduct(productIDList.get(i)).getName().contains(productSearchBox.getText().trim())) {
-                    productSupplySearch.add(inv.lookUpProduct(productIDList.get(i)));
+                if (supply.lookUpProduct(productIDList.get(i)).getName().contains(productSearchBox.getText().trim())) {
+                    productSupplySearch.add(supply.lookUpProduct(productIDList.get(i)));
                 }
             }
             productsTable.setItems(productSupplySearch);
@@ -160,7 +160,7 @@ public class MainScreenController implements Initializable {
 
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/Views/AddPart.fxml"));
-            AddPartController controller = new AddPartController(inv);
+            AddPartController controller = new AddPartController(supply);
 
             loader.setController(controller);
             Parent root = loader.load();
@@ -187,7 +187,7 @@ public class MainScreenController implements Initializable {
                 errorWindow(2);
             } else {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/Views/ModifyPart.fxml"));
-                ModifyPartController controller = new ModifyPartController(inv, selected);
+                ModifyPartController controller = new ModifyPartController(supply, selected);
 
                 loader.setController(controller);
                 Parent root = loader.load();
@@ -217,7 +217,7 @@ public class MainScreenController implements Initializable {
             if (!confirm) {
                 return;
             }
-            inv.deletePart(removePart);
+            supply.deletePart(removePart);
             partSupply.remove(removePart);
             partsTable.refresh();
 
@@ -255,7 +255,7 @@ public class MainScreenController implements Initializable {
 
             }
         }
-        inv.removeProduct(removeProduct.getProductID());
+        supply.removeProduct(removeProduct.getProductID());
         productSupply.remove(removeProduct);
         productsTable.setItems(productSupply);
         productsTable.refresh();
@@ -275,7 +275,7 @@ public class MainScreenController implements Initializable {
 
             } else {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/Views/ModifyProduct.fxml"));
-                ModifyProductController controller = new ModifyProductController(inv, productSelected);
+                ModifyProductController controller = new ModifyProductController(supply, productSelected);
 
                 loader.setController(controller);
                 Parent root = loader.load();
@@ -295,7 +295,7 @@ public class MainScreenController implements Initializable {
     ) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/Views/AddProduct.fxml"));
-            AddProductController controller = new AddProductController(inv);
+            AddProductController controller = new AddProductController(supply);
 
             loader.setController(controller);
             Parent root = loader.load();
@@ -321,7 +321,7 @@ public class MainScreenController implements Initializable {
         if (code == 2) {
             Alert alert = new Alert(AlertType.ERROR);
             alert.setTitle("Error");
-            alert.setHeaderText("Invalid Selection");
+            alert.setHeaderText("supplyalid Selection");
             alert.setContentText("You must select an item!");
             alert.showAndWait();
         }

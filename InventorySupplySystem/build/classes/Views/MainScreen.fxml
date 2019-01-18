@@ -55,7 +55,7 @@
                         <PropertyValueFactory property="Name" />
                      </cellValueFactory>
                   </TableColumn>
-                  <TableColumn fx:id="partCountColumn" prefWidth="106.0" text="Inv Count">
+                  <TableColumn fx:id="partCountColumn" prefWidth="106.0" text="supply Count">
                      <cellValueFactory>
                         <PropertyValueFactory property="InStock" />
                      </cellValueFactory>
@@ -91,7 +91,7 @@
                             <cellValueFactory><PropertyValueFactory property="Name" />
                             </cellValueFactory>
                         </TableColumn>
-                        <TableColumn fx:id="productCountColumn" prefWidth="106.0" text="Inv Count">
+                        <TableColumn fx:id="productCountColumn" prefWidth="106.0" text="supply Count">
                             <cellValueFactory><PropertyValueFactory property="InStock" />
                             </cellValueFactory>
                         </TableColumn>

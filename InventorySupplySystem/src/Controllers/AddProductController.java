@@ -37,7 +37,7 @@ import javafx.stage.Stage;
  */
 public class AddProductController implements Initializable {
 
-    Supply inv;
+    Supply supply;
 
     @FXML
     private TextField id;
@@ -63,9 +63,9 @@ public class AddProductController implements Initializable {
     private ObservableList<Part> assocPartList = FXCollections.observableArrayList();
     ArrayList<Integer> partIDList;
 
-    public AddProductController(Supply inv) {
-        this.inv = inv;
-        partIDList = inv.retrievePartsIDList();
+    public AddProductController(Supply supply) {
+        this.supply = supply;
+        partIDList = supply.retrievePartsIDList();
     }
 
     /**
@@ -91,9 +91,9 @@ public class AddProductController implements Initializable {
         if (search.getText().trim().length() == 0 | search.getText() == null) {
         } else {
             partsSupplySearch.clear();
-            for (int i = 0; i < inv.partListSize(); i++) {
-                if (inv.lookUpPart(partIDList.get(i)).getName().contains(search.getText().trim())) {
-                    partsSupplySearch.add(inv.lookUpPart(partIDList.get(i)));
+            for (int i = 0; i < supply.partListSize(); i++) {
+                if (supply.lookUpPart(partIDList.get(i)).getName().contains(search.getText().trim())) {
+                    partsSupplySearch.add(supply.lookUpPart(partIDList.get(i)));
                 }
             }
             partSearchTable.setItems(partsSupplySearch);
@@ -238,16 +238,16 @@ public class AddProductController implements Initializable {
             product.addAssociatedPart(assocPartList.get(i));
         }
 
-        inv.addProduct(product);
+        supply.addProduct(product);
 
     }
 
     private void resetFieldsStyle() {
-        name.setStyle("-fx-border-color: lightgray");
-        count.setStyle("-fx-border-color: lightgray");
-        price.setStyle("-fx-border-color: lightgray");
-        min.setStyle("-fx-border-color: lightgray");
-        max.setStyle("-fx-border-color: lightgray");
+        name.setStyle("-fx-border-color: purple");
+        count.setStyle("-fx-border-color: purple");
+        price.setStyle("-fx-border-color: purple");
+        min.setStyle("-fx-border-color: purple");
+        max.setStyle("-fx-border-color: purple");
 
     }
 
@@ -263,7 +263,7 @@ public class AddProductController implements Initializable {
             return;
         } else {
             for (int i = 0; i < partIDList.size(); i++) {
-                partsSupply.add(inv.lookUpPart(partIDList.get(i)));
+                partsSupply.add(supply.lookUpPart(partIDList.get(i)));
             }
         }
 
@@ -282,7 +282,7 @@ public class AddProductController implements Initializable {
     private void mainScreen(Event event) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/Views/MainScreen.fxml"));
-            MainScreenController controller = new MainScreenController(inv);
+            MainScreenController controller = new MainScreenController(supply);
 
             loader.setController(controller);
             Parent root = loader.load();
@@ -338,7 +338,7 @@ public class AddProductController implements Initializable {
                 {
                     Alert alert = new Alert(Alert.AlertType.ERROR);
                     alert.setTitle("Error adding product");
-                    alert.setHeaderText("Can't add product");
+                    alert.setHeaderText("Reason: ");
                     alert.setContentText("Field is empty!");
                     alert.showAndWait();
                     break;
@@ -347,7 +347,7 @@ public class AddProductController implements Initializable {
                 {
                     Alert alert = new Alert(Alert.AlertType.ERROR);
                     alert.setTitle("Error adding part");
-                    alert.setHeaderText("Cannot add part");
+                    alert.setHeaderText("Reason: ");
                     alert.setContentText("Part is already is associated with this product!");
                     alert.showAndWait();
                     break;
@@ -356,8 +356,8 @@ public class AddProductController implements Initializable {
                 {
                     Alert alert = new Alert(Alert.AlertType.ERROR);
                     alert.setTitle("Error adding product");
-                    alert.setHeaderText("Can't add product");
-                    alert.setContentText("Invalid format!");
+                    alert.setHeaderText("Reason: ");
+                    alert.setContentText("invalid format!");
                     alert.showAndWait();
                     break;
                 }
@@ -365,7 +365,7 @@ public class AddProductController implements Initializable {
                 {
                     Alert alert = new Alert(Alert.AlertType.ERROR);
                     alert.setTitle("Error adding product");
-                    alert.setHeaderText("Can't add product");
+                    alert.setHeaderText("Reason: ");
                     alert.setContentText("Name is invalid!");
                     alert.showAndWait();
                     break;
@@ -374,7 +374,7 @@ public class AddProductController implements Initializable {
                 {
                     Alert alert = new Alert(Alert.AlertType.ERROR);
                     alert.setTitle("Error adding product");
-                    alert.setHeaderText("Can't add product");
+                    alert.setHeaderText("Reason: ");
                     alert.setContentText("Value cannot be negative!");
                     alert.showAndWait();
                     break;
@@ -383,7 +383,7 @@ public class AddProductController implements Initializable {
                 {
                     Alert alert = new Alert(Alert.AlertType.ERROR);
                     alert.setTitle("Error adding product");
-                    alert.setHeaderText("Can't add product");
+                    alert.setHeaderText("Reason: ");
                     alert.setContentText("Product cost cannot be lower than it's parts!");
                     alert.showAndWait();
                     break;
@@ -392,7 +392,7 @@ public class AddProductController implements Initializable {
                 {
                     Alert alert = new Alert(Alert.AlertType.ERROR);
                     alert.setTitle("Error adding product");
-                    alert.setHeaderText("Can't add product");
+                    alert.setHeaderText("Reason: ");
                     alert.setContentText("Product must have at least one part!");
                     alert.showAndWait();
                     break;
@@ -401,8 +401,8 @@ public class AddProductController implements Initializable {
                 {
                     Alert alert = new Alert(Alert.AlertType.ERROR);
                     alert.setTitle("Error adding part");
-                    alert.setHeaderText("Can't add part");
-                    alert.setContentText("Supply cannot be lower than min!");
+                    alert.setHeaderText("Reason: ");
+                    alert.setContentText("Supply cannot be lower than minimum!");
                     alert.showAndWait();
                     break;
                 }
@@ -410,8 +410,8 @@ public class AddProductController implements Initializable {
                 {
                     Alert alert = new Alert(Alert.AlertType.ERROR);
                     alert.setTitle("Error adding part");
-                    alert.setHeaderText("Can't add part");
-                    alert.setContentText("Supply cannot be greater than max!");
+                    alert.setHeaderText("Reason: ");
+                    alert.setContentText("Supply cannot be greater than maximum!");
                     alert.showAndWait();
                     break;
                 }
@@ -419,8 +419,8 @@ public class AddProductController implements Initializable {
                 {
                     Alert alert = new Alert(Alert.AlertType.ERROR);
                     alert.setTitle("Error adding part");
-                    alert.setHeaderText("Cannot add part");
-                    alert.setContentText("Min cannot be greater than max!");
+                    alert.setHeaderText("Reason: ");
+                    alert.setContentText("Min cannot be greater than maximum!");
                     alert.showAndWait();
                     break;
                 }
@@ -428,7 +428,7 @@ public class AddProductController implements Initializable {
                 {
                     Alert alert = new Alert(Alert.AlertType.ERROR);
                     alert.setTitle("Error adding product");
-                    alert.setHeaderText("Can't add product");
+                    alert.setHeaderText("Reason: ");
                     alert.setContentText("Unknown error!");
                     alert.showAndWait();
                     break;

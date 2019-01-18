@@ -22,7 +22,7 @@ import javafx.stage.Stage;
 public class SupplyProgram extends Application {
 
 	/**
-	 * @param args the command line arguments
+	 * @param args
 	 */
 	public static void main(String[] args) {
 		launch(args);
@@ -30,14 +30,14 @@ public class SupplyProgram extends Application {
 
 	@Override
 	public void start(Stage stage) throws Exception {
-		Supply inv = new Supply();
+		Supply supply = new Supply();
                                         
                                     
                 // Set our path to FXML
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/Views/MainScreen.fxml"));
                                    
                 // Set our Controllers 
-		Controllers.MainScreenController controller = new Controllers.MainScreenController(inv);
+		Controllers.MainScreenController controller = new Controllers.MainScreenController(supply);
 		loader.setController(controller);
 		Parent root = loader.load();
                                   

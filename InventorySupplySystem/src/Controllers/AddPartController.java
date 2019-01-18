@@ -39,7 +39,7 @@ import javafx.stage.Stage;
  */
 public class AddPartController implements Initializable {
 
-    Supply inv;
+    Supply supply;
 
     //Field linking FXML
   
@@ -64,8 +64,8 @@ public class AddPartController implements Initializable {
     @FXML
     private RadioButton outSourcedRadio;
     
-    public AddPartController(Supply inv) {
-        this.inv = inv;
+    public AddPartController(Supply supply) {
+        this.supply = supply;
     }
 
     /**
@@ -82,20 +82,20 @@ public class AddPartController implements Initializable {
 
       private void addInHouse() {
 
-        inv.addPart(new InHouse(Integer.parseInt(id.getText().trim()), name.getText().trim(),
+        supply.addPart(new InHouse(Integer.parseInt(id.getText().trim()), name.getText().trim(),
                 Double.parseDouble(price.getText().trim()), Integer.parseInt(count.getText().trim()),
                 Integer.parseInt(min.getText().trim()), Integer.parseInt(max.getText().trim()), (Integer.parseInt(company.getText().trim()))));
 
     }
 
     private void addOutSourced() {
-        inv.addPart(new OutSourced(Integer.parseInt(id.getText().trim()), name.getText().trim(),
+        supply.addPart(new OutSourced(Integer.parseInt(id.getText().trim()), name.getText().trim(),
                 Double.parseDouble(price.getText().trim()), Integer.parseInt(count.getText().trim()),
                 Integer.parseInt(min.getText().trim()), Integer.parseInt(max.getText().trim()), company.getText().trim()));
 
     } 
      private boolean generateNum(Integer num) {
-        Part match = inv.lookUpPart(num);
+        Part match = supply.lookUpPart(num);
         return match != null;
     }
 
@@ -104,11 +104,11 @@ public class AddPartController implements Initializable {
         Random randomNum = new Random();
         Integer num = randomNum.nextInt(1000);
 
-        if (inv.partListSize() == 0) {
+        if (supply.partListSize() == 0) {
             id.setText(num.toString());
 
         }
-        if (inv.partListSize() == 1000) {
+        if (supply.partListSize() == 1000) {
             errorWindow(3, null);
         } else {
             match = generateNum(num);
@@ -157,7 +157,7 @@ public class AddPartController implements Initializable {
     
       private void resetFields() {
         name.setText("Part Name");
-        count.setText("Inv Count");
+        count.setText("supply Count");
         price.setText("Part Price");
         min.setText("Min");
         max.setText("Max");
@@ -253,7 +253,7 @@ public class AddPartController implements Initializable {
                     Alert alert = new Alert(AlertType.ERROR);
                     alert.setTitle("Error adding part");
                     alert.setHeaderText("Reason:");
-                    alert.setContentText("Invalid format!");
+                    alert.setContentText("supplyalid format!");
                     alert.showAndWait();
                     break;
                 }
@@ -262,7 +262,7 @@ public class AddPartController implements Initializable {
                     Alert alert = new Alert(AlertType.ERROR);
                     alert.setTitle("Error adding part");
                     alert.setHeaderText("Reason:");
-                    alert.setContentText("Name is invalid!");
+                    alert.setContentText("Name is supplyalid!");
                     alert.showAndWait();
                     break;
                 }
@@ -334,7 +334,7 @@ public class AddPartController implements Initializable {
     private void mainScreen(Event event) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/Views/MainScreen.fxml"));
-            MainScreenController controller = new MainScreenController(inv);
+            MainScreenController controller = new MainScreenController(supply);
 
             loader.setController(controller);
             Parent root = loader.load();

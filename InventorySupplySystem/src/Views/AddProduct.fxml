@@ -28,7 +28,7 @@
                         <Font size="15.0" />
                     </font>
                 </Label>
-                <Label layoutX="126.0" layoutY="231.0" text="Inv">
+                <Label layoutX="126.0" layoutY="231.0" text="supply">
                     <font>
                         <Font size="15.0" />
                     </font>
@@ -72,7 +72,7 @@
                                 <PropertyValueFactory property="Name" />
                             </cellValueFactory>
                         </TableColumn>
-                        <TableColumn fx:id="partCountColumn" prefWidth="98.0" text="Inv Count">
+                        <TableColumn fx:id="partCountColumn" prefWidth="98.0" text="supply Count">
                             <cellValueFactory>
                                 <PropertyValueFactory property="InStock" />
                             </cellValueFactory>
@@ -107,7 +107,7 @@
                                 <PropertyValueFactory property="Name" />
                             </cellValueFactory>
                         </TableColumn>
-                        <TableColumn fx:id="assocPartCountColumn" prefWidth="98.0" text="Inv Count">
+                        <TableColumn fx:id="assocPartCountColumn" prefWidth="98.0" text="supply Count">
                             <cellValueFactory>
                                 <PropertyValueFactory property="InStock" />
                             </cellValueFactory>

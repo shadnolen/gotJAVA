@@ -36,7 +36,7 @@ import javafx.stage.Stage;
  */
 public class ModifyPartController implements Initializable {
 
-    Supply inv;
+    Supply supply;
     Part part;
 
     @FXML
@@ -62,8 +62,8 @@ public class ModifyPartController implements Initializable {
     @FXML
     private Button modifyPartSaveButton;
 
-    public ModifyPartController(Supply inv, Part part) {
-        this.inv = inv;
+    public ModifyPartController(Supply supply, Part part) {
+        this.supply = supply;
         this.part = part;
     }
 
@@ -211,13 +211,13 @@ public class ModifyPartController implements Initializable {
     }
 
     private void updateItemInHouse() {
-        inv.updatePart(new InHouse(Integer.parseInt(id.getText().trim()), name.getText().trim(),
+        supply.updatePart(new InHouse(Integer.parseInt(id.getText().trim()), name.getText().trim(),
                 Double.parseDouble(price.getText().trim()), Integer.parseInt(count.getText().trim()),
                 Integer.parseInt(min.getText().trim()), Integer.parseInt(max.getText().trim()), Integer.parseInt(company.getText().trim())));
     }
 
     private void updateItemOutSourced() {
-        inv.updatePart(new OutSourced(Integer.parseInt(id.getText().trim()), name.getText().trim(),
+        supply.updatePart(new OutSourced(Integer.parseInt(id.getText().trim()), name.getText().trim(),
                 Double.parseDouble(price.getText().trim()), Integer.parseInt(count.getText().trim()),
                 Integer.parseInt(min.getText().trim()), Integer.parseInt(max.getText().trim()), company.getText().trim()));
     }
@@ -249,7 +249,7 @@ public class ModifyPartController implements Initializable {
                     Alert alert = new Alert(Alert.AlertType.ERROR);
                     alert.setTitle("Error adding part");
                     alert.setHeaderText("Reason:");
-                    alert.setContentText("Invalid format!");
+                    alert.setContentText("supplyalid format!");
                     alert.showAndWait();
                     break;
                 }
@@ -258,7 +258,7 @@ public class ModifyPartController implements Initializable {
                     Alert alert = new Alert(Alert.AlertType.ERROR);
                     alert.setTitle("Error adding part");
                     alert.setHeaderText("Reason:");
-                    alert.setContentText("Name is invalid!");
+                    alert.setContentText("Name is supplyalid!");
                     alert.showAndWait();
                     break;
                 }
@@ -331,7 +331,7 @@ public class ModifyPartController implements Initializable {
     private void mainScreen(Event event) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/Views/MainScreen.fxml"));
-            MainScreenController controller = new MainScreenController(inv);
+            MainScreenController controller = new MainScreenController(supply);
 
             loader.setController(controller);
             Parent root = loader.load();

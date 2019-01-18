@@ -3763,7 +3763,7 @@
         </condition>
     </target>
     <target name="-clean-if-config-changed" depends="-check-clean-if-config-changed" if="request.clean.due.to.config.change">
-        <echo message="Config change detected. Invoking clean." level="verbose"/>
+        <echo message="Config change detected. supplyoking clean." level="verbose"/>
         <antcall target="clean"/>
     </target>
     

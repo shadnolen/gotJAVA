@@ -37,7 +37,7 @@ import javafx.stage.Stage;
  */
 public class ModifyProductController implements Initializable {
 
-    Supply inv;
+    Supply supply;
     Product product;
 
     @FXML
@@ -65,10 +65,10 @@ public class ModifyProductController implements Initializable {
     private ObservableList<Part> assocPartList = FXCollections.observableArrayList();
     ArrayList<Integer> partIDList;
 
-    public ModifyProductController(Supply inv, Product product) {
-        this.inv = inv;
+    public ModifyProductController(Supply supply, Product product) {
+        this.supply = supply;
         this.product = product;
-        this.partIDList = inv.retrievePartsIDList();
+        this.partIDList = supply.retrievePartsIDList();
 
     }
 
@@ -98,9 +98,9 @@ public class ModifyProductController implements Initializable {
         if (search.getText().trim().length() == 0 | search.getText() == null) {
         } else {
             partsSupplySearch.clear();
-            for (int i = 0; i < inv.partListSize(); i++) {
-                if (inv.lookUpPart(partIDList.get(i)).getName().contains(search.getText().trim())) {
-                    partsSupplySearch.add(inv.lookUpPart(partIDList.get(i)));
+            for (int i = 0; i < supply.partListSize(); i++) {
+                if (supply.lookUpPart(partIDList.get(i)).getName().contains(search.getText().trim())) {
+                    partsSupplySearch.add(supply.lookUpPart(partIDList.get(i)));
                 }
             }
             partSearchTable.setItems(partsSupplySearch);
@@ -219,7 +219,7 @@ public class ModifyProductController implements Initializable {
             products.addAssociatedPart(assocPartList.get(i));
         }
 
-        inv.updateProduct(products);
+        supply.updateProduct(products);
 
     }
 
@@ -243,11 +243,11 @@ public class ModifyProductController implements Initializable {
     }
 
     private void populateSearchTable() {
-        if (inv.partListSize() == 0) {
+        if (supply.partListSize() == 0) {
             return;
         } else {
             for (int i = 0; i < partIDList.size(); i++) {
-                partsSupply.add(inv.lookUpPart(partIDList.get(i)));
+                partsSupply.add(supply.lookUpPart(partIDList.get(i)));
             }
         }
 
@@ -281,7 +281,7 @@ public class ModifyProductController implements Initializable {
                     Alert alert = new Alert(Alert.AlertType.ERROR);
                     alert.setTitle("Error adding product");
                     alert.setHeaderText("Reason:");
-                    alert.setContentText("Invalid format!");
+                    alert.setContentText("supplyalid format!");
                     alert.showAndWait();
                     break;
                 }
@@ -290,7 +290,7 @@ public class ModifyProductController implements Initializable {
                     Alert alert = new Alert(Alert.AlertType.ERROR);
                     alert.setTitle("Error adding product");
                     alert.setHeaderText("Reason:");
-                    alert.setContentText("Name is invalid!");
+                    alert.setContentText("Name is supplyalid!");
                     alert.showAndWait();
                     break;
                 }
@@ -405,7 +405,7 @@ public class ModifyProductController implements Initializable {
     private void mainScreen(Event event) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("MainScreen.fxml"));
-            MainScreenController controller = new MainScreenController(inv);
+            MainScreenController controller = new MainScreenController(supply);
 
             loader.setController(controller);
             Parent root = loader.load();

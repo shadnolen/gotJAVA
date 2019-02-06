@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.gluonhq.charm.glisten.control.TextField?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+
+<AnchorPane id="AnchorPane" prefHeight="332.0" prefWidth="534.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/10.0.1" fx:controller="controllers.MainScreenController">
+    <children>
+      <BorderPane layoutX="14.0" layoutY="13.0" prefHeight="305.0" prefWidth="510.0">
+         <top>
+            <TextField id="List" fx:id="list" BorderPane.alignment="CENTER" />
+         </top>
+         <bottom>
+              <Label fx:id="label" minHeight="16" minWidth="69" BorderPane.alignment="CENTER" />
+         </bottom>
+      </BorderPane>
+        <Button fx:id="button" layoutX="33.0" layoutY="292.0" onAction="#handleButtonAction" text="Click Me!" />
+    </children>
+</AnchorPane>

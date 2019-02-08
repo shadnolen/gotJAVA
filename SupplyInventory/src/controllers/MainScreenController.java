@@ -117,13 +117,20 @@ public class MainScreenController implements Initializable {
     }
 
     @FXML
-    private void addPart(MouseEvent event) {
+    private void addPart(MouseEvent event) throws IOException {
+        Parent addPart = FXMLLoader.load(getClass().getResource("/views/AddPart.fxml"));
+        Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
+        window.setScene(new Scene(addPart));
+        window.show();
     }
 
     @FXML
-    private void modifyPart(MouseEvent event) {
+    private void modifyPart(MouseEvent event) throws IOException {
+        Parent addPart = FXMLLoader.load(getClass().getResource("/views/ModifyPart.fxml"));
+        Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
+        window.setScene(new Scene(addPart));
+        window.show();
     }
-
     @FXML
     private void deletePart(MouseEvent event) {
     }
@@ -142,7 +149,6 @@ public class MainScreenController implements Initializable {
         Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
         window.setScene(new Scene(addPart));
         window.show();
-
     }
 
     @FXML
@@ -151,7 +157,6 @@ public class MainScreenController implements Initializable {
         Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
         window.setScene(new Scene(addPart));
         window.show();
-
     }
 
     @FXML

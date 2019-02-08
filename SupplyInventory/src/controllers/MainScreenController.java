@@ -157,6 +157,7 @@ public class MainScreenController implements Initializable {
     }
     @FXML
     private void deletePart(MouseEvent event) {
+        Parts selectedPart = partsTable.getSelectionModel().getSelectedItem();
     }
 
     @FXML

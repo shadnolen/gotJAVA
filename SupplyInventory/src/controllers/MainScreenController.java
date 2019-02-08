@@ -114,40 +114,23 @@ public class MainScreenController implements Initializable {
         
     }
 
-    @FXML
-    private void exitProgramButton(MouseEvent event) {
-         
-        Alert alert = new Alert(Alert.AlertType.ERROR);
-        alert.initModality(Modality.NONE);
-        alert.setTitle("Confirm Exit");
-        alert.setHeaderText(" Would you like to exit the program?");
-        alert.setContentText("Please confirm.");
-        
-        Optional<ButtonType> exit = alert.showAndWait();
-        
-        if (exit.get() == ButtonType.OK) {
-            Platform.exit();
-            System.exit(0);
-        }
-        else {
-            System.out.println("Cancelling exit action.");
-        }
-    
-    }
+
 
     @FXML
     private void clearText(MouseEvent event) {
     }
 
-    @FXML
+    @FXML    
+    // Linking to Addpart screen
     private void addPart(MouseEvent event) throws IOException {
         Parent addPart = FXMLLoader.load(getClass().getResource("/views/AddPart.fxml"));
         Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
         window.setScene(new Scene(addPart));
         window.show();
     }
-
+    
     @FXML
+      // Linking to Modifypart 
     private void modifyPart(MouseEvent event) throws IOException {
         Parent addPart = FXMLLoader.load(getClass().getResource("/views/ModifyPart.fxml"));
         Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
@@ -156,6 +139,7 @@ public class MainScreenController implements Initializable {
     }
     
         @FXML
+        // Linking To ModifiyProduct
     private void modifyProduct(MouseEvent event) throws IOException {
         Parent addPart = FXMLLoader.load(getClass().getResource("/views/ModifyProduct.fxml"));
         Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
@@ -164,6 +148,7 @@ public class MainScreenController implements Initializable {
     }
 
     @FXML
+    //Linking to Addproduct
     private void addProduct(MouseEvent event) throws IOException {
         Parent addPart = FXMLLoader.load(getClass().getResource("/views/AddProduct.fxml"));
         Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
@@ -186,6 +171,29 @@ public class MainScreenController implements Initializable {
 
     @FXML
     private void searchForProduct(MouseEvent event) {
+    }
+    
+        @FXML
+        
+        // Exit this piece of codework
+    private void exitProgramButton(MouseEvent event) {
+         
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.initModality(Modality.NONE);
+        alert.setTitle("Confirm Exit");
+        alert.setHeaderText(" Would you like to exit the program?");
+        alert.setContentText("Please confirm.");
+        
+        Optional<ButtonType> exit = alert.showAndWait();
+        
+        if (exit.get() == ButtonType.OK) {
+            Platform.exit();
+            System.exit(0);
+        }
+        else {
+            System.out.println("Cancelling exit action.");
+        }
+    
     }
     
 }

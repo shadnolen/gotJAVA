@@ -9,6 +9,6 @@ package models;
  *
  * @author shadn
  */
-class Products {
+public abstract class Products {
     
 }

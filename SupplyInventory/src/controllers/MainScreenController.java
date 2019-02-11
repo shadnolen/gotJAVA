@@ -111,11 +111,12 @@ public class MainScreenController implements Initializable {
     
         
               // Initialize the Animal table with the two columns.
-        partID.setCellValueFactory(cellData -> cellData.getValue().nameProperty());
+     /***   partsTable.setCellValueFactory(cellData -> cellData.getValue().nameProperty());
         partName.setCellValueFactory(cellData -> cellData.getValue().typeProperty());
          // Initialize the Group table with the two columns.
         partSupply.setCellValueFactory(cellData -> cellData.getValue().nameProperty());
         partPrice.setCellValueFactory(cellData -> cellData.getValue().sizeProperty().asObject());
+        * **/
     }    
 
     @FXML
@@ -164,8 +165,14 @@ public class MainScreenController implements Initializable {
         window.setScene(new Scene(addPart));
         window.show();
     }
+    
+      
     @FXML
-    private void deletePart(MouseEvent event) {   Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+    private void deletePart(MouseEvent event) {    /****
+    
+    Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+      
+  
         alert.initModality(Modality.NONE);
         alert.setTitle("Delete Product");
         alert.setHeaderText("Please confirm.");
@@ -181,8 +188,12 @@ public class MainScreenController implements Initializable {
       }
     public void updateProductsTable() {
         productsTable.setItems(Products.getAllProducts());
+        
+      ***/  
     }
 
+    
+    /****
     @FXML
     private void searchForPart(MouseEvent event) {
         
@@ -192,7 +203,7 @@ public class MainScreenController implements Initializable {
         sortedData.comparatorProperty().bind(Parts.partName());
         Parts.setItems(sortedData);
     }
-
+****/
     @FXML
     private void deleteProduct(MouseEvent event) {
     }

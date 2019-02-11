@@ -14,6 +14,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -118,6 +119,8 @@ public class AddProductController implements Initializable {
       //   associatedCount.setCellValueFactory(cellData -> cellData.getValue().associatedCount());
        //  associatedPrice.setCellValueFactory(cellData -> cellData.getValue().associatedPrice());
        
+       
+       /***
         Animal selectedAnimal = AnimalTable.getSelectionModel().getSelectedItem();
          if (selectedAnimal != null) {
              
@@ -131,6 +134,7 @@ public class AddProductController implements Initializable {
             alert.setContentText("Please select an animal from the top table.");
             alert.showAndWait();
         }
+        ***/
     }
     
 }

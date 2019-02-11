@@ -5,10 +5,22 @@
  */
 package models;
 
+import javafx.collections.ObservableList;
+
 /**
  *
  * @author shadn
  */
 public class SupplyItems {
+
+    public static Object getProductList() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public void removeProduct(Products selectedItem) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+ 
     
 }

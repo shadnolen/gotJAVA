@@ -95,6 +95,7 @@ public class AddProductController implements Initializable {
 
     @FXML
     private void addPart(MouseEvent event) {
+        
     }
 
     @FXML
@@ -111,6 +112,25 @@ public class AddProductController implements Initializable {
 
     @FXML
     private void saveAddProduct(MouseEvent event) {
+        
+      //    associatedID.setCellValueFactory(cellData -> cellData.getValue().associatedID());
+       //  associatedName.setCellValueFactory(cellData -> cellData.getValue().associatedName());         
+      //   associatedCount.setCellValueFactory(cellData -> cellData.getValue().associatedCount());
+       //  associatedPrice.setCellValueFactory(cellData -> cellData.getValue().associatedPrice());
+       
+        Animal selectedAnimal = AnimalTable.getSelectionModel().getSelectedItem();
+         if (selectedAnimal != null) {
+             
+            draftGroup.getmembers().add(selectedAnimal);
+            AddedAnimalTable.setItems(draftGroup.getmembers()); 
+         }
+        else {//part not selected
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("No Selection");
+            alert.setHeaderText("No Animal is selected");
+            alert.setContentText("Please select an animal from the top table.");
+            alert.showAndWait();
+        }
     }
     
 }

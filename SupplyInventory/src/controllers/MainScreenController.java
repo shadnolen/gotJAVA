@@ -16,6 +16,8 @@ import java.util.ResourceBundle;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -43,11 +45,11 @@ import javafx.stage.Stage;
  * @author shadn
  */
 public class MainScreenController implements Initializable {
-    
-       private ObservableList<Parts> partSupplyArray = FXCollections.observableArrayList();
-    private ObservableList<Products> productSupplyArray = FXCollections.observableArrayList();
-    private ObservableList<Parts> partsSupplySearch = FXCollections.observableArrayList();
-    private ObservableList<Products> productSupplySearch = FXCollections.observableArrayList();
+   //  private static SupplyItems inventory = new SupplyItems();
+  // private ObservableList<Parts> partsTable = FXCollections.observableArrayList();
+ // private ObservableList<Products> productsTable = FXCollections.observableArrayList();
+  // private ObservableList<Parts> partsSupplySearch = FXCollections.observableArrayList();
+  // private ObservableList<Products> productSupplySearch = FXCollections.observableArrayList();
     ArrayList<Integer> partIDList;
     ArrayList<Integer> productIDList;
 
@@ -69,8 +71,8 @@ public class MainScreenController implements Initializable {
     private Button modifyPartButton;
     @FXML
     private Button deletePartButton;
-    @FXML
-    private TableView<Parts> partsTable;
+   @FXML
+   private TableView<Parts> partsTable;
     @FXML
     private TableColumn<Parts, Integer> partID;
     @FXML
@@ -88,7 +90,7 @@ public class MainScreenController implements Initializable {
     @FXML
     private Button addProductButton;
     @FXML
-    private TableView<?> productsTable;
+    private TableView<Products> productsTable;
     @FXML
     private TableColumn<Products, Integer> productID;
     @FXML
@@ -106,7 +108,14 @@ public class MainScreenController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+    
+        
+              // Initialize the Animal table with the two columns.
+        partID.setCellValueFactory(cellData -> cellData.getValue().nameProperty());
+        partName.setCellValueFactory(cellData -> cellData.getValue().typeProperty());
+         // Initialize the Group table with the two columns.
+        partSupply.setCellValueFactory(cellData -> cellData.getValue().nameProperty());
+        partPrice.setCellValueFactory(cellData -> cellData.getValue().sizeProperty().asObject());
     }    
 
     @FXML
@@ -156,12 +165,32 @@ public class MainScreenController implements Initializable {
         window.show();
     }
     @FXML
-    private void deletePart(MouseEvent event) {
-        Parts selectedPart = partsTable.getSelectionModel().getSelectedItem();
+    private void deletePart(MouseEvent event) {   Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.initModality(Modality.NONE);
+        alert.setTitle("Delete Product");
+        alert.setHeaderText("Please confirm.");
+        alert.setContentText("Are you sure you want to delete this product?");
+        Optional<ButtonType> option = alert.showAndWait();
+        if (option.get() == ButtonType.OK) {
+            Parts.removeProduct(partsTable.Parts().getSelectedItem());
+            updateProductsTable();
+        }
+        else {
+            System.out.println("Cancelling deleteProduct action.");
+        }
+      }
+    public void updateProductsTable() {
+        productsTable.setItems(Products.getAllProducts());
     }
 
     @FXML
     private void searchForPart(MouseEvent event) {
+        
+           String searchText = searchParts.getText();
+        FilteredList<Parts> searchAnimalResults = searchParts(searchText);
+        SortedList<Parts> sortedData = new SortedList<>(searchAnimalResults);
+        sortedData.comparatorProperty().bind(Parts.partName());
+        Parts.setItems(sortedData);
     }
 
     @FXML
@@ -195,6 +224,18 @@ public class MainScreenController implements Initializable {
             System.out.println("Cancelling exit action.");
         }
     
+    }
+
+    private void removePart(Parts selectedPart) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    private void updatePartTableView() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    private FilteredList<Parts> searchParts(String searchText) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
 }

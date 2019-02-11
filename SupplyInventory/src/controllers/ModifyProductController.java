@@ -29,18 +29,6 @@ import javafx.stage.Stage;
 public class ModifyProductController implements Initializable {
 
     @FXML
-    private TextField search;
-    @FXML
-    private TableView<?> partSearchTable;
-    @FXML
-    private Button modifyProductAddButton;
-    @FXML
-    private Button modifyProductDeleteButton;
-    @FXML
-    private TableView<?> assocPartsTable;
-    @FXML
-    private Button modifyProductSaveButton;
-    @FXML
     private TextField modifyProID;
     @FXML
     private TextField modifyProName;
@@ -53,6 +41,12 @@ public class ModifyProductController implements Initializable {
     @FXML
     private TextField modifyProMin;
     @FXML
+    private Button modifySearchButton;
+    @FXML
+    private TextField search;
+    @FXML
+    private TableView<?> partSearchTable;
+    @FXML
     private TableColumn<?, ?> partIDCol;
     @FXML
     private TableColumn<?, ?> partNameCol;
@@ -61,7 +55,13 @@ public class ModifyProductController implements Initializable {
     @FXML
     private TableColumn<?, ?> partPriceCol;
     @FXML
+    private Button modifyProductAddButton;
+    @FXML
+    private Button modifyProductDeleteButton;
+    @FXML
     private Button modifyProCancel;
+    @FXML
+    private TableView<?> assocPartsTable;
     @FXML
     private TableColumn<?, ?> associatedPriceID;
     @FXML
@@ -71,7 +71,7 @@ public class ModifyProductController implements Initializable {
     @FXML
     private TableColumn<?, ?> associatedPrice;
     @FXML
-    private Button modifySearchButton;
+    private Button modifyProductSaveButton;
 
     /**
      * Initializes the controller class.
@@ -98,7 +98,7 @@ public class ModifyProductController implements Initializable {
     }
 
     @FXML
-    private void cancelModify(MouseEvent event) throws IOException {
+     private void cancelModify(MouseEvent event) throws IOException {
         Parent addPart = FXMLLoader.load(getClass().getResource("/views/MainScreen.fxml"));
         Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
         window.setScene(new Scene(addPart));

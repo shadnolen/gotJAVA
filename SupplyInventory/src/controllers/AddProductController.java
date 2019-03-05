@@ -21,6 +21,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
+import supplyinventory.SupplyInventory;
 
 /**
  * FXML Controller class
@@ -73,13 +74,13 @@ public class AddProductController implements Initializable {
     private TableColumn<?, ?> prodcutSupplyCol;
     @FXML
     private TableColumn<?, ?> partPriceCol;
-
+    private static SupplyInventory supply = new SupplyInventory();
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+      addProductID.setText(Integer.toString(supply.getAllProducts().size()));
     }    
 
     @FXML

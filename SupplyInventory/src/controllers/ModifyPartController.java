@@ -20,6 +20,7 @@ import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 /**
@@ -36,25 +37,25 @@ public class ModifyPartController implements Initializable {
     @FXML
     private RadioButton outSourcedRadio;
     @FXML
-    private TextField id;
-    @FXML
-    private TextField name;
-    @FXML
-    private TextField count;
-    @FXML
-    private TextField price;
-    @FXML
-    private TextField max;
-    @FXML
     private TextField company;
-    @FXML
-    private TextField min;
     @FXML
     private Label companyLabel;
     @FXML
-    private Button cancelButton;
+    private AnchorPane modifyCount;
     @FXML
-    private Button modifyPartSaveButton;
+    private TextField modifyID;
+    @FXML
+    private TextField modifyName;
+    @FXML
+    private TextField modifyPrice;
+    @FXML
+    private TextField modifyMax;
+    @FXML
+    private TextField modifyMin;
+    @FXML
+    private Button modifyCancelButton;
+    @FXML
+    private Button modifySaveButton;
 
     /**
      * Initializes the controller class.

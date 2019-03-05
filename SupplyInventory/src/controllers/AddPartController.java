@@ -8,19 +8,19 @@ package controllers;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
-import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
+import supplyinventory.SupplyInventory;
 
 /**
  * FXML Controller class
@@ -28,71 +28,79 @@ import javafx.stage.Stage;
  * @author shadn
  */
 public class AddPartController implements Initializable {
+    
+    public boolean inhouseCheck;
+    public boolean outhouseCheck;
+    private static SupplyInventory supply = MainScreenController.accessInventory();
+    private int newPartID;
 
     @FXML
-    private RadioButton inHouseRadio;
+    private RadioButton partInhouse;
     @FXML
-    private ToggleGroup addPartToggleGroup;
+    private ToggleGroup partType;
     @FXML
-    private RadioButton outSourcedRadio;
+    private RadioButton partOutsourced;
     @FXML
-    private TextField addID;
+    private TextField partID;
     @FXML
-    private TextField addName;
+    private TextField partName;
     @FXML
-    private TextField addCount;
+    private TextField partsInStock;
     @FXML
-    private TextField addPrice;
+    private TextField partPrice;
     @FXML
-    private TextField addMax;
+    private TextField partMinStock;
     @FXML
-    private TextField company;
+    private TextField partMaxStock;
     @FXML
-    private TextField addMin;
+    private Label partCompanyNameLabel;
     @FXML
-    private Label companyLabel;
+    private TextField partCompanyName;
     @FXML
-    private Button addCancel;
+    private Label partMachineIDLabel;
     @FXML
-    private Button addSave;
+    private TextField partMachineID;
 
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+     // newPartID = SupplyInventory.getAllParts().size();
+    // partID.setText("Auto-Generated: " + newPartID);
     }    
 
     @FXML
-    private void selectInHouse(MouseEvent event) {
+    private void radioButtonSelected(ActionEvent event) {  
+        
+        if (partInhouse.isSelected()) {
+            outhouseCheck = false;
+            inhouseCheck = true;
+            partCompanyNameLabel.setVisible(false);
+            partCompanyName.setVisible(false);
+            partMachineIDLabel.setVisible(true);
+            partMachineID.setVisible(true);
+        }
+        else if (partOutsourced.isSelected()) {
+            outhouseCheck = true;
+            inhouseCheck = false;
+            partMachineIDLabel.setVisible(false);
+            partMachineID.setVisible(false);
+            partCompanyNameLabel.setVisible(true);
+            partCompanyName.setVisible(true);
+        }
     }
 
     @FXML
-    private void selectOutSourced(MouseEvent event) {
+    private void saveButtonPressed(ActionEvent event) {
     }
 
     @FXML
-    private void idDisabled(MouseEvent event) {
-    }
-
-    @FXML
-    private void clearTextField(MouseEvent event) {
-    }
-
-    @FXML
-    //Exit back to the main screen 
-    private void cancelAddPart(MouseEvent event) throws IOException {
-        Parent addPart = FXMLLoader.load(getClass().getResource("/views/MainScreen.fxml"));
+      private void cancelButtonPressed(ActionEvent event) throws IOException {
+              Parent addPart = FXMLLoader.load(getClass().getResource("/views/MainScreen.fxml"));
         Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
         window.setScene(new Scene(addPart));
-        window.show();
-    }
-
-    @FXML
-    private void saveAddPart(MouseEvent event) {
-        
-        
-    }
+        window.show();  
     
-}
+}}
+

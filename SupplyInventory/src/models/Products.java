@@ -19,35 +19,65 @@ import javafx.collections.ObservableList;
  * @author shadn
  */
 public abstract class Products {
-
-  
-   
  
-
-    private static class productsTable {
-    private final ObservableList<productsTable> productParts = FXCollections.observableArrayList();
-    private final IntegerProperty productID;
-    private final StringProperty productName;
-    private final DoubleProperty productPrice;
-    private final IntegerProperty productInStock;
-    private final IntegerProperty productMin;
-    private final IntegerProperty productMax;
-
-        public productsTable() {
-        this.productID = new SimpleIntegerProperty(0);
-        this.productName = new SimpleStringProperty("");
-        this.productPrice = new SimpleDoubleProperty(0);
-        this.productInStock = new SimpleIntegerProperty(0);
-        this.productMin = new SimpleIntegerProperty(0);
-        this.productMax = new SimpleIntegerProperty(0);
-        }
-        
-          public static void getAllProducts() {
+    
+  private int prodID;
+    private String prodName;
+    private int prodInStock;
+    private double prodPrice;
+    private int prodMaxStock;
+    private int prodMinStock;
    
+    
+
+    
+    public int getProductID(){
+        return prodID;
     }
+
+    public void setProductID(int prodID){
+        this.prodID = prodID;
     }
     
+    public String getProductName(){
+        return prodName;
+    }
     
+    public void setProductName(String prodName){
+        this.prodName = prodName;
+    }
+    
+    public int getProductInStock(){
+        return prodInStock;
+    }
+    
+    public void setProductInStock(int prodInStock){
+        this.prodInStock = prodInStock;
+    }
+    
+    public double getProductPrice(){
+        return prodPrice;
+    }
+    
+    public void  setProductPrice(double prodPrice){
+        this.prodPrice = prodPrice;
+    }
+    
+    public int getProductMaxStock(){
+        return prodMaxStock;
+    }
+    
+    public void setProductMaxStock(int prodMaxStock){
+        this.prodMaxStock = prodMaxStock;
+    }
+    
+    public int getProductMinStock(){
+        return prodMinStock;
+    }
+    
+    public void setProductMinStock(int prodMinStock){
+        this.prodMinStock = prodMinStock;
+    }
     
     
 }

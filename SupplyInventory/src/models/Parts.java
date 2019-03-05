@@ -16,28 +16,69 @@ import javafx.beans.property.StringProperty;
  */
 public abstract class Parts {
     
-     protected StringProperty name;
-    protected  IntegerProperty age;
-    protected StringProperty type;
     
-    public  Parts(){
-     name =  new SimpleStringProperty("animal");
-       age = new SimpleIntegerProperty(10);
-       type = new SimpleStringProperty("type");
-}
+    
+    private int partID;
+    private String partName;
+    private int partInStock;
+    private double partPrice;
+    private int partMaxStock;
+    private int partMinStock;
+   
+    
 
-    public static void removeProduct(Parts selectedItem) {
+    
+    public int getPartID(){
+        return partID;
     }
 
-    public String getName() {
-      return name.get();
+    public void setPartID(int partID){
+        this.partID = partID;
     }
     
-     public StringProperty nameProperty() {
-        return name;
-    } 
-    public StringProperty typeProperty() {
-        return type;
-    } 
-
+    public String getPartName(){
+        return partName;
+    }
+    
+    public void setPartName(String partName){
+        this.partName = partName;
+    }
+    
+    public int getPartInStock(){
+        return partInStock;
+    }
+    
+    public void setPartInStock(int partInStock){
+        this.partInStock = partInStock;
+    }
+    
+    public double getPartPrice(){
+        return partPrice;
+    }
+    
+    public void  setPartPrice(double partPrice){
+        this.partPrice = partPrice;
+    }
+    
+    public int getPartMaxStock(){
+        return partMaxStock;
+    }
+    
+    public void setPartMaxStock(int partMaxStock){
+        this.partMaxStock = partMaxStock;
+    }
+    
+    public int getPartMinStock(){
+        return partMinStock;
+    }
+    
+    public void setPartMinStock(int partMinStock){
+        this.partMinStock = partMinStock;
+    }
+    
+    
+    
+    
+    
+    
 }

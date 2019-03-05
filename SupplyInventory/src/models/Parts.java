@@ -18,12 +18,12 @@ public abstract class Parts {
     
     
     
-    private int partID;
-    private String partName;
-    private int partInStock;
-    private double partPrice;
-    private int partMaxStock;
-    private int partMinStock;
+    public  int partID;
+    public String partName;
+    public int partInStock;
+    public double partPrice;
+    public int partMaxStock;
+    public int partMinStock;
    
     
 

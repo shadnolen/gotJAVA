@@ -6,6 +6,7 @@
 package controllers;
 
 import models.InHouse;
+import models.Outsourced;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -93,7 +94,7 @@ public class AddPartController implements Initializable {
     }
 
     @FXML
-    private void saveButtonPressed(ActionEvent event) {
+    private void saveButtonPressed(ActionEvent event) throws IOException{
         if (inhouseCheck){
             InHouse addNewPart = new InHouse();
             addNewPart.setMachineID(Integer.parseInt(partMachineID.getText()));
@@ -104,8 +105,20 @@ public class AddPartController implements Initializable {
             addNewPart.setPartMinStock(Integer.parseInt(partMinStock.getText()));
             addNewPart.setPartMaxStock(Integer.parseInt(partMaxStock.getText()));
             
+            supply.addPart(addNewPart);  
+        }
+        
+         if (outhouseCheck){
+            Outsourced addNewPart = new Outsourced();
+            addNewPart.setCompanyName(partCompanyName.getText());
+            addNewPart.setPartName(partName.getText());
+            addNewPart.setPartPrice(Double.parseDouble(partPrice.getText()));
+            addNewPart.setPartInStock(Integer.parseInt(partsInStock.getText()));
+            addNewPart.setPartID(newPartID);
+            addNewPart.setPartMinStock(Integer.parseInt(partMinStock.getText()));
+            addNewPart.setPartMaxStock(Integer.parseInt(partMaxStock.getText()));
             
-            
+            supply.addPart(addNewPart);  
         }
         
     }

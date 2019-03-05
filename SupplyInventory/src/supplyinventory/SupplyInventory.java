@@ -45,6 +45,10 @@ public class SupplyInventory extends Application {
         return allParts;        
      }
      
+     public void addPart(Parts parts){
+         allParts.add(parts);
+     }
+     
     /**
      *
      * @param products

@@ -49,6 +49,19 @@ public class SupplyInventory extends Application {
          allParts.add(parts);
      }
      
+     public static Products productLookUp(int productID){
+         for(int i = 0; i < allProducts.size() - 1; i++){
+             if(allProducts.get(i).getProductID() == productID){
+                 return allProducts.get(i);
+             }
+         }
+        return null;
+     }
+     
+     public void productUpdate(int productID, Products products){
+         Products proUpdate = productLookUp(productID);
+         proUpdate.setAssociatedParts(products.getAssociatedParts());
+     }
     /**
      *
      * @param products

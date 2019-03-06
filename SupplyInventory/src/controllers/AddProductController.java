@@ -106,9 +106,9 @@ public class AddProductController implements Initializable {
 
     @FXML
     private void cancelAddProduct(MouseEvent event) throws IOException {
-        Parent addPart = FXMLLoader.load(getClass().getResource("/views/MainScreen.fxml"));
+        Parent mainScreen = FXMLLoader.load(getClass().getResource("/views/MainScreen.fxml"));
         Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
-        window.setScene(new Scene(addPart));
+        window.setScene(new Scene(mainScreen));
         window.show();
     }
 

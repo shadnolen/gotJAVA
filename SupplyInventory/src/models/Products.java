@@ -20,15 +20,26 @@ import javafx.collections.ObservableList;
  */
 public abstract class Products {
  
+   private ObservableList<Parts> associatedParts;
     
-  private int prodID;
+    private int prodID;
     private String prodName;
     private int prodInStock;
     private double prodPrice;
     private int prodMaxStock;
     private int prodMinStock;
    
+    public Products(){
+    }
     
+    public Products(int prodID, ObservableList<Parts> associatedParts, String prodName, double prodPrice,int prodInStock, int prodMinStock, int prodMaxStock){
+        this.prodID = prodID;
+        this.associatedParts = associatedParts;
+        this.prodName = prodName;
+        this.prodInStock = prodInStock;
+        this.prodMaxStock = prodMaxStock;
+        this.prodMinStock = prodMinStock;
+    }
 
     
     public int getProductID(){
@@ -77,6 +88,14 @@ public abstract class Products {
     
     public void setProductMinStock(int prodMinStock){
         this.prodMinStock = prodMinStock;
+    }
+    
+    public ObservableList<Parts> getAssociatedParts(){
+        return associatedParts;
+    }
+    
+    public void setAssociatedParts(ObservableList<Parts> associatedParts){
+        this.associatedParts = associatedParts;
     }
     
     

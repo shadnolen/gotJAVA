@@ -31,10 +31,15 @@ import supplyinventory.SupplyInventory;
  */
 public class AddPartController implements Initializable {
     
+    
     public boolean inhouseCheck;
     public boolean outhouseCheck;
-    private static SupplyInventory supply = MainScreenController.accessInventory();
     private int newPartID;
+    private static SupplyInventory supply = MainScreenController.accessInventory();
+    
+   
+    
+    
 
     @FXML
     private RadioButton partInhouse;
@@ -65,6 +70,8 @@ public class AddPartController implements Initializable {
 
     /**
      * Initializes the controller class.
+     * @param url
+     * @param rb
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -94,12 +101,10 @@ public class AddPartController implements Initializable {
         }
     }
 
-    @FXML
-    private void saveButtonPressed(ActionEvent event) throws IOException{
+    private void saveButton(ActionEvent event) throws IOException{
         if (inhouseCheck){
             InHouse addNewPart = new InHouse();
-            // newPartID = SupplyInventory.getAllParts().size();
-            // partID.setText("InHouse-Generated: " + newPartID);
+          
             addNewPart.setMachineID(Integer.parseInt(partMachineID.getText()));
             addNewPart.setPartName(partName.getText());
             addNewPart.setPartPrice(Double.parseDouble(partPrice.getText()));
@@ -113,8 +118,7 @@ public class AddPartController implements Initializable {
         
          if (outhouseCheck){
             Outsourced addNewPart = new Outsourced();
-             //newPartID = SupplyInventory.getAllParts().size();
-             //partID.setText("OutSourced-Generated: " + newPartID);
+           
             addNewPart.setCompanyName(partCompanyName.getText());
             addNewPart.setPartName(partName.getText());
             addNewPart.setPartPrice(Double.parseDouble(partPrice.getText()));
@@ -142,11 +146,13 @@ public class AddPartController implements Initializable {
 
     
     @FXML
-      private void cancelButtonPressed(ActionEvent event) throws IOException {
+      private void cancelButton(ActionEvent event) throws IOException {
         Parent mainScreen = FXMLLoader.load(getClass().getResource("/views/MainScreen.fxml"));
         Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
         window.setScene(new Scene(mainScreen));
         window.show();      
     }
+
+    
 }
 

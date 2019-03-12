@@ -39,7 +39,7 @@
       <TextField fx:id="partMachineID" layoutX="129.0" layoutY="418.0" visible="false" />
       <ButtonBar layoutX="235.0" layoutY="453.0" prefHeight="40.0" prefWidth="167.0">
         <buttons>
-          <Button mnemonicParsing="false" onAction="#saveButtonPressed" text="Save" />
+          <Button mnemonicParsing="false" onAction="#saveButton" text="Save" />
             <Button mnemonicParsing="false" onAction="#cancelButtonPressed" text="Cancel" />
         </buttons>
       </ButtonBar>

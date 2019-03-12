@@ -59,25 +59,25 @@
                         <Font size="14.0" />
                     </font>
                 </Button>
-                <TextField fx:id="search" layoutX="738.0" layoutY="22.0" onMouseClicked="#clearField" />
+                <TextField fx:id="searchField" layoutX="738.0" layoutY="22.0" onMouseClicked="#clearField" />
                 <TableView fx:id="partSearchTable" layoutX="480.0" layoutY="66.0" prefHeight="150.0" prefWidth="426.0">
                     <columns>
-                        <TableColumn fx:id="productIDCol" minWidth="-Infinity" prefWidth="104.0" text="Part ID">
+                        <TableColumn fx:id="addPartIDCol" minWidth="-Infinity" prefWidth="104.0" text="Part ID">
                             <cellValueFactory>
                                 <PropertyValueFactory property="PartID" />
                             </cellValueFactory>
                         </TableColumn>
-                        <TableColumn fx:id="productNameCol" prefWidth="112.0" text="Part Name">
+                        <TableColumn fx:id="addProductNameCol" prefWidth="112.0" text="Part Name">
                             <cellValueFactory>
                                 <PropertyValueFactory property="Name" />
                             </cellValueFactory>
                         </TableColumn>
-                        <TableColumn fx:id="prodcutSupplyCol" prefWidth="98.0" text="supply Count">
+                        <TableColumn fx:id="addProductSupplyCol" prefWidth="98.0" text="supply Count">
                             <cellValueFactory>
                                 <PropertyValueFactory property="InStock" />
                             </cellValueFactory>
                         </TableColumn>
-                        <TableColumn fx:id="partPriceCol" prefWidth="112.0" text="Part Price">
+                        <TableColumn fx:id="addPartPriceCol" prefWidth="112.0" text="Part Price">
                             <cellValueFactory>
                                 <PropertyValueFactory property="Price" />
                             </cellValueFactory>
@@ -97,22 +97,22 @@
                 <Button fx:id="addProductCancelButton" layoutX="14.0" layoutY="411.0" mnemonicParsing="false" onMouseClicked="#cancelAddProduct" prefHeight="35.0" prefWidth="80.0" text="Cancel" />
                 <TableView fx:id="assocPartsTable" layoutX="480.0" layoutY="256.0" prefHeight="150.0" prefWidth="426.0">
                     <columns>
-                        <TableColumn fx:id="associatedID" minWidth="-Infinity" prefWidth="104.0" text="Part ID">
+                        <TableColumn fx:id="associatedIDCol" minWidth="-Infinity" prefWidth="104.0" text="Part ID">
                             <cellValueFactory>
                                 <PropertyValueFactory property="PartID" />
                             </cellValueFactory>
                         </TableColumn>
-                        <TableColumn fx:id="associatedName" prefWidth="112.0" text="Part Name">
+                        <TableColumn fx:id="associatedNameCol" prefWidth="112.0" text="Part Name">
                             <cellValueFactory>
                                 <PropertyValueFactory property="Name" />
                             </cellValueFactory>
                         </TableColumn>
-                        <TableColumn fx:id="associatedCount" prefWidth="98.0" text="supply Count">
+                        <TableColumn fx:id="associatedCountCol" prefWidth="98.0" text="supply Count">
                             <cellValueFactory>
                                 <PropertyValueFactory property="InStock" />
                             </cellValueFactory>
                         </TableColumn>
-                        <TableColumn fx:id="associatedPrice" prefWidth="112.0" text="Part Price">
+                        <TableColumn fx:id="associatedPriceCol" prefWidth="112.0" text="Part Price">
                             <cellValueFactory>
                                 <PropertyValueFactory property="Price" />
                             </cellValueFactory>

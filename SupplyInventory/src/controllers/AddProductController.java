@@ -8,6 +8,8 @@ package controllers;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -21,6 +23,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
+import models.Parts;
 import supplyinventory.SupplyInventory;
 
 /**
@@ -29,6 +32,8 @@ import supplyinventory.SupplyInventory;
  * @author shadn
  */
 public class AddProductController implements Initializable {
+    
+   
 
     @FXML
     private TextField addProductID;
@@ -43,8 +48,6 @@ public class AddProductController implements Initializable {
     @FXML
     private TextField productMin;
     @FXML
-    private TextField search;
-    @FXML
     private TableView<?> partSearchTable;
     @FXML
     private Button addButton;
@@ -53,28 +56,33 @@ public class AddProductController implements Initializable {
     @FXML
     private Button addProductCancelButton;
     @FXML
-    private TableView<?> assocPartsTable;
-    @FXML
-    private TableColumn<?, ?> associatedID;
-    @FXML
-    private TableColumn<?, ?> associatedName;
-    @FXML
-    private TableColumn<?, ?> associatedCount;
-    @FXML
-    private TableColumn<?, ?> associatedPrice;
+    private TableView<Parts> assocPartsTable;
     @FXML
     private Button productSaveButton;
     @FXML
     private Button productSearchButton;
-    @FXML
-    private TableColumn<?, ?> productIDCol;
-    @FXML
-    private TableColumn<?, ?> productNameCol;
-    @FXML
-    private TableColumn<?, ?> prodcutSupplyCol;
-    @FXML
-    private TableColumn<?, ?> partPriceCol;
+    
+    
     private static SupplyInventory supply = new SupplyInventory();
+    private ObservableList<Parts> productPart = FXCollections.observableArrayList();
+    @FXML
+    private TableColumn<?, ?> addPartIDCol;
+    @FXML
+    private TableColumn<?, ?> addProductNameCol;
+    @FXML
+    private TableColumn<?, ?> addProductSupplyCol;
+    @FXML
+    private TableColumn<?, ?> addPartPriceCol;
+    @FXML
+    private TableColumn<?, ?> associatedIDCol;
+    @FXML
+    private TableColumn<?, ?> associatedNameCol;
+    @FXML
+    private TableColumn<?, ?> associatedCountCol;
+    @FXML
+    private TableColumn<?, ?> associatedPriceCol;
+    @FXML
+    private TextField searchField;
     /**
      * Initializes the controller class.
      */

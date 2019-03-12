@@ -18,7 +18,7 @@ import javafx.collections.ObservableList;
  *
  * @author shadn
  */
-public abstract class Products {
+public  class Products {
  
    private ObservableList<Parts> associatedParts;
     

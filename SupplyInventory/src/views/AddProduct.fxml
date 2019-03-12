@@ -84,7 +84,7 @@
                         </TableColumn>
                     </columns>
                 </TableView>
-                <Button fx:id="addButton" layoutX="858.0" layoutY="222.0" mnemonicParsing="false" onMouseClicked="#addPart" text="Add">
+                <Button layoutX="858.0" layoutY="222.0" mnemonicParsing="false" onAction="#addButtonPro" onMouseClicked="#addPart" text="Add">
                     <font>
                         <Font size="14.0" />
                     </font>
@@ -94,7 +94,7 @@
                         <Font size="14.0" />
                     </font>
                 </Button>
-                <Button fx:id="addProductCancelButton" layoutX="14.0" layoutY="411.0" mnemonicParsing="false" onMouseClicked="#cancelAddProduct" prefHeight="35.0" prefWidth="80.0" text="Cancel" />
+                <Button fx:id="CancelButton" layoutX="14.0" layoutY="411.0" mnemonicParsing="false" onMouseClicked="#cancelAddProduct" prefHeight="35.0" prefWidth="80.0" text="Cancel" />
                 <TableView fx:id="assocPartsTable" layoutX="480.0" layoutY="256.0" prefHeight="150.0" prefWidth="426.0">
                     <columns>
                         <TableColumn fx:id="associatedIDCol" minWidth="-Infinity" prefWidth="104.0" text="Part ID">
@@ -119,7 +119,7 @@
                         </TableColumn>
                     </columns>
                 </TableView>
-                <Button fx:id="productSaveButton" layoutX="769.0" layoutY="415.0" mnemonicParsing="false" onMouseClicked="#saveAddProduct" text="Save">
+                <Button fx:id="SaveButton" layoutX="769.0" layoutY="415.0" mnemonicParsing="false" onMouseClicked="#saveAddProduct" text="Save">
                     <font>
                         <Font size="14.0" />
                     </font>

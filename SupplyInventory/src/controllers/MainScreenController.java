@@ -148,6 +148,19 @@ public class MainScreenController implements Initializable {
 
     @FXML
     private void exitProgram(ActionEvent event) {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.initModality(Modality.NONE);
+        alert.setTitle("Exit Program?");
+        alert.setHeaderText("Please Comfirm");
+        alert.setContentText("That You Want To Exit.");
+        Optional<ButtonType> optional = alert.showAndWait();
+        
+        if(optional.get() == ButtonType.OK){
+            Platform.exit();
+            System.exit(0);
+        }else{
+            System.out.print("Cancel Exit");
+        }
         
     }
 
@@ -213,7 +226,7 @@ public class MainScreenController implements Initializable {
         alert.setContentText("Are you sure you want to delete this product?");
         Optional<ButtonType> option = alert.showAndWait();
         if (option.get() == ButtonType.OK) {
-            supply.removeProduct(productsTable.getSelectionModel().getSelectedItem());
+            SupplyInventory.removeProduct(productsTable.getSelectionModel().getSelectedItem());
             updateProductsTable();
         }
         else {
@@ -229,13 +242,9 @@ public class MainScreenController implements Initializable {
 
     @FXML
     private void searchForPart(MouseEvent event) {
-            /****
-           String searchText = searchParts.getText();
-        FilteredList<Parts> searchAnimalResults = searchParts(searchText);
-        SortedList<Parts> sortedData = new SortedList<>(searchAnimalResults);
-        sortedData.comparatorProperty().bind(Parts.partName());
-        Parts.setItems(sortedData);
-        * ****/
+      
+     
+       
     }
 
     @FXML

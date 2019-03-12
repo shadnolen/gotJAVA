@@ -68,8 +68,8 @@ public class AddPartController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-     //newPartID = SupplyInventory.getAllParts().size();
-    // partID.setText("Auto-Generated: " + newPartID);
+     newPartID = SupplyInventory.getAllParts().size();
+     partID.setText("Auto-Generated: " + newPartID);
     }    
 
     @FXML
@@ -98,8 +98,8 @@ public class AddPartController implements Initializable {
     private void saveButtonPressed(ActionEvent event) throws IOException{
         if (inhouseCheck){
             InHouse addNewPart = new InHouse();
-             newPartID = SupplyInventory.getAllParts().size();
-             partID.setText("InHouse-Generated: " + newPartID);
+            // newPartID = SupplyInventory.getAllParts().size();
+            // partID.setText("InHouse-Generated: " + newPartID);
             addNewPart.setMachineID(Integer.parseInt(partMachineID.getText()));
             addNewPart.setPartName(partName.getText());
             addNewPart.setPartPrice(Double.parseDouble(partPrice.getText()));
@@ -113,8 +113,8 @@ public class AddPartController implements Initializable {
         
          if (outhouseCheck){
             Outsourced addNewPart = new Outsourced();
-             newPartID = SupplyInventory.getAllParts().size();
-             partID.setText("OutSourced-Generated: " + newPartID);
+             //newPartID = SupplyInventory.getAllParts().size();
+             //partID.setText("OutSourced-Generated: " + newPartID);
             addNewPart.setCompanyName(partCompanyName.getText());
             addNewPart.setPartName(partName.getText());
             addNewPart.setPartPrice(Double.parseDouble(partPrice.getText()));
@@ -127,14 +127,14 @@ public class AddPartController implements Initializable {
         }   
          
          if(!inhouseCheck && outhouseCheck){
-         Parent mainScreen = FXMLLoader.load(getClass().getResource("/views/MainScreen.fxml"));
+        Parent mainScreen = FXMLLoader.load(getClass().getResource("/views/MainScreen.fxml"));
         Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
         window.setScene(new Scene(mainScreen));
         window.show(); 
          }
          
          //Return us to the main screen 
-         Parent mainScreen = FXMLLoader.load(getClass().getResource("/views/MainScreen.fxml"));
+        Parent mainScreen = FXMLLoader.load(getClass().getResource("/views/MainScreen.fxml"));
         Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
         window.setScene(new Scene(mainScreen));
         window.show(); 

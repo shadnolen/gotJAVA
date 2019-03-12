@@ -47,13 +47,8 @@ import javafx.stage.Stage;
  * @author shadn
  */
 public class MainScreenController implements Initializable {
-   //  private static SupplyItems inventory = new SupplyItems();
-  // private ObservableList<Parts> partsTable = FXCollections.observableArrayList();
- // private ObservableList<Products> productsTable = FXCollections.observableArrayList();
-  // private ObservableList<Parts> partsSupplySearch = FXCollections.observableArrayList();
-  // private ObservableList<Products> productSupplySearch = FXCollections.observableArrayList();
-    ArrayList<Integer> partIDList;
-    ArrayList<Integer> productIDList;
+
+
     
     public static int selectPart;
     public static int selectProduct;
@@ -118,34 +113,12 @@ public class MainScreenController implements Initializable {
     private TableColumn<Products, Integer> productCountCol;
     @FXML
     private TableColumn<Products, Double> productPriceCol;
-
-
-   
+    
     
     
 
-    /**
-     * Initializes the controller class.
-     * @param url
-     * @param rb
-     */
-    @Override
-    public void initialize(URL url, ResourceBundle rb) {
-               partIDCol.setCellValueFactory(new PropertyValueFactory<> ("partID"));   
-               partNameCol.setCellValueFactory(new PropertyValueFactory<>("partName"));
-               partSupplyCol.setCellValueFactory(new PropertyValueFactory<>("partSupply"));
-               partPriceCol.setCellValueFactory(new PropertyValueFactory<>("partName"));
-               
-                productIDCol.setCellValueFactory(new PropertyValueFactory<> ("productID"));   
-               productNameCol.setCellValueFactory(new PropertyValueFactory<>("productName"));
-               productCountCol.setCellValueFactory(new PropertyValueFactory<>("productSupply"));
-               productPriceCol.setCellValueFactory(new PropertyValueFactory<>("productName"));        
-    }    
     
-    public void updatePartsTable(){
-      partsTable.setItems((ObservableList<Parts>) SupplyInventory.getAllParts());
-    }
-
+    //ActionEvents 
     @FXML
     private void exitProgram(ActionEvent event) {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
@@ -181,12 +154,10 @@ public class MainScreenController implements Initializable {
     
     @FXML
       // Linking to Modifypart 
-    private void modifyPart(MouseEvent event) throws IOException {
-       
-       
-       modifyParts =  partsTable.getSelectionModel().getSelectedItem();
-        indexParts = SupplyInventory.getAllParts().indexOf(modifyParts);
-       
+    private void modifyPart(MouseEvent event) throws IOException {   
+         modifyProd =  productsTable.getSelectionModel().getSelectedItem();
+         indexProd = SupplyInventory.getAllProducts().indexOf(modifyProd);
+        
         Parent addPart = FXMLLoader.load(getClass().getResource("/views/ModifyPart.fxml"));
         Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
         window.setScene(new Scene(addPart));
@@ -195,8 +166,7 @@ public class MainScreenController implements Initializable {
     
         @FXML
         // Linking To ModifiyProduct
-    private void modifyProduct(MouseEvent event) throws IOException {
-        
+    private void modifyProduct(MouseEvent event) throws IOException {        
         modifyProd =  productsTable.getSelectionModel().getSelectedItem();
         indexProd = SupplyInventory.getAllProducts().indexOf(modifyProd);
         
@@ -218,25 +188,22 @@ public class MainScreenController implements Initializable {
       
     @FXML
     private void deletePart(MouseEvent event) {  
-    
-     Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.initModality(Modality.NONE);
-        alert.setTitle("Delete Product");
+        alert.setTitle("Delete Part");
         alert.setHeaderText("Please confirm.");
-        alert.setContentText("Are you sure you want to delete this product?");
+        alert.setContentText("Do you want to DELETE this part?");
         Optional<ButtonType> option = alert.showAndWait();
+       
         if (option.get() == ButtonType.OK) {
             SupplyInventory.removeProduct(productsTable.getSelectionModel().getSelectedItem());
-            updateProductsTable();
-        }
-        else {
+            updateProductTable();
+        }else {
             System.out.println("Cancelling deleteProduct action.");
         }
       }
     
-    public void updateProductsTable() { 
-        productsTable.setItems((ObservableList<Products>) SupplyInventory.getAllProducts());   
-    }
+
 
     
 
@@ -249,6 +216,19 @@ public class MainScreenController implements Initializable {
 
     @FXML
     private void deleteProduct(MouseEvent event) {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.initModality(Modality.NONE);
+        alert.setTitle("Delete Product");
+        alert.setHeaderText("Please confirm.");
+        alert.setContentText("Do you want to DELETE this product?");
+        Optional<ButtonType> option = alert.showAndWait();
+       
+        if (option.get() == ButtonType.OK) {
+            SupplyInventory.removeProduct(productsTable.getSelectionModel().getSelectedItem());
+            updateProductTable();
+        }else {
+            System.out.println("Cancelling Delete.");
+        }
     }
 
 
@@ -274,7 +254,7 @@ public class MainScreenController implements Initializable {
             System.exit(0);
         }
         else {
-            System.out.println("Cancelling exit action.");
+            System.out.println("Cancelling Exit");
         }
     
     }
@@ -294,5 +274,53 @@ public class MainScreenController implements Initializable {
     public static SupplyInventory accessInventory() {    
           return supply;
     }
+    
+    public static int getIndexProd(){
+        return indexProd;
+    }
+    
+    public static int getIndexParts(){
+        return indexParts;
+    }
+    
+    public void updatePartTable(){
+        partsTable.setItems(SupplyInventory.getAllParts());
+    }
+    
+    public void updateProductTable(){
+        productsTable.setItems(SupplyInventory.getAllProducts());
+    }
+    /****
+        public void updateProductTable() { 
+        productsTable.setItems((ObservableList<Products>) SupplyInventory.getAllProducts());   
+    }
+    
+    public void updatePartTable(){
+      partsTable.setItems((ObservableList<Parts>) SupplyInventory.getAllParts());
+    }
+    ***/
+        /**
+     * Initializes the controller class.
+     * @param url
+     * @param rb
+     */
+    @Override
+    public void initialize(URL url, ResourceBundle rb) {
+              
+               //Parts
+               partIDCol.setCellValueFactory(new PropertyValueFactory<> ("partID"));   
+               partNameCol.setCellValueFactory(new PropertyValueFactory<>("partName"));
+               partSupplyCol.setCellValueFactory(new PropertyValueFactory<>("partSupply"));
+               partPriceCol.setCellValueFactory(new PropertyValueFactory<>("partName"));
+               //Products               
+                productIDCol.setCellValueFactory(new PropertyValueFactory<> ("productID"));   
+               productNameCol.setCellValueFactory(new PropertyValueFactory<>("productName"));
+               productCountCol.setCellValueFactory(new PropertyValueFactory<>("productSupply"));
+               productPriceCol.setCellValueFactory(new PropertyValueFactory<>("productName"));        
+               
+               //Update your tables 
+               updatePartTable();
+               updateProductTable();
+    }  
     
 }

@@ -91,7 +91,7 @@ public class AddProductController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-      addProductID.setText(Integer.toString(supply.getAllProducts().size()));
+    
     }    
 
     @FXML
@@ -152,7 +152,7 @@ public class AddProductController implements Initializable {
    }else{
        newPro.setAssociatedParts(productPart);
        
-       supply.addProduct(newPro);
+      
        
          Parent mainScreen = FXMLLoader.load(getClass().getResource("/views/MainScreen.fxml"));
         Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
@@ -162,7 +162,7 @@ public class AddProductController implements Initializable {
    }
     
     public void updatePartsTable(){
-        partSearchTable.setItems(supply.getAllParts());
+       
     }
 
  

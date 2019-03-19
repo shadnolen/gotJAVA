@@ -24,8 +24,8 @@ import models.Products;
  */
 public class SupplyInventory extends Application {
     
-    public static ObservableList<Products> allProducts = FXCollections.observableArrayList();
-    public static ObservableList<Parts> allParts = FXCollections.observableArrayList();
+   // public static ObservableList<Products> allProducts = FXCollections.observableArrayList();
+  //  public static ObservableList<Parts> allParts = FXCollections.observableArrayList();
     
     
     
@@ -35,40 +35,6 @@ public class SupplyInventory extends Application {
         Scene scene = new Scene(root);        
         stage.setScene(scene);
         stage.show();
-    }
-      
-    public static ObservableList<Products> getAllProducts() {
-        return allProducts;
-    }
-    
-     public static ObservableList<Parts> getAllParts() {
-        return allParts;        
-     }
-     
-     public void addPart(Parts parts){
-         allParts.add(parts);
-     }
-     
-     public static Products productLookUp(int productID){
-         for(int i = 0; i < allProducts.size() - 1; i++){
-             if(allProducts.get(i).getProductID() == productID){
-                 return allProducts.get(i);
-             }
-         }
-        return null;
-     }
-     
-     public void productUpdate(int productID, Products products){
-         Products proUpdate = productLookUp(productID);
-         proUpdate.setAssociatedParts(products.getAssociatedParts());
-     }
-    /**
-     *
-     * @param products
-     * @return
-     */
-    public static boolean removeProduct(Products products) {
-      return allProducts.remove(products);
     }
     
       /**

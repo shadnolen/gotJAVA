@@ -110,8 +110,8 @@ public class AddPartController implements Initializable {
             addNewPart.setPartPrice(Double.parseDouble(partPrice.getText()));
             addNewPart.setPartInStock(Integer.parseInt(partsInStock.getText()));
             addNewPart.setPartID(newPartID);
-            addNewPart.setPartMinStock(Integer.parseInt(partMinStock.getText()));
-            addNewPart.setPartMaxStock(Integer.parseInt(partMaxStock.getText()));
+            addNewPart.setPartMin(Integer.parseInt(partMinStock.getText()));
+            addNewPart.setPartMax(Integer.parseInt(partMaxStock.getText()));
             
             supply.addPart(addNewPart);  
         }
@@ -124,8 +124,8 @@ public class AddPartController implements Initializable {
             addNewPart.setPartPrice(Double.parseDouble(partPrice.getText()));
             addNewPart.setPartInStock(Integer.parseInt(partsInStock.getText()));
             addNewPart.setPartID(newPartID);
-            addNewPart.setPartMinStock(Integer.parseInt(partMinStock.getText()));
-            addNewPart.setPartMaxStock(Integer.parseInt(partMaxStock.getText()));
+            addNewPart.setPartMin(Integer.parseInt(partMinStock.getText()));
+            addNewPart.setPartMax(Integer.parseInt(partMaxStock.getText()));
             
             supply.addPart(addNewPart);  
         }   

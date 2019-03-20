@@ -28,7 +28,7 @@
                 <Font name="DejaVu Serif Bold" size="20.0" />
             </font>
         </Label>
-        <Button fx:id="exiit" layoutX="893.0" layoutY="440.0" mnemonicParsing="false" onMouseClicked="#exitProgramButton" text="Exit" />
+        <Button layoutX="893.0" layoutY="440.0" mnemonicParsing="false" onAction="#exit" text="Exit" />
         <AnchorPane id="outterPartsBoxMain" layoutX="14.0" layoutY="126.0" prefHeight="300.0" prefWidth="455.0" style="-fx-border-radius: 20; -fx-border-color: gray;">
             <children>
                 <Label id="partsLabelMain" style="-fx-label-padding: 10;" text="Parts">
@@ -36,10 +36,10 @@
                         <Font name="System Bold Italic" size="18.0" />
                     </font>
                 </Label>
-                <TextField id="partsSearchFieldMain" fx:id="searchParts" layoutX="176.0" layoutY="20.0" onMouseClicked="#clearText" prefHeight="22.0" prefWidth="182.0" style="-fx-padding: 2; -fx-border-color: gray;" />
-                <Button fx:id="addPartButton" layoutX="14.0" layoutY="253.0" mnemonicParsing="false" onMouseClicked="#addPart" style="-fx-padding: 10;" text="Add" />
-                <Button fx:id="modifyPartButton" layoutX="294.0" layoutY="253.0" mnemonicParsing="false" onMouseClicked="#modifyPart" style="-fx-padding: 10;" text="Modify" />
-                <Button fx:id="deletePartButton" layoutX="378.0" layoutY="253.0" mnemonicParsing="false" onMouseClicked="#deletePart" style="-fx-padding: 10;" text="Delete" />
+                <TextField id="partsSearchFieldMain" fx:id="partsSearch" layoutX="176.0" layoutY="20.0" onMouseClicked="#clearText" prefHeight="22.0" prefWidth="182.0" style="-fx-padding: 2; -fx-border-color: gray;" />
+                <Button layoutX="14.0" layoutY="253.0" mnemonicParsing="false" onAction="#partAdd" onMouseClicked="#addPart" style="-fx-padding: 10;" text="Add" />
+                <Button layoutX="294.0" layoutY="253.0" mnemonicParsing="false" onAction="#partModify" onMouseClicked="#modifyPart" style="-fx-padding: 10;" text="Modify" />
+                <Button layoutX="378.0" layoutY="253.0" mnemonicParsing="false" onAction="#partDelete" onMouseClicked="#deletePart" style="-fx-padding: 10;" text="Delete" />
                 <TableView fx:id="partsTable" layoutX="10.0" layoutY="58.0" prefHeight="185.0" prefWidth="435.0">
                    
                     <items>
@@ -67,7 +67,7 @@
                   </TableColumn>
                </columns>
                 </TableView>
-            <Button layoutX="373.0" layoutY="18.0" mnemonicParsing="false" onMouseClicked="#searchForPart" text="Search" />
+            <Button layoutX="373.0" layoutY="18.0" mnemonicParsing="false" onAction="#partsSearch" onMouseClicked="#searchForPart" text="Search" />
             </children>
         </AnchorPane>
         <AnchorPane id="outterPRoductsBoxMain" layoutX="481.0" layoutY="125.0" prefHeight="300.0" prefWidth="455.0" style="-fx-border-radius: 20; -fx-border-color: gray;">
@@ -77,10 +77,10 @@
                         <Font name="System Bold Italic" size="18.0" />
                     </font>
                 </Label>
-                <TextField id="partsSearchFieldMain" fx:id="searchProducts" layoutX="176.0" layoutY="20.0" onMouseClicked="#clearText" prefHeight="22.0" prefWidth="182.0" style="-fx-padding: 2; -fx-border-color: gray;" />
-                <Button fx:id="deleteProductButton" layoutX="378.0" layoutY="253.0" mnemonicParsing="false" onMouseClicked="#deleteProduct" style="-fx-padding: 10;" text="Delete" />
-                <Button fx:id="modifyProductButton" layoutX="294.0" layoutY="253.0" mnemonicParsing="false" onMouseClicked="#modifyProduct" style="-fx-padding: 10;" text="Modify" />
-                <Button fx:id="addProductButton" layoutX="14.0" layoutY="253.0" mnemonicParsing="false" onMouseClicked="#addProduct" style="-fx-padding: 10;" text="Add" />
+                <TextField id="partsSearchFieldMain" fx:id="productSearch" layoutX="176.0" layoutY="20.0" onMouseClicked="#clearText" prefHeight="22.0" prefWidth="182.0" style="-fx-padding: 2; -fx-border-color: gray;" />
+                <Button layoutX="378.0" layoutY="253.0" mnemonicParsing="false" onAction="#productDelete" onMouseClicked="#deleteProduct" style="-fx-padding: 10;" text="Delete" />
+                <Button layoutX="294.0" layoutY="253.0" mnemonicParsing="false" onAction="#productModify" onMouseClicked="#modifyProduct" style="-fx-padding: 10;" text="Modify" />
+                <Button layoutX="14.0" layoutY="253.0" mnemonicParsing="false" onAction="#productAdd" onMouseClicked="#addProduct" style="-fx-padding: 10;" text="Add" />
                 <TableView fx:id="productsTable" layoutX="10.0" layoutY="58.0" prefHeight="185.0" prefWidth="435.0">
                     <columns>
                         <TableColumn fx:id="productIDCol" prefWidth="93.0" text="Product ID">
@@ -101,7 +101,7 @@
                         </TableColumn>
                     </columns>
                 </TableView>
-            <Button layoutX="373.0" layoutY="18.0" mnemonicParsing="false" onMouseClicked="#searchForProduct" text="Search" />
+            <Button layoutX="373.0" layoutY="18.0" mnemonicParsing="false" onAction="#productSearch" onMouseClicked="#searchForProduct" text="Search" />
             </children>
         </AnchorPane>
     </children>

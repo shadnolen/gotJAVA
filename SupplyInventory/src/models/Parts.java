@@ -46,6 +46,8 @@ public abstract class Parts {
         this.partID.set(partID);
     }
     
+    
+    
     public StringProperty getPartName(){
         return partName;
     }

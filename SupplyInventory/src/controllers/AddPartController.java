@@ -67,6 +67,8 @@ public class AddPartController implements Initializable {
     private Label partMachineIDLabel;
     @FXML
     private TextField partMachineID;
+    @FXML
+    private Label addPartLabel;
 
     /**
      * Initializes the controller class.
@@ -101,6 +103,7 @@ public class AddPartController implements Initializable {
         }
     }
 
+    @FXML
     private void saveButton(ActionEvent event) throws IOException{
         if (inhouseCheck){
             InHouse addNewPart = new InHouse();
@@ -145,12 +148,22 @@ public class AddPartController implements Initializable {
     }
 
     
-    @FXML
       private void cancelButton(ActionEvent event) throws IOException {
         Parent mainScreen = FXMLLoader.load(getClass().getResource("/views/MainScreen.fxml"));
         Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
         window.setScene(new Scene(mainScreen));
         window.show();      
+    }
+      
+      void startPart() {
+        this.partLabel.setText("Add Part");
+        
+        this.partInhouse.setToggleGroup(this.partType);
+        this.partOutsourced.setToggleGroup(this.partType);
+    }
+
+    @FXML
+    private void cancelButtonPressed(ActionEvent event) {
     }
 
     

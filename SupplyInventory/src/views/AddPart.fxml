@@ -11,7 +11,7 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="424.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.AddPartController">
    <children>
-      <Label layoutX="171.0" layoutY="41.0" text="Add Part" textFill="#30974f">
+      <Label fx:id="addPartLabel" layoutX="171.0" layoutY="41.0" text="Add Part" textFill="#30974f">
          <font>
             <Font size="19.0" />
          </font>

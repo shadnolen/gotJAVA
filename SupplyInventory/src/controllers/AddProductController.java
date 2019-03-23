@@ -140,8 +140,8 @@ public class AddProductController implements Initializable {
    newPro.setProductID(Integer.parseInt(addProductID.getText()));
    newPro.setProductName(productName.getText());
    newPro.setProductInStock(Integer.parseInt(productCount.getText()));
-   newPro.setProductMaxStock(Integer.parseInt(productMax.getText()));
-   newPro.setProductMinStock(Integer.parseInt(productMin.getText()));
+   newPro.setProductMax(Integer.parseInt(productMax.getText()));
+   newPro.setProductMin(Integer.parseInt(productMin.getText()));
    if(productPart.size() == 0){
        Alert alert = new Alert(Alert.AlertType.INFORMATION);
        alert.initModality(Modality.NONE);

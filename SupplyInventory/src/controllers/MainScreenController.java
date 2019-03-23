@@ -14,6 +14,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
@@ -129,8 +130,14 @@ public class MainScreenController implements Initializable {
 
     @FXML
     private void partAdd(ActionEvent event) throws IOException{
-      
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("views/AddPart.fxml"));
+        Parent parentPage = loader.load();
+        Scene scenePage = new Scene(parentPage);
+        Stage stageApp = (Stage)((Node) event.getSource()).getScene().getWindow();
         
+        AddPartController controller = loader.getController();
+        controller.startPart();
     }
 
     @FXML
@@ -165,7 +172,16 @@ public class MainScreenController implements Initializable {
     }
 
     @FXML
-    private void productAdd(ActionEvent event) {
+    private void productAdd(ActionEvent event) throws IOException{
+         FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("views/AddProduct.fxml"));
+        Parent productPage = loader.load();
+        Scene sceneProPage = new Scene(productPage);
+        Stage stageProApp = (Stage)((Node) event.getSource()).getScene().getWindow();
+        
+        AddPartController controller = loader.getController();
+        controller.startPart();
+    
     }
 
     @FXML

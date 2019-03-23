@@ -178,6 +178,19 @@ public class MainScreenController implements Initializable {
 
     @FXML
     private void partDelete(ActionEvent event) {
+         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.initModality(Modality.NONE);
+        alert.setTitle("Delete Product?");
+        alert.setHeaderText("Please Confirm");
+        alert.setContentText("Do You Really Want To Delete This Item");
+        Optional<ButtonType> buttonOption = alert.showAndWait();
+        
+        if(buttonOption.get() == ButtonType.OK){
+            Parts partsSelected = partsTable.getSelectionModel().getSelectedItem();
+            updateProductsTable();
+        }else{
+            System.out.print("Cancelling");
+        }
     }
 
     @FXML
@@ -197,7 +210,20 @@ public class MainScreenController implements Initializable {
 
     @FXML
     private void productDelete(ActionEvent event) {
-    }
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.initModality(Modality.NONE);
+        alert.setTitle("Delete Product?");
+        alert.setHeaderText("Please Confirm");
+        alert.setContentText("Do You Really Want To Delete This Item");
+        Optional<ButtonType> buttonOption = alert.showAndWait();
+        
+        if(buttonOption.get() == ButtonType.OK){
+            Products proSelected = productsTable.getSelectionModel().getSelectedItem();
+            updateProductsTable();
+        }else{
+            System.out.print("Cancelling");
+        }
+  }
 
     @FXML
     private void productModify(ActionEvent event) throws IOException {

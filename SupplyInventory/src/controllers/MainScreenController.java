@@ -127,10 +127,10 @@ public class MainScreenController implements Initializable {
             System.exit(0);
         }
     }
-
+    
     @FXML
-    private void partAdd(ActionEvent event) throws IOException{
-        FXMLLoader loader = new FXMLLoader();
+    void addPart(ActionEvent event) throws IOException{
+          FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getResource("views/AddPart.fxml"));
         Parent parentPage = loader.load();
         Scene scenePage = new Scene(parentPage);
@@ -139,9 +139,41 @@ public class MainScreenController implements Initializable {
         AddPartController controller = loader.getController();
         controller.startPart();
     }
+    
+        @FXML
+    void addPro(ActionEvent event) throws IOException{
+          FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("views/AddProduct.fxml"));
+        Parent parentPage = loader.load();
+        Scene scenePage = new Scene(parentPage);
+        Stage stageApp = (Stage)((Node) event.getSource()).getScene().getWindow();
+        
+        AddPartController controller = loader.getController();
+        controller.startPart();
+    }
+
+    
+    
+    
+    @FXML
+    private void partAdd(ActionEvent event) throws IOException{
+      addPart(event);
+    }
 
     @FXML
-    private void partModify(ActionEvent event) {
+    private void partModify(ActionEvent event) throws IOException {
+        Parts partSelected = partsTable.getSelectionModel().getSelectedItem();
+        indexID = getPartsList().indexOf(partSelected);
+        
+        if(partSelected != null){
+            addPart(event);
+        }else{
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.initModality(Modality.APPLICATION_MODAL);
+            alert.setTitle("No Part Selected");
+            alert.setHeaderText("Please Select a Part From The List");
+            alert.showAndWait();
+        }
     }
 
     @FXML
@@ -168,19 +200,27 @@ public class MainScreenController implements Initializable {
     }
 
     @FXML
-    private void productModify(ActionEvent event) {
+    private void productModify(ActionEvent event) throws IOException {
+        
+          Products proSelected = productsTable.getSelectionModel().getSelectedItem();
+        indexID = getPartsList().indexOf(proSelected);
+        
+        if(proSelected != null){
+            addPro(event);
+        }else{
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.initModality(Modality.APPLICATION_MODAL);
+            alert.setTitle("No Part Selected");
+            alert.setHeaderText("Please Select a Part From The List");
+            alert.showAndWait();
+        }
+        
+        
     }
 
     @FXML
     private void productAdd(ActionEvent event) throws IOException{
-         FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(getClass().getResource("views/AddProduct.fxml"));
-        Parent productPage = loader.load();
-        Scene sceneProPage = new Scene(productPage);
-        Stage stageProApp = (Stage)((Node) event.getSource()).getScene().getWindow();
-        
-        AddPartController controller = loader.getController();
-        controller.startPart();
+         addPro(event);
     
     }
 

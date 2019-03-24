@@ -7,6 +7,7 @@ package controllers;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.Optional;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -15,10 +16,13 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import models.Parts;
 
@@ -33,8 +37,6 @@ public class AddPartController implements Initializable {
     private Label addPartLabel;
     @FXML
     private RadioButton partInhouse;
-    @FXML
-    private ToggleGroup partType;
     @FXML
     private RadioButton partOutsourced;
     @FXML
@@ -59,13 +61,12 @@ public class AddPartController implements Initializable {
     private TextField partMachineID;
 
     
-    @FXML 
-    private ToggleGroup sourced;
    
     private Parts sourcedSelected;
+    @FXML
+    private ToggleGroup toggle;
    
     
-    @FXML
     void mainAccess(ActionEvent event) throws IOException{
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getResource("views/MainScreen.fxml"));
@@ -92,8 +93,27 @@ public class AddPartController implements Initializable {
         // TODO
     }    
 
+    
+    
     @FXML
     private void radioButtonSelected(ActionEvent event) {
+        if(this.toggle.getSelectedToggle().equals(this.partInhouse)){
+            this.partCompanyName.setEditable(false);
+            this.partCompanyName.setDisable(true);
+            this.partCompanyName.setText(" ");
+            
+           this.partMachineID.setEditable(true);
+           this.partMachineID.setDisable(false);
+        }else if(this.toggle.getSelectedToggle().equals(this.partOutsourced)){
+            this.partMachineID.setEditable(false);
+           this.partMachineID.setDisable(true);
+           this.partMachineID.setText(" ");
+        }else{
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.initModality(Modality.NONE);
+            alert.setTitle("Invalid Type");
+            alert.setHeaderText("Try A Diffrent Part Type");
+        }        
     }
 
     @FXML
@@ -101,7 +121,18 @@ public class AddPartController implements Initializable {
     }
 
     @FXML
-    private void cancelButtonPressed(ActionEvent event) {
+    private void cancelButtonPressed(ActionEvent event) throws IOException {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.initModality(Modality.NONE);
+        alert.setTitle("Confirm Cancel");
+        alert.setHeaderText("Confirm Edit Cancel");
+        alert.setContentText("Anything Unsaved Will Be Lost");
+        Optional<ButtonType> buttonOption = alert.showAndWait();
+        if(buttonOption.get()== ButtonType.OK){
+            mainAccess( event);
+        }
     }
+    
+    
     
 }

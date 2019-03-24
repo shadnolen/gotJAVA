@@ -18,7 +18,7 @@
       </Label>
       <RadioButton fx:id="partInhouse" layoutX="86.0" layoutY="86.0" mnemonicParsing="false" onAction="#radioButtonSelected" text="In-House">
          <toggleGroup>
-            <ToggleGroup fx:id="partType" />
+            <ToggleGroup fx:id="toggle" />
          </toggleGroup></RadioButton>
       <RadioButton fx:id="partOutsourced" layoutX="239.0" layoutY="86.0" mnemonicParsing="false" onAction="#radioButtonSelected" text="Outsourced" toggleGroup="$partType" />
       <Label layoutX="52.0" layoutY="149.0" text="ID" />

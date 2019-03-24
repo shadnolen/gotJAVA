@@ -136,7 +136,7 @@ public class MainScreenController implements Initializable {
         Scene scenePage = new Scene(parentPage);
         Stage stageApp = (Stage)((Node) event.getSource()).getScene().getWindow();
         
-        AddPartController controller = loader.getController();
+        AddPartControllerAlt controller = loader.getController();
         controller.startPart();
     }
     
@@ -148,7 +148,7 @@ public class MainScreenController implements Initializable {
         Scene scenePage = new Scene(parentPage);
         Stage stageApp = (Stage)((Node) event.getSource()).getScene().getWindow();
         
-        AddPartController controller = loader.getController();
+        AddPartControllerAlt controller = loader.getController();
         controller.startPart();
     }
 
@@ -240,8 +240,6 @@ public class MainScreenController implements Initializable {
             alert.setHeaderText("Please Select a Part From The List");
             alert.showAndWait();
         }
-        
-        
     }
 
     @FXML
@@ -287,7 +285,4 @@ public class MainScreenController implements Initializable {
       updatePartsTable();
       updateProductsTable();      
     }    
-    
-    
-    
-}
+   }

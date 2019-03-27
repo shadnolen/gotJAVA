@@ -10,7 +10,7 @@ import javafx.collections.ObservableList;
 
 /**
  *
- * @author Duncan
+ * @author ShadTheJavaSlayer
  */
 public class Supply {
     

@@ -24,6 +24,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import models.InHouse;
 import models.Parts;
 
 /**
@@ -33,8 +34,6 @@ import models.Parts;
  */
 public class AddPartController implements Initializable {
 
-    @FXML
-    private Label addPartLabel;
     @FXML
     private RadioButton partInhouse;
     @FXML
@@ -65,6 +64,8 @@ public class AddPartController implements Initializable {
     private Parts sourcedSelected;
     @FXML
     private ToggleGroup toggle;
+    @FXML
+    private Label addPartLabel;
    
     
     void mainAccess(ActionEvent event) throws IOException{
@@ -118,6 +119,20 @@ public class AddPartController implements Initializable {
 
     @FXML
     private void saveButton(ActionEvent event) {
+        
+        if(validPart(
+        this.partName.getText(),
+                this.partMinStock.getText(),
+                this.partMaxStock.getText(),
+                this.partsInStock.getText(),
+                this.partPrice.getText(),
+                this.partCompanyName.getText(),
+                this.partMachineID.getText()))
+        {      
+            if(this.toggle.getSelectedToggle().equals(this.partInhouse)){
+                InHouse pih = new InHouse();
+            }
+        }
     }
 
     @FXML
@@ -132,7 +147,91 @@ public class AddPartController implements Initializable {
             mainAccess( event);
         }
     }
+
+    private boolean validPart(String partName, String partMax, String partMin, String partSupply, String partPrice, String company, String machine) {
+        String errorMessage = " ";
+        Integer pMin = null; 
+        Integer pMax = null;
+        Integer pSupply = null;
+        Double pPrice = null;
+        Boolean valid;
+        
+         if(partName == null || partName.length() == 0) {
+            errorMessage += ("Part Name Can't blank\n");
+        }
+        
+        try {
+           pMax = Integer.parseInt(partMax);
+        } catch (Exception e) {
+            errorMessage += ("Minimum must be a Number \n");
+        }
+        
+        try {
+            pMin = Integer.parseInt(partMin);
+        } catch (Exception e) {
+            errorMessage += ("Maximum must be a Number \n");
+        }
+        
+        if(pMin != null && pMin < 0) {
+            errorMessage += ("Minimum Can't be Negative \n");
+        }
+        
+        if(pMin != null && pMax != null && pMin > pMax) {
+            errorMessage += ("Minimum must be less than Maximum \n");
+        }
+        try{
+            pSupply = Integer.parseInt(partSupply); 
+     if(pMin != null && pMax != null && pSupply<pMin && pMax> pMax){
+         errorMessage  += ("Supply Count Must be between Min and Max Count");
+     }
+        }catch(NumberFormatException e){
+            errorMessage +=("Supply Count Must Be A Number");
+        }
+            try {
+            pPrice = Double.parseDouble(partPrice);
+            
+            if(pPrice <= 0) {
+               errorMessage += ("Price must be greater than 0\n"); 
+            }
+        } catch (NumberFormatException e) {
+            errorMessage += ("Price must be numeric\n");
+        }
+        
+        try {
+            if (this.toggle.getSelectedToggle().equals(this.partInhouse)){
+                //intMachineId
+                try {
+                    Integer.parseInt(machine);
+                } catch (NumberFormatException e) {
+                    errorMessage += ("Machine ID must be numeric\n");
+                }
+            } else if (this.toggle.getSelectedToggle().equals(this.partOutsourced)) {
+                if(company == null || company.length() == 0) {
+                    errorMessage += ("Company Name is blank\n");
+                }
+            }    
+        } catch(Exception e) {
+           errorMessage += ("Part type of In-House or Outsourced must be selected\n"); 
+        }
+        
+        if (errorMessage.length() > 0) {
+            errorMessage += ("\nFix the listed errors and save again");
+            
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Part Validation Error");
+            alert.setHeaderText("Error");
+            alert.setContentText(errorMessage);
+            alert.showAndWait();
+            valid = false;
+        } else {
+            valid = true;
+        }
+        
+        return valid;
+    } 
+
+    }
     
     
     
-}
+

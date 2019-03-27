@@ -128,10 +128,9 @@ public class MainScreenController implements Initializable {
         }
     }
     
-    @FXML
     void addPart(ActionEvent event) throws IOException{
           FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(getClass().getResource("views/AddPart.fxml"));
+        loader.setLocation(getClass().getResource("/views/AddPart.fxml"));
         Parent parentPage = loader.load();
         Scene scenePage = new Scene(parentPage);
         Stage stageApp = (Stage)((Node) event.getSource()).getScene().getWindow();
@@ -140,8 +139,7 @@ public class MainScreenController implements Initializable {
         controller.startPart();
     }
     
-        @FXML
-    void addPro(ActionEvent event) throws IOException{
+        void addPro(ActionEvent event) throws IOException{
           FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getResource("views/AddProduct.fxml"));
         Parent parentPage = loader.load();
@@ -171,7 +169,7 @@ public class MainScreenController implements Initializable {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.initModality(Modality.APPLICATION_MODAL);
             alert.setTitle("No Part Selected");
-            alert.setHeaderText("Please Select a Part From The List");
+            alert.setHeaderText("Please Select a Part From The Parts List");
             alert.showAndWait();
         }
     }
@@ -237,7 +235,7 @@ public class MainScreenController implements Initializable {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.initModality(Modality.APPLICATION_MODAL);
             alert.setTitle("No Part Selected");
-            alert.setHeaderText("Please Select a Part From The List");
+            alert.setHeaderText("Please Select a Part From The Product List");
             alert.showAndWait();
         }
     }
@@ -285,4 +283,44 @@ public class MainScreenController implements Initializable {
       updatePartsTable();
       updateProductsTable();      
     }    
+
+    @FXML
+    private void exitProgram(ActionEvent event) {
+    }
+
+    @FXML
+    private void clearText(MouseEvent event) {
+    }
+
+    @FXML
+    private void addPart(MouseEvent event) {
+    }
+
+    @FXML
+    private void modifyPart(MouseEvent event) {
+    }
+
+    @FXML
+    private void deletePart(MouseEvent event) {
+    }
+
+    @FXML
+    private void searchForPart(MouseEvent event) {
+    }
+
+    @FXML
+    private void deleteProduct(MouseEvent event) {
+    }
+
+    @FXML
+    private void modifyProduct(MouseEvent event) {
+    }
+
+    @FXML
+    private void addProduct(MouseEvent event) {
+    }
+
+    @FXML
+    private void searchForProduct(MouseEvent event) {
+    }
    }

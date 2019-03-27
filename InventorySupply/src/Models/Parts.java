@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Model;
+package Models;
 
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.IntegerProperty;
@@ -13,13 +13,13 @@ import javafx.beans.property.StringProperty;
  *
  * @author Duncan
  */
-public abstract class Part {
-    protected IntegerProperty inStock;
-    protected IntegerProperty max;
-    protected IntegerProperty min;
-    protected StringProperty name;
+public abstract class Parts {
+    protected IntegerProperty supplyInStock;
+    protected IntegerProperty supplyMax;
+    protected IntegerProperty supplyMin;
+    protected StringProperty partName;
     protected IntegerProperty partID;
-    protected DoubleProperty price;
+    protected DoubleProperty partPrice;
             
     //partID
     public void setPartID(int partID) {
@@ -36,66 +36,66 @@ public abstract class Part {
     
     //name
     public void setName(String name) {
-        this.name.set(name);
+        this.partName.set(name);
     }
     
     public String getName() {
-        return this.name.get();
+        return this.partName.get();
     }
     
     public StringProperty nameProperty() {
-        return name;
+        return partName;
     }
     
     //price
     public void setPrice(double price) {
-        this.price.set(price);
+        this.partPrice.set(price);
     }
     
     public double getPrice() {
-        return this.price.get();
+        return this.partPrice.get();
     }
     
     public DoubleProperty priceProperty() {
-        return price;
+        return partPrice;
     }
     
     //inStock
     public void setInStock(int inStock) {
-        this.inStock.set(inStock);
+        this.supplyInStock.set(inStock);
     }
     
     public int getInStock() {
-        return this.inStock.get();
+        return this.supplyInStock.get();
     }
     
     public IntegerProperty inStockProperty() {
-        return inStock;
+        return supplyInStock;
     }
     
     //min
     public void setMin(int min) {
-        this.min.set(min);
+        this.supplyMin.set(min);
     }
     
     public int getMin() {
-        return this.min.get();
+        return this.supplyMin.get();
     }
     
     public IntegerProperty minProperty() {
-        return min;
+        return supplyMin;
     }
     
     //max
     public void setMax(int max) {
-        this.max.set(max);
+        this.supplyMax.set(max);
     }
     
     public int getMax() {
-        return this.max.get();
+        return this.supplyMax.get();
     }
     
     public IntegerProperty maxProperty() {
-        return max;
+        return supplyMax;
     }
 }

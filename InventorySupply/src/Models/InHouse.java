@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Model;
+package Models;
 
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleDoubleProperty;
@@ -14,26 +14,26 @@ import javafx.beans.property.SimpleStringProperty;
  *
  * @author Duncan
  */
-public class InHouse extends Part {
+public class InHouse extends Parts {
     private final IntegerProperty machineID;
     
     public InHouse(int partID, String name, double price, int inStock, int min, int max, int machineID) {
         this.partID = new SimpleIntegerProperty(partID);
-        this.name = new SimpleStringProperty(name);
-        this.price = new SimpleDoubleProperty(price);
-        this.inStock = new SimpleIntegerProperty(inStock);
-        this.min = new SimpleIntegerProperty(min);
-        this.max = new SimpleIntegerProperty(max);
+        this.partName = new SimpleStringProperty(name);
+        this.partPrice = new SimpleDoubleProperty(price);
+        this.supplyInStock = new SimpleIntegerProperty(inStock);
+        this.supplyMin = new SimpleIntegerProperty(min);
+        this.supplyMax = new SimpleIntegerProperty(max);
         this.machineID = new SimpleIntegerProperty(machineID);
     }
 
     public InHouse() {
         this.partID = new SimpleIntegerProperty(0);
-        this.name = new SimpleStringProperty("");
-        this.price = new SimpleDoubleProperty(0);
-        this.inStock = new SimpleIntegerProperty(0);
-        this.min = new SimpleIntegerProperty(0);
-        this.max = new SimpleIntegerProperty(0);
+        this.partName = new SimpleStringProperty("");
+        this.partPrice = new SimpleDoubleProperty(0);
+        this.supplyInStock = new SimpleIntegerProperty(0);
+        this.supplyMin = new SimpleIntegerProperty(0);
+        this.supplyMax = new SimpleIntegerProperty(0);
         this.machineID = new SimpleIntegerProperty(0);
     }
     

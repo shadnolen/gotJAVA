@@ -16,8 +16,9 @@ import javafx.collections.ObservableList;
 
 /**
  *
- * @author Duncan
+ * @author ShadTheJavaSlayer
  */
+
 public class Products {
     private ObservableList<Parts> productsPart = FXCollections.observableArrayList();
     private final IntegerProperty productID;
@@ -38,7 +39,7 @@ public class Products {
 
     public Products() {
         this.productID = new SimpleIntegerProperty(0);
-        this.productName = new SimpleStringProperty("");
+        this.productName = new SimpleStringProperty(" ");
         this.productPrice = new SimpleDoubleProperty(0);
         this.productInStock = new SimpleIntegerProperty(0);
         this.productMin = new SimpleIntegerProperty(0);

@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-
+package InvSupply;
 import java.io.IOException;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -12,13 +12,13 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-import Views.MainScreenController;
-import Views.PartScreenController;
+import Controllers.MainScreenController;
+import Controllers.PartsAddController;
 import javafx.stage.Modality;
 
 /**
  *
- * @author Duncan
+ * @author 
  */
 public class InventorySupplySystem extends Application {
     
@@ -46,7 +46,7 @@ public class InventorySupplySystem extends Application {
 
         // Give the controller access to the main app.
         MainScreenController controller = loader.getController();
-        controller.setDefaults(); 
+        
         controller.startMain(stage); 
     }
 }

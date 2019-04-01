@@ -19,7 +19,7 @@
          <children>
             <RadioButton fx:id="inhouse" maxHeight="-Infinity" minHeight="-Infinity" minWidth="85.0" mnemonicParsing="false" onAction="#source" prefHeight="17.0" text="InHouse">
                <toggleGroup>
-                  <ToggleGroup fx:id="Toggle" />
+                  <ToggleGroup fx:id="toggle" />
                </toggleGroup></RadioButton>
             <RadioButton fx:id="outsourced" maxHeight="-Infinity" minHeight="-Infinity" minWidth="95.0" mnemonicParsing="false" onAction="#source" prefHeight="17.0" text="Outsourced" toggleGroup="$typeOfPart">
                <HBox.margin>

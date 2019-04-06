@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Controllers;
+package View_Controller;
 
-import Model.InHouse;
+import Model.InHousePart;
 import Model.Part;
 import Model.Product;
 import Model.Inventory;
@@ -14,7 +14,7 @@ import static Model.Inventory.getPartList;
 import static Model.Inventory.getProductList;
 import static Model.Inventory.removePart;
 import static Model.Inventory.removeProduct;
-import Model.Outsourced;
+import Model.OutsourcedPart;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Optional;
@@ -37,7 +37,7 @@ import javafx.stage.Stage;
 /**
  * FXML Controller class
  *
- * @author Snolen
+ * @author Duncan
  */
 
 public class MainScreenController {
@@ -93,7 +93,7 @@ public class MainScreenController {
         Scene part_page_scene = new Scene(part_page_parent);
         Stage app_stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         
-        PartsController controller = loader.getController();
+        PartScreenController controller = loader.getController();
         controller.startPart();
         
         app_stage.hide(); //optional
@@ -110,7 +110,7 @@ public class MainScreenController {
         Scene part_page_scene = new Scene(part_page_parent);
         Stage app_stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         
-        PartsController controller = loader.getController();
+        PartScreenController controller = loader.getController();
         controller.startPart(part);
         
         app_stage.hide(); //optional
@@ -127,7 +127,7 @@ public class MainScreenController {
         Scene product_page_scene = new Scene(product_page_parent);
         Stage app_stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         
-        ProductsController controller = loader.getController();
+        ProductScreenController controller = loader.getController();
         controller.startProduct();
         
         app_stage.hide(); //optional
@@ -144,7 +144,7 @@ public class MainScreenController {
         Scene product_page_scene = new Scene(product_page_parent);
         Stage app_stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         
-        ProductsController controller = loader.getController();
+        ProductScreenController controller = loader.getController();
         controller.startProduct(product);
         
         app_stage.hide(); //optional
@@ -354,8 +354,8 @@ public class MainScreenController {
 
     private void defaultParts() {
         int partID = Inventory.getPartIDCount();
-        Inventory.addPart(new InHouse(partID, "Flux Capacitor", 31.03, 42, 1, 99, 42));
-        Inventory.addPart(new Outsourced(getPartIDCount(), "Plutonium", 75, 2, 1, 250, "Czech"));
+        Inventory.addPart(new InHousePart(partID, "Flux Capacitor", 31.03, 42, 1, 99, 42));
+        Inventory.addPart(new OutsourcedPart(getPartIDCount(), "Plutonium", 75, 2, 1, 250, "Czech"));
     }
 
     private void defaultProducts() {

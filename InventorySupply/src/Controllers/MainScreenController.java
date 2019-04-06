@@ -8,6 +8,11 @@ package Controllers;
 import InvSupply.InventorySupplySystem;
 import Models.Parts;
 import Models.Products;
+import Models.Supply;
+import static Models.Supply.getPartList;
+import static Models.Supply.getProductList;
+import static Models.Supply.partRemove;
+import static Models.Supply.productsRemove;
 import java.io.IOException;
 import java.net.URL;
 import java.util.Optional;
@@ -59,10 +64,14 @@ public class MainScreenController implements Initializable {
     private TableColumn<Products, Double> productCost_Column;
     @FXML
     private TextField searchProduct;
+    
+     private static int index = 0;
 
+    public static int indexSelect() {
+        return index;
+    }
     
-    
-     void partsAcc(ActionEvent event) throws IOException {
+     void partsAccess(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getResource("PartScreen.fxml"));
         Parent parentPage = loader.load();  
@@ -70,7 +79,23 @@ public class MainScreenController implements Initializable {
         Scene part_page_scene = new Scene(parentPage);
         Stage app_stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         
-        PartsAddController controller = loader.getController();
+        PartsController controller = loader.getController();
+        controller.startPart();
+        
+        app_stage.hide(); 
+        app_stage.setScene(part_page_scene);
+        app_stage.show();
+    }
+     
+      void partsAccessII(ActionEvent event, Parts parts) throws IOException {
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("PartScreen.fxml"));
+        Parent parentPage = loader.load();  
+       
+        Scene part_page_scene = new Scene(parentPage);
+        Stage app_stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        
+        PartsController controller = loader.getController();
         controller.startPart();
         
         app_stage.hide(); 
@@ -80,7 +105,7 @@ public class MainScreenController implements Initializable {
     
 
     
-    void productsAcc(ActionEvent event) throws IOException {
+    void proAccessI(ActionEvent event, Models.Products proSelect) throws IOException {
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getResource("ProductScreen.fxml"));
         Parent product_page_parent = loader.load();  
@@ -88,8 +113,24 @@ public class MainScreenController implements Initializable {
         Scene product_page_scene = new Scene(product_page_parent);
         Stage app_stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         
-        ProductsAddController controller = loader.getController();
-        controller.startProduct();
+        ProductController controller = loader.getController();
+        controller.proStart();
+        
+        app_stage.hide(); //optional
+        app_stage.setScene(product_page_scene);
+        app_stage.show();
+    }
+    
+     void proAccessII(ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("ProductScreen.fxml"));
+        Parent product_page_parent = loader.load();  
+       
+        Scene product_page_scene = new Scene(product_page_parent);
+        Stage app_stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        
+        ProductController controller = loader.getController();
+        controller.proStart();
         
         app_stage.hide(); //optional
         app_stage.setScene(product_page_scene);
@@ -136,7 +177,7 @@ public class MainScreenController implements Initializable {
 
     @FXML
     private void partsAdd(ActionEvent event) throws IOException {
-        partsAcc(event);
+        partsAccess(event);
     }
 
      @FXML
@@ -145,7 +186,7 @@ public class MainScreenController implements Initializable {
         index = getPartList().indexOf(partSelect);
 
         if(partSelect != null) {
-            partsAcc(event, partSelect);    
+            partsAccessII(event, partSelect);    
         } else {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.initModality(Modality.APPLICATION_MODAL);
@@ -162,8 +203,8 @@ public class MainScreenController implements Initializable {
         if(partSelect != null) {
             Boolean found = false;
             //this uses recursion, I'm sure there is a better way to do it
-            for (int i = 0; i < InventorySupplySystem.getProductList().size(); i++) {
-                ObservableList<Parts> productParts = InventorySupplySystem.getProductList().get(i).getProductParts();
+            for (int i = 0; i < Supply.getProductList().size(); i++) {
+                ObservableList<Parts> productParts = Supply.getProductList().get(i).getProductParts();
                 for(int x = 0; x < productParts.size(); x++) {
                     if(productParts.get(x).equals(partSelect)) {
                        found = true; 
@@ -203,13 +244,13 @@ public class MainScreenController implements Initializable {
 
     @FXML
     private void partsSearch(ActionEvent event) {
-        String term = searchPart.getText();
-        ObservableList foundParts = InventorySupplySystem.partLookup(term);
+        String search = searchPart.getText();
+        ObservableList foundParts = Supply.lookupProduct(search);
         if(foundParts.isEmpty()) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.initModality(Modality.APPLICATION_MODAL);
             alert.setTitle("No Part match found");
-            alert.setHeaderText("No Part Names found matching " + term); 
+            alert.setHeaderText("No Part Names found matching " + search); 
             alert.showAndWait();
         } else {
             partsTable.setItems(foundParts);
@@ -218,16 +259,32 @@ public class MainScreenController implements Initializable {
 
     @FXML
     private void productAdd(ActionEvent event) throws IOException {
-         productsAcc(event);
+         proAccessII(event);
      }
-
+  @FXML
+    void proAccess(ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("ProductScreen.fxml"));
+        Parent parentPage = loader.load();  
+       
+        Scene product_page_scene = new Scene(parentPage);
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        
+        ProductController controller = loader.getController();
+        controller.proStart();
+        
+        stage.hide(); //optional
+        stage.setScene(product_page_scene);
+        stage.show();
+    }
+  
     @FXML
     private void productChange(ActionEvent event) throws IOException {
-        Products productSelect = productsTable.getSelectionModel().getSelectedItem();
-        index = getProductList().indexOf(productSelect);
+        Products proSelect = productsTable.getSelectionModel().getSelectedItem();
+        index = getProductList().indexOf(proSelect);
 
-        if(productSelect != null) {
-            accessProduct(event, productSelect);    
+        if(proSelect != null) {
+            proAccessI(event, proSelect );    
         } else {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.initModality(Modality.APPLICATION_MODAL);
@@ -236,6 +293,8 @@ public class MainScreenController implements Initializable {
             alert.showAndWait();
         }
     }
+    
+    
 
     @FXML
     private void productDelete(ActionEvent event)  {
@@ -252,7 +311,7 @@ public class MainScreenController implements Initializable {
                 Optional<ButtonType> result = alert.showAndWait();
 
                 if (result.get() == ButtonType.OK) {
-                    removeProduct(productSelect);
+                    productsRemove(productSelect);
                     updatePartTableView();
                 }    
             } else {
@@ -273,16 +332,16 @@ public class MainScreenController implements Initializable {
 
     @FXML
     private void productsSearch(ActionEvent event) {
-        String term = searchProduct.getText();
-        ObservableList foundProducts = InventorySupplySystem.productLookup(term);
+        String proSearch = searchProduct.getText();
+        ObservableList foundProducts = Supply.lookupProduct(proSearch);
         if(foundProducts.isEmpty()) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.initModality(Modality.APPLICATION_MODAL);
             alert.setTitle("No Product match found");
-            alert.setHeaderText("No Product Names found matching " + term); 
+            alert.setHeaderText("No Product Names found matching " + proSearch); 
             alert.showAndWait();
         } else {
-            productTable.setItems(foundProducts);
+            productsTable.setItems(foundProducts);
         }
     }
     

@@ -3,8 +3,8 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+package duncan_nisbett_c482_software_1;
 
-package InvSupply;
 import java.io.IOException;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -12,15 +12,15 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-import Controllers.MainScreenController;
-import Controllers.PartsController;
+import View_Controller.MainScreenController;
+import View_Controller.PartScreenController;
 import javafx.stage.Modality;
 
 /**
  *
- * @author 
+ * @author Duncan
  */
-public class InventorySupplySystem extends Application {
+public class Duncan_Nisbett_C482_Software_1 extends Application {
     
     private Stage mainStage;
     private AnchorPane mainScreen;
@@ -28,7 +28,7 @@ public class InventorySupplySystem extends Application {
     @Override
     public void start(Stage stage) throws IOException {
         this.mainStage = stage;
-        this.mainStage.setTitle("Inventory Supply Mangement System"); 
+        this.mainStage.setTitle("Inventory Mangement System"); 
         showMainScreen(stage);
     }
 
@@ -41,12 +41,12 @@ public class InventorySupplySystem extends Application {
 
     public void showMainScreen(Stage stage) throws IOException {
         FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(InventorySupplySystem.class.getResource("/Views/MainScreen.fxml"));
+        loader.setLocation(Duncan_Nisbett_C482_Software_1.class.getResource("/View_Controller/MainScreen.fxml"));
         this.mainScreen = (AnchorPane) loader.load();  
 
         // Give the controller access to the main app.
         MainScreenController controller = loader.getController();
-        
+        controller.setDefaults(); 
         controller.startMain(stage); 
     }
 }

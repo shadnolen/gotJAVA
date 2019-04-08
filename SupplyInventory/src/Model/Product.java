@@ -16,7 +16,7 @@ import javafx.collections.ObservableList;
 
 /**
  *
- * @author Duncan
+ * @author Snolen
  */
 public class Product {
     private ObservableList<Part> productParts = FXCollections.observableArrayList();

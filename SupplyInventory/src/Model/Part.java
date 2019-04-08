@@ -11,7 +11,7 @@ import javafx.beans.property.StringProperty;
 
 /**
  *
- * @author Duncan
+ * @author Snolen
  */
 public abstract class Part {
     protected IntegerProperty inStock;

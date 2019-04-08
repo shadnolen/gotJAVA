@@ -12,7 +12,7 @@ import javafx.beans.property.SimpleStringProperty;
 
 /**
  *
- * @author Duncan
+ * @author Snolen
  */
 public class InHouse extends Part {
     private final IntegerProperty machineID;

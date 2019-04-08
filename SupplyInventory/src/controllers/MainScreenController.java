@@ -352,28 +352,4 @@ public class MainScreenController {
         updateProductTableView();
     }
 
-    private void defaultParts() {
-        int partID = Inventory.getPartIDCount();
-        Inventory.addPart(new InHouse(partID, "Flux Capacitor", 31.03, 42, 1, 99, 42));
-        Inventory.addPart(new Outsourced(getPartIDCount(), "Plutonium", 75, 2, 1, 250, "Czech"));
-    }
-
-    private void defaultProducts() {
-        int productID = Inventory.getProductIDCount();
-        ObservableList<Part> emptyParts = FXCollections.observableArrayList();
-        Product product1 = new Product(productID, "No Parts", 999, 25, 1, 50);
-        product1.setProductParts(emptyParts);
-        Inventory.addProduct(product1);
-        
-        ObservableList<Part> copyParts = Inventory.lookupPart("Flux");
-        Product product2 = new Product(Inventory.getProductIDCount(), "One Part", 234.11, 12, 1, 999);
-        product2.setProductParts(copyParts);
-        Inventory.addProduct(product2);
-    }
-
-    public void setDefaults() {
-        defaultParts();
-        defaultProducts(); 
-    }
-
 }

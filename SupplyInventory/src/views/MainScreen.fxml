@@ -79,7 +79,7 @@
             </TableView>
             <HBox layoutX="287.0" layoutY="284.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="28.0" prefWidth="231.0">
                <children>
-                  <Button maxHeight="-Infinity" minHeight="-Infinity" minWidth="60.0" mnemonicParsing="false" onAction="#addProduct" prefHeight="25.0" text="Add" />
+                  <Button maxHeight="-Infinity" minHeight="-Infinity" minWidth="60.0" mnemonicParsing="false" onAction="#buttonAdd" prefHeight="25.0" text="Add" />
                   <Button maxHeight="-Infinity" minHeight="-Infinity" minWidth="60.0" mnemonicParsing="false" onAction="#changeProduct" prefHeight="25.0" text="Modify">
                      <HBox.margin>
                         <Insets left="20.0" />

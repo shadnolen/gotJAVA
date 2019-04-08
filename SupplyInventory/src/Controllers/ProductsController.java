@@ -33,7 +33,7 @@ import javafx.stage.Stage;
 /**
  * FXML Controller class
  *
- * @author Duncan
+ * @author Snolen
  */
 public class ProductsController {
 

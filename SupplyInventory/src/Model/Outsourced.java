@@ -12,7 +12,7 @@ import javafx.beans.property.StringProperty;
 
 /**
  *
- * @author Duncan
+ * @author Snolen
  */
 public class Outsourced extends Part {
     private final StringProperty companyName;

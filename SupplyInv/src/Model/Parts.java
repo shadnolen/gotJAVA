@@ -51,4 +51,5 @@ public class Parts {
         public void setEmailAddress(String email){
             emailAddress.set(email);
         }
+        
 }

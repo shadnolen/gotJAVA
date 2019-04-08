@@ -6,6 +6,9 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.control.cell.*?>
+<?import javafx.collections.*?>
+<?import Model.Parts?> 
 
 <GridPane id="gridPane" alignment ="CENTER" prefHeight="400" prefWidth="800" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.MainScreenController">
     <padding>
@@ -16,25 +19,44 @@
    
 
     <TableView fx:id="tableView" GridPane.columnIndex="0" GridPane.rowIndex="1">
+        
        
         <columns>         
-            <TableColumn text="First Name"></TableColumn> 
+            <TableColumn fx:id="firstNameCoumn" prefWidth="100"  text="First Name">
             <cellValueFactory><PropertyValueFactory property="firstName" /> </cellValueFactory>
+          </TableColumn> 
           
-            <TableColumn text="Last Name"></TableColumn> 
+            <TableColumn text="Last Name">
             <cellValueFactory><PropertyValueFactory property="lastName" /> </cellValueFactory>
+          </TableColumn> 
           
-            <TableColumn text="Email Address"></TableColumn> 
+            <TableColumn text="Email Address"  prefWidth="250.0" >
             <cellValueFactory><PropertyValueFactory property="emailAddress" /> </cellValueFactory>
-      
-        </columns>
-        
-        <items>
-            <FXCollections fx:factory="obervableArrayList"> 
-            <Parts firstName="Test First 1" lastName="Test Last 1" emailAddress="Test1@email.com"/>
-            </FXCollections>            
-        </items>
-    </TableView>
+      </TableColumn> 
+     </columns>
+     
+  
+     
+  
+<items>
+    <FXCollections fx:factory="observableArrayList">
+        <Parts firstName="Jacob" lastName="Smith"  
+           emailAddress="jacob.smith@example.com"/>
+        <Parts firstName="Isabella" lastName="Johnson" 
+           emailAddress="isabella.johnson@example.com"/>
+        <Parts firstName="Ethan" lastName="Williams" 
+            emailAddress="ethan.williams@example.com"/>
+        <Parts firstName="Emma" lastName="Jones"
+            emailAddress="emma.jones@example.com"/>
+        <Parts firstName="Michael" lastName="Brown" 
+             emailAddress="michael.brown@example.com"/>
+    </FXCollections>
+</items>
+
+   <sortOrder>
+         <fx:reference  source="firstNameCoumn"/>
+     </sortOrder>
+</TableView>
  
    
    

@@ -9,6 +9,7 @@
 <?import javafx.scene.control.cell.*?>
 <?import javafx.collections.*?>
 <?import Model.Parts?> 
+<?import Model.Formatted?>
 
 <GridPane id="gridPane" alignment ="CENTER" prefHeight="400" prefWidth="800" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.MainScreenController">
     <padding>
@@ -24,14 +25,23 @@
         <columns>         
             <TableColumn fx:id="firstNameCoumn" prefWidth="100"  text="First Name">
             <cellValueFactory><PropertyValueFactory property="firstName" /> </cellValueFactory>
+            <cellFactory>
+                <Formatted alig="center"></Formatted>
+            </cellFactory>
           </TableColumn> 
           
             <TableColumn text="Last Name">
             <cellValueFactory><PropertyValueFactory property="lastName" /> </cellValueFactory>
+            <cellFactory>
+                <Formatted alig="center"></Formatted>
+            </cellFactory>
           </TableColumn> 
           
             <TableColumn text="Email Address"  prefWidth="250.0" >
             <cellValueFactory><PropertyValueFactory property="emailAddress" /> </cellValueFactory>
+            <cellFactory>
+                <Formatted alig="center"></Formatted>
+            </cellFactory>
       </TableColumn> 
      </columns>
      
@@ -58,6 +68,16 @@
      </sortOrder>
 </TableView>
  
-   
+   <HBox spacing="10" alignment="bottom_right" GridPane.columnIndex="0" 
+          GridPane.rowIndex="2">
+          <TextField fx:id="firstNameField" promptText="First Name"
+               prefWidth="90"/>
+          <TextField fx:id="lastNameField" promptText="Last Name"
+               prefWidth="90"/>
+          <TextField fx:id="emailField" promptText="email"
+               prefWidth="150"/>
+          <Button text="Add" onAction="#addPerson"/>
+     </HBox>
+
    
 </GridPane>

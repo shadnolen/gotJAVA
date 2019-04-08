@@ -16,16 +16,24 @@
    
 
     <TableView fx:id="tableView" GridPane.columnIndex="0" GridPane.rowIndex="1">
-        <columns>
-         
+       
+        <columns>         
             <TableColumn text="First Name"></TableColumn> 
+            <cellValueFactory><PropertyValueFactory property="firstName" /> </cellValueFactory>
+          
             <TableColumn text="Last Name"></TableColumn> 
+            <cellValueFactory><PropertyValueFactory property="lastName" /> </cellValueFactory>
+          
             <TableColumn text="Email Address"></TableColumn> 
-            
+            <cellValueFactory><PropertyValueFactory property="emailAddress" /> </cellValueFactory>
+      
         </columns>
         
-        
-        
+        <items>
+            <FXCollections fx:factory="obervableArrayList"> 
+            <Parts firstName="Test First 1" lastName="Test Last 1" emailAddress="Test1@email.com"/>
+            </FXCollections>            
+        </items>
     </TableView>
  
    

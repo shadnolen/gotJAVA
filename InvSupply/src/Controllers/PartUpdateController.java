@@ -20,14 +20,20 @@ import javafx.scene.control.ToggleGroup;
  *
  * @author shadn
  */
-public class PartsUpdateController implements Initializable {
+public class PartUpdateController implements Initializable {
 
     @FXML
     private RadioButton inhousePart;
     @FXML
+    private ToggleGroup toggle;
+    @FXML
     private RadioButton outsourcedPart;
     @FXML
+    private TextField partID;
+    @FXML
     private TextField partName;
+    @FXML
+    private TextField partSupply;
     @FXML
     private TextField partCost;
     @FXML
@@ -35,17 +41,11 @@ public class PartsUpdateController implements Initializable {
     @FXML
     private TextField partMin;
     @FXML
-    private Label partLabel;
-    @FXML
-    private TextField partID;
-    @FXML
-    private TextField partSupply;
-    @FXML
     private TextField machineID;
     @FXML
-    private TextField company;
+    private TextField companyID;
     @FXML
-    private ToggleGroup source;
+    private Label partLabel;
 
     /**
      * Initializes the controller class.
@@ -56,15 +56,15 @@ public class PartsUpdateController implements Initializable {
     }    
 
     @FXML
-    private void partType(ActionEvent event) {
+    private void source(ActionEvent event) {
     }
 
     @FXML
-    private void saveButton(ActionEvent event) {
+    private void savePart(ActionEvent event) {
     }
 
     @FXML
-    private void cancelButton(ActionEvent event) {
+    private void cancelPart(ActionEvent event) {
     }
     
 }

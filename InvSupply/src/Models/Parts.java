@@ -18,7 +18,7 @@ public abstract class Parts {
 protected StringProperty partName;
 protected IntegerProperty partID;
 protected DoubleProperty partPrice;
-protected IntegerProperty supplyCount;
+protected IntegerProperty partSupply;
 protected IntegerProperty partMax;
 protected IntegerProperty partMin;
 
@@ -86,15 +86,15 @@ public IntegerProperty partMinProperty(){
 }
 
 public void setSupplyCount(int partMax){
-    this.supplyCount.set(partMax);
+    this.partSupply.set(partMax);
 }
 
 public int  getSupplyCount(){
-    return this.supplyCount.get();
+    return this.partSupply.get();
 }
 
 public IntegerProperty supplyCountProperty(){
-    return supplyCount;
+    return partSupply;
 }
 
 

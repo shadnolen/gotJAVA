@@ -20,7 +20,7 @@ import javafx.scene.control.TextField;
  *
  * @author shadn
  */
-public class ProductScreenController implements Initializable {
+public class ProductUpdateController implements Initializable {
 
     @FXML
     private TextField productID;

@@ -22,7 +22,7 @@ public class InHouse extends Parts{
     private final IntegerProperty machID;
     
     
-    public InHouse(int partID, String partName, double partPrice, int partSupply, int partMax, int partMin){
+    public InHouse(int partID, String partName, double partPrice, int partSupply, int partMax, int partMin, int machID){
     
     this.partID = new SimpleIntegerProperty(partID);
     this.partName = new SimpleStringProperty(partName);
@@ -35,7 +35,7 @@ public class InHouse extends Parts{
     
     public InHouse(){
     this.partID = new SimpleIntegerProperty(0);
-    this.partName = new SimpleStringProperty(0);
+    this.partName = new SimpleStringProperty(" ");
     this.partPrice = new SimpleDoubleProperty(0);
     this.partSupply = new SimpleIntegerProperty(0);
     this.partMax= new SimpleIntegerProperty(0);

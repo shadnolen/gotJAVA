@@ -28,7 +28,7 @@
               <columns>
                 <TableColumn fx:id="partIDCV" maxWidth="60.0" minWidth="60.0" prefWidth="60.0" resizable="false" text="Part ID" />
                 <TableColumn fx:id="partNameCV" maxWidth="120.0" minWidth="120.0" prefWidth="120.0" resizable="false" text="Part Name" />
-                  <TableColumn fx:id="partSupplyCV" maxWidth="132.0" minWidth="110.0" prefWidth="132.0" resizable="false" text="Inventory Level" />
+                  <TableColumn fx:id="partSupplyCV" maxWidth="132.0" minWidth="110.0" prefWidth="132.0" resizable="false" text="Supply Level" />
                   <TableColumn fx:id="partCostCV" maxWidth="189.0" minWidth="128.0" prefWidth="167.0" resizable="false" text="Price/Cost per Unit" />
               </columns>
             </TableView>
@@ -73,7 +73,7 @@
                <columns>
                   <TableColumn fx:id="productIdCV" maxWidth="84.0" minWidth="84.0" prefWidth="84.0" resizable="false" text="Product ID" />
                   <TableColumn fx:id="productNameCV" maxWidth="120.0" minWidth="120.0" prefWidth="120.0" resizable="false" text="Product Name" />
-                  <TableColumn fx:id="productSupplyCV" maxWidth="143.0" minWidth="110.0" prefWidth="143.0" resizable="false" text="Inventory Supply" />
+                  <TableColumn fx:id="productSupplyCV" maxWidth="143.0" minWidth="110.0" prefWidth="143.0" resizable="false" text="Supply Level" />
                   <TableColumn fx:id="productCostColumn" maxWidth="184.0" minWidth="125.0" prefWidth="151.0" resizable="false" text="Price per Unit" />
                </columns>
             </TableView>

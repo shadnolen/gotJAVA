@@ -21,6 +21,17 @@ import javafx.beans.property.SimpleStringProperty;
 public class InHouse extends Parts{
     private final IntegerProperty machID;
     
+     public int getMachID(){
+        return this.machID.get();
+    }
+    
+    public void setMachID(int machID){
+        this.machID.set(machID);
+    }
+    
+    public IntegerProperty machIDP(){
+        return machID;
+    }
     
     public InHouse(int partID, String partName, double partPrice, int partSupply, int partMax, int partMin, int machID){
     
@@ -43,17 +54,7 @@ public class InHouse extends Parts{
     this.machID = new SimpleIntegerProperty(0);    
     }
     
-    public int getMachID(){
-        return this.machID.get();
-    }
-    
-    public void setMachID(int machID){
-        this.machID.set(machID);
-    }
-    
-    public IntegerProperty machIDP(){
-        return machID;
-    }
+   
     
     
 }

@@ -58,7 +58,7 @@ public class SupplyInv {
         partFound = partsOL;
     }else{
             for(int i = 0; i < partsOL.size(); i++){
-                if(partsOL.get(i).getName().toLowerCase().contains(searchText.toLowerCase())){
+                if(partsOL.get(i).getPartName().toLowerCase().contains(searchText.toLowerCase())){
                     partFound.add(partsOL.get(i));
                 }
             }            
@@ -92,7 +92,7 @@ public class SupplyInv {
             productsFound = productsOL;
         }else{
             for(int i = 0; i < productsOL.size(); i++){
-                if(productsOL.get(i).getName().toLowerCase().contains(searchText.toLowerCase())){
+                if(productsOL.get(i).getProductName().toLowerCase().contains(searchText.toLowerCase())){
                     productsFound.add(productsOL.get(i));
                 }
             }

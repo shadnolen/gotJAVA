@@ -19,7 +19,7 @@ import javafx.beans.property.SimpleStringProperty;
  * @author shadn
  */
 public class InHouse extends Parts{
-    private IntegerProperty machID;
+    private final IntegerProperty machID;
     
     
     public InHouse(int partID, String partName, double partPrice, int partSupply, int partMax, int partMin){

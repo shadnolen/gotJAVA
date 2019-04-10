@@ -67,4 +67,41 @@ public class SupplyInv {
     }
     
     // Adding to the Products
+    
+    public static ObservableList<Products> getProductsOL(){
+        return productsOL;
+    }
+    
+    public static void addProducts(Products products){
+        productsOL.add(products);
+    }
+    
+    public static void removeProducts(Products products){
+        productsOL.remove(products);
+    }
+    
+    public static int getCountProduct(){
+        countProduct += 1;
+        return countProduct;
+    }
+    
+    public static ObservableList<Products>  productLookup(String searchText){
+        ObservableList<Products> productsFound = FXCollections.observableArrayList();
+       
+        if(searchText.length() == 0){
+            productsFound = productsOL;
+        }else{
+            for(int i = 0; i < productsOL.size(); i++){
+                if(productsOL.get(i).getName().toLowerCase().contains(searchText.toLowerCase())){
+                    productsFound.add(productsOL.get(i));
+                }
+            }
+        }
+        return productsFound;
+    }
+    
+    public static void updateProduct(int productIdex, Products products){
+        productsOL.set(productIdex, products);
+    }
+    
 }

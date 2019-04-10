@@ -47,6 +47,65 @@ public class Products {
    }
    
    
+   // aPL = associatedPartsList
+   public void setProductPartList(ObservableList<Parts> aPL){
+       productPartsList = aPL;
+   }
+   
+   public ObservableList<Parts> getProductPartList(){
+       return productPartsList;
+   }
+   
+   public void setProductID(int productID){
+      this.productID.set(productID);
+   }
+   
+   public int getProductID(){
+        return this.productID.get();
+   }
+   
+   public IntegerProperty productIDProperty(){
+       return productID;
+   }
+   
+   //Product name get and set
+   public void setProductName(String productName){
+       this.productName.set(productName);
+   }
+   
+   public String getProductName(){
+       return this.productName.get();
+   }
+   
+   public StringProperty productNameProperty(){
+       return productName;
+   }
+   
+     //Product pirce get and set
+   public void setProductPrice(double productPrice){
+       this.productPrice.set(productPrice);
+   }
+   
+   public double getProductPrice(){
+       return this.productPrice.get();
+   }
+   
+   public DoubleProperty productPriceProperty(){
+       return productPrice;
+   }
+   
+   public void setProductSupplyCount(int productSupplyCount){
+       this.productSupplyCount.set(productSupplyCount);
+   }
+   
+   public int getProductSupplyCount(){
+       return this.productSupplyCount.get();
+   }
+   
+   public IntegerProperty productSupplyCountProperty(){
+       return productSupplyCount;
+   }
+   
    
     
 }

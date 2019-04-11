@@ -7,11 +7,13 @@ package Controllers;
 
 import Models.Parts;
 import Models.Products;
+import Models.SupplyInv;
 import static Models.SupplyInv.getPartsOL;
 import static Models.SupplyInv.getProductsOL;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -68,7 +70,6 @@ public class MainScreenController implements Initializable {
      * Initializes the controller class.
      */
     
-    @FXML
     void partsPage (ActionEvent event) throws IOException{
         Parent parentPage = FXMLLoader.load(getClass().getResource("/Views/PartUpdate.fxml"));
         Scene scene = new Scene(parentPage);
@@ -84,6 +85,17 @@ public class MainScreenController implements Initializable {
 
     @FXML
     private void searchParts(ActionEvent event) {
+          String text = searchPart.getText();
+        ObservableList partFound = SupplyInv.partLookUp(text);
+        if(partFound.isEmpty()){
+            Alert alert = new Alert(AlertType.ERROR);
+            alert.initModality(Modality.APPLICATION_MODAL);
+            alert.setTitle("No Match Found");
+            alert.setHeaderText("Nothing Found Matching" + text);
+            alert.showAndWait();
+        }else{
+            productTable.setItems(partFound);
+        }
     }
 
     @FXML
@@ -93,7 +105,7 @@ public class MainScreenController implements Initializable {
 
     
     @FXML
-    private void ModifyButton(ActionEvent event) throws IOException {
+    private void productModifyButton(ActionEvent event) throws IOException {
 
         Products productSelect = productTable.getSelectionModel().getSelectedItem();
         index = getProductsOL().indexOf(productSelect);
@@ -107,7 +119,7 @@ public class MainScreenController implements Initializable {
         } else {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.initModality(Modality.APPLICATION_MODAL);
-            alert.setTitle("No Part selected");
+            alert.setTitle("No Part Selected");
             alert.setHeaderText("Please select a part from the existing list to modify"); 
             alert.showAndWait();
         }
@@ -120,6 +132,17 @@ public class MainScreenController implements Initializable {
 
     @FXML
     private void searchProductButton(ActionEvent event) {
+        String text = productSearch.getText();
+        ObservableList productFound = SupplyInv.productLookup(text);
+        if(productFound.isEmpty()){
+            Alert alert = new Alert(AlertType.ERROR);
+            alert.initModality(Modality.APPLICATION_MODAL);
+            alert.setTitle("No Match Found");
+            alert.setHeaderText("Nothing Found Matching" + text);
+            alert.showAndWait();
+        }else{
+            productTable.setItems(productFound);
+        }
     }
 
     @FXML
@@ -132,7 +155,7 @@ public class MainScreenController implements Initializable {
     }
 
     @FXML
-    private void productModifyButton(ActionEvent event) throws IOException {
+    private void modifyButton(ActionEvent event) throws IOException {
         
         Parts partSelect = partTable.getSelectionModel().getSelectedItem();
         

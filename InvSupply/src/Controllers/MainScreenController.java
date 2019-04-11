@@ -7,6 +7,7 @@ package Controllers;
 
 import Models.Parts;
 import Models.Products;
+import static Models.SupplyInv.getPartsOL;
 import static Models.SupplyInv.getProductsOL;
 import java.io.IOException;
 import java.net.URL;
@@ -36,7 +37,7 @@ public class MainScreenController implements Initializable {
     @FXML
     private TextField searchPart;
     @FXML
-    private TableView<?> partTable;
+    private TableView<Parts> partTable;
     @FXML
     private TableColumn<?, ?> partIDCV;
     @FXML
@@ -131,7 +132,25 @@ public class MainScreenController implements Initializable {
     }
 
     @FXML
-    private void productModifyButton(ActionEvent event) {
+    private void productModifyButton(ActionEvent event) throws IOException {
+        
+        Parts partSelect = partTable.getSelectionModel().getSelectedItem();
+        
+        index = getPartsOL().indexOf(partSelect);
+        
+         if(partSelect != null) {
+        Parent parentPage = FXMLLoader.load(getClass().getResource("/Views/PartUpdate.fxml"));
+        Scene scene = new Scene(parentPage);
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        stage.setScene(scene);
+        stage.show();           
+        } else {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.initModality(Modality.APPLICATION_MODAL);
+            alert.setTitle("No Part selected");
+            alert.setHeaderText("Please select a part from the existing list to modify"); 
+            alert.showAndWait();
+     }
     }
 
     @FXML

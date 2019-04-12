@@ -78,6 +78,7 @@ public class MainScreenController implements Initializable {
         stage.show();  
         stage.setScene(scene);
     }
+    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
@@ -157,8 +158,7 @@ public class MainScreenController implements Initializable {
     @FXML
     private void modifyButton(ActionEvent event) throws IOException {
         
-        Parts partSelect = partTable.getSelectionModel().getSelectedItem();
-        
+        Parts partSelect = partTable.getSelectionModel().getSelectedItem();        
         index = getPartsOL().indexOf(partSelect);
         
          if(partSelect != null) {
@@ -186,6 +186,7 @@ public class MainScreenController implements Initializable {
         alert.setTitle("Confirm Exit");
         alert.setHeaderText("Did you Save?");
         alert.setContentText("Click to Exit");
+     //  Option<Button>
     }
     
 }

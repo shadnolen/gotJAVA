@@ -122,8 +122,8 @@ public class MainScreenController implements Initializable {
         } else {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.initModality(Modality.APPLICATION_MODAL);
-            alert.setTitle("No Part Selected");
-            alert.setHeaderText("Please select a part from the existing list to modify"); 
+            alert.setTitle("No Product Selected");
+            alert.setHeaderText("Please select a Product  from the existing list to modify"); 
             alert.showAndWait();
         }
   

@@ -19,6 +19,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
@@ -69,8 +70,87 @@ public class PartUpdateController implements Initializable {
     private void source(ActionEvent event) {
     }
 
-   public Boolean isValid(){
-        return null;
+   public Boolean isValid(String partID, String partName, String partCost,  String partMax, String partMin, String partSupply, String companyName, String machineID){
+       String error = " ";
+       Integer intMax = null,  intMin=null,  intSupply=null;
+       Double price = null;.
+       Boolean valid;
+       
+       if(partName == null || partName.length() == 0){
+           error  += ("Part is empty");
+       }
+       try {
+            intMin = Integer.parseInt(min);
+        } catch (Exception e) {
+            error += ("Minimum must be numeric\n");
+        }
+        
+        try {
+            intMax = Integer.parseInt(max);
+        } catch (Exception e) {
+            error += ("Maximum must be numeric\n");
+        }
+        
+        if(intMin != null && intMin < 0) {
+            error += ("Minimum cannot be negative\n");
+        }
+        
+        if(intMin != null && intMax != null && intMin > intMax) {
+            error += ("Minimum must be less than maximum\n");
+        }
+        
+        try {
+            intSupply = Integer.parseInt(intSupply);
+            
+            if(intMin != null && intMax != null && intSupply < intMin && intSupply > intMax) {
+               error += ("Inventory must be between minimum and maximum\n"); 
+            }
+        } catch (Exception e) {
+            error += ("Inventory must be numeric\n");
+        }
+        
+        try {
+            price = Double.parseDouble(price);
+            
+            if(price <= 0) {
+               error += ("Price must be greater than 0\n"); 
+            }
+        } catch (Exception e) {
+            error += ("Price must be numeric\n");
+        }
+        
+        try {
+            if (this.toggle.getSelectedToggle().equals(this.inhousePart)){
+                //intMachineId
+                try {
+                    Integer.parseInt(machineID);
+                } catch (Exception e) {
+                    error += ("Machine ID must be numeric\n");
+                }
+            } else if (this.toggle.getSelectedToggle().equals(this.outsourcedPart)) {
+                if(companyID == null || companyID.length() == 0) {
+                    error += ("Company Name is blank\n");
+                }
+            }    
+        } catch(Exception e) {
+           error += ("Part type of In-House or Outsourced must be selected\n"); 
+        }
+        
+        if (error.length() > 0) {
+            error += ("\nFix the listed errors and save again");
+            
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Part Validation Error");
+            alert.setHeaderText("Error");
+            alert.setContentText(error);
+            alert.showAndWait();
+            valid = false;
+        } else {
+            valid = true;
+        }
+        
+        return valid;
+    
         
     }
     @FXML

@@ -7,6 +7,9 @@ package javarefresh;
 
 import static java.lang.Double.max;
 import java.util.Arrays;
+import static java.util.Calendar.DATE;
+import static javarefresh.Stairs.countPaths;
+
 
 /**
  *
@@ -54,6 +57,8 @@ public class JavaRefresh {
      */
     public static void main(String[] args) {
     System.out.println(indices);
+    System.out.println(DATE);
+    System.out.print(countPaths);
     }
     
 }

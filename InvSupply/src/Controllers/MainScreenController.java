@@ -130,7 +130,12 @@ public class MainScreenController implements Initializable {
  
   }
     @FXML
-    private void deleteButton(ActionEvent event) {
+    private void deleteButton(ActionEvent event)throws IOException{
+        Parent parent = FXMLLoader.load(getClass().getResource("/Views/MainScreen.fxml"));
+        Scene scene = new Scene(parent);
+        Stage stage = (Stage)((Node) event.getSource()).getScene().getWindow();
+        stage.setScene(scene);
+        stage.showAndWait();
     }
 
     @FXML

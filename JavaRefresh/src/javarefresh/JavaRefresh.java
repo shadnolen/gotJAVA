@@ -5,43 +5,20 @@
  */
 package javarefresh;
 
-import static java.lang.Double.max;
+
 import java.util.Arrays;
 import static java.util.Calendar.DATE;
 
 
-
+import java.awt.*;
 /**
  *
  * @author shadn
  */
 public class JavaRefresh {
     
-       //how to manipulate characters in a string.  
-        String bandNames;
-        int fans;
-        String [] bands = {"Pink-Floyd",  "Slayer", "Kreator"};
-        private int bandsCount = 0;
-        
-        public void fan(String bandNames, int fans){
-            this.bandNames = bandNames;
-            this.fans = fans;
-        }
-        
-        public void fansDB(){
-            System.out.print("Some like it, Louder then NlogN");
-        }
-        
-        public int loudness(){
-            return this.fans * 7;
-        }
-        
-        public void fansNoise(){
-        this.bandsCount = (this.bandsCount +1) %5;
-        String myBand = this.bands[this.bandsCount];
-            System.out.println(myBand);
-}
-        
+    
+   
 
     //Working on inexing
     private static int[] index;
@@ -89,14 +66,21 @@ public class JavaRefresh {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-  
      
+        //Simple math fuctions 
+     double powerExample = Math.pow(5, 10);
+     
+     //Passing Variables
+     double sroot = Math.sqrt(powerExample);
     
-    System.out.println(index);
+     System.out.println(powerExample);
+    System.out.println(sroot);
+    
+    System.out.println(Arrays.toString(index));
     System.out.println(DATE);
  
     }
-    
+     
     //String replace
     
     

@@ -11,6 +11,7 @@ import static java.util.Calendar.DATE;
 
 
 import java.awt.*;
+import java.util.Random;
 /**
  *
  * @author shadn
@@ -68,14 +69,39 @@ public class JavaRefresh {
     public static void main(String[] args) {
      
         //Simple math fuctions 
-     double powerExample = Math.pow(5, 10);
+        Random random = new Random();
+        
+     double powerExample = Math.pow(random.nextDouble(), random.nextDouble());
      
      //Passing Variables
      double sroot = Math.sqrt(powerExample);
+     
+     
+     //Coin Flip 
+     CoinFlip flipNow = new CoinFlip();
+     System.out.println("Before the Flip:  " + flipNow.headsUp);
+     
+     for(int i=0 ;i < 5 ; i++){
+         System.out.println("Flip:  " + flipNow.headsUp);
+         flipNow.flipIt();
+         System.out.println("After Flip " + flipNow.headsUp);
+     }
+     
+     //Dice rolling this time 
+     DiceRoller dice1 = new DiceRoller();
+      DiceRoller dice2 = new DiceRoller();   
     
-     System.out.println(powerExample);
-    System.out.println(sroot);
+    // DiceRoller preRoll = new DiceRoller();
+    System.out.println("What are we starting with " + dice1.preRoll);
+  
+     System.out.println("You rolled a : " + dice1.roller());
+      System.out.println("You rolled a : " + dice2.roller());
+     System.out.println("Total:     ");
     
+     
+// Math outputs 
+     System.out.println(powerExample);     
+    System.out.println(sroot);    
     System.out.println(Arrays.toString(index));
     System.out.println(DATE);
  

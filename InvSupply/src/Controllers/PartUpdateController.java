@@ -73,20 +73,20 @@ public class PartUpdateController implements Initializable {
    public Boolean isValid(String partID, String partName, String partCost,  String partMax, String partMin, String partSupply, String companyName, String machineID){
        String error = " ";
        Integer intMax = null,  intMin=null,  intSupply=null;
-       Double price = null;.
+      
        Boolean valid;
        
        if(partName == null || partName.length() == 0){
            error  += ("Part is empty");
        }
        try {
-            intMin = Integer.parseInt(min);
+            intMin = Integer.parseInt(partMin);
         } catch (Exception e) {
             error += ("Minimum must be numeric\n");
         }
         
         try {
-            intMax = Integer.parseInt(max);
+            intMax = Integer.parseInt(partMax);
         } catch (Exception e) {
             error += ("Maximum must be numeric\n");
         }
@@ -100,7 +100,7 @@ public class PartUpdateController implements Initializable {
         }
         
         try {
-            intSupply = Integer.parseInt(intSupply);
+            intSupply = Integer.parseInt(partSupply);
             
             if(intMin != null && intMax != null && intSupply < intMin && intSupply > intMax) {
                error += ("Inventory must be between minimum and maximum\n"); 
@@ -110,7 +110,7 @@ public class PartUpdateController implements Initializable {
         }
         
         try {
-            price = Double.parseDouble(price);
+            cost = Double.parseDouble(price);
             
             if(price <= 0) {
                error += ("Price must be greater than 0\n"); 
@@ -155,46 +155,44 @@ public class PartUpdateController implements Initializable {
     }
     @FXML
     private void savePart(ActionEvent event) throws IOException{
-        if(isValid( this.partID.getText(),  this.partName.getText(), this.partCost.getText(), this.partMax.getText(),
+        if(!isValid( this.partID.getText(),  this.partName.getText(), this.partCost.getText(), this.partMax.getText(),
                 this.partMin.getText(), this.partSupply.getText(), this.companyID.getText(), this.machineID.getText())){
-            if(this.toggle.getSelectedToggle().equals(.this.InHouse)){
-                   
-                    InHouse part = new InHouse();
-                    
-                    part.setMachID(Integer.parseInt(this.machineID.getText()));
+        } 
+            if (this.toggle.getSelectedToggle().equals(this.inhousePart)){
+                InHouse part = new InHouse();
+                part.setMachID(Integer.parseInt(this.machineID.getText()));
+                //common mutators
+                part.setPartName(this.partName.getText());
+                part. setSupplyCount(Integer.parseInt(this.partSupply.getText()));
+                part.setPartMin(Integer.parseInt(this.partMin.getText()));
+                part.setPartMax(Integer.parseInt(this.partMax.getText()));
+                part.setPartPrice(Double.parseDouble(this.partCost.getText()));
+                
+                if(this.partID.getText().length() == 0) {
+                    part.setPartID(partSupply.getPartIDCount());
+                    SupplyInv.addPart(part);
+                } else {
                     part.setPartID(Integer.parseInt(this.partID.getText()));
-                    part.setPartName(this.partName.getText());
-                    part.setPartPrice(Integer.parseInt(this.partCost.getText()));
-                    part.setPartMax(Integer.parseInt(this.partMax.getText()));
-                    part.setPartMin(Integer.parseInt(this.partMin.getText()));
-                    
-                    if(this.partID.getText().length()==0){
-                   
-                        part.setPartID(SupplyInv.getCountPart());                   
-                     }else{
-                        part.setPartID(Integer.parseInt(this.partID.getText()));
-                        SupplyInv.updatePart(selectedIndex(), part);
-                    }
-              }else{
-                   
-                    OutSourced part = new OutSourced();
-                    
-                    part.setCompanyName(Integer.parseInt(this.companyID.getText()));
-                    part.setPartID(Integer.parseInt(this.partID.getText()));
-                    part.setPartName(this.partName.getText());
-                    part.setPartPrice(Integer.parseInt(this.partCost.getText()));
-                    part.setPartMax(Integer.parseInt(this.partMax.getText()));
-                    part.setPartMin(Integer.parseInt(this.partMin.getText()));
-                    
-                    if(this.partID.getText().length()==0){
-                   
-                        part.setPartID(SupplyInv.getCountPart());                   
-                     }else{
-                        part.setPartID(Integer.parseInt(this.partID.getText()));
-                        SupplyInv.updatePart(selectedIndex(), part);
-                    }
-              }
-            
+                    SupplyInv.updatePart(selectedIndex(), part);
+                }
+            } else {
+                OutSourced part = new OutSourced();
+                
+                part.setCompanyID(Integer.parseInt(this.companyID.getText()));
+                part.setPartID(Integer.parseInt(this.partID.getText()));
+                part.setPartName(this.partName.getText());
+                part.setPartPrice(Integer.parseInt(this.partCost.getText()));
+                part.setPartMax(Integer.parseInt(this.partMax.getText()));
+                part.setPartMin(Integer.parseInt(this.partMin.getText()));
+                
+                if(this.partID.getText().length()==0){
+                
+                part.setPartID(SupplyInv.getCountPart());
+                }else{
+                part.setPartID(Integer.parseInt(this.partID.getText()));
+                SupplyInv.updatePart(selectedIndex(), part);
+                }
+                }
         }
     }
     

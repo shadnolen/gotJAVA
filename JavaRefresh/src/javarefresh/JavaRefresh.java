@@ -90,7 +90,7 @@ public class JavaRefresh {
      //Dice rolling this time 
      DiceRoller dice1 = new DiceRoller();
       DiceRoller dice2 = new DiceRoller();   
-    
+    //int sum = dice1 add(dice2);
     // DiceRoller preRoll = new DiceRoller();
     System.out.println("What are we starting with " + dice1.preRoll);
   

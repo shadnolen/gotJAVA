@@ -110,9 +110,9 @@ public class PartUpdateController implements Initializable {
         }
         
         try {
-            cost = Double.parseDouble(price);
+            partCost = Double.parseDouble(price);
             
-            if(price <= 0) {
+            if(partCost <= 0) {
                error += ("Price must be greater than 0\n"); 
             }
         } catch (Exception e) {
@@ -192,8 +192,7 @@ public class PartUpdateController implements Initializable {
                 part.setPartID(Integer.parseInt(this.partID.getText()));
                 SupplyInv.updatePart(selectedIndex(), part);
                 }
-                }
-        }
+            }
     }
     
     

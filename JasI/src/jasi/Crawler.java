@@ -16,12 +16,10 @@ import java.util.Scanner;
 //Directory Crawler 
 public class Crawler {
     
- 
-   
-    
-   
-    
+  
     public static void main(String[] args){
+        
+        //input scanner
        Scanner keyboard = new Scanner(System.in);
        String fName = keyboard.nextLine();    
        System.out.println("Directory or file to crawl: ");  
@@ -34,6 +32,7 @@ public class Crawler {
        }
     }
     
+    //A recursive method for printing directorys 
     public static void print(File f){
         System.out.println(f.getPath());
         

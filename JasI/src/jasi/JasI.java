@@ -13,14 +13,17 @@ import java.util.Scanner;
  */
 public class JasI {
 
-    
+ 
     
     /**
      * 
      * @param args the command line arguments
      */
-    public static void main(String[] args) {
-          // System.out.println("Directory or file to crawl: ");
+    public static void main(String[] args, boolean Crawler, boolean Cars) {
+         //  Crawler crawl = new Crawler();
+           System.out.println("Directory or file to crawl: ");
+           System.out.print(Crawler);
+           System.out.print(Cars);
     
    }
 }

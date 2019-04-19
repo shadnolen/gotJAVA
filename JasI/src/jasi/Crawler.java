@@ -14,7 +14,7 @@ import java.util.Scanner;
  */
 
 //Directory Crawler 
-public class Crawler {
+public class Crawler extends JasI{
     
   
     public static void main(String[] args){

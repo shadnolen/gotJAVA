@@ -9,7 +9,7 @@ package jasi;
  *
  * @author shadn
  */
-public class Cars {
+public class Cars extends JasI {
     private String make;
     private String model;
     private int yearBuilt;   

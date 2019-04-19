@@ -5,10 +5,14 @@
  */
 package jasi;
 
+import java.util.HashMap;
+
 /**
  *
  * @author shadn
  */
-public class HashMaps {
+public class HashMaps extends JasI{
+    HashMap<String, String> bands = new HashMap<String, String>();
+    
     
 }

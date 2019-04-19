@@ -5,6 +5,7 @@
  */
 package javaapplicationii;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
@@ -43,9 +44,29 @@ public class JavaApplicationII {
            System.out.println(i);
         });
        
+       // Loop though the HashMap And print keys & values
        for(String i : bands.keySet()){
            System.out.println("Band: " + i + " Album: " + bands.get(i) );
        }
+       
+       
+       ArrayList<String> deathMetal = new ArrayList<String>();
+       deathMetal.add("Death");
+        deathMetal.add("Carcass");
+         deathMetal.add("Deicide");
+          deathMetal.add("Pestilence");
+           deathMetal.add("GorGuts");
+           
+      
+           System.out.println(deathMetal);
+           System.out.println(deathMetal.get(0));
+           System.out.println(deathMetal.get(1));
+           System.out.println(deathMetal.get(2));           
+           System.out.println(deathMetal.size());
+           
+           System.out.println(deathMetal.set(4, "Kreator"));
+           System.out.println(deathMetal);
+           
        
        
     }

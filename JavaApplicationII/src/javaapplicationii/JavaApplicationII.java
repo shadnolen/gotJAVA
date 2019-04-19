@@ -13,13 +13,34 @@ import java.util.HashMap;
  * @author shadn
  */
 public class JavaApplicationII {
-
-
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) {
-        
+    
+    //Creating methods  inside classes
+    static void myArrays(){
+     // ARRAYS   
+       ArrayList<String> deathMetal = new ArrayList<String>();
+       deathMetal.add("Death");
+        deathMetal.add("Carcass");
+         deathMetal.add("Deicide");
+          deathMetal.add("Pestilence");
+           deathMetal.add("GorGuts");
+           
+           //get all in array 
+           System.out.println(deathMetal);
+           //get elemet at array spot #
+           System.out.println(deathMetal.get(0));
+           //get elemet at array spot #
+           System.out.println(deathMetal.get(1));
+         //get elemet at array spot #
+           System.out.println(deathMetal.get(2));           
+           
+           //Get size of array
+           System.out.println(deathMetal.size());
+         
+           //Change element in array
+           System.out.println(deathMetal.set(4, "Kreator"));
+           System.out.println(deathMetal);    
+       }
+  static void myHash(){
         // HashMaps 
         HashMap<String, String> bands = new HashMap<>();
         
@@ -48,28 +69,17 @@ public class JavaApplicationII {
        for(String i : bands.keySet()){
            System.out.println("Band: " + i + " Album: " + bands.get(i) );
        }
-       
-       
-       ArrayList<String> deathMetal = new ArrayList<String>();
-       deathMetal.add("Death");
-        deathMetal.add("Carcass");
-         deathMetal.add("Deicide");
-          deathMetal.add("Pestilence");
-           deathMetal.add("GorGuts");
-           
-      
-           System.out.println(deathMetal);
-           System.out.println(deathMetal.get(0));
-           System.out.println(deathMetal.get(1));
-           System.out.println(deathMetal.get(2));           
-           System.out.println(deathMetal.size());
-           
-           System.out.println(deathMetal.set(4, "Kreator"));
-           System.out.println(deathMetal);
-           
-       
-       
-    }
- 
-    
+  }
+
+
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String[] args) {
+        
+      myHash();
+       myArrays();
+       myHash();
+       myArrays();
+    } 
 }

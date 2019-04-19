@@ -12,19 +12,18 @@ import java.util.Random;
  * @author shadn
  */
 public class DiceRoller {
-Random random;
-int preRoll= 0; 
- 
-    public  DiceRoller(){
-       
-   this.random = new Random();      
-    }
+
     
-    public int roller(){
-        int roll = this.random.nextInt(5) + 1;
-        this.preRoll = roll;
-        return roll;
-    }
+    int die1 =(int)(Math.random()*6+1);
+    int die2=(int) (Math.random()*6+1);
     
+public DiceRoller(){
+
+      int sum;
+    sum = die1 + die2;
+     System.out.println(sum);
+  
+ }
     
+     
 }

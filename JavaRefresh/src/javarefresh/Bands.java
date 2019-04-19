@@ -11,7 +11,7 @@ import java.util.Arrays;
  *
  * @author shadn
  */
-public class  Bands  extends JavaRefresh{
+public class  Bands  {
        //how to manipulate characters in a string.  
         String bandNames;
         int fans;
@@ -36,6 +36,8 @@ public class  Bands  extends JavaRefresh{
         String myBand = this.bands[this.bandsCount];
         
 }
+        
+        
        
 }            
         

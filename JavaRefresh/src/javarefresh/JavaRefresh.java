@@ -10,6 +10,7 @@ import java.util.Arrays;
 import static java.util.Calendar.DATE;
 
 
+
 import java.awt.*;
 import java.util.Random;
 /**
@@ -70,8 +71,7 @@ public class JavaRefresh {
      
         //Simple math fuctions 
         Random random = new Random();
-        
-     double powerExample = Math.pow(random.nextDouble(), random.nextDouble());
+        double powerExample = Math.pow(random.nextDouble(), random.nextDouble());
      
      //Passing Variables
      double sroot = Math.sqrt(powerExample);
@@ -81,31 +81,45 @@ public class JavaRefresh {
      CoinFlip flipNow = new CoinFlip();
      System.out.println("Before the Flip:  " + flipNow.headsUp);
      
-     for(int i=0 ;i < 5 ; i++){
+     for(int i=0 ;i < 2 ; i++){
          System.out.println("Flip:  " + flipNow.headsUp);
          flipNow.flipIt();
          System.out.println("After Flip " + flipNow.headsUp);
      }
      
      //Dice rolling this time 
-     DiceRoller dice1 = new DiceRoller();
-      DiceRoller dice2 = new DiceRoller();   
+ 
+      
+      
+
     //int sum = dice1 add(dice2);
     // DiceRoller preRoll = new DiceRoller();
-    System.out.println("What are we starting with " + dice1.preRoll);
+  //  System.out.println("What are we starting with " + dice1.preRoll);
   
-     System.out.println("You rolled a : " + dice1.roller());
-      System.out.println("You rolled a : " + dice2.roller());
-     System.out.println("Total:     ");
-    
+   //  System.out.println("Die 1 : " + dice1.sum());
+    //  System.out.println("Die 2 : " + dice2.roller());
      
+    
+      // HashSets UL
+HashSets hashset = new HashSets();
+     
+     
+ //    System.out.println(CountRolls);
 // Math outputs 
+System.out.print(random);
      System.out.println(powerExample);     
     System.out.println(sroot);    
     System.out.println(Arrays.toString(index));
     System.out.println(DATE);
+      //  System.out.println(hashset); 
  
     }
+    
+    public static double noReturn(int n){
+            return noReturn(n-1) + 1.0/n;
+        } 
+    
+   
      
     //String replace
     

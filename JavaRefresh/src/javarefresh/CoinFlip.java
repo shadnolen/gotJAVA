@@ -26,11 +26,11 @@ public class CoinFlip {
     
       if (headsUp == heads){
       //  return "Head up, Butter Cup";
-        System.out.println("test1");
+        System.out.println("Heads Up");
         
     }else{
     //   return "Tails foo";
-         System.out.println("test2");
+         System.out.println("Tails Down");
       }
       return null;
     }

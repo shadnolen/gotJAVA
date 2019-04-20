@@ -16,7 +16,9 @@ public class JavaApplicationIII {
      */
     public static void main(String[] args) {
      Fibit.FibIt();
-     PrimeInt.primeInt();
+     Strings.strings();
+   //  PrimeInt.primeInt();
+   
     }
     
 }

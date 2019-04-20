@@ -42,7 +42,14 @@ static int fibonacci(int number){
     return fibonacci(number-1) + fibonacci(number -2); 
 }
 
-
+//Simple counting method 
+static void cNum(){
+       for(int i = 0;i <= 6; i++){
+    System.out.println("Number " + i + " Stunner");
+}for (int i= 0; i>6;i++){
+    System.out.println("Number " + i + " Stunner");
+}
+}
    
   
     /**
@@ -51,12 +58,9 @@ static int fibonacci(int number){
     public static void main(String[] args) {
       
            HashST.myHash();
-          date();       
-        
+          date();    
           ArraySets.ArraySets();
-      for(int i = 0;i <= 6; i++){
-    System.out.println("Number " + i + " Stunner");
-}
+          cNum();
     }
 
       

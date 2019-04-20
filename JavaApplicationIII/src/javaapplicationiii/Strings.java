@@ -17,11 +17,13 @@ public class Strings {
        String textII = "When the sun burns red The earth will turn From blue to gray";
        
        System.out.printf(textI + textII + "\n");    
-       System.out.printf(textI.toLowerCase() + textII.toUpperCase() + "\n");    
+       
+       // Adding upper/lowercase to the mix
+       System.out.printf("\n" + textI.toLowerCase() + textII.toUpperCase() + "\n");    
        
        // Let's Flip it and reverse the String;
        String rText = new StringBuffer(textI).reverse().toString();
-       System.out.println("\n Flip it and reverse it: \n");
+       System.out.println("\n Flip it and reverse it:");
        System.out.printf(rText, textI);
   
    }

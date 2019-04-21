@@ -17,6 +17,8 @@ public class JavaApplicationIII {
     public static void main(String[] args) {
      Fibit.FibIt();
      Strings.strings();
+   System.out.print("\n");
+    Pnum.pnum();
    //  PrimeInt.primeInt();
    
     }

@@ -15,11 +15,27 @@ public class Strings {
        //basic string build 
        String textI = "Face the end of time, As we plunge headlong towards the day, Can't deny the signs \n" ;
        String textII = "When the sun burns red The earth will turn From blue to gray";
+      
+       
+     
+       
+       
+       
+       
        
        System.out.printf(textI + textII + "\n");    
        
        // Adding upper/lowercase to the mix
        System.out.printf("\n" + textI.toLowerCase() + textII.toUpperCase() + "\n");    
+       
+       //Count the Char
+      int textIII = textI.length();
+      System.out.println(textIII);
+      
+      System.out.println(" ");
+      
+       //Concat the Strings 
+      System.out.printf(textI.concat(textII).toUpperCase());
        
        // Let's Flip it and reverse the String;
        String rText = new StringBuffer(textI).reverse().toString();
@@ -27,5 +43,5 @@ public class Strings {
        System.out.printf(rText, textI);
   
    }
-     
+   
 }

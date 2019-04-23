@@ -5,22 +5,21 @@
  */
 package javaapplicationiv;
 
-import java.util.Scanner;
-
 /**
  *
  * @author shadn
  */
-public class JavaApplicationIV {
-    
-    
-   // Auto newAuto = new Auto();
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) {
- 
-     
+public class Queues <Items>{
+    private Node first;
+    private Node last;
+   
+    private class Node{
+        Items item;
+        Node nextItem;
     }
     
+    public void enqueue(Items item){
+    }
+    
+    public void  ded
 }

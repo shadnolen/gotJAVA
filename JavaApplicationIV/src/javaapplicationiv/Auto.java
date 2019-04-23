@@ -5,6 +5,8 @@
  */
 package javaapplicationiv;
 
+import java.util.Scanner;
+
 /**
  *
  * @author shadn
@@ -60,8 +62,23 @@ public class Auto {
     }
       Auto(int year, String make, String model, String trim, String plateID) {
     }
-   
-  
+      
+         Scanner key = new Scanner(System.in);
+
+   Auto autoI = new Auto(1994, "Ford", "Fusion", "SEL", "TURD!");
    
 }
+/***
 
+static void test(){
+  System.out.println("What is the Make: ");
+    String make = key.nextLine();
+    
+     System.out.println("What is the Model: ");
+    String model = key.nextLine();
+   
+    System.out.println("Your turd bucket: " + make + "\n" + model ) ;
+    System.out.println(autoI.getModel());
+}}
+* 
+* *****/

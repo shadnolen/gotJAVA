@@ -25,8 +25,9 @@ class Descriptions {
     }
      
      //Get the map
-  public static String geStateMap(){
-        return null;
+  public static String getStateMap(){
+         String[] randomState= {  "Minnesota", "North Dakota", "Montana", "Idaho", "Washington"};
+          return null;
     }  
   
   public static String getStateName(){
@@ -38,25 +39,26 @@ class Descriptions {
         return null;
     }
  
- private static String[] state= {  "Minnesota", "North Dakota", "Montana", "Idaho", "Washington"};
+ // private static String[] randomState= {  "Minnesota", "North Dakota", "Montana", "Idaho", "Washington"};
  
- public static String randomState(){
-         return null;
+ public static String getRandomState(){
+          String[] randomState= {  "Minnesota", "North Dakota", "Montana", "Idaho", "Washington"};
+          return null;
  }
  
  public static String randomCity(){
      return null;
  }
  
- public static String healthEvent(){
+ public static String getHealthEvent(){
      return null;
  }
  
- public static String healthChange(){
+ public static String getHealthChange(){
      return null;
  }
   
- public static String coPilot(){
+ public static String getCoPilot(){
      return null;
  }
  

@@ -8,6 +8,7 @@ package Controllers;
 import static Controllers.MainScreenController.selectedIndex;
 import Models.InHouse;
 import Models.OutSourced;
+import Models.Parts;
 import Models.SupplyInv;
 import java.io.IOException;
 import java.net.URL;
@@ -20,10 +21,12 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 /**
@@ -65,14 +68,39 @@ public class PartUpdateController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
     }    
+    
+    
+    @FXML
+    private void partSource() {
+     if(this.toggle.getSelectedToggle().equals(this.inhousePart)){
+         this.companyID.setEditable(false);
+         this.companyID.setDisable(true);
+         this.companyID.setText(" ");
+         this.machineID.setEditable(true);
+         this.machineID.setDisable(false);
+     }else if(this.toggle.getSelectedToggle().equals(this.outsourcedPart)){
+        this.machineID.setEditable(false);
+        this.machineID.setDisable(true);
+        this.machineID.setText(" ");
+    }else{
+         Alert  alert = new Alert(AlertType.ERROR);
+         alert.initModality(Modality.NONE);
+         alert.setTitle("Invalid Selection");
+         alert.setHeaderText("The selection is invalid");
+     }
+    }
 
     @FXML
     private void source(ActionEvent event) {
     }
+    
+    
 
    public Boolean isValid(String partID, String partName, String partCost,  String partMax, String partMin, String partSupply, String companyName, String machineID){
        String error = " ";
        Integer intMax = null,  intMin=null,  intSupply=null;
+       Double ourCost = null;
+  
       
        Boolean valid;
        
@@ -110,9 +138,9 @@ public class PartUpdateController implements Initializable {
         }
         
         try {
-            partCost = Double.parseDouble(price);
+            ourCost = Double.parseDouble(partCost);
             
-            if(partCost <= 0) {
+            if(ourCost <= 0) {
                error += ("Price must be greater than 0\n"); 
             }
         } catch (Exception e) {
@@ -128,7 +156,7 @@ public class PartUpdateController implements Initializable {
                     error += ("Machine ID must be numeric\n");
                 }
             } else if (this.toggle.getSelectedToggle().equals(this.outsourcedPart)) {
-                if(companyID == null || companyID.length() == 0) {
+                if(companyName == null || companyName.length()== 0) {
                     error += ("Company Name is blank\n");
                 }
             }    
@@ -169,7 +197,7 @@ public class PartUpdateController implements Initializable {
                 part.setPartPrice(Double.parseDouble(this.partCost.getText()));
                 
                 if(this.partID.getText().length() == 0) {
-                    part.setPartID(partSupply.getPartIDCount());
+                    part.setPartID(SupplyInv.getCountPart());
                     SupplyInv.addPart(part);
                 } else {
                     part.setPartID(Integer.parseInt(this.partID.getText()));
@@ -205,5 +233,40 @@ public class PartUpdateController implements Initializable {
         stage.setScene(scene);
         stage.showAndWait();
     }
+    
+    
+    
+    void addPart(){
+        this.partLabel.setText("Add a part");
+        this.inhousePart.setToggleGroup(toggle);
+        this.outsourcedPart.setToggleGroup(toggle);
+        
+    }
+    @FXML
+    private void addPart(Parts part){
+        this.partLabel.setText("Modify Part");
+        this.inhousePart.setToggleGroup(toggle);
+        this.outsourcedPart.setToggleGroup(toggle);
+        
+        partID.setText(Integer.toString(part.getPartID()));
+        partName.setText(part.getPartName());
+        partSupply.setText(Integer.toString(part.getSupplyCount()));
+        partCost.setText(Double.toString(part.getPartPrice()));
+        partMax.setText(Integer.toString(part.getPartMax()));
+        partMin.setText(Integer.toString(part.getPartMin()));
+        
+        if(part instanceof InHouse){
+       inhousePart.selectedProperty().set(true);
+       machineID.setText(Integer.toString(((InHouse) part).getMachID()));
+    }else{
+            outsourcedPart.selectedProperty().set(true);
+            companyID.setText(((OutSourced)part).getCompanyName());
+        }
+        
+        partSource();
+        
+    }
+
+    
     
 }

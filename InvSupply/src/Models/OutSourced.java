@@ -32,7 +32,7 @@ public class OutSourced extends Parts{
     public int getCompanyID(){
         return this.companyID.get();
     }
-    public void setCompnyID(int companyID){
+    public void setCompanyID(int companyID){
         this.companyID.set(companyID);
     }
     

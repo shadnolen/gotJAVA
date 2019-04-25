@@ -5,9 +5,12 @@
  */
 package Controllers;
 
+import Models.Parts;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -20,6 +23,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 /**
@@ -44,30 +48,34 @@ public class ProductUpdateController implements Initializable {
     @FXML
     private TextField productSearch;
     @FXML
-    private TableView<?> partNew;
+    private TableView<Parts> partNew;
     @FXML
-    private TableColumn<?, ?> partINew;
+    private TableColumn<Parts, Integer> partINew;
     @FXML
-    private TableColumn<?, ?> partNameNew;
+    private TableColumn<Parts, String> partNameNew;
     @FXML
-    private TableColumn<?, ?> partSupplyNew;
+    private TableColumn<Parts, Integer> partSupplyNew;
     @FXML
-    private TableColumn<?, ?> partCostNew;
+    private TableColumn<Parts, Double> partCostNew;
     @FXML
     private TableView<?> productParts;
     @FXML
-    private TableColumn<?, ?> productIdNew;
+    private TableColumn<Parts, Integer> productIdNew;
     @FXML
-    private TableColumn<?, ?> productNameNew;
+    private TableColumn<Parts, String> productNameNew;
     @FXML
-    private TableColumn<?, ?> productSupplyNew;
+    private TableColumn<Parts, Integer> productSupplyNew;
     @FXML
-    private TableColumn<?, ?> productCostNew;
+    private TableColumn<Parts, Double> productCostNew;
     @FXML
     private Label productLabel;
+    
+     private ObservableList <Parts> currentList = FXCollections.observableArrayList();
 
     /**
      * Initializes the controller class.
+     * @param url
+     * @param rb
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -79,8 +87,35 @@ public class ProductUpdateController implements Initializable {
     }
 
     @FXML
-    private void addPart(ActionEvent event) {
-    }
+     void addPart(ActionEvent event) {
+        Boolean partFound = false;
+        Parts part = partNew.getSelectionModel().getSelectedItem();
+        
+        if(part != null){
+            for(int i = 0; i < currentList.size(); i++){
+                if(currentList.get(i).equals(part)){
+                    partFound = true;
+                }
+            }
+            
+           if(partFound){
+               Alert alert = new Alert(Alert.AlertType.ERROR);
+               alert.initModality(Modality.NONE);
+               alert.setTitle(" Nothing Selected");
+               alert.setHeaderText("Please select a part");
+               alert.showAndWait();
+           
+        }else{
+            currentList.add(part);
+            partNew.setItems(currentList);
+        }
+    }else{
+    Alert alert = new Alert(Alert.AlertType.ERROR);
+    alert.initModality(Modality.NONE);
+    alert.setTitle("Nothing selected");
+    alert.showAndWait();
+        }
+}
 
     @FXML
     private void deletePart(ActionEvent event) {
@@ -150,22 +185,7 @@ public class ProductUpdateController implements Initializable {
             error += ("Price must be numeric\n");
         }
         
-        try {
-            if (this.toggle.getSelectedToggle().equals(this.inhousePart)){
-                //intMachineId
-                try {
-                    Integer.parseInt(machineID);
-                } catch (Exception e) {
-                    error += ("Machine ID must be numeric\n");
-                }
-            } else if (this.toggle.getSelectedToggle().equals(this.outsourcedPart)) {
-                if(companyName == null || companyName.length()== 0) {
-                    error += ("Company Name is blank\n");
-                }
-            }    
-        } catch(Exception e) {
-           error += ("Part type of In-House or Outsourced must be selected\n"); 
-        }
+       if(current)
         
         if (error.length() > 0) {
             error += ("\nFix the listed errors and save again");

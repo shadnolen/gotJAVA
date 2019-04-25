@@ -13,14 +13,13 @@ import java.util.Scanner;
  */
 public class JavaApplicationIV {
     
-    
-   // Auto newAuto = new Auto();
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
  
-     
+
+ Duplicate.duplicateString();
     }
     
 }

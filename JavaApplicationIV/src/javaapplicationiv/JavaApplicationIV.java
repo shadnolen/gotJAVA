@@ -6,6 +6,7 @@
 package javaapplicationiv;
 
 import java.util.Scanner;
+import static javaapplicationiv.Binary.isBinaryOrNot;
 
 /**
  *
@@ -18,7 +19,15 @@ public class JavaApplicationIV {
      */
     public static void main(String[] args) {
  
-
+JavaSkills.javaSkills();
+Binary.isBinaryOrNot(0);
+        isBinaryOrNot(128956);
+ 
+        isBinaryOrNot((101110));
+ 
+        isBinaryOrNot((42578));
+ 
+        isBinaryOrNot((10110101));
  Duplicate.duplicateString();
     }
     

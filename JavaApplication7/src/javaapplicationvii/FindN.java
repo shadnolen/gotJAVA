@@ -25,10 +25,14 @@ public class FindN {
                    System.out.print(arrayNum[i] + " + " + arrayNum[j] + "="  + numbers);
                }               
            } 
-           findN(new int[] {2,3,4,5,6,7,9}, 14);
-           findN(new int[] {2,3,4,5,6,7,9}, 16); 
+           
        }
     
    }  
-      
+   
+   public static void main(String[] args){
+      findN(new int[] {2,3,4,5,6,7,9}, 14);
+      findN(new int[] {2,3,4,5,6,7,9}, 16); 
+     
+   } 
 }

@@ -6,34 +6,36 @@
 package javaapplicationvii;
 
 import java.util.Scanner;
+import static javaapplicationvii.FindN.findN;
 
 /**
  *
  * @author shadn
  */
 public class JavaApplicationVII {
-
+   static void findN(int arrayNum[], int numbers){
+      Scanner kb = new Scanner(System.in);
+     
+     
+       System.out.print("Enter what is the number your looking for ");
+        numbers = kb.nextInt();
+       System.out.print("Your looking for " + numbers);
+       for(int i =0;  i < arrayNum.length;  i++){
+           for(int j = i; j <arrayNum.length; j++){
+               if(arrayNum[i] + arrayNum[j] == numbers){
+                   System.out.print(arrayNum[i] + " +  " + arrayNum[j] + " = "  + numbers);
+               }               
+           } 
+           
+       }
+    
+   } 
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        
-          static void findN(int arrayNum[], int numbers){
-       Scanner kb = new Scanner(System.in);
-     numbers = kb.nextInt();
-     
-       System.out.print("Enter what is the number your looking for");
-       System.out.print("Your looking for " + numbers);
-       for(int i =0;  i < arrayNum.length;  i++){
-           for(int j = i+1; j <arrayNum.length; j++){
-               if(arrayNum[i] + arrayNum[j] == numbers){
-                   System.out.print(arrayNum[i] + " + " + arrayNum[j] + "="  + numbers);
-               }               
-           } 
-           findN(new int[] {2,3,4,5,6,7,9}, 14);
-           findN(new int[] {2,3,4,5,6,7,9}, 16); 
-       }
+             findN(new int[] {2,3,4,5,6,7,9}, 14);
+            findN(new int[] {2,3,4,5,6,7,9}, 16); 
+    }
     
-   } 
-
 }

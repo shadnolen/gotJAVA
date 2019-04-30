@@ -17,13 +17,16 @@ public class JavaApplicationVII {
       Scanner kb = new Scanner(System.in);
      
      
-       System.out.print("Enter what is the number your looking for ");
+       System.out.print(" Enter what is the number your looking for \n ");
         numbers = kb.nextInt();
-       System.out.print("Your looking for " + numbers);
+       System.out.print("Your looking for " + numbers + " \n");
        for(int i =0;  i < arrayNum.length;  i++){
-           for(int j = i; j <arrayNum.length; j++){
+           for(int j = i+1; j <arrayNum.length; j++){
                if(arrayNum[i] + arrayNum[j] == numbers){
-                   System.out.print(arrayNum[i] + " +  " + arrayNum[j] + " = "  + numbers);
+                   System.out.print(arrayNum[i] + " +  " + arrayNum[j] + " = "  + numbers +"\n");
+               } else if(arrayNum[i] + arrayNum[j] + numbers == 0){
+                   System.out.println(" no match");
+                   break;
                }               
            } 
            

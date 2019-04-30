@@ -10,6 +10,7 @@ package javaapplicationvii;
  * @author shadn
  */
 public class FloydR {
+    
     int rows = 20;
      
       FloydR(){

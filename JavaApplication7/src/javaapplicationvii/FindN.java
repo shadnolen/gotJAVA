@@ -11,14 +11,9 @@ import java.util.Scanner;
  *
  * @author shadn
  */
-public class JavaApplicationVII {
-
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) {
-        
-          static void findN(int arrayNum[], int numbers){
+public class FindN {
+    
+   static void findN(int arrayNum[], int numbers){
        Scanner kb = new Scanner(System.in);
      numbers = kb.nextInt();
      
@@ -34,6 +29,6 @@ public class JavaApplicationVII {
            findN(new int[] {2,3,4,5,6,7,9}, 16); 
        }
     
-   } 
-
+   }  
+      
 }

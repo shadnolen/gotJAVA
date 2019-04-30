@@ -11,7 +11,7 @@ package javaapplicationvii;
  */
 public class FloydIn {
     
-    FloydIn(){
+   static void  floydIn(){
         int rows = 10;
         int count = rows;  
         for(int i = 0; i <rows; i++){

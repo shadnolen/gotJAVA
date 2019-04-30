@@ -5,18 +5,25 @@
  */
 package javaapplicationvii;
 
+import java.util.Scanner;
+
 /**
  *
  * @author shadn
  */
 public class FloydR {
     
-    int rows = 20;
+   // int rows = 20;
      
-      FloydR(){
+      static void floydR(){
+       Scanner kb = new Scanner(System.in);
        
-        for(int i = 0; i < rows; i++){
-            for(int j = 0; j<rows; j++){
+       System.out.println("How big you need your pyrmid yo?");
+       int rows = kb.nextInt();
+       System.out.println("Oh you want it " + rows + " high, huh");
+      
+        for(int i = 1; i < rows; i++){
+            for(int j = 0; j<rows; ++j){
                 System.out.print(" ");
             }
             
@@ -24,7 +31,7 @@ public class FloydR {
              for(int k = 1; k <= i; k++){
                 System.out.print(i + " ");
              }
-             System.out.println();
+             System.out.println(rows);
         }
        
         

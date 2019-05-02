@@ -6,6 +6,7 @@
 package Controllers;
 
 import Models.Parts;
+import Models.Products;
 import Models.SupplyInv;
 import java.io.IOException;
 import java.net.URL;
@@ -135,9 +136,7 @@ public class ProductUpdateController implements Initializable {
         
     }
 
-    @FXML
-    private void productSaveButton(ActionEvent event) {
-    }
+   
 
     @FXML
     private void productCancelButton(ActionEvent event) throws IOException {
@@ -225,6 +224,21 @@ public class ProductUpdateController implements Initializable {
         
         return valid;
     
+        
+    }
+     
+      @FXML
+    private void productSaveButton(ActionEvent event) throws IOException{
+        if(isValid(this.productName.getText(),
+                        this.productCost.getText(),
+                        this.productSupply.getText(),
+                        this.productMax.getText(),
+                        this.productMin.getText())){
+            Products products = new Products();
+                           products.setProductName(this.productName.getText());
+                           products.getProductPrice(Double.parseDouble(this.productCost.getText()));
+                           products
+        }
         
     }
      

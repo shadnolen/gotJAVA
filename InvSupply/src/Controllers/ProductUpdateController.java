@@ -6,6 +6,7 @@
 package Controllers;
 
 import Models.Parts;
+import Models.SupplyInv;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -58,7 +59,7 @@ public class ProductUpdateController implements Initializable {
     @FXML
     private TableColumn<Parts, Double> partCostNew;
     @FXML
-    private TableView<?> productParts;
+    private TableView<Parts> productParts;
     @FXML
     private TableColumn<Parts, Integer> productIdNew;
     @FXML
@@ -79,7 +80,19 @@ public class ProductUpdateController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+       
+        // Setting  our list 
+        partINew.setCellValueFactory(cellData -> cellData.getValue().partIDProperty().asObject());
+        partNameNew.setCellValueFactory(cellData -> cellData.getValue().partNameProperty());
+        partSupplyNew.setCellValueFactory(cellData -> cellData.getValue().supplyCountProperty().asObject());
+        partCostNew.setCellValueFactory(cellData -> cellData.getValue().partPriceProperty().asObject());
+        productIdNew.setCellValueFactory(cellData -> cellData.getValue().partIDProperty().asObject());
+        productNameNew.setCellValueFactory(cellData -> cellData.getValue().partNameProperty());
+        productSupplyNew.setCellValueFactory(cellData->  cellData.getValue().supplyCountProperty().asObject());
+        productCostNew.setCellValueFactory(cellData -> cellData.getValue().partPriceProperty().asObject());
+        
+        updatePartTableView();
+        updateProductTableView();        
     }    
 
     @FXML
@@ -119,6 +132,7 @@ public class ProductUpdateController implements Initializable {
 
     @FXML
     private void deletePart(ActionEvent event) {
+        
     }
 
     @FXML
@@ -213,5 +227,12 @@ public class ProductUpdateController implements Initializable {
     
         
     }
+     
+     public void updatePartTableView(){
+         partNew.setItems(SupplyInv.getPartsOL());
+     }
+     public void updateProductTableView(){
+         productParts.setItems(currentList);
+     }
     
 }

@@ -96,8 +96,10 @@ public class PartUpdateController implements Initializable {
     
     
 
-   public Boolean isValid(String partID, String partName, String partCost,  String partMax, String partMin, String partSupply, String companyName, String machineID){
+   public Boolean isValid(String partID, String partName, String partCost,  String partMax, String partMin,
+           String partSupply, String companyName, String machineID){
        String error = " ";
+       
        Integer intMax = null,  intMin=null,  intSupply=null;
        Double ourCost = null;
   
@@ -110,41 +112,41 @@ public class PartUpdateController implements Initializable {
        try {
             intMin = Integer.parseInt(partMin);
         } catch (Exception e) {
-            error += ("Minimum must be numeric\n");
+            error += ("Min must be number\n");
         }
         
         try {
             intMax = Integer.parseInt(partMax);
         } catch (Exception e) {
-            error += ("Maximum must be numeric\n");
+            error += ("Max must be number\n");
         }
         
         if(intMin != null && intMin < 0) {
-            error += ("Minimum cannot be negative\n");
+            error += ("Negative, on using a negative number \n");
         }
         
         if(intMin != null && intMax != null && intMin > intMax) {
-            error += ("Minimum must be less than maximum\n");
+            error += ("Min must be less than max \n");
         }
         
         try {
             intSupply = Integer.parseInt(partSupply);
             
             if(intMin != null && intMax != null && intSupply < intMin && intSupply > intMax) {
-               error += ("Inventory must be between minimum and maximum\n"); 
+               error += ("Supply count  must be between min and max \n"); 
             }
         } catch (Exception e) {
-            error += ("Inventory must be numeric\n");
+            error += ("Supply count must be a number \n");
         }
         
         try {
             ourCost = Double.parseDouble(partCost);
             
             if(ourCost <= 0) {
-               error += ("Price must be greater than 0\n"); 
+               error += ("Price must be greater than ZER0\n"); 
             }
         } catch (Exception e) {
-            error += ("Price must be numeric\n");
+            error += ("Price must be number \n");
         }
         
         try {
@@ -153,23 +155,23 @@ public class PartUpdateController implements Initializable {
                 try {
                     Integer.parseInt(machineID);
                 } catch (Exception e) {
-                    error += ("Machine ID must be numeric\n");
+                    error += ("MACHINE ID must be number \n");
                 }
             } else if (this.toggle.getSelectedToggle().equals(this.outsourcedPart)) {
                 if(companyName == null || companyName.length()== 0) {
-                    error += ("Company Name is blank\n");
+                    error += ("You left COMPANY NAME blank \n");
                 }
             }    
         } catch(Exception e) {
-           error += ("Part type of In-House or Outsourced must be selected\n"); 
+           error += ("IN-HOUSE or OUTSOURCED must be selected \n"); 
         }
         
         if (error.length() > 0) {
-            error += ("\nFix the listed errors and save again");
+            error += ("\n Fix the errors to save");
             
             Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Part Validation Error");
-            alert.setHeaderText("Error");
+            alert.setTitle(" Validation Error");
+            alert.setHeaderText(" Error");
             alert.setContentText(error);
             alert.showAndWait();
             valid = false;

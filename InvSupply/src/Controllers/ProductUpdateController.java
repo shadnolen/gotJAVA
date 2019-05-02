@@ -148,17 +148,17 @@ public class ProductUpdateController implements Initializable {
        try {
             intMin = Integer.parseInt(partMin);
         } catch (Exception e) {
-            error += ("Minimum must be numeric\n");
+            error += ("Minimum must be number \n");
         }
         
         try {
             intMax = Integer.parseInt(productMax);
         } catch (Exception e) {
-            error += ("Maximum must be numeric\n");
+            error += ("Maximum must be number \n");
         }
         
         if(intMin != null && intMin < 0) {
-            error += ("Minimum cannot be negative\n");
+            error += ("Negative, on the negative input \n");
         }
         
         if(intMin != null && intMax != null && intMin > intMax) {
@@ -169,23 +169,25 @@ public class ProductUpdateController implements Initializable {
             intSupply = Integer.parseInt(productSupply);
             
             if(intMin != null && intMax != null && intSupply < intMin && intSupply > intMax) {
-               error += ("Inventory must be between minimum and maximum\n"); 
+               error += ("Supply count must be between Min and Max value \n"); 
             }
         } catch (Exception e) {
-            error += ("Inventory must be numeric\n");
+            error += ("Supply count  must be a number \n");
         }
         
         try {
             ourCost = Double.parseDouble(productCost);
             
             if(ourCost <= 0) {
-               error += ("Price must be greater than 0\n"); 
+               error += ("Price must be greater than ZERO \n"); 
             }
         } catch (Exception e) {
-            error += ("Price must be numeric\n");
+            error += ("Price must be a number, yo \n");
         }
         
-       if(current)
+     if(currentList.isEmpty()){
+         error += ("You need at least one part \n");
+     }
         
         if (error.length() > 0) {
             error += ("\nFix the listed errors and save again");

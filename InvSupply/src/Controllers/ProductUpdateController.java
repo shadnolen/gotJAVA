@@ -187,10 +187,17 @@ public class ProductUpdateController implements Initializable {
         
      if(currentList.isEmpty()){
          error += ("You need at least one part \n");
-     }
-        
+     }else{
+         Double cost = 0.0;
+         for(int i = 0;i < currentList.size();i++){
+             cost += currentList.get(i).getPartPrice();
+         }
+         if(ourCost != null && cost > ourCost){
+             error += ("The product cost of $" + ourCost + "must be greater than part cost of $ " + cost + "\n ");
+         }
+     }        
         if (error.length() > 0) {
-            error += ("\nFix the listed errors and save again");
+            error += ("\n Fix the errors to save");
             
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Part Validation Error");

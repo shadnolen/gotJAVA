@@ -107,7 +107,7 @@ public class PartUpdateController implements Initializable {
        Boolean valid;
        
        if(partName == null || partName.length() == 0){
-           error  += ("Part is empty");
+           error  += ("Part is empty \n");
        }
        try {
             intMin = Integer.parseInt(partMin);
@@ -143,7 +143,7 @@ public class PartUpdateController implements Initializable {
             ourCost = Double.parseDouble(partCost);
             
             if(ourCost <= 0) {
-               error += ("Price must be greater than ZER0\n"); 
+               error += ("Price must be greater than ZER0 \n"); 
             }
         } catch (Exception e) {
             error += ("Price must be number \n");

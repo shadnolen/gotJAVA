@@ -90,6 +90,24 @@ public class Products {
        return this.productPrice.get();
    }
    
+   // Set min and max
+   
+   public int getMin(){
+       return this.productMin.get();
+   }
+   
+   public void setMin(int min){
+     this.productMin.set(min);
+   }
+   
+     public int getMax(){
+       return this.productMax.get();
+   }
+   
+   public void setMax(int max){
+     this.productMax.set(max);
+   }
+   
    public DoubleProperty productPriceProperty(){
        return productPrice;
    }

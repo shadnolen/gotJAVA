@@ -230,14 +230,21 @@ public class ProductUpdateController implements Initializable {
       @FXML
     private void productSaveButton(ActionEvent event) throws IOException{
         if(isValid(this.productName.getText(),
+                        this.productID.getText(),
                         this.productCost.getText(),
                         this.productSupply.getText(),
                         this.productMax.getText(),
-                        this.productMin.getText())){
-            Products products = new Products();
+                        this.productMin.getText()
+                       //  this.companyName.getText(),
+                        ){
+                           Products products = new Products();
                            products.setProductName(this.productName.getText());
-                           products.getProductPrice(Double.parseDouble(this.productCost.getText()));
-                           products
+                           products.setProductPrice(Double.parseDouble(this.productCost.getText()));
+                           products.setProductSupplyCount(Integer.parseInt(this.partSupplyNew.getText()));
+                           products.setMax(Integer.parseInt(this.productMax.getText()));
+                           products.setMin(Integer.parseInt(this.productMin.getText()));
+                           products.setProductPartsList(currentList);
+                           
         }
         
     }

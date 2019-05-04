@@ -5,6 +5,7 @@
  */
 package Controllers;
 
+import static Controllers.MainScreenController.selectedIndex;
 import Models.Parts;
 import Models.Products;
 import Models.SupplyInv;
@@ -147,7 +148,7 @@ public class ProductUpdateController implements Initializable {
         stage.showAndWait();
     }
     
-     public Boolean isValid(String productID, String productName, String productCost,  String productMax, String partMin, String productSupply, String companyName, String machineID){
+     public Boolean isValid(String productID, String productName, String productCost,  String productMax, String partMin, String productSupply){
        String error = " ";
        Integer intMax = null,  intMin=null,  intSupply=null;
        Double ourCost = null;
@@ -236,16 +237,32 @@ public class ProductUpdateController implements Initializable {
                         this.productMax.getText(),
                         this.productMin.getText()
                        //  this.companyName.getText(),
-                        ){
+        )){
                            Products products = new Products();
                            products.setProductName(this.productName.getText());
                            products.setProductPrice(Double.parseDouble(this.productCost.getText()));
                            products.setProductSupplyCount(Integer.parseInt(this.partSupplyNew.getText()));
                            products.setMax(Integer.parseInt(this.productMax.getText()));
                            products.setMin(Integer.parseInt(this.productMin.getText()));
-                           products.setProductPartsList(currentList);
+                           products.setProductPartList(currentList);
                            
-        }
+        if(this.productID.getText().length() == 0){
+            products.setProductID(SupplyInv.getCountProduct());
+            SupplyInv.addProducts(products);
+         }else{
+            products.setProductID(Integer.parseInt(this.productID.getText()));
+            SupplyInv.updateProduct(selectedIndex(), products);
+        } 
+        
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("/Views/MainScreen.fxml"));
+        Parent parentPage = loader.load();
+        Scene scene  = new Scene(parentPage);
+        Stage stage  = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        
+        MainScreenController controller = loader.getController();
+        stage.setScene(scene);     
+      }
         
     }
      

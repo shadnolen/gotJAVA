@@ -102,6 +102,16 @@ public class ProductUpdateController implements Initializable {
 
     @FXML
     private void searchProducts(ActionEvent event) {
+        String search = productSearch.getText();
+        ObservableList found= SupplyInv.partLookUp(search);
+        if(found.isEmpty()){
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.initModality(Modality.NONE);
+            alert.setTitle("No part found");
+            alert.setHeaderText(search + " Not found in Database");
+        }else{
+            partNew.setItems(found);
+        }
     }
 
     @FXML

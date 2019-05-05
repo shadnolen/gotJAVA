@@ -43,25 +43,25 @@ public class MainScreenController implements Initializable {
     @FXML
     private TableView<Parts> partTable;
     @FXML
-    private TableColumn<?, ?> partIDCV;
+    private TableColumn<Parts, Integer> partIDCV;
     @FXML
-    private TableColumn<?, ?> partNameCV;
+    private TableColumn<Parts, String> partNameCV;
     @FXML
-    private TableColumn<?, ?> partSupplyCV;
+    private TableColumn<Parts, Integer> partSupplyCV;
     @FXML
-    private TableColumn<?, ?> partCostCV;
+    private TableColumn<Parts, Boolean> partCostCV;
     @FXML
     private TextField productSearch;
     @FXML
     private TableView<Products> productTable;
     @FXML
-    private TableColumn<?, ?> productIdCV;
+    private TableColumn<Products, Integer> productIdCV;
     @FXML
-    private TableColumn<?, ?> productNameCV;
+    private TableColumn<Products, String> productNameCV;
     @FXML
-    private TableColumn<?, ?> productSupplyCV;
+    private TableColumn<Products, Integer> productSupplyCV;
     @FXML
-    private TableColumn<?, ?> productCostColumn;
+    private TableColumn<Products, Boolean> productCostColumn;
 
      private static int index = -1;
     

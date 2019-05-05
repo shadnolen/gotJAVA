@@ -11,6 +11,7 @@ import Models.Products;
 import Models.SupplyInv;
 import java.io.IOException;
 import java.net.URL;
+import java.util.Optional;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -22,6 +23,8 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -134,6 +137,27 @@ public class ProductUpdateController implements Initializable {
 
     @FXML
     private void deletePart(ActionEvent event) {
+        Parts partSelect = productParts.getSelectionModel().getSelectedItem();
+        if(partSelect != null){
+            Alert alert = new Alert(AlertType.CONFIRMATION);
+            alert.initModality(Modality.NONE);
+            alert.setTitle("Remove Part");
+            alert.setHeaderText("Confirm your removal");
+            alert.setContentText("Do you really want to remove: " + partSelect.getPartName() + "?");
+           
+            Optional<ButtonType>  delete = alert.showAndWait();
+           
+            if(delete.get() == ButtonType.OK){
+                currentList.remove(partSelect);
+                updateProductTableView();
+            }            
+        }else{
+            Alert alert = new Alert(AlertType.ERROR);
+            alert.initModality(Modality.NONE);
+            alert.setTitle("Nothing selected.");
+            alert.setHeaderText("Did you forget to select somthing?");
+            alert.showAndWait();
+        }
         
     }
 
@@ -162,13 +186,13 @@ public class ProductUpdateController implements Initializable {
        try {
             intMin = Integer.parseInt(partMin);
         } catch (Exception e) {
-            error += ("Minimum must be number \n");
+            error += ("Minimum must be a number \n");
         }
         
         try {
             intMax = Integer.parseInt(productMax);
         } catch (Exception e) {
-            error += ("Maximum must be number \n");
+            error += ("Maximum must be a number \n");
         }
         
         if(intMin != null && intMin < 0) {

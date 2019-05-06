@@ -6,7 +6,7 @@
 package imsystem;
 
 //Import from model package
-import model.Supply;
+
 
 //List of Java Imports
 import javafx.application.Application;

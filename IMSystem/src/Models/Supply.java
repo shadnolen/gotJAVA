@@ -59,7 +59,7 @@ public class Supply {
         partFound = partsList;        
      }else{
         for(int i = 0; i< partsList.size(); i++){
-            if(partsList.get(i).getName().toLowerCase().contains(search.toLowerCase())){
+            if(partsList.get(i).getPartName().toLowerCase().contains(search.toLowerCase())){
                 partFound.add(partsList.get(i));
             }
         }
@@ -100,7 +100,7 @@ public class Supply {
            productFound = productsList;
        }else{
            for(int i =0; i< productsList.size(); i++){
-               if(productsList.get(i).getName().toLowerCase().contains(search.toLowerCase())){
+               if(productsList.get(i).getProName().toLowerCase().contains(search.toLowerCase())){
                   productFound.add(productsList.get(i));
                }
            }

@@ -66,5 +66,9 @@ public class PartsController implements Initializable {
     @FXML
     private void cancelPart(ActionEvent event) {
     }
+
+    void paging() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
 }

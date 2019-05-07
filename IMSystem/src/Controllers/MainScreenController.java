@@ -5,14 +5,22 @@
  */
 package Controllers;
 
+import Models.Parts;
+import Models.Products;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 
 /**
  * FXML Controller class
@@ -24,27 +32,120 @@ public class MainScreenController implements Initializable {
     @FXML
     private TextField partSearch;
     @FXML
-    private TableView<?> partsTable;
+    private TableView<Parts> partsTable;
     @FXML
-    private TableColumn<?, ?> IDColumn;
+    private TableColumn<Parts, Integer> IDColumn;
     @FXML
-    private TableColumn<?, ?> NameColumn;
+    private TableColumn<Parts, String> NameColumn;
     @FXML
-    private TableColumn<?, ?> SupplyColumn;
+    private TableColumn<Parts, Integer> SupplyColumn;
     @FXML
-    private TableColumn<?, ?> CostColumn;
+    private TableColumn<Parts, Double> CostColumn;
     @FXML
     private TextField proSearch;
     @FXML
-    private TableView<?> productTable;
+    private TableView<Products> productTable;
     @FXML
-    private TableColumn<?, ?> proIDColumn;
+    private TableColumn<Products, Integer> proIDColumn;
     @FXML
-    private TableColumn<?, ?> proNameColumn;
+    private TableColumn<Products, String> proNameColumn;
     @FXML
-    private TableColumn<?, ?> proSupplyColumn;
+    private TableColumn<Products, Integer> proSupplyColumn;
     @FXML
-    private TableColumn<?, ?> proCostColumn;
+    private TableColumn<Products, Double> proCostColumn;
+    
+    private static int index = -1;
+    
+    public static int indexS(){
+        return index;
+    }
+   
+    
+// Reuseable Code 
+        @FXML   
+    void pageLoadPart(ActionEvent event, Parts part) throws IOException{
+          //Page Load
+     FXMLLoader fxLoad = new FXMLLoader();
+    fxLoad.setLocation(getClass().getResource("/Views/Parts.fxml"));
+    Parent parent = fxLoad.load();
+    
+    //Setting Stage&Scene
+    Scene scene = new Scene(parent);
+    Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+    
+    PartsController partController = fxLoad.getController();
+    partController.paging();
+    
+    //Hiding  the comp
+    stage.hide();
+    stage.setScene(scene);
+    stage.show();
+    }
+    
+    
+    @FXML   
+    void pageLoadPart(ActionEvent event) throws IOException{
+        
+        //Page Load
+     FXMLLoader fxLoad = new FXMLLoader();
+    fxLoad.setLocation(getClass().getResource("/Views/Parts.fxml"));
+    Parent parent = fxLoad.load();
+    
+    //Setting Stage&Scene
+    Scene scene = new Scene(parent);
+    Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+    
+    PartsController partController = fxLoad.getController();
+    partController.paging();
+    
+    //Hiding  the comp
+    stage.hide();
+    stage.setScene(scene);
+    stage.show();
+    }
+    
+            @FXML   
+    void pageLoadPro(ActionEvent event, Products products) throws IOException{
+         //Page Load
+     FXMLLoader fxLoad = new FXMLLoader();
+    fxLoad.setLocation(getClass().getResource("/Views/Products.fxml"));
+    Parent parent = fxLoad.load();
+    
+    //Setting Stage&Scene
+    Scene scene = new Scene(parent);
+    Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+    
+    PartsController partController = fxLoad.getController();
+    partController.paging();
+    
+    //Hiding  the comp
+    stage.hide();
+    stage.setScene(scene);
+    stage.show();
+    }
+    
+    @FXML   
+    void pageLoadPro(ActionEvent event) throws IOException{
+            //Page Load
+     FXMLLoader fxLoad = new FXMLLoader();
+    fxLoad.setLocation(getClass().getResource("/Views/Products.fxml"));
+    Parent parent = fxLoad.load();
+    
+    //Setting Stage&Scene
+    Scene scene = new Scene(parent);
+    Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+    
+    PartsController partController = fxLoad.getController();
+    partController.paging();
+    
+    //Hiding  the comp
+    stage.hide();
+    stage.setScene(scene);
+    stage.show();
+    }
+    
+    
+   
 
     /**
      * Initializes the controller class.

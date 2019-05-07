@@ -7,6 +7,7 @@ package Controllers;
 
 import Models.Parts;
 import Models.Products;
+import static Models.Supply.getPartsList;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -17,9 +18,11 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 /**
@@ -160,15 +163,30 @@ public class MainScreenController implements Initializable {
     }
 
     @FXML
-    private void addPart(ActionEvent event) {
+    private void addPart(ActionEvent event) throws IOException {
+        pageLoadPart(event);
     }
 
     @FXML
-    private void partMod(ActionEvent event) {
+    private void partMod(ActionEvent event) throws IOException{
+        
+        Parts partMod = partsTable.getSelectionModel().getSelectedItem();
+        index = getPartsList().indexOf(partMod);
+        
+        if(partMod != null){
+            pageLoadPart(event);
+        }else{
+    Alert alert = new Alert(Alert.AlertType.ERROR);
+    alert.initModality(Modality.NONE);
+    alert.setTitle("No Part Selected ");
+    alert.setHeaderText("You need to select something, yo!");
+    alert.showAndWait();
+        }
     }
 
     @FXML
     private void partDelete(ActionEvent event) {
+        Parts partDel = partsTable.getSelectionModel().getSelectedItem();
     }
 
     @FXML
@@ -176,7 +194,8 @@ public class MainScreenController implements Initializable {
     }
 
     @FXML
-    private void proAdd(ActionEvent event) {
+    private void proAdd(ActionEvent event) throws IOException{
+        pageLoadPro(event);
     }
 
     @FXML

@@ -100,6 +100,16 @@ public class MainScreenController implements Initializable {
                 alert.setHeaderText("Nothing Selected");
                 alert.showAndWait();
     }
+    
+   @FXML
+     void indexCount(Stage stage) throws IOException{
+        index = 1;
+        Parent parentPage = FXMLLoader.load(getClass().getResource("/Views/MainScreen.fxml"));
+        Scene scene = new Scene(parentPage);
+        stage.setScene(scene);
+        stage.show();
+        
+    }
     @FXML   
     void pageLoadPart(ActionEvent event) throws IOException{
         
@@ -167,10 +177,7 @@ public class MainScreenController implements Initializable {
     /**
      * Initializes the controller class.
      */
-    @Override
-    public void initialize(URL url, ResourceBundle rb) {
-        // TODO
-    }    
+
 
     @FXML
     private void partSearch(ActionEvent event) {
@@ -199,11 +206,7 @@ public class MainScreenController implements Initializable {
         if(partMod != null){
             pageLoadPart(event);
         }else{
-    Alert alert = new Alert(Alert.AlertType.ERROR);
-    alert.initModality(Modality.APPLICATION_MODAL);
-    alert.setTitle("No Part Selected ");
-    alert.setHeaderText("You need to select something, yo!");
-    alert.showAndWait();
+             noSelect(event);
         }
     }
 
@@ -315,6 +318,15 @@ public class MainScreenController implements Initializable {
 
     @FXML
     private void exit(ActionEvent event) {
+        Alert alert = new Alert(Alert.AlertType.WARNING);
+        alert.initModality(Modality.APPLICATION_MODAL);
+        alert.setTitle("Exit!");
+        alert.setHeaderText("Did you save?");
+        alert.setContentText("Any unsaved work will be lost!");
+        Optional<ButtonType> exit = alert.showAndWait();
+        if(exit.get() == ButtonType.OK){
+            System.exit(index);
+        }
         
     }
 
@@ -329,6 +341,19 @@ public class MainScreenController implements Initializable {
         productTable.setItems(proItems);
     }
 
+        @Override
+    public void initialize(URL url, ResourceBundle rb) {
+     IDColumn.setCellValueFactory(cellData -> cellData.getValue().partIDP().asObject());
+     NameColumn.setCellValueFactory(cellData-> cellData.getValue().partNameP());
+     SupplyColumn.setCellValueFactory(cellData -> cellData.getValue().inStockP().asObject());
+     CostColumn.setCellValueFactory(cellData -> cellData.getValue().partPriceP().asObject());
+     
+      proIDColumn.setCellValueFactory(cellData -> cellData.getValue().proIDP().asObject());
+     proNameColumn.setCellValueFactory(cellData-> cellData.getValue().proNameP());
+     proSupplyColumn.setCellValueFactory(cellData -> cellData.getValue().proInStock().asObject());
+     proCostColumn.setCellValueFactory(cellData -> cellData.getValue().proPriceP().asObject());
+     
+    }    
  
     
 }

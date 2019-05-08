@@ -13,7 +13,7 @@ import javafx.beans.property.StringProperty;
  *
  * @author shadn
  */
-class Parts {
+public abstract class Parts {
     protected StringProperty partName;
     protected IntegerProperty partID;
     protected  DoubleProperty partPrice;
@@ -75,7 +75,7 @@ class Parts {
         return this.inStock.get();
     }
     
-    public IntegerProperty inStock(){
+    public IntegerProperty inStockP(){
         return inStock;
     }
     

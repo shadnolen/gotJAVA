@@ -9,6 +9,8 @@ package imsystem;
 
 
 //List of Java Imports
+import Models.Supply;
+import Controllers.MainScreenController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -34,10 +36,10 @@ public class IMSystem extends Application {
                                         
                                     
                 // Set our path to FXML
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("/Views/Main.fxml"));
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("/Views/MainScreen.fxml"));
                                    
                 // Set our Controllers 
-		controllers.MainController controller = new controllers.MainController(supply);
+		Controllers.MainScreenController controller = new Controllers.MainScreenController();
 		loader.setController(controller);
 		Parent root = loader.load();
                                   

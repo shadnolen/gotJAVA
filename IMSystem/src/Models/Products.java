@@ -18,7 +18,7 @@ import javafx.collections.ObservableList;
  *
  * @author shadn
  */
-class Products {
+public abstract class Products {
 
     private ObservableList<Parts> proPart = FXCollections.observableArrayList();
     
@@ -84,6 +84,20 @@ class Products {
    
    public DoubleProperty proPriceP(){
        return proPrice;
+   }
+   
+   //INstock
+   public void setProInStock(int proInStock){
+   this.proInStock.set(proInStock);
+   }
+   
+   
+   public int getProInStock(){
+       return this.proInStock.get();       
+   }
+   
+   public IntegerProperty proInStock(){
+       return proInStock;
    }
    
    //MINiMIUM

@@ -46,6 +46,8 @@ public class PartsController implements Initializable {
     private TextField partCompany;
     @FXML
     private Label partLabel;
+    
+
 
     /**
      * Initializes the controller class.

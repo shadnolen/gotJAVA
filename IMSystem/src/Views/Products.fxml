@@ -75,7 +75,7 @@
       </AnchorPane>
       <AnchorPane layoutX="336.0" layoutY="242.0" prefHeight="205.0" prefWidth="446.0">
          <children>
-            <TableView fx:id="productParts" layoutX="6.0" layoutY="13.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="150.0" prefWidth="432.0">
+            <TableView fx:id="proParts" layoutX="6.0" layoutY="13.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="150.0" prefWidth="432.0">
                <columns>
                   <TableColumn fx:id="proID" maxWidth="60.0" minWidth="60.0" prefWidth="60.0" resizable="false" text="Part ID" />
                   <TableColumn fx:id="proName" maxWidth="120.0" minWidth="120.0" prefWidth="120.0" resizable="false" text="Part Name" />

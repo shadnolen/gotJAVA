@@ -7,10 +7,16 @@ package Controllers;
 
 import Models.Parts;
 import Models.Products;
+import Models.Supply;
 import static Models.Supply.getPartsList;
+import static Models.Supply.getProductsList;
+import static Models.Supply.partRemove;
+import static Models.Supply.productRemove;
 import java.io.IOException;
 import java.net.URL;
+import java.util.Optional;
 import java.util.ResourceBundle;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -19,6 +25,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -58,7 +65,7 @@ public class MainScreenController implements Initializable {
     private TableColumn<Products, Double> proCostColumn;
     
     private static int index = -1;
-    
+    boolean partF;
     public static int indexS(){
         return index;
     }
@@ -85,7 +92,14 @@ public class MainScreenController implements Initializable {
     stage.show();
     }
     
-    
+    @FXML
+    void noSelect(ActionEvent event) throws IOException{
+          Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.initModality(Modality.APPLICATION_MODAL);
+                alert.setTitle("Unable to complete task!");
+                alert.setHeaderText("Nothing Selected");
+                alert.showAndWait();
+    }
     @FXML   
     void pageLoadPart(ActionEvent event) throws IOException{
         
@@ -160,6 +174,15 @@ public class MainScreenController implements Initializable {
 
     @FXML
     private void partSearch(ActionEvent event) {
+         String search = partSearch.getText();
+        ObservableList partFound = Supply.partLookUp(search);
+        if(partFound.isEmpty()){
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.initModality(Modality.APPLICATION_MODAL);
+            alert.setTitle("Nothing found");
+            alert.setHeaderText("Could'nt find anthing matching: " + partSearch );
+            alert.showAndWait();
+        }
     }
 
     @FXML
@@ -177,7 +200,7 @@ public class MainScreenController implements Initializable {
             pageLoadPart(event);
         }else{
     Alert alert = new Alert(Alert.AlertType.ERROR);
-    alert.initModality(Modality.NONE);
+    alert.initModality(Modality.APPLICATION_MODAL);
     alert.setTitle("No Part Selected ");
     alert.setHeaderText("You need to select something, yo!");
     alert.showAndWait();
@@ -187,10 +210,52 @@ public class MainScreenController implements Initializable {
     @FXML
     private void partDelete(ActionEvent event) {
         Parts partDel = partsTable.getSelectionModel().getSelectedItem();
+      
+        
+        if(partDel != null){
+           partF = false;
+            
+            for(int i = 0; i< Supply.getProductsList().size(); i++){
+                ObservableList<Parts> proParts = Supply.getProductsList().get(i).getProParts();
+                for(int pp = 0; pp < proParts.size(); pp++){
+                    if(proParts.get(pp).equals(pp)){
+                    partF = true;
+                    }
+                }
+            }
+            
+            if(partF){
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.initModality(Modality.APPLICATION_MODAL);
+                alert.setTitle("Unable to complete task!");
+                alert.setHeaderText("Object is linked to a current product");
+                alert.showAndWait();
+            }else{
+                Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                alert.initModality(Modality.APPLICATION_MODAL);
+                alert.setTitle("Confirm to complete task!");
+                alert.setHeaderText("Do you really want to DELETE: " + partF + " ?");
+                Optional<ButtonType> delete = alert.showAndWait();
+                
+                if(delete.get() == ButtonType.OK){
+                    partRemove(partDel);
+                    updatePartTable();
+                }
+            }
+        }
     }
 
     @FXML
     private void searchProducts(ActionEvent event) {
+        String search = proSearch.getText();
+        ObservableList partFound = Supply.partLookUp(search);
+        if(partFound.isEmpty()){
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.initModality(Modality.APPLICATION_MODAL);
+            alert.setTitle("Nothing found");
+            alert.setHeaderText("Could'nt find anthing matching: " + proSearch );
+            alert.showAndWait();
+        }
     }
 
     @FXML
@@ -199,15 +264,71 @@ public class MainScreenController implements Initializable {
     }
 
     @FXML
-    private void proMod(ActionEvent event) {
+    private void proMod(ActionEvent event) throws IOException {
+        Products proSelect = productTable.getSelectionModel().getSelectedItem();
+        index = getProductsList().indexOf(proSelect);
+        
+        if(proSelect != null){
+            pageLoadPro(event, proSelect);
+        }else{
+            noSelect(event);
+        }
     }
 
     @FXML
     private void proDelete(ActionEvent event) {
+           Products proDel = productTable.getSelectionModel().getSelectedItem();
+       
+        
+        if(proDel != null){
+           partF = false;
+            
+            for(int i = 0; i< Supply.getProductsList().size(); i++){
+                ObservableList<Parts> proParts = Supply.getProductsList().get(i).getProParts();
+                for(int pp = 0; pp < proParts.size(); pp++){
+                    if(proParts.get(pp).equals(pp)){
+                    partF = true;
+                    }
+                }
+            }
+            
+            if(partF){
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.initModality(Modality.APPLICATION_MODAL);
+                alert.setTitle("Unable to complete task!");
+                alert.setHeaderText("Object is linked to a current product");
+                alert.showAndWait();
+            }else{
+                Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                alert.initModality(Modality.APPLICATION_MODAL);
+                alert.setTitle("Confirm to complete task!");
+                alert.setHeaderText("Do you really want to DELETE: " + partF + " ?");
+                Optional<ButtonType> delete = alert.showAndWait();
+                
+                if(delete.get() == ButtonType.OK){
+                    productRemove(proDel);
+                    updatePartTable();
+                }
+            }
+        }
     }
 
     @FXML
     private void exit(ActionEvent event) {
+        
     }
+
+  
+    
+    public void updatePartTable() {
+      partsTable.setItems(getPartsList());
+    }
+    
+    public void updateProTable(){
+        ObservableList<Products> proItems = getProductsList();
+        productTable.setItems(proItems);
+    }
+
+ 
     
 }

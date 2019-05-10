@@ -10,7 +10,7 @@ package imsystem;
 
 //List of Java Imports
 import Models.Supply;
-import Controllers.MainScreenController;
+import javafx.scene.layout.AnchorPane;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -26,22 +26,29 @@ public class IMSystem extends Application {
 	/**
 	 * @param args
 	 */
+    
+            private Stage mainStage;
+            private AnchorPane mainScreen;
+            
 	public static void main(String[] args) {
 		launch(args);
 	}
 
 	@Override
 	public void start(Stage stage) throws Exception {
-		Supply supply = new Supply();
+	this.mainStage = mStage;
+                     this.mainStage.setTitle(" IMS");
+                     showMainStage(mStage);
                                         
                                     
                 // Set our path to FXML
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("/Views/MainScreen.fxml"));
+		FXMLLoader loadFx = new FXMLLoader(getClass().getResource("/Views/MainScreen.fxml"));
+                                           loadFx.setLocation()
                                    
                 // Set our Controllers 
 		Controllers.MainScreenController controller = new Controllers.MainScreenController();
-		loader.setController(controller);
-		Parent root = loader.load();
+		loadFx.setController(controller);
+		Parent root = loadFx.load();
                                   
                 //Setting the stage
 		Scene scene = new Scene(root);

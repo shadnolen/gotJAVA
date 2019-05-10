@@ -5,8 +5,11 @@
  */
 package Controllers;
 
+import Models.Parts;
+import Models.Products;
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -37,31 +40,34 @@ public class ProductController implements Initializable {
     @FXML
     private TextField productSearch;
     @FXML
-    private TableView<?> partNew;
+    private TableView<Parts> partNew;
     @FXML
-    private TableColumn<?, ?> partID;
+    private TableColumn<Parts, Integer> partID;
     @FXML
-    private TableColumn<?, ?> partName;
+    private TableColumn<Parts, String> partName;
     @FXML
-    private TableColumn<?, ?> partSupply;
+    private TableColumn<Parts, Integer> partSupply;
     @FXML
-    private TableColumn<?, ?> partCost;
+    private TableColumn<Parts, Double> partCost;
     @FXML
-    private TableView<?> proParts;
+    private TableView<Products> proParts;
     @FXML
-    private TableColumn<?, ?> proID;
+    private TableColumn<Products, Integer> proID;
     @FXML
-    private TableColumn<?, ?> proName;
+    private TableColumn<Products, String> proName;
     @FXML
-    private TableColumn<?, ?> proSupply;
+    private TableColumn<Products, Integer> proSupply;
     @FXML
-    private TableColumn<?, ?> proPrice;
+    private TableColumn<Products, Double> proPrice;
     @FXML
     private Label productLabel;
 
     /**
      * Initializes the controller class.
      */
+    
+    private ObservableList<Parts> prodList  = FXCollections.observableArrayList();
+    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
@@ -73,6 +79,13 @@ public class ProductController implements Initializable {
 
     @FXML
     private void partAdd(ActionEvent event) {
+        Boolean  partFound = false;
+        Parts part = partNew.getSelectionModel().getSelectedItem();
+        if(part != null){
+            for(int i= 0; i< prodList.size();i++ ){
+                if(prodList.get(i))
+            }
+        }
     }
 
     @FXML

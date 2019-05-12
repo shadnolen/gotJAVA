@@ -3,10 +3,19 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/shadn/OneDrive/GitHub/JavaBasicsII/InventorySupplySystem(4)/InventorySupplySystem/src/Controllers/AddPartController.java</file>
-            <file>file:/C:/Users/shadn/OneDrive/GitHub/JavaBasicsII/InventorySupplySystem(4)/InventorySupplySystem/src/Model/Part.java</file>
-            <file>file:/C:/Users/shadn/OneDrive/GitHub/JavaBasicsII/InventorySupplySystem(4)/InventorySupplySystem/src/Model/InHouse.java</file>
-            <file>file:/C:/Users/shadn/OneDrive/GitHub/JavaBasicsII/InventorySupplySystem(4)/InventorySupplySystem/src/Model/Supply.java</file>
+            <file>file:/C:/Users/shadn/OneDrive/GitHub/JavaBasicsII/InventorySupplySystem/InventorySupplySystem/src/DRY/MainLoad.java</file>
+            <file>file:/C:/Users/shadn/OneDrive/GitHub/JavaBasicsII/InventorySupplySystem/InventorySupplySystem/src/Controllers/MainScreenController.java</file>
+            <file>file:/C:/Users/shadn/OneDrive/GitHub/JavaBasicsII/InventorySupplySystem/InventorySupplySystem/src/DRY/ProLoad.java</file>
+            <file>file:/C:/Users/shadn/OneDrive/GitHub/JavaBasicsII/InventorySupplySystem/InventorySupplySystem/src/Views/ProductScreen.fxml</file>
+            <file>file:/C:/Users/shadn/OneDrive/GitHub/JavaBasicsII/InventorySupplySystem/InventorySupplySystem/src/DRY/NoSelect.java</file>
+            <file>file:/C:/Users/shadn/OneDrive/GitHub/JavaBasicsII/InventorySupplySystem/InventorySupplySystem/src/Model/Supply.java</file>
+            <file>file:/C:/Users/shadn/OneDrive/GitHub/JavaBasicsII/InventorySupplySystem/InventorySupplySystem/src/Controllers/ProductScreenController.java</file>
+            <file>file:/C:/Users/shadn/OneDrive/GitHub/JavaBasicsII/InventorySupplySystem/InventorySupplySystem/src/Model/Outsourced.java</file>
+            <file>file:/C:/Users/shadn/OneDrive/GitHub/JavaBasicsII/InventorySupplySystem/InventorySupplySystem/src/DRY/PartLoad.java</file>
+            <file>file:/C:/Users/shadn/OneDrive/GitHub/JavaBasicsII/InventorySupplySystem/InventorySupplySystem/src/Model/Part.java</file>
+            <file>file:/C:/Users/shadn/OneDrive/GitHub/JavaBasicsII/InventorySupplySystem/InventorySupplySystem/src/Model/InHouse.java</file>
+            <file>file:/C:/Users/shadn/OneDrive/GitHub/JavaBasicsII/InventorySupplySystem/InventorySupplySystem/src/Supply/SupplyInv.java</file>
+            <file>file:/C:/Users/shadn/OneDrive/GitHub/JavaBasicsII/InventorySupplySystem/InventorySupplySystem/src/Controllers/PartScreenController.java</file>
         </group>
     </open-files>
 </project-private>

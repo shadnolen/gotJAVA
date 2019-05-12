@@ -11,7 +11,7 @@ import javafx.beans.property.StringProperty;
 
 /**
  *
- * @author Duncan
+ * @author shadn
  */
 public abstract class Part {
     protected IntegerProperty inStock;
@@ -21,80 +21,77 @@ public abstract class Part {
     protected IntegerProperty partID;
     protected DoubleProperty price;
             
-    //partID
+  
+    /***GET AND SET PARTS ***/
+    
+    
+    /*** @param partID ***/
     public void setPartID(int partID) {
         this.partID.set(partID);
-    }
-    
+    }    
     public int getPartID() {
         return this.partID.get();
-    }
-    
+    }    
     public IntegerProperty partIDProperty() {
         return partID;
     }
     
-    //name
+    
+    /***  @param name ***/
     public void setName(String name) {
-        this.name.set(name);
-    }
+        this.name.set(name);    }
     
     public String getName() {
         return this.name.get();
-    }
-    
+    }    
     public StringProperty nameProperty() {
         return name;
     }
     
-    //price
+    
+  /***  @param price ***/
     public void setPrice(double price) {
         this.price.set(price);
-    }
-    
+    }    
     public double getPrice() {
         return this.price.get();
-    }
-    
+    }    
     public DoubleProperty priceProperty() {
         return price;
     }
     
-    //inStock
+    
+ /***  @param inStock ***/
     public void setInStock(int inStock) {
         this.inStock.set(inStock);
-    }
-    
+    }    
     public int getInStock() {
         return this.inStock.get();
-    }
-    
+    }    
     public IntegerProperty inStockProperty() {
         return inStock;
     }
     
-    //min
+    
+    /***  @param min ***/
     public void setMin(int min) {
         this.min.set(min);
-    }
-    
+    }    
     public int getMin() {
         return this.min.get();
-    }
-    
+    }    
     public IntegerProperty minProperty() {
         return min;
     }
+
     
-    //max
+   /***  @param max ***/
     public void setMax(int max) {
         this.max.set(max);
-    }
-    
+    }    
     public int getMax() {
         return this.max.get();
-    }
-    
+    }    
     public IntegerProperty maxProperty() {
         return max;
     }

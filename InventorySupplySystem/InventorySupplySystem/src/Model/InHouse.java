@@ -27,6 +27,7 @@ public class InHouse extends Part {
      * @param machineID ***/
     
     public InHouse(int partID, String name, double price, int inStock, int min, int max, int machineID) {
+           /*** PROVIDES A FULL IMPLEMENTION FOR WRAPPING STRING VALUES  ***/       
         this.partID = new SimpleIntegerProperty(partID);
         this.name = new SimpleStringProperty(name);
         this.price = new SimpleDoubleProperty(price);
@@ -37,6 +38,7 @@ public class InHouse extends Part {
     }
 
     public InHouse() {
+          /*** REFERENCE VARIABLE THAT REFERS TO THE CURRENT OBJECT  ***/
         this.partID = new SimpleIntegerProperty(0);
         this.name = new SimpleStringProperty("");
         this.price = new SimpleDoubleProperty(0);

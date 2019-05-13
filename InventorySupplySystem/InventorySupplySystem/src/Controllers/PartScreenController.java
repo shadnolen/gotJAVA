@@ -199,7 +199,7 @@ public class PartScreenController {
     public Boolean isPartValid(String name, String min, String max, String inv, String price, String company, String machine) {
         String errorMessage = "";
         Integer intMin = null, intMax = null, intInv = null;
-        Double dPrice = null;
+        Double pricing = null;
         Boolean valid;
         
         if(name == null || name.length() == 0) {
@@ -237,9 +237,9 @@ public class PartScreenController {
         }
         
         try {
-            dPrice = Double.parseDouble(price);
+            pricing = Double.parseDouble(price);
             
-            if(dPrice <= 0) {
+            if(pricing <= 0) {
                errorMessage += ("Price must be greater than 0\n"); 
             }
         } catch (Exception e) {

@@ -20,7 +20,7 @@ import javafx.stage.Stage;
  */
 public class MainLoad {
     
-   /*** COMMON MAINSCREEN LOADERS - PARTS
+   /*** COMMON SCREEN LOADERS - PARTS
      * @param event
      * @throws java.io.IOException ***/
     public void partMain(ActionEvent event) throws IOException {
@@ -39,7 +39,7 @@ public class MainLoad {
         stage.show();
     }
     
-    /*** COMMON MAINSCREEN LOADERS - PRODUCTS
+    /*** COMMON SCREEN LOADERS - PRODUCTS
      * @param event
      * @throws java.io.IOException ***/
         public void proMain(ActionEvent event) throws IOException {

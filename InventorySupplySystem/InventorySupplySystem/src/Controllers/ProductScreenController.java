@@ -7,22 +7,19 @@ package Controllers;
 
 import DRY.MainLoad;
 import Model.Supply;
-import static Model.Supply.getPartList;
+
 import Model.Part;
 import Model.Product;
 import static Controllers.MainScreenController.selectedIndex;
+import DRY.NoSelect;
 import java.io.IOException;
 import java.util.Optional;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
+
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
@@ -30,7 +27,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.stage.Modality;
-import javafx.stage.Stage;
+
 /**
  * FXML Controller class
  *
@@ -94,24 +91,26 @@ public class ProductScreenController {
     
     private ObservableList<Part> currentParts = FXCollections.observableArrayList();
     
-            MainLoad ml = new MainLoad();
+     /*** LOAD CLASS ***/    
+    MainLoad ml = new MainLoad();
+    NoSelect ns = new  NoSelect();
     
     @FXML
     void partAdd(ActionEvent event) {
         Boolean found = false;
         Part part = partNew.getSelectionModel().getSelectedItem();
         
-        //make sure a part was selected
+      /*** PART SELECTED? ***/
         if(part != null) {
             for (int i = 0; i < currentParts.size(); i++) {
                 if(currentParts.get(i).equals(part)) {
                     found = true;
                 }
             } 
-
+   /*** PART DUPLICATE ***/ 
             if(found) {
                 Alert alert = new Alert(Alert.AlertType.WARNING);
-                alert.setTitle("Part Duplication");
+                alert.setTitle("PartDuplication");
                 alert.setHeaderText("Part already in Product");
                 alert.setContentText("This part is already linked to the product");
                 alert.showAndWait();
@@ -120,11 +119,7 @@ public class ProductScreenController {
                 productParts.setItems(currentParts);    
             }
         } else {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.initModality(Modality.APPLICATION_MODAL);
-            alert.setTitle("No Part selected");
-            alert.setHeaderText("Please select a part from the existing list to add to the product"); 
-            alert.showAndWait();
+            ns.noAlert();
         }
     }
 
@@ -155,14 +150,10 @@ public class ProductScreenController {
 
             if (result.get() == ButtonType.OK) {
                 currentParts.remove(partSelect);
-                proUpdatePartTableView();
+                proUpdateView();
             }    
         } else {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.initModality(Modality.APPLICATION_MODAL);
-            alert.setTitle("No Part selected");
-            alert.setHeaderText("Please select a part from the existing list to delete from the product"); 
-            alert.showAndWait();
+        ns.noAlert();
         }
         
     }
@@ -179,76 +170,84 @@ public class ProductScreenController {
         productPartCost.setCellValueFactory(cellData -> cellData.getValue().priceProperty().asObject());
         
         partTableView();
-        proUpdatePartTableView();
+        proUpdateView();
     }
     
-    //Make sure the part data is valid
+    
+    /*** VALID FIELDS / PRODUCT> COST
+     * @param name
+     * @param min
+     * @param max
+     * @param inv
+     * @param price
+     * @return  ***/
+ 
+   
     public Boolean isProductValid(String name, String min, String max, String inv, String price) {
         String errorMessage = "";
         Integer intMin = null, intMax = null, intInv = null;
-        Double dPrice = null;
+        Double pricing = null;
         Boolean valid;
         
         if(name == null || name.length() == 0) {
-            errorMessage += ("Product Name is blank\n");
+            errorMessage += ("Product Name is blank \n");
         }
         
         try {
             intMin = Integer.parseInt(min);
-        } catch (Exception e) {
-            errorMessage += ("Minimum must be numeric\n");
+        } catch (NumberFormatException e) {
+            errorMessage += ("Minimum must be a number \n");
         }
         
         try {
             intMax = Integer.parseInt(max);
-        } catch (Exception e) {
-            errorMessage += ("Maximum must be numeric\n");
+        } catch (NumberFormatException e) {
+            errorMessage += ("Maximum must be a number \n");
         }
         
         if(intMin != null && intMin < 0) {
-            errorMessage += ("Minimum cannot be negative\n");
+            errorMessage += ("Minimum cannot be negative \n");
         }
         
         if(intMin != null && intMax != null && intMin > intMax) {
-            errorMessage += ("Minimum must be less than maximum\n");
+            errorMessage += ("Minimum must be less than max \n");
         }
         
         try {
             intInv = Integer.parseInt(inv);
             
             if(intMin != null && intMax != null && intInv < intMin && intInv > intMax) {
-               errorMessage += ("Supply must be between minimum and maximum\n"); 
+               errorMessage += ("Supply amount must be between MIN and MAX \n"); 
             }
-        } catch (Exception e) {
-            errorMessage += ("Supply must be numeric\n");
+        } catch (NumberFormatException e) {
+            errorMessage += ("Supply must be a number \n");
         }
         
         try {
-            dPrice = Double.parseDouble(price);
+            pricing = Double.parseDouble(price);
             
-            if(dPrice <= 0) {
-               errorMessage += ("Price must be greater than 0\n"); 
+            if(pricing <= 0) {
+               errorMessage += ("Price must be greater than ZER0\n"); 
             }
-        } catch (Exception e) {
+        } catch (NumberFormatException e) {
             errorMessage += ("Price must be numeric\n");
         }
         
         if(currentParts.isEmpty()) {
-            errorMessage += ("Product must have at least one part\n");
+            errorMessage += ("Product must be connected to at least one part \n");
         } else {
-            //loop through all the products and add up the cost
-            //price of product cannot be less than the cost of the parts
+           
             Double partCost = 0.0;
             for (int i = 0; i < currentParts.size(); i++) {
                 partCost += currentParts.get(i).getPrice();
             }
-            if(dPrice != null && partCost > dPrice) {
-                errorMessage += ("Product price ("+dPrice+") must be greater than the sum of the parts ("+partCost+")\n");
+            if(pricing != null && partCost > pricing) {
+                errorMessage += ("Product price ("+ pricing +") must be greater than the sum of the parts ("+ partCost +")\n");
             }
         }
         
         if (errorMessage.length() > 0) {
-            errorMessage += ("\nFix the listed errors and save again");
+            errorMessage += ("\n Fix the listed errors to save");
             
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Product Validation Error");
@@ -323,14 +322,14 @@ public class ProductScreenController {
         productMax.setText(Integer.toString(product.getMax()));
         
         currentParts = product.getProductParts();
-        proUpdatePartTableView();
+        proUpdateView();
     }
     
     public void partTableView() {
         partNew.setItems(Supply.getPartList());
     }
 
-    private void proUpdatePartTableView() {
+    private void proUpdateView() {
         productParts.setItems(currentParts);
     }
 }

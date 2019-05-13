@@ -21,6 +21,9 @@ import javafx.stage.Stage;
  */
 public class PartLoad {
     
+    /*** PARTSCREEN MAIN LOADER
+     * @param event
+     * @throws java.io.IOException ***/
        public void partPage(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getResource("/Views/PartScreen.fxml"));
@@ -37,6 +40,10 @@ public class PartLoad {
         stage.show();
     }
     
+         /*** PARTSCREEN MAIN LOADER  With PRAM
+     * @param event
+     * @param part
+     * @throws java.io.IOException**/
    public  void partPage(ActionEvent event, Part part) throws IOException {
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getResource("/Views/PartScreen.fxml"));

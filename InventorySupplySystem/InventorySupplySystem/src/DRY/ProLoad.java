@@ -21,7 +21,9 @@ import javafx.stage.Stage;
  */
 public class ProLoad {
     
-    /*** MAIN PRODUCTSCREEN LOADER ***/
+    /*** MAIN PRODUCTSCREEN LOADER
+     * @param event
+     * @throws java.io.IOException ***/
      public void proPage(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getResource("/Views/ProductScreen.fxml"));
@@ -38,7 +40,10 @@ public class ProLoad {
         stage.show();
     }
     
-      /*** MAIN PRODUCTSCREEN LOADER WITH PRAM***/
+      /*** MAIN PRODUCTSCREEN LOADER WITH PRA
+     * @param event
+     * @param product
+     * @throws java.io.IOException**/
     public void proPage(ActionEvent event, Product product) throws IOException {
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getResource("/Views/ProductScreen.fxml"));

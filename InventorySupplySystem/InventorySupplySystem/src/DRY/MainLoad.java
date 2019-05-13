@@ -20,7 +20,9 @@ import javafx.stage.Stage;
  */
 public class MainLoad {
     
-   //Parts
+   /*** COMMON MAINSCREEN LOADERS - PARTS
+     * @param event
+     * @throws java.io.IOException ***/
     public void partMain(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getResource("/Views/MainScreen.fxml"));
@@ -37,7 +39,9 @@ public class MainLoad {
         stage.show();
     }
     
-    //Products
+    /*** COMMON MAINSCREEN LOADERS - PRODUCTS
+     * @param event
+     * @throws java.io.IOException ***/
         public void proMain(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getResource("/Views/MainScreen.fxml"));

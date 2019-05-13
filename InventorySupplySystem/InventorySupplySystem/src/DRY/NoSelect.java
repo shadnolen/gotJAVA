@@ -13,7 +13,8 @@ import javafx.stage.Modality;
  * @author shadn
  */
 public class NoSelect {
-    
+    /*** COMMON CODE 
+     * NOTHING SELECTED ERROR ***/
     public void noAlert(){
     Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.initModality(Modality.APPLICATION_MODAL);
@@ -21,7 +22,7 @@ public class NoSelect {
             alert.setHeaderText("Please select  from the existing list to modify"); 
             alert.showAndWait();
      }
-    
+    /*** CONNECTED ERROR ****/
     public void associatedObject(){
         Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.initModality(Modality.APPLICATION_MODAL);

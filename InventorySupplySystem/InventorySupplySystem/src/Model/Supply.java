@@ -112,6 +112,8 @@ public class Supply {
         return proFound;
     }
     
+    /*** END OF PRODUCTS ***/
+    
     /*** UPDATE LIST ***/
     public static void proUpdate(int index, Product product) {
         productList.set(index, product);

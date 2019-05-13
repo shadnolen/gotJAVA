@@ -19,6 +19,8 @@ import javafx.collections.ObservableList;
  * @author shadn
  */
 public class Product {
+    
+    /*** PROVIDES A FULL IMPLEMENTION FOR WRAPPING STRING VALUES  ***/
     private ObservableList<Part> productParts = FXCollections.observableArrayList();
     private final IntegerProperty productID;
     private final StringProperty productName;
@@ -27,6 +29,7 @@ public class Product {
     private final IntegerProperty productMin;
     private final IntegerProperty productMax;
 
+     /*** REFERENCE VARIABLE THAT REFERS TO THE CURRENT OBJECT  ***/
     public Product(int productID, String name, double price, int inStock, int min, int max) {
         this.productID = new SimpleIntegerProperty(productID);
         this.productName = new SimpleStringProperty(name);
@@ -45,7 +48,11 @@ public class Product {
         this.productMax = new SimpleIntegerProperty(0);
     }
 
-    //productID
+    /*** GET AND SET
+     * @param productID ***/
+    
+    /*** ID
+     * @param productID ***/
     public void setProductID(int productID) {
         this.productID.set(productID);
     }
@@ -58,7 +65,8 @@ public class Product {
         return productID;
     }
     
-    //productName
+   /*** NAME
+     * @param name ***/
      public void setName(String name) {
         this.productName.set(name);
     }
@@ -71,7 +79,8 @@ public class Product {
         return productName;
     }
     
-    //productPrice
+    /*** PRICE
+     * @param price ***/
     public void setPrice(double price) {
         this.productPrice.set(price);
     }
@@ -84,7 +93,8 @@ public class Product {
         return productPrice;
     }
 
-    //productInStock
+    /*** INSTOCK
+     * @param inStock ***/
     public void setInStock(int inStock) {
         this.productInStock.set(inStock);
     }
@@ -97,7 +107,8 @@ public class Product {
         return productInStock;
     }
     
-    //productMin
+    /*** MIN
+     * @param min ***/
     public void setMin(int min) {
         this.productMin.set(min);
     }
@@ -110,7 +121,8 @@ public class Product {
         return productMin;
     }
     
-    //productMax
+  /*** MAX
+     * @param max ***/
      public void setMax(int max) {
         this.productMax.set(max);
     }
@@ -123,7 +135,8 @@ public class Product {
         return productMax;
     }
     
-    //associatedParts
+   /*** ASSOCIATED 
+     * @param associatedParts ***/
     public void setProductParts(ObservableList<Part> associatedParts) {
         productParts = associatedParts;
     }
@@ -131,6 +144,6 @@ public class Product {
     public ObservableList<Part> getProductParts() {
         return productParts;
     }
-    
+    /*** END GET AND SET ***/
 
 }

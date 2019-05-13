@@ -14,6 +14,7 @@ import javafx.beans.property.StringProperty;
  * @author shadn
  */
 public abstract class Part {
+      /*** PROVIDES A FULL IMPLEMENTION FOR WRAPPING STRING VALUES  ***/
     protected IntegerProperty inStock;
     protected IntegerProperty max;
     protected IntegerProperty min;
@@ -37,7 +38,8 @@ public abstract class Part {
     }
     
     
-    /***  @param name ***/
+    /*** NAME 
+     * @param name ***/
     public void setName(String name) {
         this.name.set(name);    }
     
@@ -49,7 +51,8 @@ public abstract class Part {
     }
     
     
-  /***  @param price ***/
+  /*** PRICE
+   * @param price ***/
     public void setPrice(double price) {
         this.price.set(price);
     }    
@@ -61,7 +64,8 @@ public abstract class Part {
     }
     
     
- /***  @param inStock ***/
+ /*** InStock
+  * @param inStock ***/
     public void setInStock(int inStock) {
         this.inStock.set(inStock);
     }    
@@ -73,7 +77,8 @@ public abstract class Part {
     }
     
     
-    /***  @param min ***/
+    /***  MIN
+     * @param min ***/
     public void setMin(int min) {
         this.min.set(min);
     }    
@@ -85,7 +90,8 @@ public abstract class Part {
     }
 
     
-   /***  @param max ***/
+   /***  MAX
+    * @param max ***/
     public void setMax(int max) {
         this.max.set(max);
     }    

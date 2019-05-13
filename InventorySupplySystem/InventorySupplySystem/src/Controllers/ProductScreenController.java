@@ -282,7 +282,7 @@ public class ProductScreenController {
             product.setProductParts(currentParts);
             
             if(this.productId.getText().length() == 0) {
-                product.setProductID(Supply.getProductIDCount());
+                product.setProductID(Supply.getProductIndex());
                 Supply.proAdd(product);
             } else {
                 product.setProductID(Integer.parseInt(this.productId.getText()));

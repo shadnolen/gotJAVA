@@ -136,7 +136,7 @@ public class PartScreenController {
                 part.setPrice(Double.parseDouble(this.partCost.getText()));
                 
                 if(this.partId.getText().length() == 0) {
-                    part.setPartID(Supply.getPartIDCount());
+                    part.setPartID(Supply.getPartIndex());
                     Supply.partAdd(part);
                 } else {
                     part.setPartID(Integer.parseInt(this.partId.getText()));
@@ -153,7 +153,7 @@ public class PartScreenController {
                 part.setPrice(Double.parseDouble(this.partCost.getText()));
                 
                 if(this.partId.getText().length() == 0) {
-                    part.setPartID(Supply.getPartIDCount());
+                    part.setPartID(Supply.getPartIndex());
                     Supply.partAdd(part);
                 } else {
                     part.setPartID(Integer.parseInt(this.partId.getText()));

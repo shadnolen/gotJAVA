@@ -19,8 +19,8 @@ public class Supply {
     private static final ObservableList<Product> productList = FXCollections.observableArrayList();
     
    /*** SET UP THE COUNTER ***/
-    private static int partIDCount = 0;
-    private static int productIDCount = 0;
+    private static int partIndex = 0;
+    private static int productIndex = 0;
     
   
     /*** PARTS
@@ -42,14 +42,14 @@ public class Supply {
         partList.set(index, part);
     }
 
-    public static int getPartIDCount() {
-        partIDCount += 1;
-        return partIDCount;
+    public static int getPartIndex() {
+        partIndex += 1;
+        return partIndex;
     }
     
-    public static int cancelPartIDCount() {
-        partIDCount -= 1;
-        return partIDCount;
+    public static int cancelPartIndex() {
+        partIndex -= 1;
+        return partIndex;
     }
 
     public static ObservableList partLookUp(String searchTerm) {
@@ -86,14 +86,14 @@ public class Supply {
         productList.remove(product);
     }
 
-    public static int getProductIDCount() {
-        productIDCount += 1;
-        return productIDCount;
+    public static int getProductIndex() {
+        productIndex += 1;
+        return productIndex;
     }
    
-    public static int cancelProductIDCount() {
-        productIDCount -= 1;
-        return productIDCount;
+    public static int cancelProductIndex() {
+        productIndex -= 1;
+        return productIndex;
     }
 
     public static ObservableList proLookUp(String searchTerm) {

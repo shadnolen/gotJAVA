@@ -146,7 +146,7 @@ public class MainScreenController {
                 Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
                 alert.initModality(Modality.NONE);
                 alert.setTitle("Part Delete Confirmation");
-                alert.setHeaderText("Confirm deletion of part");
+                alert.setHeaderText("Confirm delete");
                 alert.setContentText("Are you sure you want to delete " + partSelect.getName() + "?");
                
                 Optional<ButtonType> delete = alert.showAndWait();
@@ -187,8 +187,8 @@ public class MainScreenController {
         if(proFound.isEmpty()) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.initModality(Modality.APPLICATION_MODAL);
-            alert.setTitle("No Product match found");
-            alert.setHeaderText("No Product Names found matching " + sp); 
+            alert.setTitle("No match found");
+            alert.setHeaderText("No Product found matching " + sp); 
             alert.showAndWait();
         } else {
             productTable.setItems(proFound);
@@ -205,7 +205,7 @@ public class MainScreenController {
                 Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
                 alert.initModality(Modality.NONE);
                 alert.setTitle("Product Delete Confirmation");
-                alert.setHeaderText("Confirm you want to delete product");
+                alert.setHeaderText("Confirm delete");
                 alert.setContentText("Delete " + proSelect.getName() + "?");
                 Optional<ButtonType> result = alert.showAndWait();
 

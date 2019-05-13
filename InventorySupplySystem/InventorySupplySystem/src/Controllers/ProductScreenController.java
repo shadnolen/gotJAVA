@@ -236,10 +236,12 @@ public class ProductScreenController {
             errorMessage += ("Price must be number \n");
         }
         
+        /*** IS ITEM CONNECTED ***/
         if(currentParts.isEmpty()) {
             errorMessage += ("Product must be connected to at least one part \n");
         } else {
-           
+            
+              /*** PRICING  PRICING > COST?***/           
             Double partCost = 0.0;
             for (int i = 0; i < currentParts.size(); i++) {
                 partCost += currentParts.get(i).getPrice();

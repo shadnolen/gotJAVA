@@ -6,6 +6,7 @@
 package Controllers;
 
 import DRY.MainLoad;
+
 import Model.InHouse;
 import Model.Supply;
 import Model.Outsourced;
@@ -58,20 +59,21 @@ public class PartScreenController {
     private TextField partMax;
 
     @FXML
-    private RadioButton InHouse;
+    public RadioButton InHouse;
 
     @FXML
-    private RadioButton Outsourced;
+    public RadioButton Outsourced;
 
     @FXML
     private Label partLabel;
     
     @FXML
-    private ToggleGroup typeOfPart;
+    public ToggleGroup typeOfPart;
     
     private Part partSelect;
     
     MainLoad ml = new MainLoad();
+    
     
     
     @FXML
@@ -192,7 +194,15 @@ public class PartScreenController {
         partType();
     }
     
-    //Make sure the part data is valid
+        /*** VALID FIELDS / PART> COST
+     * @param name
+     * @param min
+     * @param max
+     * @param inv
+     * @param price
+     * @param company
+     * @param machine
+     * @return  ***/
     public Boolean isPartValid(String name, String min, String max, String inv, String price, String company, String machine) {
         String errorMessage = "";
         Integer intMin = null, intMax = null, intInv = null;
@@ -205,42 +215,42 @@ public class PartScreenController {
         
         try {
             intMin = Integer.parseInt(min);
-        } catch (Exception e) {
-            errorMessage += ("Minimum must be numeric\n");
+        } catch (NumberFormatException e) {
+            errorMessage += ("Minimum must be a number \n");
         }
         
         try {
             intMax = Integer.parseInt(max);
-        } catch (Exception e) {
-            errorMessage += ("Maximum must be numeric\n");
+        } catch (NumberFormatException e) {
+            errorMessage += ("Maximum must be a number \n");
         }
         
         if(intMin != null && intMin < 0) {
-            errorMessage += ("Minimum cannot be negative\n");
+            errorMessage += ("Min cannot be negative \n");
         }
         
         if(intMin != null && intMax != null && intMin > intMax) {
-            errorMessage += ("Minimum must be less than maximum\n");
+            errorMessage += ("Min must be less than max \n");
         }
         
         try {
             intInv = Integer.parseInt(inv);
             
             if(intMin != null && intMax != null && intInv < intMin && intInv > intMax) {
-               errorMessage += ("Supply must be between minimum and maximum\n"); 
+               errorMessage += ("Supply must be between min and max \n"); 
             }
-        } catch (Exception e) {
-            errorMessage += ("Supply must be numeric\n");
+        } catch (NumberFormatException e) {
+            errorMessage += ("Supply must be number \n");
         }
         
         try {
             pricing = Double.parseDouble(price);
             
             if(pricing <= 0) {
-               errorMessage += ("Price must be greater than 0\n"); 
+               errorMessage += ("Price must be greater than ZER0\n"); 
             }
-        } catch (Exception e) {
-            errorMessage += ("Price must be numeric\n");
+        } catch (NumberFormatException e) {
+            errorMessage += ("Price must be number \n");
         }
         
         try {
@@ -248,23 +258,23 @@ public class PartScreenController {
                 //intMachineId
                 try {
                     Integer.parseInt(machine);
-                } catch (Exception e) {
-                    errorMessage += ("Machine ID must be numeric\n");
+                } catch (NumberFormatException e) {
+                    errorMessage += ("Machine ID must be Number \n");
                 }
             } else if (this.typeOfPart.getSelectedToggle().equals(this.Outsourced)) {
                 if(company == null || company.length() == 0) {
-                    errorMessage += ("Company Name is blank\n");
+                    errorMessage += ("Company Name is blank \n");
                 }
             }    
         } catch(Exception e) {
-           errorMessage += ("Part type of In-House or Outsourced must be selected\n"); 
+           errorMessage += ("Select  InHouse or Outsourced \n"); 
         }
         
         if (errorMessage.length() > 0) {
-            errorMessage += ("\nFix the listed errors and save again");
+            errorMessage += ("\n Fix the listed errors to save ");
             
             Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Part Validation Error");
+            alert.setTitle(" Validation Error");
             alert.setHeaderText("Error");
             alert.setContentText(errorMessage);
             alert.showAndWait();

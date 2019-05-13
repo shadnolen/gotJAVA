@@ -8,49 +8,47 @@ package Supply;
 import java.io.IOException;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
+
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import Controllers.MainScreenController;
-import Controllers.PartScreenController;
-import javafx.stage.Modality;
+
 
 /**
  *
  * @author shadn
  */
 public class SupplyInv extends Application {
-    
+   
+    /***  INITIALIZE ***/
     private Stage mainStage;
     private AnchorPane mainScreen;
     
     @Override
     public void start(Stage stage) throws IOException {
      
-        //Set our stage
+       /*** SET UP THE STAGE ***/
         this.mainStage = stage;
         this.mainStage.setTitle("Supply Mangement System"); 
         mainScreen(stage);
     }
 
-    /**
+    /*** MAIN LOADER
      * @param stage
      * @throws java.io.IOException
      */
     public void mainScreen(Stage stage) throws IOException {
-        //set our main location
+      
+        /*** SET THE MAIN LOCATION ***/
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(SupplyInv.class.getResource("/Views/MainScreen.fxml"));
         this.mainScreen = (AnchorPane) loader.load();  
-
-        // Give the controller access to the main app.
         MainScreenController controller = loader.getController();
     
-        //  Call the main loader
+       /*** SET STAGE MAINLOADER ***/
         controller.mainLoader(stage); 
     }
-        //The start of all Java
+       /*** THE START OF ALL JAVA ***/
      public static void main(String[] args) {      
         launch(args);
     }

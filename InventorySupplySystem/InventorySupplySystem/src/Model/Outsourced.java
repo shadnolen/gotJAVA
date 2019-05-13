@@ -18,6 +18,7 @@ public class Outsourced extends Part {
     private final StringProperty companyName;
 
     public Outsourced(int partID, String name, double price, int inStock, int min, int max, String companyName) {
+        /*** PROVIDES A FULL IMPLEMENTION FOR WRAPPING STRING VALUES  ***/         
         this.companyName = new SimpleStringProperty(companyName);
         this.inStock = new SimpleIntegerProperty(inStock);
         this.max = new SimpleIntegerProperty(max);
@@ -28,16 +29,18 @@ public class Outsourced extends Part {
     }
 
     public Outsourced() {
-        this.companyName = new SimpleStringProperty("");
+          /*** REFERENCE VARIABLE THAT REFERS TO THE CURRENT OBJECT  ***/
+        this.companyName = new SimpleStringProperty(" ");
         this.inStock = new SimpleIntegerProperty(0);
         this.max = new SimpleIntegerProperty(0);
         this.min = new SimpleIntegerProperty(0);
-        this.name = new SimpleStringProperty("");
+        this.name = new SimpleStringProperty(" ");
         this.partID = new SimpleIntegerProperty(0);
         this.price = new SimpleDoubleProperty(0);
     }
 
-    /*** COMPANY GET AND SET ***/
+    /*** COMPANY GET AND SET
+     * @return  ***/
     public String getCompanyName() {
         return this.companyName.get();
     }

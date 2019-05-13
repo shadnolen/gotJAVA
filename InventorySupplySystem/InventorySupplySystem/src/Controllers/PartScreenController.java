@@ -15,10 +15,7 @@ import java.io.IOException;
 import java.util.Optional;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
+
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
@@ -76,6 +73,7 @@ public class PartScreenController {
     
     MainLoad ml = new MainLoad();
     
+    
     @FXML
     void cancelPart(ActionEvent event) throws IOException {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
@@ -92,6 +90,7 @@ public class PartScreenController {
 
     @FXML
     void partType() {
+         /*** REFERENCE VARIABLE THAT REFERS TO THE CURRENT OBJECT  ***/
         if (this.typeOfPart.getSelectedToggle().equals(this.InHouse)){
             this.partCompany.setEditable(false);
             this.partCompany.setDisable(true);
@@ -117,6 +116,7 @@ public class PartScreenController {
     @FXML
     void savePart(ActionEvent event) throws IOException {
         if(isPartValid(
+                 /*** REFERENCE VARIABLE THAT REFERS TO THE CURRENT OBJECT  ***/
             this.partName.getText(), 
             this.partMin.getText(),
             this.partMax.getText(),
@@ -127,8 +127,7 @@ public class PartScreenController {
         )) {
             if (this.typeOfPart.getSelectedToggle().equals(this.InHouse)){
                 InHouse part = new InHouse();
-                part.setMachineID(Integer.parseInt(this.partMachineId.getText()));
-                //common mutators
+                part.setMachineID(Integer.parseInt(this.partMachineId.getText()));             
                 part.setName(this.partName.getText());
                 part.setInStock(Integer.parseInt(this.partInv.getText()));
                 part.setMin(Integer.parseInt(this.partMin.getText()));
@@ -145,7 +144,6 @@ public class PartScreenController {
             } else {
                 Outsourced part = new Outsourced();
                 part.setCompanyName(this.partCompany.getText());
-                //common mutators
                 part.setName(this.partName.getText());
                 part.setInStock(Integer.parseInt(this.partInv.getText()));
                 part.setMin(Integer.parseInt(this.partMin.getText()));
@@ -166,8 +164,7 @@ public class PartScreenController {
     }
     
    public  void startPart() {
-        this.partLabel.setText("Add Part");
-        
+        this.partLabel.setText("Add Part");        
         this.InHouse.setToggleGroup(this.typeOfPart);
         this.Outsourced.setToggleGroup(this.typeOfPart);
     }

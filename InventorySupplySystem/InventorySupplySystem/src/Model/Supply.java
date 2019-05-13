@@ -52,15 +52,15 @@ public class Supply {
         return partIndex;
     }
 
-    public static ObservableList partLookUp(String searchTerm) {
+    public static ObservableList partLookUp(String searchps) {
         ObservableList<Part> partFound = FXCollections.observableArrayList();
         
-        if(searchTerm.length() == 0) {
+        if(searchps.length() == 0) {
             partFound = partList;
             
         } else {            
             for (int i = 0; i < partList.size(); i++) {                
-                if (partList.get(i).getName().toLowerCase().contains(searchTerm.toLowerCase())) {
+                if (partList.get(i).getName().toLowerCase().contains(searchps.toLowerCase())) {
                     partFound.add(partList.get(i));
                 }
             }    
@@ -96,14 +96,14 @@ public class Supply {
         return productIndex;
     }
 
-    public static ObservableList proLookUp(String searchTerm) {
+    public static ObservableList proLookUp(String searchps) {
         ObservableList<Product> proFound = FXCollections.observableArrayList();
         
-        if(searchTerm.length() == 0) {
+        if(searchps.length() == 0) {
             proFound = productList;
         } else {
             for (int i = 0; i < productList.size(); i++) {
-                if (productList.get(i).getName().toLowerCase().contains(searchTerm.toLowerCase())) {
+                if (productList.get(i).getName().toLowerCase().contains(searchps.toLowerCase())) {
                     proFound.add(productList.get(i));
                 }
             }    

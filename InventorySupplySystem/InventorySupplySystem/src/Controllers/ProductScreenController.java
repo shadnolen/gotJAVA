@@ -188,18 +188,20 @@ public class ProductScreenController {
         Integer intMin = null, intMax = null, intInv = null;
         Double pricing = null;
         Boolean valid;
-        
+        /*** NAME VALID? ***/
         if(name == null || name.length() == 0) {
             errorMessage += ("Product Name is blank \n");
         }
         
         try {
+              /*** MIN VALID? ***/
             intMin = Integer.parseInt(min);
         } catch (NumberFormatException e) {
             errorMessage += ("Minimum must be a number \n");
         }
         
         try {
+              /*** MAX VALID? ***/
             intMax = Integer.parseInt(max);
         } catch (NumberFormatException e) {
             errorMessage += ("Maximum must be a number \n");
@@ -208,14 +210,14 @@ public class ProductScreenController {
         if(intMin != null && intMin < 0) {
             errorMessage += ("Minimum cannot be negative \n");
         }
-        
+          /*** MIN < MAX VALID? ***/
         if(intMin != null && intMax != null && intMin > intMax) {
             errorMessage += ("Minimum must be less than max \n");
         }
         
         try {
             intInv = Integer.parseInt(inv);
-            
+              /*** SUPPY AMOUNT <= MAX/MIN  VALID? ***/
             if(intMin != null && intMax != null && intInv < intMin && intInv > intMax) {
                errorMessage += ("Supply amount must be between MIN and MAX \n"); 
             }
@@ -223,14 +225,15 @@ public class ProductScreenController {
             errorMessage += ("Supply must be a number \n");
         }
         
+        /*** PRICING ***/
         try {
             pricing = Double.parseDouble(price);
             
             if(pricing <= 0) {
-               errorMessage += ("Price must be greater than ZER0\n"); 
+               errorMessage += ("Price must be greater than ZER0 \n"); 
             }
         } catch (NumberFormatException e) {
-            errorMessage += ("Price must be numeric\n");
+            errorMessage += ("Price must be number \n");
         }
         
         if(currentParts.isEmpty()) {
@@ -245,10 +248,10 @@ public class ProductScreenController {
                 errorMessage += ("Product price ("+ pricing +") must be greater than the sum of the parts ("+ partCost +")\n");
             }
         }
-        
+      
+        /*** IF ANY ERROR IS PRESENT ***/ 
         if (errorMessage.length() > 0) {
-            errorMessage += ("\n Fix the listed errors to save");
-            
+            errorMessage += ("\n Fix the listed errors to save");          
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Product Validation Error");
             alert.setHeaderText("Error");
@@ -265,6 +268,7 @@ public class ProductScreenController {
     @FXML
     void saveProduct(ActionEvent event) throws IOException {
         if(isProductValid(
+                 /*** REFERENCE VARIABLE THAT REFERS TO THE CURRENT OBJECT  ***/
             this.productName.getText(), 
             this.productMin.getText(),
             this.productMax.getText(),
@@ -294,13 +298,13 @@ public class ProductScreenController {
 
     @FXML
     void productSearch(ActionEvent event) {
-        String term = productSearch.getText();
-        ObservableList partFound = Supply.partLookUp(term);
+        String ps = productSearch.getText();
+        ObservableList partFound = Supply.partLookUp(ps);
         if(partFound.isEmpty()) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.initModality(Modality.APPLICATION_MODAL);
             alert.setTitle("No Part match found");
-            alert.setHeaderText("No Part Names found matching " + term); 
+            alert.setHeaderText("No Part Names found matching " + ps); 
             alert.showAndWait();
         } else {
             partNew.setItems(partFound);
@@ -312,19 +316,19 @@ public class ProductScreenController {
     }
     
    public void startProduct(Product product) {
-        this.productLabel.setText("Modify Product");
-        
-        productId.setText(Integer.toString(product.getProductID()));
-        productName.setText(product.getName());
-        productInv.setText(Integer.toString(product.getInStock()));
-        productCost.setText(Double.toString(product.getPrice()));
-        productMin.setText(Integer.toString(product.getMin()));
-        productMax.setText(Integer.toString(product.getMax()));
+        this.productLabel.setText("Modify Product");        
+        this.productId.setText(Integer.toString(product.getProductID()));
+        this.productName.setText(product.getName());
+        this.productInv.setText(Integer.toString(product.getInStock()));
+        this.productCost.setText(Double.toString(product.getPrice()));
+        this.productMin.setText(Integer.toString(product.getMin()));
+        this.productMax.setText(Integer.toString(product.getMax()));
         
         currentParts = product.getProductParts();
         proUpdateView();
     }
     
+   /*** UPDATE THE VIEWS ***/
     public void partTableView() {
         partNew.setItems(Supply.getPartList());
     }

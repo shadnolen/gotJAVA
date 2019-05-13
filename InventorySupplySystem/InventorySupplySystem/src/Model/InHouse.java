@@ -38,7 +38,7 @@ public class InHouse extends Part {
     }
 
     public InHouse() {
-          /*** REFERENCE VARIABLE THAT REFERS TO THE CURRENT OBJECT  ***/
+         
         this.partID = new SimpleIntegerProperty(0);
         this.name = new SimpleStringProperty("");
         this.price = new SimpleDoubleProperty(0);

@@ -12,6 +12,7 @@ import Model.Part;
 import Model.Product;
 import static Controllers.MainScreenController.selectedIndex;
 import DRY.NoSelect;
+import java.awt.Color;
 import java.io.IOException;
 import java.util.Optional;
 
@@ -213,6 +214,7 @@ public class ProductScreenController {
           /*** MIN < MAX VALID? ***/
         if(intMin != null && intMax != null && intMin > intMax) {
             errorMessage += ("Minimum must be less than max \n");
+            
         }
         
         try {
@@ -241,7 +243,8 @@ public class ProductScreenController {
             errorMessage += ("Product must be connected to at least one part \n");
         } else {
             
-              /*** PRICING  PRICING > COST?***/           
+              /*** PRICING  PRICING > COST?***/
+           
             Double partCost = 0.0;
             for (int i = 0; i < currentParts.size(); i++) {
                 partCost += currentParts.get(i).getPrice();

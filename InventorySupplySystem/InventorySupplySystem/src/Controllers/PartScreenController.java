@@ -268,12 +268,14 @@ public class PartScreenController {
             }    
         } catch(Exception e) {
            errorMessage += ("Select  InHouse or Outsourced \n"); 
+        
         }
         
         if (errorMessage.length() > 0) {
             errorMessage += ("\n Fix the listed errors to save ");
             
             Alert alert = new Alert(Alert.AlertType.ERROR);
+        
             alert.setTitle(" Validation Error");
             alert.setHeaderText("Error");
             alert.setContentText(errorMessage);

@@ -16,6 +16,7 @@ public class NoSelect {
     /*** COMMON CODE 
      * NOTHING SELECTED ERROR ***/
     public void noAlert(){
+        
     Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.initModality(Modality.APPLICATION_MODAL);
             alert.setTitle("Nothing selected");

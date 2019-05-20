@@ -10,11 +10,11 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="1061.0" styleClass="root" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.MainScreenController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="1061.0" style="-fx-background-color: salmon;" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.MainScreenController">
    <children>
-      <AnchorPane layoutX="14.0" layoutY="52.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="347.0" prefWidth="491.0">
+      <AnchorPane layoutX="14.0" layoutY="52.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="366.0" prefWidth="491.0">
          <children>
-            <HBox layoutX="225.0" layoutY="45.0" prefHeight="28.0" prefWidth="266.0">
+            <HBox layoutX="230.0" layoutY="45.0" prefHeight="28.0" prefWidth="266.0">
                <children>
                   <Button maxHeight="-Infinity" minHeight="-Infinity" minWidth="60.0" mnemonicParsing="false" onAction="#partSearch" text="Search">
                      <font>
@@ -27,7 +27,7 @@
                   </TextField>
                </children>
             </HBox>
-            <TableView fx:id="partTable" layoutX="3.0" layoutY="77.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="480.0">
+            <TableView fx:id="partTable" layoutX="3.0" layoutY="77.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="480.0" style="-fx-background-color: white;">
               <columns>
                 <TableColumn fx:id="ColumnID" maxWidth="82.39996337890625" minWidth="60.0" prefWidth="76.79998779296875" resizable="false" text="Part ID" />
                 <TableColumn fx:id="ColumnName" maxWidth="156.00001525878906" minWidth="120.0" prefWidth="138.39999389648438" resizable="false" text="Part Name" />
@@ -69,9 +69,9 @@
             <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
          </padding>
       </AnchorPane>
-      <AnchorPane layoutX="529.0" layoutY="52.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="347.0" prefWidth="542.0">
+      <AnchorPane layoutX="531.0" layoutY="53.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="347.0" prefWidth="542.0">
          <children>
-            <HBox layoutX="264.0" layoutY="43.0" prefHeight="28.0" prefWidth="254.0">
+            <HBox layoutX="266.0" layoutY="43.0" prefHeight="28.0" prefWidth="254.0">
                <children>
                   <Button maxHeight="-Infinity" minHeight="-Infinity" minWidth="60.0" mnemonicParsing="false" onAction="#productSearch" text="Search">
                      <font>
@@ -84,7 +84,7 @@
                   </TextField>
                </children>
             </HBox>
-            <TableView fx:id="productTable" layoutX="19.0" layoutY="77.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="499.0">
+            <TableView fx:id="productTable" layoutX="19.0" layoutY="77.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="499.0" style="-fx-background-color: white;">
                <columns>
                   <TableColumn fx:id="ColumnProID" maxWidth="95.20001220703125" minWidth="44.800048828125" prefWidth="95.20001220703125" resizable="false" text="Product ID" />
                   <TableColumn fx:id="ColumnProName" maxWidth="207.199951171875" minWidth="120.0" prefWidth="156.79998779296875" resizable="false" text="Product Name" />
